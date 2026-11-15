@@ -65,7 +65,7 @@ def slab(pre, current):
         return f'<li><a href="{href}"{cur}>{text}</a></li>'
     return (f'<header class="slab"><div class="container">'
             f'<a class="wordmark" href="{pre}index.html" aria-label="Parrot Cart plugins, the catalogue" '
-            f'data-slot="logo" data-alt="The Parrot Cart logo, on the ink bar">Parrot Cart plugins</a>'
+            f'><img src="{pre}assets/parrot-cart-mark.svg" width="24" height="28" alt="">Parrot Cart plugins</a>'
             f'<nav aria-label="The registry"><ul>'
             + link(f"{pre}index.html#plugins", "Plugins", "plugins")
             + link(f"{pre}index.html#install", "Install", "install")
@@ -86,7 +86,7 @@ def footer(pre, entries, config):
                     for e in sorted(entries, key=lambda e: e["name"].lower()))
     return f"""<footer class="foot"><div class="container">
 <div class="cols">
-<div><h2>Parrot Cart plugins</h2><p>Free plugins for the ColecoVision cart. The registry hosts no files.</p></div>
+<div><h2>Parrot Cart plugins</h2><p>Free plugins for your Parrot Flash cartridge, all in one place.</p></div>
 <div><h2>Plugins</h2><ul>{names}</ul></div>
 <div><h2>The registry</h2><ul><li><a href="{pre}submit/">Submit a plugin</a></li><li><a href="{pre}submit/#rules">The rules</a></li>
 <li><a href="{pre}authors/">For plugin authors</a></li><li><a href="{pre}authors/icon-editor/">The icon editor</a></li>
@@ -110,7 +110,7 @@ def page(title, description, body, pre, current, screens, entries, config, scrip
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{FONTS}">
 <link rel="stylesheet" href="{pre}assets/site.css">
-<link rel="icon" href="{pre}assets/icon.svg" type="image/svg+xml">
+<link rel="icon" href="{pre}assets/parrot-cart-icon.svg" type="image/svg+xml">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -856,7 +856,8 @@ def build(out, config=None, root=ROOT):
     if os.path.isdir(out):
         shutil.rmtree(out)
     os.makedirs(os.path.join(out, "assets"))
-    for name in ("tokens.css", "base.css", "site.css", "site.js", "icon-editor.js"):
+    for name in ("tokens.css", "base.css", "site.css", "site.js", "icon-editor.js",
+                 "parrot-cart-mark.svg", "parrot-cart-icon.svg"):     # the logo, from the cart's own site
         shutil.copy(os.path.join(ASSETS, name), os.path.join(out, "assets", name))
     with open(os.path.join(out, "assets", "icon.svg"), "w") as f:     # the menu's plug, as on the TV
         f.write(ICON_SVG.format(bg="#22232e", fg="#c95bba", d=tvscreen._path(tvscreen.MENU["icons"]["plugin"])))
