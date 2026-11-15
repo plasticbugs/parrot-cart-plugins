@@ -1,0 +1,28 @@
+[
+ {
+  "shape": "Index-First",
+  "theme": "terrazzo",
+  "axes": "light/geometric-sans/warm",
+  "hero": "Settled",
+  "nav": "slab",
+  "footer": "index columns",
+  "imagery": "product built: the cart menu screens from .CVP headers in the menu font",
+  "photos": [],
+  "entry": "hero beside the Plugins page screen",
+  "fingerprint": "Hanging|Asymmetric spans|Hairline|Solid|Tightly cropped to the grid|None",
+  "sections": [
+   "hero",
+   "catalogue table",
+   "switcher",
+   "steps",
+   "figure band",
+   "close band",
+   "footer"
+  ],
+  "signature": "the cart Plugins page drawn pixel for pixel from the registry headers",
+  "waived": [],
+  "prompt": "Parrot Cart plugin registry: browse and search .CVP plugins, a page per plugin, a submit page",
+  "date": "2026-11-15",
+  "mode": "build"
+ }
+]

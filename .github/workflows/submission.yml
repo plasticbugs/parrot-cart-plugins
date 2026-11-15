@@ -1,0 +1,93 @@
+# A plugin submission: an issue from the "Submit a plugin" form (it has the
+# plugin-submission label). Three jobs, each with only the permissions it
+# needs. The first reads the plugin's repository (never running anything
+# from it) with a read-only token; the second comments the result; the third
+# opens a pull request with the entry, which a maintainer reviews and merges.
+# The issue's text reaches the scripts only through the API (check_submission.sh
+# fetches it), never through an expression in a run step.
+name: Plugin submission
+
+on:
+  issues:
+    types: [opened, edited, labeled, reopened]
+  workflow_dispatch:
+    inputs:
+      issue:
+        description: The submission issue's number
+        required: true
+        type: number
+
+permissions: {}
+
+concurrency:
+  group: submission-${{ github.event.issue.number || inputs.issue }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.issue.state == 'open' && !github.event.issue.pull_request &&
+      contains(github.event.issue.labels.*.name, 'plugin-submission'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: read
+    outputs:
+      ok: ${{ steps.check.outputs.ok }}
+      issue: ${{ steps.check.outputs.issue }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Check the plugin
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || inputs.issue }}
+        run: tools/ci/check_submission.sh
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
+        with:
+          name: submission
+          path: out/
+          retention-days: 7
+          if-no-files-found: error
+
+  comment:
+    needs: check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      actions: read
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Comment the result on the issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ needs.check.outputs.issue }}
+        run: tools/ci/comment.sh
+
+  pull-request:
+    needs: check
+    if: needs.check.outputs.ok == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          token: ${{ secrets.REGISTRY_BOT_TOKEN || github.token }}
+          fetch-depth: 0
+      - name: Open a pull request with the entry
+        env:
+          GH_TOKEN: ${{ secrets.REGISTRY_BOT_TOKEN || github.token }}
+          ISSUE_NUMBER: ${{ needs.check.outputs.issue }}
+        run: tools/ci/open_pr.sh submission "submission/$ISSUE_NUMBER"

@@ -1,0 +1,83 @@
+{
+  "schema": 2,
+  "id": "moviecart.scumm",
+  "name": "SCUMM",
+  "version": "0.2.7",
+  "by": "MovieCart",
+  "description": "Plays SCUMM adventure games from /SCUMM, with saves.",
+  "repo": "OWNER/parrotcart-scumm",
+  "repo_id": null,
+  "owner": "OWNER",
+  "api": 1,
+  "home": "/SCUMM",
+  "opens": [
+    ".lfl",
+    ".000"
+  ],
+  "uses": [],
+  "icon": "3c42a581bda5423c",
+  "file_icon": "7e81ad81b981b57e",
+  "license": {
+    "spdx": "GPL-3.0",
+    "name": "GNU General Public License v3.0",
+    "url": "https://github.com/OWNER/parrotcart-scumm/blob/v0.2.7/LICENSE"
+  },
+  "source_url": "https://github.com/OWNER/parrotcart-scumm/tree/v0.2.7",
+  "credits_url": "https://github.com/OWNER/parrotcart-scumm#credits",
+  "release": {
+    "tag": "v0.2.7",
+    "url": "https://github.com/OWNER/parrotcart-scumm/releases/tag/v0.2.7",
+    "published": "2026-11-14"
+  },
+  "download": {
+    "name": "SCUMM-0.2.7.CVP",
+    "url": "https://github.com/OWNER/parrotcart-scumm/releases/download/v0.2.7/SCUMM-0.2.7.CVP",
+    "size": 971008,
+    "sha256": "16cfcaaae36a1509c785ccaade7a999b5600adbb6ff7ae91594e21943bb05034"
+  },
+  "image": {
+    "size": 970496,
+    "sha256": "05ae10eb25886bdf77e53b6f39e8f6b16e49007fac930f62a4afc1292661b511",
+    "kind": "xip"
+  },
+  "credits": "ScummVM, via frank-quest",
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 420,
+      "sha256": "f0ce0f526b0d9102cf560efb789fac5a48afdcecacf7969471f53431b8481235",
+      "lines": 30
+    },
+    "web": {
+      "file": "README.md",
+      "size": 461,
+      "sha256": "949a0f36b9b4d93452de05c29561e4692117426b4f3643ca098ae998988d83b5",
+      "url": "https://github.com/OWNER/parrotcart-scumm#credits"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1059,
+      "sha256": "f62acb92c4cec623530c98b4b49092e1830bc28e566b5d8e948aef66fea0d18d"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 537,
+      "sha256": "393796d3fee127e22383d79f1d70cd048774526b2456ebc35d663966a4bbea34"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.2.7",
+      "url": "https://github.com/OWNER/parrotcart-scumm/releases/tag/v0.2.7",
+      "published": "2026-11-14",
+      "version": "0.2.7",
+      "notes": "An example entry. When SCUMM is listed, the notes of its 0.2.7 release on GitHub show here."
+    }
+  ],
+  "added": "2026-11-14",
+  "updated": "2026-11-15",
+  "submission": null,
+  "example": true
+}

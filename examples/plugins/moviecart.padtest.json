@@ -1,0 +1,81 @@
+{
+  "schema": 2,
+  "id": "moviecart.padtest",
+  "name": "Pad Test",
+  "version": "0.1.2",
+  "by": "MovieCart",
+  "description": "Shows a USB pad's buttons and sticks on the TV as they move.",
+  "repo": "OWNER/parrotcart-padtest",
+  "repo_id": null,
+  "owner": "OWNER",
+  "api": 1,
+  "home": "",
+  "opens": [],
+  "uses": [
+    "usb-host"
+  ],
+  "icon": "3c4299819999423c",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": null,
+    "name": "Not chosen yet",
+    "url": "https://github.com/OWNER/parrotcart-padtest/blob/v0.1.2/LICENSE"
+  },
+  "source_url": "https://github.com/OWNER/parrotcart-padtest/tree/v0.1.2",
+  "credits_url": "https://github.com/OWNER/parrotcart-padtest#credits",
+  "release": {
+    "tag": "v0.1.2",
+    "url": "https://github.com/OWNER/parrotcart-padtest/releases/tag/v0.1.2",
+    "published": "2026-11-14"
+  },
+  "download": {
+    "name": "PADTEST-0.1.2.CVP",
+    "url": "https://github.com/OWNER/parrotcart-padtest/releases/download/v0.1.2/PADTEST-0.1.2.CVP",
+    "size": 96256,
+    "sha256": "21fac97d3c9cc2437c8153cc6c5de4a6a80b375b9f193f2d075c83e07208daa7"
+  },
+  "image": {
+    "size": 95744,
+    "sha256": "6dbd919b9c23f572328dacf643fced281131365b1fd5ed02d756f0e4044ce898",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 415,
+      "sha256": "1ff49406818fc8320bbf97677006ddec651e1040b256bffd3d51a31995cd93bf",
+      "lines": 30
+    },
+    "web": {
+      "file": "README.md",
+      "size": 449,
+      "sha256": "161fdc9680b7e1f804f4e86d5120329aaad85c586e85c3e5b3d62a81c85b8d1e",
+      "url": "https://github.com/OWNER/parrotcart-padtest#credits"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1206,
+      "sha256": "ac6f8b7f5c83b43370e3513e699a89d2314593900bc6a8ba1a229a7b1f1ea523"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 460,
+      "sha256": "0b843e772816c9c4b1793c7e9adc5fd632e417e4853d01b998df9ec0f00e049c"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.2",
+      "url": "https://github.com/OWNER/parrotcart-padtest/releases/tag/v0.1.2",
+      "published": "2026-11-14",
+      "version": "0.1.2",
+      "notes": "An example entry. When Pad Test is listed, the notes of its 0.1.2 release on GitHub show here."
+    }
+  ],
+  "added": "2026-11-14",
+  "updated": "2026-11-15",
+  "submission": null,
+  "example": true
+}

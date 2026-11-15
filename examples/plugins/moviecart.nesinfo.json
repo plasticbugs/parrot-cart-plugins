@@ -1,0 +1,76 @@
+{
+  "schema": 2,
+  "id": "moviecart.nesinfo",
+  "name": "NES Info",
+  "version": "1.0.0",
+  "by": "MovieCart",
+  "description": "Shows a .nes file's header and CRC-32: the SDK's smallest example.",
+  "repo": "OWNER/parrotcart-nesinfo",
+  "repo_id": null,
+  "owner": "OWNER",
+  "api": 1,
+  "home": "/NES",
+  "opens": [
+    ".nes"
+  ],
+  "uses": [],
+  "icon": "3c4299819999423c",
+  "file_icon": "7e42427e7e5a7e00",
+  "license": {
+    "spdx": null,
+    "name": "Not chosen yet",
+    "url": "https://github.com/OWNER/parrotcart-nesinfo/blob/v1.0.0/LICENSE"
+  },
+  "source_url": "https://github.com/OWNER/parrotcart-nesinfo/tree/v1.0.0",
+  "credits_url": "https://github.com/OWNER/parrotcart-nesinfo#credits",
+  "release": {
+    "tag": "v1.0.0",
+    "url": "https://github.com/OWNER/parrotcart-nesinfo/releases/tag/v1.0.0",
+    "published": "2026-11-14"
+  },
+  "download": {
+    "name": "NESINFO-1.0.0.CVP",
+    "url": "https://github.com/OWNER/parrotcart-nesinfo/releases/download/v1.0.0/NESINFO-1.0.0.CVP",
+    "size": 66816,
+    "sha256": "06e0797d3de278c00c2e02c86e05554f27165e9bb2f1e4750c9083fd8260f451"
+  },
+  "image": {
+    "size": 66304,
+    "sha256": "96fea966b1973b479725c3ffacd3e5d42db7961eef785ffd9f0fbdee9a31290d",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": null,
+    "web": {
+      "file": "README.md",
+      "size": 480,
+      "sha256": "05e9780749368234d5ffb603e18cb70ecec5bfedbabd56809efe9ea0e2fc590c",
+      "url": "https://github.com/OWNER/parrotcart-nesinfo#credits"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1095,
+      "sha256": "76e4b03336de60d6150ef26b442e453ebe1de853b88c6265a790338759f843ae"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 516,
+      "sha256": "5c227ae542735b95c84a5dc904f95cf3572b97bda32b3126f654174bae377000"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v1.0.0",
+      "url": "https://github.com/OWNER/parrotcart-nesinfo/releases/tag/v1.0.0",
+      "published": "2026-11-14",
+      "version": "1.0.0",
+      "notes": "An example entry. When NES Info is listed, the notes of its 1.0.0 release on GitHub show here."
+    }
+  ],
+  "added": "2026-11-14",
+  "updated": "2026-11-15",
+  "submission": null,
+  "example": true
+}

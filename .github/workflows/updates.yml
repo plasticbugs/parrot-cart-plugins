@@ -1,0 +1,60 @@
+# New versions of listed plugins: once a day, each listed repository's
+# latest release. A new one is checked as a submission is (nothing from it
+# runs), and each plugin that passes with a newer version gets a pull
+# request on update/<id> for a maintainer to merge.
+name: Plugin updates
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: plugin-updates
+  cancel-in-progress: false
+
+jobs:
+  find:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    outputs:
+      any: ${{ steps.find.outputs.any }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Look for new releases
+        id: find
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: tools/ci/find_updates.sh
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
+        if: steps.find.outputs.any == 'true'
+        with:
+          name: updates
+          path: out/
+          retention-days: 7
+          if-no-files-found: error
+
+  pull-requests:
+    needs: find
+    if: needs.find.outputs.any == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          token: ${{ secrets.REGISTRY_BOT_TOKEN || github.token }}
+          fetch-depth: 0
+      - name: Open a pull request for each update
+        env:
+          GH_TOKEN: ${{ secrets.REGISTRY_BOT_TOKEN || github.token }}
+        run: tools/ci/update_prs.sh
