@@ -261,7 +261,7 @@ stay ready in the cart's flash</h2></div>
 </ul></div></section>""")
 
     body.append("""<section class="band band--paper close" aria-labelledby="close-title"><div class="container">
-<div><h2 id="close-title">Your plugin, listed from one GitHub issue</h2><p>A bot checks the release; a
+<div><h2 id="close-title">Add your plugin by submitting a GitHub issue in the registry.</h2><p>A bot checks the release; a
 maintainer merges.</p></div>
 <div class="actions"><a class="btn" href="submit/">Submit a plugin</a>
 <a class="btn btn--secondary" href="registry.json">registry.json</a></div>
