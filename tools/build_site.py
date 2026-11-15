@@ -234,16 +234,16 @@ def home(entries, config):
             f'<figcaption><span>{t}</span><span class="code">{e_(code)}</span></figcaption></figure>'
             for k, t, s, sc, code in states)
         body.append(f"""<section class="section" aria-labelledby="change-title"><div class="container">
-<div class="headblock"><h2 id="change-title">How plugins work with files</h2><p class="lead">The menu hides files nothing
-on the card can open. Copy {e_(pick['name'])} and they appear.</p></div>
+<div class="headblock"><h2 id="change-title">How plugins work with files</h2><p class="lead">The card only shows files
+that are associated with a plugin.</p></div>
 <div class="switch" data-switch>
 <div class="switch__tabs" role="tablist" aria-label="The card, a step at a time" aria-orientation="vertical">{tabs}</div>
 <div class="switch__panels">{panels}</div>
 </div></div></section>""")
 
     body.append("""<section class="section" id="install" aria-labelledby="install-title"><div class="container">
-<div class="headblock"><h2 id="install-title">No installer: the card is the whole install</h2><p class="lead">Three
-steps, and nothing to run on a computer.</p></div>
+<div class="headblock"><h2 id="install-title">No installer. Manage your plugins on the cartridge.</h2><p class="lead">Three
+easy steps.</p></div>
 <ol class="steps">
 <li><h3>Download its .CVP</h3><p>From its page here.</p></li>
 <li><h3>Copy it to /PLUGINS</h3><p>On the cart's microSD card.</p></li>
