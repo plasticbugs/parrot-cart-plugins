@@ -1,6 +1,6 @@
 /* Hallmark · shape: Index-First (swapped from the drawn Map / Diagram, which carries the Submit page) · genre: modern-minimal · theme: Terrazzo (deal 2/3, seed parrot-cart-plugin-registry-32db·777b6a44·2026-11-15·r0) · job: try · draw: 7c62b5
  * hero: Settled · nav: slab · footer: index columns · imagery: the product built, the cart's menu screens from the .CVP headers in its own font; no photographs · signature: the cart's Plugins page drawn pixel for pixel from the registry's real headers · terrazzo: off-white
- * axes: light/geometric-sans/warm · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
+ * display face: Bricolage Grotesque ExtraBold (the user's pick, replacing Syne) · axes: light/geometric-sans/warm · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 · weakest: P, a catalogue argues little on its own; the screens carry the argument that one copied file is the whole install */
 /* Hallmark · hero-review: fix · 5 findings · 2 resolved (headline in three whole lines, caption names its source) 2 partial (the TV larger at 7fr and edge to edge at 375; its rows still end at 40% because that is the cart's own layout) 1 answered (colour comes only from the TV, as Terrazzo puts it only in its pictures) */
 /* Hallmark · finish-review: subagent · 12 findings · 10 resolved (Submit button off with a note while registry_repo is OWNER/..., no GitHub links to the stand-in; the switcher opens on After; rules and checks merged into one table named for the rules; 6px offsets at 375; the close's Submit in ink, bands joined; SHA row on the value column; the note as muted text under a rule; map numerals in ink; three heads in the product's words) 2 partial (the Submit hero's map now sits under the note, the hero fills 1440 so air above stays small; step numerals set lining-nums, which Syne may not carry) · gap: the sample drawer, answered: seven more black screens beside the catalogue would add weight, not a drawer; each plugin's page carries its own screen */
@@ -23,7 +23,7 @@
 /* ---- the slab ---- */
 .slab { background: var(--color-ink); color: var(--color-paper); }
 .slab .container { display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); min-height: var(--slab-height); }
-.wordmark { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: none; font: 700 var(--text-lg)/1 var(--font-display); letter-spacing: var(--tracking-display); white-space: nowrap; }
+.wordmark { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: none; font: var(--display-weight) var(--text-lg)/1 var(--font-display); letter-spacing: var(--tracking-display); white-space: nowrap; }
 .wordmark { gap: var(--space-sm); }
 .wordmark > img { width: 24px; height: 28px; image-rendering: pixelated; }
 .slab nav ul { display: flex; gap: var(--space-lg); margin: 0; padding: 0; list-style: none; }
@@ -108,7 +108,7 @@ a.card:hover { box-shadow: var(--shadow-card-hover); }
 .spec .plugin a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
 .spec .plugin a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .spec .plugin small { display: block; color: var(--color-muted); font-size: var(--text-sm); }
-.spec--rules tbody th { padding: var(--space-md) var(--space-md) var(--space-md) 0; color: var(--color-ink); font: 700 var(--text-title)/1.2 var(--font-display); letter-spacing: var(--tracking-display); white-space: normal; border-bottom-color: var(--color-rule); }
+.spec--rules tbody th { padding: var(--space-md) var(--space-md) var(--space-md) 0; color: var(--color-ink); font: var(--display-weight) var(--text-title)/1.2 var(--font-display); letter-spacing: var(--tracking-display); white-space: normal; border-bottom-color: var(--color-rule); }
 .spec--rules td.by { color: var(--color-ink-2); white-space: nowrap; }
 .spec--rules tbody tr:hover { background: none; }
 .empty { padding: var(--space-xl) 0; color: var(--color-muted); }
@@ -117,7 +117,7 @@ a.card:hover { box-shadow: var(--shadow-card-hover); }
 .switch { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: var(--space-xl) var(--space-3xl); align-items: start; }
 .switch__tabs { grid-column: 2; grid-row: 1; display: grid; gap: 0; align-self: start; border-top: var(--rule-bar) solid var(--color-ink); }
 .switch__tabs button { display: grid; gap: var(--space-2xs); width: 100%; min-height: 48px; padding: var(--space-md) 0; border: 0; border-bottom: var(--rule-hair) solid var(--color-rule); background: none; color: var(--color-muted); text-align: left; cursor: pointer; transition: color var(--dur-short) var(--ease-out); }
-.switch__tabs button b { font: 700 var(--text-title)/1.2 var(--font-display); letter-spacing: var(--tracking-display); }
+.switch__tabs button b { font: var(--display-weight) var(--text-title)/1.2 var(--font-display); letter-spacing: var(--tracking-display); }
 .switch__tabs button:hover { color: var(--color-ink-2); }
 .switch__tabs button[aria-selected="true"] { color: var(--color-ink); }
 .switch__tabs button[aria-selected="true"] b { color: var(--color-ink); }
@@ -132,14 +132,14 @@ html:not(.js) .switch__panels { grid-template-columns: repeat(3, minmax(0, 1fr))
 /* ---- steps on rules ---- */
 .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap-columns); margin: 0; padding: 0; list-style: none; counter-reset: step; }
 .steps li { counter-increment: step; display: grid; align-content: start; gap: var(--space-sm); padding-top: var(--space-lg); border-top: var(--rule-bar) solid var(--color-ink); }
-.steps li::before { content: counter(step); font: 700 var(--text-section)/1 var(--font-display); letter-spacing: -0.04em; font-variant-numeric: lining-nums tabular-nums; }
+.steps li::before { content: counter(step); font: var(--display-weight) var(--text-section)/1 var(--font-display); letter-spacing: -0.04em; font-variant-numeric: lining-nums tabular-nums; }
 .steps h3 { font-family: var(--font-body); font-weight: 500; letter-spacing: 0; }
 .steps p { color: var(--color-ink-2); }
 .steps--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
 /* ---- the figure on the ink band ---- */
 .figure-band .container { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-3xl); align-items: center; }
-.figure-band .big { display: block; font: 700 calc(var(--text-display) * 2)/0.9 var(--font-display); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.figure-band .big { display: block; font: var(--display-weight) calc(var(--text-display) * 2)/0.9 var(--font-display); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
 .figure-band h2 { max-width: 28ch; }
 .ruled { margin: 0; padding: 0; list-style: none; border-top: var(--rule-hair) solid var(--color-ink-2); }
 .ruled li { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--space-lg); padding: var(--space-md) 0; border-bottom: var(--rule-hair) solid var(--color-ink-2); }
@@ -258,7 +258,7 @@ pre.plain { margin: 0; padding: var(--space-md) var(--space-lg); max-height: min
 .editor__preview { display: grid; gap: var(--space-xl); position: sticky; top: var(--space-lg); }
 .pad { display: grid; gap: var(--space-md); min-width: 0; margin: 0; padding: 0; border: 0; }
 .pad legend { display: grid; gap: var(--space-2xs); padding: 0 0 var(--space-sm); }
-.pad legend b { font: 700 var(--text-title)/1.2 var(--font-display); letter-spacing: var(--tracking-display); }
+.pad legend b { font: var(--display-weight) var(--text-title)/1.2 var(--font-display); letter-spacing: var(--tracking-display); }
 .pad legend span { color: var(--color-muted); font-size: var(--text-sm); }
 .px { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 1px; width: min(100%, 352px); aspect-ratio: 1; padding: 1px; background: var(--color-ink-2); touch-action: none; user-select: none; -webkit-user-select: none; }
 .px__c { min-width: 0; padding: 0; border: 0; border-radius: 0; background: var(--tv-black); cursor: crosshair; }

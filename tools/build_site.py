@@ -33,7 +33,7 @@ ROOT = registry.ROOT
 ASSETS = os.path.join(ROOT, "site", "assets")
 FLASH_SLOTS = 10            # the menu's plugin cache: sdplayer.c NSLOT (keep in step with the firmware)
 NEEDS = {"usb-host": "USB host", "usb-device": "USB device", "psram": "PSRAM"}
-FONTS = ("https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Onest:wght@400;500"
+FONTS = ("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Onest:wght@400;500"
          "&family=JetBrains+Mono:wght@500&display=swap")
 SLOTS_JS = ("<script>window.hallmarkSlots = (m) => { for (const [k, v] of Object.entries(m)) { const s = "
             "document.querySelector(`[data-slot=\"${k}\"]`); if (!s) continue; const im = new Image(); im.src = "
@@ -459,7 +459,7 @@ def submit_page(entries, config):
         primary, soon = f'<a class="btn" href="{e_(form)}">Open a submission</a>', ""
     body = f"""<section class="banner" aria-labelledby="hero-title"><div class="container">
 <div class="banner__text">
-<h1 id="hero-title">List your plugin with one issue</h1>
+<h1 id="hero-title">Submit an Issue in the repository to add your Plugin</h1>
 <p class="lead">Name the repository; a bot checks its release and opens a PR.</p>
 <div class="actions">{primary}<a class="btn btn--secondary" href="#rules">Read the rules</a></div>
 {soon}
