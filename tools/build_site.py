@@ -449,7 +449,6 @@ def submit_page(entries, config):
         ("Open source", "Public, with the full source and a LICENSE.", "Bot"),
         ("Credited", "A README crediting whose work it uses.", "Both"),
         ("Free", "Never sold, or bundled with anything sold.", "Maintainer"),
-        ("No game art", "No commercial game art or ROMs.", "Maintainer"),
     ]
     rule_rows = "".join(f'<tr><th scope="row">{t}</th><td>{s}</td><td class="by" data-label="Checked by">{w}</td></tr>'
                         for t, s, w in rules)
@@ -469,7 +468,7 @@ def submit_page(entries, config):
 <p class="map-legend">Nothing in your repository runs.</p>
 </div></section>
 <section class="section" id="rules" aria-labelledby="rules-title"><div class="container">
-<div class="headblock"><h2 id="rules-title">Free, open, credited, and no game art</h2></div>
+<div class="headblock"><h2 id="rules-title">Free, open, credited</h2></div>
 <table class="spec spec--rules"><thead><tr><th scope="col">Rule</th><th scope="col">What it takes</th>
 <th scope="col">Checked by</th></tr></thead>
 <tbody>{rule_rows}</tbody></table>
@@ -688,7 +687,7 @@ def screenshots_doc(entries, config):
 {doc_section("show", "What to show", None,
              '<ul class="rows"><li><h3>The plugin itself</h3><p>Its own screens, first the one a person will see most.</p></li>'
              '<li><h3>Nothing you can\'t share</h3><p>An emulator\'s pictures show homebrew or your own test files, '
-             'not a commercial game: the registry\'s rule on game art covers screenshots too.</p></li>'
+             'not a commercial game.</p></li>'
              '<li><h3>One set a release</h3><p>A release with several .CVP files shares its screenshots.</p></li></ul>')}
 {doc_section("taking", "Taking one", "Any ColecoVision emulator that saves the picture at its own size will do.",
              '<ul class="rows"><li><h3>Save at 1x</h3><p>Turn off scaling, filters and scanlines.</p></li>'
