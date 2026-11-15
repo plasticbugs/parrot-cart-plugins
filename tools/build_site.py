@@ -194,7 +194,7 @@ def home(entries, config):
              "A photograph of a TV showing the cart's Plugins page with these plugins")}
 </div></section>""",
             f"""<section class="section" id="plugins" aria-labelledby="plugins-title"><div class="container">
-<div class="headblock"><h2 id="plugins-title">Every plugin, by ID</h2><p class="lead">{e_(line)}</p></div>
+<div class="headblock"><h2 id="plugins-title">Browse Plugins</h2><p class="lead">{e_(line)}</p></div>
 <div class="finder" data-finder="catalogue" data-empty="catalogue-empty" hidden>
 <label for="q">Search by name or file type<input id="q" type="search" autocomplete="off" spellcheck="false"></label>
 <p role="status" aria-live="polite"></p></div>
@@ -234,7 +234,7 @@ def home(entries, config):
             f'<figcaption><span>{t}</span><span class="code">{e_(code)}</span></figcaption></figure>'
             for k, t, s, sc, code in states)
         body.append(f"""<section class="section" aria-labelledby="change-title"><div class="container">
-<div class="headblock"><h2 id="change-title">What one file changes</h2><p class="lead">The menu hides files nothing
+<div class="headblock"><h2 id="change-title">How plugins work with files</h2><p class="lead">The menu hides files nothing
 on the card can open. Copy {e_(pick['name'])} and they appear.</p></div>
 <div class="switch" data-switch>
 <div class="switch__tabs" role="tablist" aria-label="The card, a step at a time" aria-orientation="vertical">{tabs}</div>
