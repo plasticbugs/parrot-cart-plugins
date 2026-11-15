@@ -4,7 +4,7 @@ Plays NES games from /NES, with USB pads.
 
 ## Install
 
-1. Copy `NES-0.4.6.CVP` to `/PLUGINS` on the cart's microSD card.
+1. Copy `NES-0.4.7.CVP` to `/PLUGINS` on the cart's microSD card.
 2. Put your .nes files in `/NES`.
 3. On the cart: Home, Plugins, NES, then A.
 

@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "moviecart.nes",
   "name": "NES",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "by": "MovieCart",
   "description": "Plays NES games from /NES, with USB pads.",
   "repo": "OWNER/parrotcart-nes",
@@ -17,29 +17,29 @@
     "usb-host",
     "psram"
   ],
-  "icon": "007e81a5eba5817e",
-  "file_icon": "7e42427e7e5a7e00",
+  "icon": "00dea282a282c67c",
+  "file_icon": "00dea282a282c67c",
   "license": {
     "spdx": "LGPL-2.1",
     "name": "GNU Lesser General Public License v2.1",
-    "url": "https://github.com/OWNER/parrotcart-nes/blob/v0.4.6/LICENSE"
+    "url": "https://github.com/OWNER/parrotcart-nes/blob/v0.4.7/LICENSE"
   },
-  "source_url": "https://github.com/OWNER/parrotcart-nes/tree/v0.4.6",
+  "source_url": "https://github.com/OWNER/parrotcart-nes/tree/v0.4.7",
   "credits_url": "https://github.com/OWNER/parrotcart-nes#credits",
   "release": {
-    "tag": "v0.4.6",
-    "url": "https://github.com/OWNER/parrotcart-nes/releases/tag/v0.4.6",
+    "tag": "v0.4.7",
+    "url": "https://github.com/OWNER/parrotcart-nes/releases/tag/v0.4.7",
     "published": "2026-11-14"
   },
   "download": {
-    "name": "NES-0.4.6.CVP",
-    "url": "https://github.com/OWNER/parrotcart-nes/releases/download/v0.4.6/NES-0.4.6.CVP",
+    "name": "NES-0.4.7.CVP",
+    "url": "https://github.com/OWNER/parrotcart-nes/releases/download/v0.4.7/NES-0.4.7.CVP",
     "size": 204288,
-    "sha256": "5c5c787e6b8a66751171b0395eb211dac1faa576d99ea660a65915bc27109161"
+    "sha256": "8023191eadba41088d92f895f2e4e851b2f49b3ded6369b8d930dde8ee7d479f"
   },
   "image": {
     "size": 203776,
-    "sha256": "ac8f358bd0b9f97ca34441137a92e63243aec65e1b8ab7d200ccbdd7baf4e5b3",
+    "sha256": "b9c31d5157441e0450eedfb09c97f42b08862400e5ca59f9ec45752b880a984e",
     "kind": "sram"
   },
   "credits": "QuickNES by Shay Green (blargg), via frank-nes; emu2413 by Mitsutaka Okazaki",
@@ -47,38 +47,38 @@
     "cart": {
       "file": "cart-readme.txt",
       "size": 443,
-      "sha256": "8f62e558c8b2f1a668c3101674eb33bbede82bfb98235762a86d3c3c7aef46e8",
+      "sha256": "c629ada6841551b122f736e649f2a00e41e283efbddfd107ac8c188b3b5b710a",
       "lines": 32
     },
     "web": {
       "file": "README.md",
       "size": 482,
-      "sha256": "055ec39b87b5783c19db6356823f90c054f7e08f0040408b8adb8f5825ca8e5a",
+      "sha256": "d59f4ade1341b879b55d7898c95bc7dbeec9532014b5213b261ed512e0c05dae",
       "url": "https://github.com/OWNER/parrotcart-nes#credits"
     }
   },
   "screenshots": [
     {
       "file": "screenshot-1.png",
-      "size": 1118,
-      "sha256": "34174bf646db0cfb6007c1d859696200d7575c72d425a66aebe187354ed4da53"
+      "size": 1120,
+      "sha256": "eaa529596963a9bb0eb178c9c3c253d7b20d53f3a76feda959aef39df77d5dd1"
     },
     {
       "file": "screenshot-2.png",
-      "size": 516,
-      "sha256": "5c227ae542735b95c84a5dc904f95cf3572b97bda32b3126f654174bae377000"
+      "size": 528,
+      "sha256": "564f49acceaff4be5d66cfaf352ae74a9159e867c9474b95eb49012adbd63d21"
     }
   ],
   "history": [
     {
-      "tag": "v0.4.6",
-      "url": "https://github.com/OWNER/parrotcart-nes/releases/tag/v0.4.6",
+      "tag": "v0.4.7",
+      "url": "https://github.com/OWNER/parrotcart-nes/releases/tag/v0.4.7",
       "published": "2026-11-14",
-      "version": "0.4.6",
-      "notes": "An example entry. When NES is listed, the notes of its 0.4.6 release on GitHub show here."
+      "version": "0.4.7",
+      "notes": "An example entry. When NES is listed, the notes of its 0.4.7 release on GitHub show here."
     }
   ],
-  "added": "2026-11-14",
+  "added": "2026-11-15",
   "updated": "2026-11-15",
   "submission": null,
   "example": true

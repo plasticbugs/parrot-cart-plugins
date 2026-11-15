@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "moviecart.nesinfo",
   "name": "NES Info",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "by": "MovieCart",
   "description": "Shows a .nes file's header and CRC-32: the SDK's smallest example.",
   "repo": "OWNER/parrotcart-nesinfo",
@@ -15,24 +15,24 @@
   ],
   "uses": [],
   "icon": "3c4299819999423c",
-  "file_icon": "7e42427e7e5a7e00",
+  "file_icon": "00dea282a282c67c",
   "license": {
     "spdx": null,
     "name": "Not chosen yet",
-    "url": "https://github.com/OWNER/parrotcart-nesinfo/blob/v1.0.0/LICENSE"
+    "url": "https://github.com/OWNER/parrotcart-nesinfo/blob/v1.0.1/LICENSE"
   },
-  "source_url": "https://github.com/OWNER/parrotcart-nesinfo/tree/v1.0.0",
+  "source_url": "https://github.com/OWNER/parrotcart-nesinfo/tree/v1.0.1",
   "credits_url": "https://github.com/OWNER/parrotcart-nesinfo#credits",
   "release": {
-    "tag": "v1.0.0",
-    "url": "https://github.com/OWNER/parrotcart-nesinfo/releases/tag/v1.0.0",
+    "tag": "v1.0.1",
+    "url": "https://github.com/OWNER/parrotcart-nesinfo/releases/tag/v1.0.1",
     "published": "2026-11-14"
   },
   "download": {
-    "name": "NESINFO-1.0.0.CVP",
-    "url": "https://github.com/OWNER/parrotcart-nesinfo/releases/download/v1.0.0/NESINFO-1.0.0.CVP",
+    "name": "NESINFO-1.0.1.CVP",
+    "url": "https://github.com/OWNER/parrotcart-nesinfo/releases/download/v1.0.1/NESINFO-1.0.1.CVP",
     "size": 66816,
-    "sha256": "06e0797d3de278c00c2e02c86e05554f27165e9bb2f1e4750c9083fd8260f451"
+    "sha256": "3e8cc983f67e87efa3495d35cfcad887f439ccf9c5d9ef4bcbb7c84026859932"
   },
   "image": {
     "size": 66304,
@@ -44,7 +44,7 @@
     "web": {
       "file": "README.md",
       "size": 480,
-      "sha256": "05e9780749368234d5ffb603e18cb70ecec5bfedbabd56809efe9ea0e2fc590c",
+      "sha256": "5696e549189f26989034cc4ce6496585c02f16180d248e905b6f9da876b97f40",
       "url": "https://github.com/OWNER/parrotcart-nesinfo#credits"
     }
   },
@@ -52,24 +52,24 @@
     {
       "file": "screenshot-1.png",
       "size": 1095,
-      "sha256": "76e4b03336de60d6150ef26b442e453ebe1de853b88c6265a790338759f843ae"
+      "sha256": "5c5021ab1102e07ca3bde0bcdba75cf40e6ea3a26e84ea508985d8ab6948a5c7"
     },
     {
       "file": "screenshot-2.png",
-      "size": 516,
-      "sha256": "5c227ae542735b95c84a5dc904f95cf3572b97bda32b3126f654174bae377000"
+      "size": 528,
+      "sha256": "564f49acceaff4be5d66cfaf352ae74a9159e867c9474b95eb49012adbd63d21"
     }
   ],
   "history": [
     {
-      "tag": "v1.0.0",
-      "url": "https://github.com/OWNER/parrotcart-nesinfo/releases/tag/v1.0.0",
+      "tag": "v1.0.1",
+      "url": "https://github.com/OWNER/parrotcart-nesinfo/releases/tag/v1.0.1",
       "published": "2026-11-14",
-      "version": "1.0.0",
-      "notes": "An example entry. When NES Info is listed, the notes of its 1.0.0 release on GitHub show here."
+      "version": "1.0.1",
+      "notes": "An example entry. When NES Info is listed, the notes of its 1.0.1 release on GitHub show here."
     }
   ],
-  "added": "2026-11-14",
+  "added": "2026-11-15",
   "updated": "2026-11-15",
   "submission": null,
   "example": true

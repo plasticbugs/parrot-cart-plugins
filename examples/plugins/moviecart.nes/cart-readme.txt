@@ -5,7 +5,7 @@ with USB pads.
 
 INSTALL
 
-1. Copy NES-0.4.6.CVP to
+1. Copy NES-0.4.7.CVP to
    /PLUGINS on the cart's
    microSD card.
 2. Put your .nes files in
