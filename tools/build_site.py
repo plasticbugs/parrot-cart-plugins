@@ -186,11 +186,11 @@ def home(entries, config):
         line = f"{len(entries) - len(examples)} plugins, each a free download from its author's release."
     body = [f"""<section class="hero" aria-labelledby="hero-title"><div class="container">
 <div class="hero__text">
-<h1 id="hero-title">Plugins for Parrot&nbsp;Cart, one file each</h1>
-<p class="lead">Free emulators and tools for the ColecoVision cart: copy one to /PLUGINS.</p>
+<h1 id="hero-title">Plugins for your Parrot&nbsp;Cart</h1>
+<p class="lead">Emulators, utilities and more to enhance your ColecoVision.</p>
 <div class="actions"><a class="btn" href="#plugins">See the plugins</a><a class="btn btn--secondary" href="submit/">Submit a plugin</a></div>
 </div>
-{screen_card(plugins_screen, "The cart's Plugins page, drawn from each file's header", "/PLUGINS", "hero-screen",
+{screen_card(plugins_screen, "The cart's Plugins page", "/PLUGINS", "hero-screen",
              "A photograph of a TV showing the cart's Plugins page with these plugins")}
 </div></section>""",
             f"""<section class="section" id="plugins" aria-labelledby="plugins-title"><div class="container">
