@@ -567,7 +567,7 @@ def authors_index(entries, config):
     tiles = "".join(f'<li><h2><a href="{h}">{t}</a></h2><p>{d}</p></li>' for h, t, d in cards)
     body = f"""<section class="banner" aria-labelledby="hero-title"><div class="container">
 <div class="banner__text">
-<h1 id="hero-title">What your release needs</h1>
+<h1 id="hero-title">Packaging your plugin</h1>
 <p class="lead">A .CVP, a licence and a README list a plugin. Screenshots and icons make it easy to find.</p>
 <div class="actions"><a class="btn" href="../submit/">Submit a plugin</a><a class="btn btn--secondary" href="icon-editor/">Open the icon editor</a></div>
 <p class="soon">Start from {template_link(config)}: a plugin that builds, with a README, icons and a release workflow.</p>
