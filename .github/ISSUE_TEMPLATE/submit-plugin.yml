@@ -6,21 +6,18 @@ body:
   - type: markdown
     attributes:
       value: |
-        Give the GitHub repository that publishes your plugin. A bot reads the
-        repository and the `.CVP` file(s) on its release, checks them the way
-        the cart's menu does, and replies here. If everything passes, it opens a
-        pull request adding your plugin, and a maintainer merges it. Nothing
-        from your repository is ever run: the bot only reads files.
+        Tell us which GitHub repo your plugin is in. We'll check your latest
+        release and reply here. If it passes, we'll add your plugin to the
+        registry. We only read your files; we never run anything.
 
-        New versions are found by themselves once a plugin is listed: publish a
-        release with the new `.CVP` and an update pull request follows.
+        After that, new releases are picked up automatically.
 
-        The plugin's page shows what the release holds, copied into the
-        registry: the README inside the `.CVP` (as the cart shows it), the
-        repository's `README.md`, the release's notes, and up to three
-        screenshots attached to the release as `screenshot-1.png` to
-        `screenshot-3.png` (PNG, exactly 256 x 192, 100 KB each at most).
-        What each needs: https://plasticbugs.github.io/parrot-cart-plugins/authors/
+        Your plugin's page shows your README, your release notes and up to
+        three screenshots. Attach them to the release as `screenshot-1.png`,
+        `screenshot-2.png` and `screenshot-3.png` (PNG, 256 × 192, 100 KB max
+        each).
+
+        More details: https://plasticbugs.github.io/parrot-cart-plugins/authors/
   - type: input
     id: repo
     attributes:
