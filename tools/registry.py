@@ -256,7 +256,7 @@ def ownership(entries, pid, repo_id, full, shared=()):
         for e in entries.values():
             if e["id"].split(".")[0] == prefix and e.get("owner", "").lower() != owner:
                 return (f"the developer part {prefix!r} is already used by {e['owner']} "
-                        f"({e['id']}): use one of your own")
+                        f"({e['id']}). Use one of your own")
     return None
 
 

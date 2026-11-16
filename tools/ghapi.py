@@ -156,7 +156,7 @@ class GitHub:
             if body is None:
                 raise TooBig(url)
             if (status == 403 and hdrs.get("x-ratelimit-remaining") == "0") or status == 429:
-                raise GitHubError("GitHub's rate limit was reached: try again later")
+                raise GitHubError("GitHub's rate limit was reached. Try again later")
             if status >= 500:
                 raise GitHubError(f"GitHub answered {status} for {url}")
             return status, body

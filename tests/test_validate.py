@@ -112,7 +112,7 @@ class Submissions(unittest.TestCase):
         self.assertTrue(res["ok"], res)
         self.assertEqual(res["changed"], ["moviecart.padtest", "moviecart.padtest18"])
         self.assertEqual([p["file"] for p in res["plugins"]], ["PADTEST-0.1.2.CVP", "PADTEST18.CVP"])
-        self.assertTrue(any("isn't in the release's tag" in w for w in res["plugins"][1]["warnings"]))
+        self.assertTrue(any("isn't in the release tag" in w for w in res["plugins"][1]["warnings"]))
 
     def test_missing_licence_credits_source(self):
         res = run("gb-missing", "other-dev/gb-plugin")
@@ -136,7 +136,7 @@ class Submissions(unittest.TestCase):
         e = res["plugins"][0]["entry"]
         self.assertIsNone(e["license"]["spdx"])
         self.assertEqual(e["image"]["kind"], "xip")
-        self.assertTrue(any("couldn't name the licence" in w for w in res["warnings"]))
+        self.assertTrue(any("couldn't tell which licence" in w for w in res["warnings"]))
 
     def test_too_big_isnt_downloaded(self):
         t = gh("too-big")
@@ -421,7 +421,7 @@ class Command(unittest.TestCase):
         code, text = cli(["fixture-dev/nes-plugin", "--description", "x", "--fixtures",
                           os.path.join(GH_DIR, "rate-limited")])
         self.assertEqual(code, 2)
-        self.assertIn("couldn't run", text)
+        self.assertIn("couldn't finish", text)
 
     def test_report_is_escaped(self):
         res = {"ok": False, "repo": "a/b", "tag": "`v1`", "release_url": None, "warnings": [], "changed": [],

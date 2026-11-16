@@ -52,7 +52,7 @@ def clean_line(s, n):
     s = "".join(" " if unicodedata.category(c)[0] in "CZ" else c for c in s)
     s = re.sub(r" +", " ", s).strip()
     if len(s) > n:
-        raise FormError(f"the description is {len(s)} characters; {n} at most")
+        raise FormError(f"the description is {len(s)} characters. The limit is {n}")
     return s
 
 
@@ -66,12 +66,12 @@ def parse(body, description_max=160):
     if repo.endswith(".git"):
         repo = repo[:-4]
     if not REPO.fullmatch(repo):
-        raise FormError("the repository must be given as owner/repo, as on GitHub")
+        raise FormError("give the repository as owner/repo, the way GitHub shows it")
     tag = s.get(LABELS["tag"], "").strip()
     if tag == NO_RESPONSE:
         tag = ""
     if tag and not TAG.fullmatch(tag):
-        raise FormError("the release tag has characters this registry doesn't accept (A-Z a-z 0-9 . _ + -)")
+        raise FormError("the release tag can only use A-Z, a-z, 0-9 and . _ + -")
     desc = s.get(LABELS["description"], "").strip()
     if desc == NO_RESPONSE:
         desc = ""

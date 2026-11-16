@@ -14,14 +14,14 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 import registry  # noqa: E402
 
 CHECKLIST = """
-Before merging, a maintainer checks:
+Before merging, check that:
 
-- [ ] The repository and the release hold no commercial game art, ROMs or other files the author can't share.
-- [ ] The README's credits name the work the plugin uses, and its licence fits (GPL and LGPL code: the full source is linked).
-- [ ] The plugin is free: nothing in the repository sells it or bundles it with hardware.
+- [ ] The repo and the release have no commercial game art, ROMs or other files the author can't share.
+- [ ] The README credits the work the plugin uses, and the licence fits. GPL and LGPL code needs the full source linked.
+- [ ] The plugin is free. Nothing in the repo sells it or bundles it with hardware.
 - [ ] The description is accurate.
-- [ ] The screenshots (in `plugins/<id>/`) show the plugin itself and nothing the author can't share, such as a commercial game's art.
-- [ ] The README and the release notes say nothing that shouldn't be on the site.
+- [ ] The screenshots in `plugins/<id>/` show the plugin itself, with no commercial game art.
+- [ ] The README and release notes are fine to show on the site.
 """
 
 
