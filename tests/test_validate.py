@@ -34,7 +34,7 @@ class Root:
         os.makedirs(os.path.join(self.dir, "plugins"))
         for e in entries:
             registry.write_json(registry.entry_path(self.dir, e["id"]), e)
-            if e["id"] == "moviecart.nes":                   # its files, as the release has them
+            if e["id"] == "parrotcart.nes":                   # its files, as the release has them
                 d = registry.files_dir(self.dir, e["id"])
                 os.makedirs(d)
                 for name, data in NES_FILES.items():
@@ -80,11 +80,11 @@ class Submissions(unittest.TestCase):
         res = validate.validate(t, "fixture-dev/nes-plugin", None, "Plays NES games.", root=tmp(),
                                 config=CONFIG, today=TODAY, submission=12)
         self.assertTrue(res["ok"], res)
-        self.assertEqual(res["changed"], ["moviecart.nes"])
+        self.assertEqual(res["changed"], ["parrotcart.nes"])
         e = res["plugins"][0]["entry"]
         self.assertEqual(registry.check_entry(e), [])
         self.assertEqual((e["name"], e["version"], e["by"], e["repo"], e["owner"], e["repo_id"]),
-                         ("NES", "0.4.6", "MovieCart", "fixture-dev/nes-plugin", "fixture-dev", 880001))
+                         ("NES", "0.4.6", "Parrot Cart", "fixture-dev/nes-plugin", "fixture-dev", 880001))
         self.assertEqual(e["opens"], [".nes"])
         self.assertEqual(e["uses"], ["usb-host", "psram"])
         self.assertEqual(e["license"]["spdx"], "LGPL-2.1")
@@ -110,7 +110,7 @@ class Submissions(unittest.TestCase):
     def test_two_plugins_in_a_release(self):
         res = run("pads-two", "fixture-dev/pad-tools", "v0.1.2")
         self.assertTrue(res["ok"], res)
-        self.assertEqual(res["changed"], ["moviecart.padtest", "moviecart.padtest18"])
+        self.assertEqual(res["changed"], ["parrotcart.padtest", "parrotcart.padtest18"])
         self.assertEqual([p["file"] for p in res["plugins"]], ["PADTEST-0.1.2.CVP", "PADTEST18.CVP"])
         self.assertTrue(any("isn't in the release tag" in w for w in res["plugins"][1]["warnings"]))
 
@@ -218,7 +218,7 @@ class PageContent(unittest.TestCase):
         d = tmp()
         path = os.path.join(d, "NES-0.4.6.CVP")
         with open(path, "wb") as f:
-            f.write(make_cvp(image(**SRAM_IMAGE), id="moviecart.nes", name="NES", version="0.4.6",
+            f.write(make_cvp(image(**SRAM_IMAGE), id="parrotcart.nes", name="NES", version="0.4.6",
                              readme="A line that is far too long for the cart's page\n"))
         s = custom(scenarios.nes_good)
         store = ("https://release-assets.githubusercontent.com/github-production-release-asset/880001/8800010"
@@ -302,11 +302,11 @@ class AgainstTheRegistry(unittest.TestCase):
         self.assertIn("already registered to someone/nes", res["plugins"][0]["errors"][0])
 
     def test_developer_part_used_by_another_owner(self):
-        other = nes_entry(id="moviecart.gameboy", repo="someone/gb", owner="someone", repo_id=2)
+        other = nes_entry(id="parrotcart.gameboy", repo="someone/gb", owner="someone", repo_id=2)
         with Root(other) as root:
             res = run("nes-good", "fixture-dev/nes-plugin", root=root)
         self.assertFalse(res["ok"])
-        self.assertIn("'moviecart' is already used by someone", res["plugins"][0]["errors"][0])
+        self.assertIn("'parrotcart' is already used by someone", res["plugins"][0]["errors"][0])
 
     def test_update(self):
         old = nes_entry(version="0.4.5", added="2026-10-01", submission=3, description="Old words.")
@@ -397,12 +397,12 @@ class Command(unittest.TestCase):
                           os.path.join(GH_DIR, "nes-good"), "--today", TODAY])
         self.assertEqual(code, 0, text)
         self.assertTrue(text.startswith(validate.MARK))
-        self.assertTrue(os.path.isfile(os.path.join(out, "plugins", "moviecart.nes", "screenshot-1.png")))
-        with open(os.path.join(out, "plugins", "moviecart.nes.json")) as f:
+        self.assertTrue(os.path.isfile(os.path.join(out, "plugins", "parrotcart.nes", "screenshot-1.png")))
+        with open(os.path.join(out, "plugins", "parrotcart.nes.json")) as f:
             e = json.load(f)
         self.assertEqual((e["description"], e["submission"]), ("Plays NES games on the console.", 7))
         with open(os.path.join(out, "result.json")) as f:
-            self.assertEqual(json.load(f)["changed"], ["moviecart.nes"])
+            self.assertEqual(json.load(f)["changed"], ["parrotcart.nes"])
         with open(os.path.join(out, "report.md")) as f:
             self.assertIn("passed", f.read())
 
@@ -441,7 +441,7 @@ class Jobs(unittest.TestCase):
             found = find_updates.find(gh("nes-good"), root=root, config=CONFIG, today=TODAY)
         self.assertEqual(len(found), 1)
         repo, tag, res = found[0]
-        self.assertEqual((repo, tag, res["changed"]), ("fixture-dev/nes-plugin", "v0.4.6", ["moviecart.nes"]))
+        self.assertEqual((repo, tag, res["changed"]), ("fixture-dev/nes-plugin", "v0.4.6", ["parrotcart.nes"]))
 
     def test_no_update_when_the_tag_is_listed(self):
         with Root(nes_entry()) as root:
@@ -450,40 +450,40 @@ class Jobs(unittest.TestCase):
     def test_verify(self):
         e = nes_entry()
         with Root(e) as root:
-            self.assertEqual(verify_entries.verify(gh("nes-good"), "moviecart.nes", root=root, config=CONFIG), [])
+            self.assertEqual(verify_entries.verify(gh("nes-good"), "parrotcart.nes", root=root, config=CONFIG), [])
         with Root(dict(e, name="Not NES", opens=[".zip"])) as root:
-            bad = verify_entries.verify(gh("nes-good"), "moviecart.nes", root=root, config=CONFIG)
+            bad = verify_entries.verify(gh("nes-good"), "parrotcart.nes", root=root, config=CONFIG)
         self.assertEqual(len(bad), 2)
         self.assertIn("name is 'Not NES'", bad[0])
 
     def test_verify_reads_the_files_and_the_notes(self):
         e = nes_entry()
         with Root(e) as root:
-            with open(os.path.join(root, "plugins", "moviecart.nes", "cart-readme.txt"), "ab") as f:
+            with open(os.path.join(root, "plugins", "parrotcart.nes", "cart-readme.txt"), "ab") as f:
                 f.write(b"An extra line.\n")
-            bad = verify_entries.verify(gh("nes-good"), "moviecart.nes", root=root, config=CONFIG)
+            bad = verify_entries.verify(gh("nes-good"), "parrotcart.nes", root=root, config=CONFIG)
         self.assertTrue(any("cart-readme.txt" in b for b in bad), bad)
         with Root(e) as root:                                # a screenshot swapped for another real PNG
             other = shot(7)
-            with open(os.path.join(root, "plugins", "moviecart.nes", "screenshot-1.png"), "wb") as f:
+            with open(os.path.join(root, "plugins", "parrotcart.nes", "screenshot-1.png"), "wb") as f:
                 f.write(other)
             e2 = dict(e, screenshots=[validate._meta("screenshot-1.png", other), e["screenshots"][1]])
             registry.write_json(registry.entry_path(root, e["id"]), e2)
-            bad = verify_entries.verify(gh("nes-good"), "moviecart.nes", root=root, config=CONFIG)
+            bad = verify_entries.verify(gh("nes-good"), "parrotcart.nes", root=root, config=CONFIG)
         self.assertTrue(any("screenshots is" in b for b in bad), bad)
         edited = dict(e, history=[dict(e["history"][0], notes="Not what the release says.")])
         with Root(edited) as root:
-            bad = verify_entries.verify(gh("nes-good"), "moviecart.nes", root=root, config=CONFIG)
+            bad = verify_entries.verify(gh("nes-good"), "parrotcart.nes", root=root, config=CONFIG)
         self.assertTrue(any("notes for 0.4.6 aren't the release's" in b for b in bad), bad)
 
     def test_apply_entries_copies_the_files(self):
         res = run("nes-good", "fixture-dev/nes-plugin")
         src, dst = tmp(), tmp()
         validate.write_out(res, src)
-        self.assertEqual(sorted(os.listdir(os.path.join(src, "plugins", "moviecart.nes"))),
+        self.assertEqual(sorted(os.listdir(os.path.join(src, "plugins", "parrotcart.nes"))),
                          ["README.md", "cart-readme.txt", "screenshot-1.png", "screenshot-2.png"])
-        os.makedirs(os.path.join(dst, "plugins", "moviecart.nes"))
-        with open(os.path.join(dst, "plugins", "moviecart.nes", "screenshot-3.png"), "wb") as f:
+        os.makedirs(os.path.join(dst, "plugins", "parrotcart.nes"))
+        with open(os.path.join(dst, "plugins", "parrotcart.nes", "screenshot-3.png"), "wb") as f:
             f.write(shot(3))                                 # left from an older version: it must go
         old = registry.ROOT
         self.addCleanup(setattr, registry, "ROOT", old)
@@ -491,15 +491,15 @@ class Jobs(unittest.TestCase):
         out = io.StringIO()
         with contextlib.redirect_stdout(out):
             self.assertEqual(apply_entries.main([src]), 0)
-        self.assertEqual(out.getvalue().split(), ["moviecart.nes"])
-        e = registry.load_entries(dst)["moviecart.nes"]
+        self.assertEqual(out.getvalue().split(), ["parrotcart.nes"])
+        e = registry.load_entries(dst)["parrotcart.nes"]
         self.assertEqual(registry.check_files(registry.files_dir(dst, e["id"]), e), [])
         # a file the entry doesn't list, or one changed on the way, stops it
         for name, data in (("extra.html", b"<script>"), ("screenshot-1.png", shot(3))):
             with self.subTest(name):
                 src2 = tmp()
                 validate.write_out(res, src2)
-                with open(os.path.join(src2, "plugins", "moviecart.nes", name), "wb") as f:
+                with open(os.path.join(src2, "plugins", "parrotcart.nes", name), "wb") as f:
                     f.write(data)
                 err = io.StringIO()
                 with contextlib.redirect_stderr(err):
@@ -512,7 +512,7 @@ class Jobs(unittest.TestCase):
         self.addCleanup(setattr, registry, "ROOT", registry.ROOT)
         registry.ROOT = tmp()
         validate.write_out(run("nes-good", "fixture-dev/nes-plugin"), src)
-        self.assertEqual(registry.check_entry(e, "moviecart.nes.json"), [])
+        self.assertEqual(registry.check_entry(e, "parrotcart.nes.json"), [])
         # a bad one stops the lot
         bad = dict(e, id="../../evil")
         with open(os.path.join(src, "plugins", "zzz.json"), "w") as f:

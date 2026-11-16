@@ -1,0 +1,82 @@
+{
+  "schema": 2,
+  "id": "parrotcart.starwars",
+  "name": "Star Wars",
+  "version": "0.1.2",
+  "by": "Parrot Cart",
+  "description": "Plays the 1983 Star Wars arcade game from your own ROM files, with a USB pad as the yoke.",
+  "repo": "OWNER/parrotcart-starwars",
+  "repo_id": null,
+  "owner": "OWNER",
+  "api": 1,
+  "home": "/STARWARS",
+  "opens": [],
+  "uses": [
+    "usb-host"
+  ],
+  "icon": "8142249999244281",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": "BSD-3-Clause",
+    "name": "BSD 3-Clause License",
+    "url": "https://github.com/OWNER/parrotcart-starwars/blob/v0.1.2/LICENSE"
+  },
+  "source_url": "https://github.com/OWNER/parrotcart-starwars/tree/v0.1.2",
+  "credits_url": "https://github.com/OWNER/parrotcart-starwars#credits",
+  "release": {
+    "tag": "v0.1.2",
+    "url": "https://github.com/OWNER/parrotcart-starwars/releases/tag/v0.1.2",
+    "published": "2026-11-15"
+  },
+  "download": {
+    "name": "STARWARS.CVP",
+    "url": "https://github.com/OWNER/parrotcart-starwars/releases/download/v0.1.2/STARWARS.CVP",
+    "size": 178432,
+    "sha256": "1aad821f60c61c122b7cfd19300ea78a3259c0c6f5a6eb39789897a0884a85eb"
+  },
+  "image": {
+    "size": 177920,
+    "sha256": "b0f29c17195ed422af14e86c98ee118d6fc171acdfba967ca9ec198bc79596af",
+    "kind": "sram"
+  },
+  "credits": "Parts ported from MAME (BSD-3-Clause): Steve Baines, Frank Palazzolo, Mathis Rosenhauer, Aaron Giles and others. Star Wars is a trademark of Lucasfilm Ltd. The plugin contains none of the game.",
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 724,
+      "sha256": "058c01e6badb16ed18a10a7a770a9c618f2df487590911099f9d31c441fc2936",
+      "lines": 43
+    },
+    "web": {
+      "file": "README.md",
+      "size": 754,
+      "sha256": "2274bef0430d13d83a2ad8edd5c501b39d02c510117e5a698e6b95c345aec2e4",
+      "url": "https://github.com/OWNER/parrotcart-starwars#credits"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1219,
+      "sha256": "f28e8bfe61f4911c38360c8be0ce70109845a48287d30fe1615b219477209671"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 464,
+      "sha256": "6535f7c7dc9b533cd9987bf6c25d6364b40661b9089f13a861677518a2fee226"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.2",
+      "url": "https://github.com/OWNER/parrotcart-starwars/releases/tag/v0.1.2",
+      "published": "2026-11-15",
+      "version": "0.1.2",
+      "notes": "An example entry. When Star Wars is listed, the notes of its 0.1.2 release on GitHub show here."
+    }
+  ],
+  "added": "2026-11-15",
+  "updated": "2026-11-15",
+  "submission": null,
+  "example": true
+}

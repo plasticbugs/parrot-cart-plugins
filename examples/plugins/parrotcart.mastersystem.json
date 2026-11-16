@@ -1,0 +1,88 @@
+{
+  "schema": 2,
+  "id": "parrotcart.mastersystem",
+  "name": "Master System",
+  "version": "0.2.3",
+  "by": "Parrot Cart",
+  "description": "Plays Master System, Game Gear and SG-1000 games, with saves.",
+  "repo": "OWNER/parrotcart-mastersystem",
+  "repo_id": null,
+  "owner": "OWNER",
+  "api": 1,
+  "home": "/SMS",
+  "opens": [
+    ".sms",
+    ".gg",
+    ".sg"
+  ],
+  "uses": [
+    "usb-host",
+    "psram"
+  ],
+  "icon": "00ff207520ff0000",
+  "file_icon": "7e42427e7e7e3c00",
+  "license": {
+    "spdx": "GPL-3.0",
+    "name": "GNU General Public License v3.0",
+    "url": "https://github.com/OWNER/parrotcart-mastersystem/blob/v0.2.3/LICENSE",
+    "note": "Its Z80 core's notice allows non-commercial use only."
+  },
+  "source_url": "https://github.com/OWNER/parrotcart-mastersystem/tree/v0.2.3",
+  "credits_url": "https://github.com/OWNER/parrotcart-mastersystem#credits",
+  "release": {
+    "tag": "v0.2.3",
+    "url": "https://github.com/OWNER/parrotcart-mastersystem/releases/tag/v0.2.3",
+    "published": "2026-11-15"
+  },
+  "download": {
+    "name": "SMS.CVP",
+    "url": "https://github.com/OWNER/parrotcart-mastersystem/releases/download/v0.2.3/SMS.CVP",
+    "size": 204448,
+    "sha256": "424ba341e086d540dc160d7c27c08b5bab139d69ac50fb35deee49e84c51c5ab"
+  },
+  "image": {
+    "size": 201984,
+    "sha256": "689ac6d70e82678834ee82861b3fdd035a7a0fffcf3ea0fa74c6f085b4fd8175",
+    "kind": "sram"
+  },
+  "credits": "SMS Plus by Charles MacDonald; pico-smsplus by Frank Hoedemakers; the Z80 core by Juergen Buchmueller",
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 515,
+      "sha256": "ca133e3c2c532f8ae95515dad1c57fed55354de96a8884d8653950cbbdf3d006",
+      "lines": 32
+    },
+    "web": {
+      "file": "README.md",
+      "size": 561,
+      "sha256": "8189c45b8658efb2893b580dacfa1b2f6efbd828b3abc5e7524f367f305dfb66",
+      "url": "https://github.com/OWNER/parrotcart-mastersystem#credits"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1264,
+      "sha256": "275b345162e1943f3871785a581040b43f9b131e7e8548c966b38c54ac1e68b6"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 515,
+      "sha256": "68f7538de5d82fc3b9995b7bce22288fd9c1072e7c6f9d6d5d73dc6c07281040"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.2.3",
+      "url": "https://github.com/OWNER/parrotcart-mastersystem/releases/tag/v0.2.3",
+      "published": "2026-11-15",
+      "version": "0.2.3",
+      "notes": "An example entry. When Master System is listed, the notes of its 0.2.3 release on GitHub show here."
+    }
+  ],
+  "added": "2026-11-15",
+  "updated": "2026-11-15",
+  "submission": null,
+  "example": true
+}

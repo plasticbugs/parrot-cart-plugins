@@ -95,25 +95,25 @@ class Site(unittest.TestCase):
         self.assertEqual(registry.check_entry(e), [])
         registry.write_json(registry.entry_path(root, e["id"]), e)
         _, pages, idx = self.build(root)
-        self.assertEqual([p["id"] for p in idx["plugins"]], ["moviecart.nes"])
+        self.assertEqual([p["id"] for p in idx["plugins"]], ["parrotcart.nes"])
         for name, text in pages.items():
             for bad in ("<script>alert", "<img src=x", "<b>NES", "<svg onload", "<i>", 'href="javascript', "<a onerror", " onerror=alert(2)>"):
                 self.assertNotIn(bad, text, (name, bad))
-        self.assertIn("&lt;b&gt;NES&lt;/b&gt;", pages["plugins/moviecart.nes/index.html"])
+        self.assertIn("&lt;b&gt;NES&lt;/b&gt;", pages["plugins/parrotcart.nes/index.html"])
 
     def test_a_plugins_page_shows_what_was_copied(self):
         root = tmp()
         e = listed(root)
         out, pages, idx = self.build(root)
-        page = pages["plugins/moviecart.nes/index.html"]
-        here = os.path.join(out, "plugins", "moviecart.nes")
+        page = pages["plugins/parrotcart.nes/index.html"]
+        here = os.path.join(out, "plugins", "parrotcart.nes")
         # the screenshots: copies beside the page, never the release's own address
         for i in (1, 2):
             with open(os.path.join(here, f"screenshot-{i}.png"), "rb") as f:
                 self.assertEqual(f.read(), shot(i))
             self.assertIn(f'<img src="screenshot-{i}.png" width="256" height="192"', page)
         self.assertNotIn("releases/download/v0.4.6/screenshot", page)
-        self.assertIn('src="plugins/moviecart.nes/screenshot-1.png"', pages["index.html"])
+        self.assertIn('src="plugins/parrotcart.nes/screenshot-1.png"', pages["index.html"])
         for t, a in Tags(page).seen + Tags(pages["index.html"]).seen:
             if t in ("img", "script", "source", "video", "iframe") and "src" in a:
                 self.assertFalse(a["src"].startswith(("http", "//")), a)
@@ -133,16 +133,16 @@ class Site(unittest.TestCase):
         self.assertIn('href="https://github.com/fixture-dev/nes-plugin/blob/v0.4.6/docs/pads.md"', page)
         self.assertNotIn("tracker.png", page)
         self.assertEqual(idx["plugins"][0]["screenshots"],
-                         [f"https://plasticbugs.github.io/parrot-cart-plugins/plugins/moviecart.nes/screenshot-{i}.png"
+                         [f"https://plasticbugs.github.io/parrot-cart-plugins/plugins/parrotcart.nes/screenshot-{i}.png"
                           for i in (1, 2)])
-        self.assertTrue(idx["plugins"][0]["readme_url"].endswith("/plugins/moviecart.nes/cart-readme.txt"))
+        self.assertTrue(idx["plugins"][0]["readme_url"].endswith("/plugins/parrotcart.nes/cart-readme.txt"))
 
     def test_a_plugin_without_a_readme_says_so(self):
         pages = self.build()[1]
-        page = pages["plugins/moviecart.nesinfo/index.html"]
+        page = pages["plugins/parrotcart.nesinfo/index.html"]
         self.assertIn("No README on the cart", page)
         self.assertIn('href="../../authors/readme/"', page)
-        self.assertNotIn("No README on the cart", pages["plugins/moviecart.nes/index.html"])
+        self.assertNotIn("No README on the cart", pages["plugins/parrotcart.nes/index.html"])
 
     def test_the_site_needs_no_script_and_calls_nobody(self):
         out, pages, _ = self.build()

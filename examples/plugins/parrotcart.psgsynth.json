@@ -1,0 +1,86 @@
+{
+  "schema": 2,
+  "id": "parrotcart.psgsynth",
+  "name": "PSG Synth",
+  "version": "1.0.0",
+  "by": "Parrot Cart",
+  "description": "Plays the console's sound chip from a USB MIDI keyboard.",
+  "repo": "OWNER/parrotcart-psgsynth",
+  "repo_id": null,
+  "owner": "OWNER",
+  "api": 1,
+  "home": "",
+  "opens": [],
+  "uses": [
+    "usb-host"
+  ],
+  "icon": "003e222222eeee00",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": null,
+    "name": "Not chosen yet",
+    "url": "https://github.com/OWNER/parrotcart-psgsynth/blob/v1.0.0/LICENSE"
+  },
+  "source_url": "https://github.com/OWNER/parrotcart-psgsynth/tree/v1.0.0",
+  "credits_url": "https://github.com/OWNER/parrotcart-psgsynth#credits",
+  "release": {
+    "tag": "v1.0.0",
+    "url": "https://github.com/OWNER/parrotcart-psgsynth/releases/tag/v1.0.0",
+    "published": "2026-11-15"
+  },
+  "download": {
+    "name": "PSGSYNTH.CVP",
+    "url": "https://github.com/OWNER/parrotcart-psgsynth/releases/download/v1.0.0/PSGSYNTH.CVP",
+    "size": 95922,
+    "sha256": "a817f89f9fea237465e51b3f2a4a965736b39c24606cc1a217e31228c5ed6f35"
+  },
+  "image": {
+    "size": 93952,
+    "sha256": "7353ee47b12633794e6d16786812a5e6a270680dca29c3284b0c140571b4c9c7",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 408,
+      "sha256": "0d49852d6bf6b1aa00ca2e81d9ce849d5739cdb2fa6482e825941fdc8b3025de",
+      "lines": 30
+    },
+    "web": {
+      "file": "README.md",
+      "size": 442,
+      "sha256": "0dc83ccd773e0860be7f4c5b2b12e413cbac7814c5fca45bd37c9d54588f6216",
+      "url": "https://github.com/OWNER/parrotcart-psgsynth#credits"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1552,
+      "sha256": "6c46f8a5155ea344e063fe29b84bdb351f0c677ac364762e82f2cf8eda8c0845"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 1222,
+      "sha256": "6445cdfeafa914e4245f14bcadd51b9058fcdb95d3d8afdbf364bf922a8b8852"
+    },
+    {
+      "file": "screenshot-3.png",
+      "size": 462,
+      "sha256": "353b2673f58a7a4888c699d50421eb67321edccef216a59ebb4fe08443cc33fa"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v1.0.0",
+      "url": "https://github.com/OWNER/parrotcart-psgsynth/releases/tag/v1.0.0",
+      "published": "2026-11-15",
+      "version": "1.0.0",
+      "notes": "An example entry. When PSG Synth is listed, the notes of its 1.0.0 release on GitHub show here."
+    }
+  ],
+  "added": "2026-11-15",
+  "updated": "2026-11-15",
+  "submission": null,
+  "example": true
+}

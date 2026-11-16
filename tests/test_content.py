@@ -2,6 +2,7 @@
 SDK's own converter and check, screenshots (tools/png.py), and the files an
 entry keeps beside it"""
 import copy
+import hashlib
 import os
 import struct
 import unittest
@@ -122,7 +123,7 @@ class Png(unittest.TestCase):
         self.assertIsNone(png.check(self.build(struct.pack(">IIBBBBB", 256, 192, 8, 3, 0, 0, 1), zlib.compress(raw))))
 
     def test_the_menus_pages_as_pictures(self):
-        e = registry.load_entries(ROOT, examples=True)["moviecart.nes"]
+        e = registry.load_entries(ROOT, examples=True)["parrotcart.nes"]
         rows, palette = tvscreen.details_page(e).pixels()
         self.assertEqual((len(rows), len(rows[0])), (192, 256))
         self.assertIsNone(png.check(png.write(rows, palette)))
@@ -132,14 +133,17 @@ class Png(unittest.TestCase):
 class EntryFiles(unittest.TestCase):
     def setUp(self):
         self.entries = registry.load_entries(ROOT, examples=True)
-        self.e = self.entries["moviecart.nes"]
-        self.dir = registry.files_dir(ROOT, "moviecart.nes", examples=True)
+        self.e = self.entries["parrotcart.nes"]
+        self.dir = registry.files_dir(ROOT, "parrotcart.nes", examples=True)
 
     def test_examples_have_their_files(self):
         for pid, e in self.entries.items():
             self.assertEqual(registry.check_files(registry.files_dir(ROOT, pid, examples=True), e), [], pid)
-        self.assertIsNone(self.entries["moviecart.nesinfo"]["readme"]["cart"])     # the page without one
-        self.assertEqual(self.entries["moviecart.psgsynth"]["screenshots"], [])
+        self.assertIsNone(self.entries["parrotcart.nesinfo"]["readme"]["cart"])     # the page without one
+        shots = self.entries["parrotcart.psgsynth"]["screenshots"]          # the synth playing, then the menu
+        self.assertEqual([x["file"] for x in shots], ["screenshot-1.png", "screenshot-2.png", "screenshot-3.png"])
+        with open(os.path.join(ROOT, "examples", "screens", "psgsynth-playing.png"), "rb") as f:
+            self.assertEqual(shots[0]["sha256"], hashlib.sha256(f.read()).hexdigest())
 
     def test_examples_are_what_the_seeder_writes(self):
         for e, files in seed_examples.build(self.e["updated"]):
@@ -171,7 +175,7 @@ class EntryFiles(unittest.TestCase):
                 self.assertTrue(any(p.startswith(key) for p in registry.check_entry(e)))
 
     def test_files_must_be_the_entrys(self):
-        d = os.path.join(tmp(), "moviecart.nes")
+        d = os.path.join(tmp(), "parrotcart.nes")
         os.makedirs(d)
         for name in registry.entry_files(self.e):
             with open(os.path.join(d, name), "wb") as f:

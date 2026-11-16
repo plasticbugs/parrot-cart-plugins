@@ -1,0 +1,82 @@
+{
+  "schema": 2,
+  "id": "parrotcart.esb",
+  "name": "Empire Strikes Back",
+  "version": "0.1.2",
+  "by": "Parrot Cart",
+  "description": "Plays the 1985 Empire Strikes Back arcade game from your own ROM files, with a USB pad.",
+  "repo": "OWNER/parrotcart-esb",
+  "repo_id": null,
+  "owner": "OWNER",
+  "api": 1,
+  "home": "/ESB",
+  "opens": [],
+  "uses": [
+    "usb-host"
+  ],
+  "icon": "0066ffbdff5a42c3",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": "BSD-3-Clause",
+    "name": "BSD 3-Clause License",
+    "url": "https://github.com/OWNER/parrotcart-esb/blob/v0.1.2/LICENSE"
+  },
+  "source_url": "https://github.com/OWNER/parrotcart-esb/tree/v0.1.2",
+  "credits_url": "https://github.com/OWNER/parrotcart-esb#credits",
+  "release": {
+    "tag": "v0.1.2",
+    "url": "https://github.com/OWNER/parrotcart-esb/releases/tag/v0.1.2",
+    "published": "2026-11-15"
+  },
+  "download": {
+    "name": "ESB.CVP",
+    "url": "https://github.com/OWNER/parrotcart-esb/releases/download/v0.1.2/ESB.CVP",
+    "size": 196096,
+    "sha256": "e0741795db7cc073066733830cd28f885c15e78913286563abf1336c363bd2b3"
+  },
+  "image": {
+    "size": 195584,
+    "sha256": "d714f7eee7c0db53e14025ae582900bab322a7f77097ebea7806855ad1ddf5b5",
+    "kind": "sram"
+  },
+  "credits": "Parts ported from MAME (BSD-3-Clause): Steve Baines, Frank Palazzolo, Mathis Rosenhauer, Aaron Giles and others. Star Wars is a trademark of Lucasfilm Ltd. The plugin contains none of the game.",
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 724,
+      "sha256": "749723d5a1610d65df8d86a94fa1491307ac47f69ff7d926625a5365b22ca994",
+      "lines": 42
+    },
+    "web": {
+      "file": "README.md",
+      "size": 757,
+      "sha256": "e0073508f789892972ef7bd150ab053a61bb504b61a0573207640c3c2e7d9827",
+      "url": "https://github.com/OWNER/parrotcart-esb#credits"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1213,
+      "sha256": "5d9920f0f29c161eee44f0261652b1518de4a34c016a3cf88d61df15d6c8f5c4"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 529,
+      "sha256": "05b0143d1909821089878029327de2a682050752b26d4ebaedce3334be93b4f1"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.2",
+      "url": "https://github.com/OWNER/parrotcart-esb/releases/tag/v0.1.2",
+      "published": "2026-11-15",
+      "version": "0.1.2",
+      "notes": "An example entry. When Empire Strikes Back is listed, the notes of its 0.1.2 release on GitHub show here."
+    }
+  ],
+  "added": "2026-11-15",
+  "updated": "2026-11-15",
+  "submission": null,
+  "example": true
+}

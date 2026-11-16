@@ -288,7 +288,7 @@ def shots_section(e):
         f'decoding="async"></div><figcaption><span>Picture {i}</span>'
         f'<span class="code">{png.WIDTH} × {png.HEIGHT}</span></figcaption></figure>'
         for i, s in enumerate(e["screenshots"], 1))
-    lead = ("This example shows the cart's own menu. A listed plugin shows its author's screenshots."
+    lead = ("Pictures of this example on the cart. A listed plugin shows its author's screenshots."
             if e.get("example") else "From the author's release, pixel for pixel.")
     return f"""<section class="section" id="screenshots" aria-labelledby="shots-title"><div class="container">
 <div class="headblock"><h2 id="shots-title">On the TV</h2><p class="lead">{lead}</p></div>

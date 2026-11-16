@@ -1,0 +1,42 @@
+EMPIRE STRIKES BACK FOR PARROT
+CART
+
+Plays the 1985 Empire Strikes
+Back arcade game from your own
+ROM files, with a USB pad.
+
+INSTALL
+
+1. Copy ESB.CVP to /PLUGINS on
+   the cart's microSD card.
+2. Put your own Empire Strikes
+   Back ROM files (MAME's esb
+   set) in /ESB, loose or
+   zipped, or as /ESB.ZIP.
+3. On the cart: Home, Plugins,
+   Empire Strikes Back, then
+   A.
+
+WHAT IT NEEDS
+
+Opens: No files: it is an
+  app
+Folder: /ESB
+Uses: USB host
+
+CREDITS
+
+Parts ported from MAME
+(BSD-3-Clause): Steve Baines,
+Frank Palazzolo, Mathis
+Rosenhauer, Aaron Giles and
+others. Star Wars is a
+trademark of Lucasfilm Ltd.
+The plugin contains none of
+the game.
+
+SOURCE
+
+An example entry: this
+plugin's repository isn't
+public yet.

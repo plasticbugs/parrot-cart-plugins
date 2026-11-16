@@ -15,7 +15,10 @@ so on the page:
   cart-readme.txt  that README.md through the SDK's converter
                    (tools/cvreadme.py), as a build with a README would hold
   screenshot-N.png the cart's menu pages for the plugin, drawn from its
-                   header in the menu's font (not the plugin running)
+                   header in the menu's font; for a plugin in SCREENS, a
+                   picture of it running comes first (examples/screens/:
+                   PSG Synth's is coleco's midihello/test/ui_preview.c
+                   "chord" screen, 1 pixel in 3)
   history          one line saying the release's notes will show there
 
 NO_README and NO_SHOTS leave an example without, to show those pages too.
@@ -44,32 +47,51 @@ OWNER = "OWNER"                # nobody: an example's repository isn't public
 
 # id: repository name, licence (spdx, name, note), description
 SEEDS = {
-    "moviecart.nes": ("parrotcart-nes", ("LGPL-2.1", "GNU Lesser General Public License v2.1", None),
+    "parrotcart.nes": ("parrotcart-nes", ("LGPL-2.1", "GNU Lesser General Public License v2.1", None),
                       "Plays NES games from /NES, with USB pads."),
-    "moviecart.gameboy": ("parrotcart-gameboy", ("MIT", "MIT License", None),
+    "parrotcart.gameboy": ("parrotcart-gameboy", ("MIT", "MIT License", None),
                           "Plays Game Boy games from /GB, with saves and USB pads."),
-    "moviecart.mastersystem": ("parrotcart-mastersystem", ("GPL-3.0", "GNU General Public License v3.0",
+    "parrotcart.mastersystem": ("parrotcart-mastersystem", ("GPL-3.0", "GNU General Public License v3.0",
                                                            "Its Z80 core's notice allows non-commercial use only."),
                                "Plays Master System, Game Gear and SG-1000 games, with saves."),
-    "moviecart.scumm": ("parrotcart-scumm", ("GPL-3.0", "GNU General Public License v3.0", None),
+    "parrotcart.scumm": ("parrotcart-scumm", ("GPL-3.0", "GNU General Public License v3.0", None),
                         "Plays SCUMM adventure games from /SCUMM, with saves."),
-    "moviecart.padtest": ("parrotcart-padtest", (None, "Not chosen yet", None),
+    "parrotcart.padtest": ("parrotcart-padtest", (None, "Not chosen yet", None),
                           "Shows a USB pad's buttons and sticks on the TV as they move."),
-    "moviecart.nesinfo": ("parrotcart-nesinfo", (None, "Not chosen yet", None),
+    "parrotcart.nesinfo": ("parrotcart-nesinfo", (None, "Not chosen yet", None),
                           "Shows a .nes file's header and CRC-32: the SDK's smallest example."),
-    "moviecart.psgsynth": ("parrotcart-psgsynth", (None, "Not chosen yet", None),
+    "parrotcart.psgsynth": ("parrotcart-psgsynth", (None, "Not chosen yet", None),
                            "Plays the console's sound chip from a USB MIDI keyboard."),
+    "parrotcart.starwars": ("parrotcart-starwars", ("BSD-3-Clause", "BSD 3-Clause License", None),
+                            "Plays the 1983 Star Wars arcade game from your own ROM files, with a USB pad as the yoke."),
+    "parrotcart.esb": ("parrotcart-esb", ("BSD-3-Clause", "BSD 3-Clause License", None),
+                       "Plays the 1985 Empire Strikes Back arcade game from your own ROM files, with a USB pad."),
 }
 
 CREDITS = {
-    "moviecart.nes": "QuickNES by Shay Green (blargg), via frank-nes; emu2413 by Mitsutaka Okazaki",
-    "moviecart.gameboy": "Peanut-GB and minigb_apu",
-    "moviecart.mastersystem": "SMS Plus by Charles MacDonald; pico-smsplus by Frank Hoedemakers; "
+    "parrotcart.nes": "QuickNES by Shay Green (blargg), via frank-nes; emu2413 by Mitsutaka Okazaki",
+    "parrotcart.gameboy": "Peanut-GB and minigb_apu",
+    "parrotcart.mastersystem": "SMS Plus by Charles MacDonald; pico-smsplus by Frank Hoedemakers; "
                               "the Z80 core by Juergen Buchmueller",
-    "moviecart.scumm": "ScummVM, via frank-quest",
+    "parrotcart.scumm": "ScummVM, via frank-quest",
+    "parrotcart.starwars": "Parts ported from MAME (BSD-3-Clause): Steve Baines, Frank Palazzolo, Mathis Rosenhauer, "
+                           "Aaron Giles and others. Star Wars is a trademark of Lucasfilm Ltd. The plugin contains "
+                           "none of the game.",
+    "parrotcart.esb": "Parts ported from MAME (BSD-3-Clause): Steve Baines, Frank Palazzolo, Mathis Rosenhauer, "
+                      "Aaron Giles and others. Star Wars is a trademark of Lucasfilm Ltd. The plugin contains "
+                      "none of the game.",
 }
-NO_README = {"moviecart.nesinfo"}          # as a plugin built before the README existed
-NO_SHOTS = {"moviecart.psgsynth"}
+# a step of its own, for an app that needs files but opens none
+ROMS = {
+    "parrotcart.starwars": "Put your own Star Wars ROM files (MAME's `starwars` set) in `/STARWARS`, "
+                           "loose or zipped, or as `/STARWARS.ZIP`.",
+    "parrotcart.esb": "Put your own Empire Strikes Back ROM files (MAME's `esb` set) in `/ESB`, "
+                      "loose or zipped, or as `/ESB.ZIP`.",
+}
+# pictures of the plugin running, before the menu pages (examples/screens/)
+SCREENS = {"parrotcart.psgsynth": ["psgsynth-playing.png"]}
+NO_README = {"parrotcart.nesinfo"}          # as a plugin built before the README existed
+NO_SHOTS = set()
 NEEDS = {"usb-host": "USB host", "usb-device": "USB device", "psram": "PSRAM"}
 
 
@@ -77,6 +99,8 @@ def readme_md(e):
     steps = [f"Copy `{e['download']['name']}` to `/PLUGINS` on the cart's microSD card."]
     if e["opens"] and e["home"]:
         steps.append(f"Put your {' '.join(e['opens'])} files in `{e['home']}`.")
+    if e["id"] in ROMS:
+        steps.append(ROMS[e["id"]])
     steps.append(f"On the cart: Home, Plugins, {e['name']}, then A.")
     facts = [("Opens", " ".join(f"`{x}`" for x in e["opens"]) or "No files: it is an app"),
              ("Folder", f"`{e['home']}`" if e["home"] else "None"),
@@ -91,13 +115,18 @@ def readme_md(e):
 
 
 def shots(e):
-    """the menu's pages for this plugin, as 256 x 192 PNGs"""
+    """the plugin running (SCREENS), then the menu's pages for it, as 256 x 192 PNGs, three at most"""
+    pics = []
+    for name in SCREENS.get(e["id"], []):
+        with open(os.path.join(registry.ROOT, "examples", "screens", name), "rb") as f:
+            pics.append(f.read())
     pages = [tvscreen.details_page(e)]
     if e["opens"] and e["home"]:
         pages.append(tvscreen.folder_page(e["home"], ["Sample 1", "Sample 2", "Sample 3"], e["file_icon"]))
     else:
         pages.append(tvscreen.plugins_page([e]))
-    return [(registry.SHOTS[i], png.write(*p.pixels())) for i, p in enumerate(pages)]
+    pics += [png.write(*p.pixels()) for p in pages]
+    return [(registry.SHOTS[i], data) for i, data in enumerate(pics[:len(registry.SHOTS)])]
 
 
 def meta(name, data, **more):
