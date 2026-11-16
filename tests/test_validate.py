@@ -114,13 +114,14 @@ class Submissions(unittest.TestCase):
         self.assertEqual([p["file"] for p in res["plugins"]], ["PADTEST-0.1.2.CVP", "PADTEST18.CVP"])
         self.assertTrue(any("isn't in the release tag" in w for w in res["plugins"][1]["warnings"]))
 
-    def test_missing_licence_credits_source(self):
+    def test_missing_license_and_readme(self):
         res = run("gb-missing", "other-dev/gb-plugin")
         self.assertFalse(res["ok"])
         text = " ".join(res["errors"])
         self.assertIn("no LICENSE", text)
-        self.assertIn("no credits", text)
-        self.assertIn("doesn't link to the plugin's source", text)
+        self.assertNotIn("credits", text)                  # credits and a source link aren't required
+        self.assertNotIn("source", text)
+        self.assertTrue(any("no README inside" in e for e in res["plugins"][0]["errors"]))
         self.assertIsNone(res["plugins"][0]["entry"])
 
     def test_prerelease(self):
@@ -204,15 +205,10 @@ class PageContent(unittest.TestCase):
         res = run("pads-two", "fixture-dev/pad-tools", "v0.1.2")
         self.assertTrue(res["ok"], res)
         p = res["plugins"][0]
-        self.assertIsNone(p["entry"]["readme"]["cart"])
         self.assertEqual(p["entry"]["screenshots"], [])
         self.assertEqual(p["entry"]["history"][0]["notes"], "")
-        self.assertTrue(any("no README section" in w for w in p["warnings"]))
         self.assertTrue(any("no screenshots" in w for w in res["warnings"]))
         self.assertTrue(any("no notes" in w for w in res["warnings"]))
-        text = validate.report(res)
-        self.assertIn("no README section", text)             # the warning reaches the issue and the PR
-        self.assertIn("no README on the cart", text)
 
     def test_a_bad_readme_section_fails(self):
         d = tmp()
@@ -360,10 +356,7 @@ Plays NES games on the console.
 
 ### Rules
 
-- [X] The plugin is a free download.
-- [X] The repository is public.
-- [X] The repository has a LICENSE file.
-- [X] The README credits.
+- [X] The repository is public and has a LICENSE file.
 - [X] No commercial game art.
 - [X] The registry may copy.
 """

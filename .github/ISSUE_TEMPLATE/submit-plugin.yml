@@ -48,13 +48,7 @@ body:
       label: Rules
       description: We can only list your plugin if all of these are true.
       options:
-        - label: The plugin is free. It isn't sold, and it isn't bundled with the cart or anything else that's sold.
-          required: true
-        - label: The repo is public and has the plugin's full source, including any code it links in. GPL and LGPL code requires this.
-          required: true
-        - label: The repo has a LICENSE file. A non-commercial licence is fine.
-          required: true
-        - label: The README credits the people whose work the plugin uses, and links to the full source.
+        - label: The repo is public and has a LICENSE file.
           required: true
         - label: The repo and the release, including screenshots, have no commercial game art, ROMs or other files I don't have the right to share.
           required: true

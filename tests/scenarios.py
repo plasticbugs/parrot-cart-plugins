@@ -29,6 +29,8 @@ CREDITS
 QuickNES by Shay Green.
 """
 
+SHORT_README = "A PLUGIN\n\nA short README, as the SDK\nstores it inside the .CVP.\n"
+
 # file -> its header (tests/test_cvp.py checks cvp.py reads each back)
 PLUGINS = {
     "NES-0.4.6.CVP": dict(id="parrotcart.nes", name="NES", version="0.4.6", by="Parrot Cart", home="/NES",
@@ -42,13 +44,13 @@ PLUGINS = {
                           icon="00ff207520ff0000", file_icon="7e42427e7e7e3c00", kind="sram"),
     "PADTEST-0.1.2.CVP": dict(id="parrotcart.padtest", name="Pad Test", version="0.1.2", by="Parrot Cart", home="",
                               opens=[], uses=["usb-host"], icon="3c4299819999423c", file_icon="0000000000000000",
-                              kind="sram"),
+                              kind="sram", readme=SHORT_README),
     "PADTEST18.CVP": dict(id="parrotcart.padtest18", name="Pad Test 0.18", version="0.1.1", by="Parrot Cart", home="",
                           opens=[], uses=["usb-host"], icon="3c4299819999423c", file_icon="0000000000000000",
-                          kind="sram"),
+                          kind="sram", readme=SHORT_README),
     "SCUMM-0.2.7.CVP": dict(id="parrotcart.scumm", name="SCUMM", version="0.2.7", by="Parrot Cart", home="/SCUMM",
                             opens=[".lfl", ".000"], uses=[], icon="3c42a581bda5423c", file_icon="7e81ad81b981b57e",
-                            kind="xip"),
+                            kind="xip", readme=SHORT_README),
     "NESINFO-1.0.0.CVP": dict(id="parrotcart.nesinfo", name="NES Info", version="1.0.0", by="Parrot Cart", home="/NES",
                               opens=[".nes"], uses=[], icon="3c4299819999423c", file_icon="7e42427e7e5a7e00",
                               kind="sram"),

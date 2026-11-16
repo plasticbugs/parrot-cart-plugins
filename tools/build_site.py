@@ -388,7 +388,7 @@ def plugin_page(e, entries, config, root=ROOT):
         ("Plugin API", f'<span class="code">{e["api"]}</span>'),
         ("GitHub", link_or_text(f"https://github.com/{e['repo']}", e_(e["repo"]), True) if live
          else "Not public yet"),
-        ("Licence", link_or_text(lic["url"], e_(lic["name"]), live)
+        ("License", link_or_text(lic["url"], e_(lic["name"]), live)
          + (f'. {e_(lic["note"])}' if lic.get("note") else "")),
     ]
     rows.insert(4, ("Source", link_or_text(e["source_url"], f'Code at <span class="code">{e_(e["release"]["tag"])}</span>',
@@ -424,32 +424,25 @@ was listed.</p></div>
 def submit_page(entries, config):
     form = f"https://github.com/{config['registry_repo']}/issues/new?template=submit-plugin.yml"
     nodes = [
-        ("Your release", "The .CVP, a licence and credits."),
+        ("Your release", "The .CVP, with its README inside."),
         ("An issue", "Your repo and a one-line description."),
         ("The check", "We read your files and reply on the issue."),
         ("Your listing", "Made from your release."),
-        ("A review", "We read the credits and approve it."),
+        ("A review", "We look it over and approve it."),
         ("This site", "Your plugin gets its own page."),
         ("SD cards", "People copy it to /PLUGINS."),
         ("Your next release", "Picked up within a day."),
     ]
     items = "".join(f'<li{" class=loop" if i == len(nodes) - 1 else ""}><h2>{t}</h2><p>{s}</p></li>'
                     for i, (t, s) in enumerate(nodes))
-    # one table: each rule, what it takes, and how it's checked
-    rules = [
-        ("The .CVP", "It loads on the cart and fits in a 1 MB slot.", "Automatically"),
-        ("The README", 'Optional for the cart. If your .CVP has one, it\'s <a class="link" href="../authors/readme/">'
-         "plain text, 30 characters wide</a>.", "Automatically"),
-        ("Screenshots", 'Optional. Up to three <a class="link" href="../authors/screenshots/">PNGs, 256 × 192</a>.',
-         "Both ways"),
-        ("The version", "Higher than the one already listed.", "Automatically"),
-        ("The ID", "No one else uses it.", "Automatically"),
-        ("Open source", "A public repo with the full source and a LICENSE file.", "Automatically"),
-        ("Credited", "Your README credits whose work the plugin uses.", "Both ways"),
-        ("Free", "It's never sold or bundled with anything that's sold.", "By hand"),
+    # what a plugin needs, in a few lines
+    needs = [
+        ("The .CVP", "Under 1 MB."),
+        ("The README", 'Goes <a class="link" href="../authors/readme/">inside the .CVP</a>.'),
+        ("Screenshots", 'Up to three, as <a class="link" href="../authors/screenshots/">256 × 192 PNGs</a>.'),
+        ("Your repo", "Public, with a license."),
     ]
-    rule_rows = "".join(f'<tr><th scope="row">{t}</th><td>{s}</td><td class="by" data-label="Checked">{w}</td></tr>'
-                        for t, s, w in rules)
+    need_rows = "".join(f"<li><b>{t}</b><span>{s}</span></li>" for t, s in needs)
     if placeholder(config):
         primary = ('<a class="btn" aria-disabled="true">Open an issue</a>')
         soon = '<p class="soon">Submissions open once the registry is on GitHub.</p>'
@@ -459,17 +452,15 @@ def submit_page(entries, config):
 <div class="banner__text">
 <h1 id="hero-title">Submit an Issue in the repository to add your Plugin</h1>
 <p class="lead">Tell us your repo. We'll check your release and add your plugin.</p>
-<div class="actions">{primary}<a class="btn btn--secondary" href="#rules">Read the rules</a></div>
+<div class="actions">{primary}<a class="btn btn--secondary" href="#rules">See the requirements</a></div>
 {soon}
 </div>
 <ol class="map" aria-label="From your release to the cart">{items}</ol>
 <p class="map-legend">We never run anything from your repo.</p>
 </div></section>
 <section class="section" id="rules" aria-labelledby="rules-title"><div class="container">
-<div class="headblock"><h2 id="rules-title">Free, open, credited</h2></div>
-<table class="spec spec--rules"><thead><tr><th scope="col">Rule</th><th scope="col">What we need</th>
-<th scope="col">How it's checked</th></tr></thead>
-<tbody>{rule_rows}</tbody></table>
+<div class="headblock"><h2 id="rules-title">Requirements</h2></div>
+<ul class="ruled">{need_rows}</ul>
 </div></section>
 <section class="band band--paper close" aria-labelledby="close-title"><div class="container">
 <div><h2 id="close-title">Check your plugin before you release it</h2><p>Clone this repo and run this. It shows your
@@ -545,10 +536,10 @@ plugin's details, its README and anything the cart would refuse.</p></div>
 
 def authors_index(entries, config):
     needs = [
-        ("The .CVP", "Required", "Your plugin, built with the SDK."),
-        ("LICENSE", "Required", "In your repo, at the release's tag."),
-        ("README.md", "Required", 'Credits and a link to the source. The SDK also puts it <a class="link" '
-         'href="readme/">in the .CVP</a> so the cart can show it.'),
+        ("The .CVP", "Required", "Your plugin, built with the SDK. Under 1 MB."),
+        ("README", "Required", 'Goes <a class="link" href="readme/">inside the .CVP</a>, so the cart can show '
+         "it. The SDK puts your README.md there."),
+        ("LICENSE", "Required", "In your public repo, at the release's tag."),
         ("Release notes", "Optional", "The text of your GitHub release. Shown for each version."),
         ("Screenshots", "Optional", '<a class="link" href="screenshots/">Up to three PNGs</a>, 256 × 192, '
          "attached to the release."),
@@ -565,7 +556,7 @@ def authors_index(entries, config):
     body = f"""<section class="banner" aria-labelledby="hero-title"><div class="container">
 <div class="banner__text">
 <h1 id="hero-title">Packaging your plugin</h1>
-<p class="lead">To be listed, a plugin needs a .CVP, a licence and a README. Screenshots and icons help people find it.</p>
+<p class="lead">To be listed, a plugin needs a .CVP, a README and a license. Screenshots and icons help people find it.</p>
 <div class="actions"><a class="btn" href="../submit/">Submit a plugin</a><a class="btn btn--secondary" href="icon-editor/">Open the icon editor</a></div>
 <p class="soon">Start from {template_link(config)}. It's a working plugin with a README, icons and a release workflow.</p>
 </div>
@@ -575,7 +566,7 @@ def authors_index(entries, config):
              spec_table(("Part", "", "What it is"), needs))}
 {authors_close("../")}"""
     return page("For plugin authors: Parrot Cart plugins",
-                "What your Parrot Cart plugin's release needs: a .CVP, a licence and a README. Screenshots and "
+                "What your Parrot Cart plugin's release needs: a .CVP, a README and a license. Screenshots and "
                 "icons are optional.", body, "../", "authors", [], entries, config)
 
 

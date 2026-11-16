@@ -20,7 +20,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 FORM = os.path.join(os.path.dirname(HERE), ".github", "ISSUE_TEMPLATE", "submit-plugin.yml")
 
 LABELS = {"repo": "Repository", "tag": "Release tag", "description": "Short description", "rules": "Rules"}
-RULES = 6                          # the form's checkboxes, all required
+RULES = 3                          # the form's checkboxes, all required
 REPO = re.compile(r"[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})/[A-Za-z0-9._-]{1,100}")
 TAG = re.compile(r"[A-Za-z0-9][A-Za-z0-9._+-]{0,99}")
 NO_RESPONSE = "_No response_"

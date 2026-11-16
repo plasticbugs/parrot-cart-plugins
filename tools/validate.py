@@ -9,8 +9,9 @@ It reads, and never runs, what the repository holds: the repository's
 details, its LICENSE and README at the release's tag, and the release's
 .CVP assets (each downloaded with a size cap and checked as the cart's
 menu checks it, tools/cvp.py). Then the registry's rules: a public
-repository, a licence, a README with credits and a link to the source, an
-ID nobody else has, a version newer than the one listed.
+repository with a LICENSE, a README inside each .CVP, an ID nobody else
+has, a version newer than the one listed. The repository's README.md is
+shown when there is one; credits and a source link aren't required.
 
 What the plugin's page shows is copied into the entry, so the site stays
 static and hotlinks nothing: the release's notes, the README.md at the tag,
@@ -203,18 +204,10 @@ def validate(gh, repo, tag=None, description=None, root=registry.ROOT, config=No
                     "url": lic.get("html_url") or f"https://github.com/{full}/blob/{tag}/LICENSE"}
 
     text, rd = gh.readme(full, ref=tag, cap=limits["readme_max_bytes"])
-    credits_url, credits_line = None, ""
-    if text is None:
-        err(f"{full} has no README at {tag}")
-    else:
-        credits, source = readme_checks(text, full)
-        if not credits:
-            err("the README has no credits. Add a Credits section that says whose work the plugin uses")
-        if not source:
-            err("the README doesn't link to the plugin's source. Add a line with the word \"source\" and a link. "
-                f"https://github.com/{full} is enough if all the source is there")
+    credits_url, credits_line = f"https://github.com/{full}", ""
+    if text is not None:                   # optional: shown on the plugin's page when there is one
         credits_url = (rd or {}).get("html_url") or f"https://github.com/{full}#readme"
-        credits_line = credits_text(text)
+        credits_line = credits_text(text) if readme_checks(text, full)[0] else ""
     # the README.md the plugin's page shows, as it is at the tag
     web_file = None
     if text is not None:
@@ -282,8 +275,8 @@ def validate(gh, repo, tag=None, description=None, root=registry.ROOT, config=No
         pid = pr["id"] = info["id"]
         pr["version"], pr["name"] = info["version"], info["name"]
         if info["readme"] is None and not any("README" in e for e in errs):
-            pr["warnings"].append("it has no README section, so the cart has no README to show. Build it "
-                                  "with the SDK from a README.md to add one")
+            pr["errors"].append("It has no README inside. Build it with the SDK from a README.md "
+                                "(README README.md in cvcart_plugin()) to add one")
         if pid in seen:
             pr["errors"].append(f"{seen[pid]} in this release has the same ID")
             continue

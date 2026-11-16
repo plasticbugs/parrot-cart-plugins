@@ -22,10 +22,7 @@ BODY = """### Repository
 
 ### Rules
 
-- [{a}] The plugin is a free download.
-- [X] The repository is public.
-- [X] The repository has a LICENSE file.
-- [X] The README credits.
+- [{a}] The repository is public and has a LICENSE file.
 - [X] No commercial game art.
 - [X] The registry may copy.
 """

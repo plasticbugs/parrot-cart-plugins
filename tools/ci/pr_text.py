@@ -17,8 +17,6 @@ CHECKLIST = """
 Before merging, check that:
 
 - [ ] The repo and the release have no commercial game art, ROMs or other files the author can't share.
-- [ ] The README credits the work the plugin uses, and the licence fits. GPL and LGPL code needs the full source linked.
-- [ ] The plugin is free. Nothing in the repo sells it or bundles it with hardware.
 - [ ] The description is accurate.
 - [ ] The screenshots in `plugins/<id>/` show the plugin itself, with no commercial game art.
 - [ ] The README and release notes are fine to show on the site.
