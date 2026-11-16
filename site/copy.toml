@@ -1,0 +1,1050 @@
+# All the words on the Parrot Cart plugins site, plus the fixed sentences in
+# our replies on submission issues and pull requests. Edit the text inside
+# the quotes. The comment above each line says where it shows.
+#
+#   - Keep every {placeholder} in braces. The site fills it in with a name,
+#     a number or a link. Each comment lists the ones that line can use.
+#   - A link is [text](address). Code is `code`. Bold is **bold**.
+#   - Type < > & and quotes as they are. Straight apostrophes turn curly.
+#   - Don't delete a line. The build stops and names any line it can't find.
+#
+# To preview, run  python3 tools/build_site.py --out _site  and open
+# _site/index.html. Or edit this file on GitHub. The site rebuilds when the
+# change reaches main.
+
+
+# ==== The catalogue (the home page) ===========================================
+
+[home]
+# The browser tab
+page_title = "Parrot Cart plugins"
+# The summary search engines show
+description = "Free plugins for Parrot Cart, the ColecoVision cartridge with a microSD card. Download a .CVP file and copy it to /PLUGINS."
+
+[home.hero]
+# The big headline. Its last two words stay on one line.
+title = "Plugins for your Parrot Cart"
+# The line under the headline
+lead = "Emulators, utilities and more to enhance your ColecoVision."
+# The first button under the headline
+browse_button = "Browse plugins"
+# The second button under the headline
+submit_button = "Submit a plugin"
+# Under the TV picture beside the headline
+card_caption = "The cart's Plugins page"
+# The tag at the right under the TV picture
+card_code = "/PLUGINS"
+# The TV picture's description for screen readers
+card_alt = "A photo of a TV showing the cart's Plugins page with these plugins"
+
+[home.browse]
+# The plugin list's heading
+title = "Browse Plugins"
+# Under that heading, while the site only has examples. Takes {count}.
+lead_examples = "Showing {count} examples of the cart's own plugins until the first ones are submitted."
+# Under that heading, once real plugins are listed. Takes {count}.
+lead = "{count} plugins. Each one is a free download from its author."
+# The search box's label
+search_label = "Search by name or file type"
+# Under an example plugin's name in the list
+example = "Example"
+# Under a plugin's name in the list. Takes {name}, the author.
+by = "By {name}"
+# In the Opens column, for a plugin that opens no files
+no_files = "An app"
+# In the Needs column, for a plugin that needs nothing extra
+needs_nothing = "None"
+# When a search finds nothing
+no_match = "No plugins match. Try a file type like .nes, or clear the search."
+
+[home.browse.columns]
+# The plugin list's column headings (also the labels on a phone)
+plugin = "Plugin"
+id = "ID"
+opens = "Opens"
+needs = "Needs"
+version = "Version"
+size = "Size"
+
+[home.files]
+# The heading over the Before / Copied / After pictures
+title = "How plugins work with files"
+# Under that heading
+lead = "The card only shows files that are associated with a plugin."
+# The tab list's name for screen readers
+tabs_label = "Step by step"
+# The first tab. Its text takes {ext} and {folder}.
+before = "Before"
+before_text = "Three {ext} files in {folder}. The menu hides them."
+# The second tab. Its text takes {file}, the .CVP's name.
+copied = "Copied"
+copied_text = "Copy {file} to /PLUGINS. It shows up on the Plugins page."
+# The tag under the second tab's picture
+copied_code = "/PLUGINS"
+# The third tab
+after = "After"
+after_text = "The files show up with the plugin's icon. Press A to open one."
+
+[home.install]
+# The install steps' heading
+title = "No installer. Manage your plugins on the cartridge."
+# Under that heading
+lead = "Three easy steps."
+
+# The install steps, in order. Each has a title and a line under it.
+[[home.install.steps]]
+title = "Download the .CVP"
+text = "From the plugin's page on this site."
+
+[[home.install.steps]]
+title = "Copy it to /PLUGINS"
+text = "On the cart's microSD card."
+
+[[home.install.steps]]
+title = "Start it from Plugins"
+text = "Press B for Home, open Plugins, pick the plugin and press A."
+
+[home.flash]
+# The dark band. The big number 10 shows first, then this line.
+title = "plugins stay ready on the cart"
+
+# The dark band's rows: a bold start, then the rest of the sentence.
+[[home.flash.rows]]
+bold = "The first time you start one"
+text = "it's copied into a 1 MB slot. That happens once per version."
+
+[[home.flash.rows]]
+bold = "A new version"
+text = "uses the old version's slot."
+
+[[home.flash.rows]]
+bold = "When every slot is full"
+text = "the next plugin takes the one used longest ago."
+
+[[home.flash.rows]]
+bold = "Removing a plugin"
+text = "frees its slot."
+
+[home.close]
+# The last band's heading
+title = "Add your plugin by submitting a GitHub issue in the registry."
+# Under that heading
+text = "We'll check your release and list it here."
+# Its two buttons
+submit_button = "Submit a plugin"
+json_button = "registry.json"
+
+
+# ==== A plugin's page ==========================================================
+
+[plugin]
+# The browser tab. Takes {name}.
+page_title = "{name}, a Parrot Cart plugin"
+# The summary search engines show. Takes {name}, {version} and {description}.
+description = "{name} {version}, a free Parrot Cart plugin. {description}"
+
+[plugin.hero]
+# The button for a listed plugin. Takes {file}, the .CVP's name.
+download_button = "Download {file}"
+# The second button for a listed plugin
+source_button = "Source code"
+# The button for an example plugin
+example_button = "Put it on your cart"
+# Under that button, for an example plugin
+example_note = "This is an example. Its source isn't public yet, so there's no download."
+# Under the TV picture beside the plugin's name
+card_caption = "Its details page on the cart"
+# The TV picture's description for screen readers. Takes {name}.
+card_alt = "A photo of a TV showing the cart's details page for {name}"
+
+[plugin.shots]
+# The screenshots' heading
+title = "On the TV"
+# Under that heading, for a listed plugin
+lead = "From the author's release, pixel for pixel."
+# Under that heading, for an example plugin
+lead_example = "Pictures of this example on the cart. A listed plugin shows its author's screenshots."
+# Under each screenshot. Takes {number}.
+caption = "Picture {number}"
+# Each screenshot's description for screen readers. Takes {name}, {number} and {count}.
+alt = "{name} on the TV, picture {number} of {count}"
+
+[plugin.cart_readme]
+# The heading over the README as the cart shows it
+title = "README on the cart"
+# Under that heading. Takes {lines}.
+lead = "What the cart shows for this plugin: {lines} lines, 30 characters wide."
+# The scrolling README picture's name for screen readers
+scroll_label = "The README in the cart's font. The same text follows as plain text."
+# Under the README picture
+caption = "From the details page on the cart"
+# The tag at the right under the README picture. Takes {size}.
+size = "{size} bytes"
+# The heading over the same README as text
+text_title = "As plain text"
+
+[plugin.no_cart_readme]
+# The heading when the .CVP has no README
+title = "No README on the cart"
+# Under that heading
+lead = "This plugin's .CVP doesn't include a README, so the cart has nothing to show."
+# The yellow note under it. Takes {readme_page}, the link to the README help page.
+author_note = "**If you wrote this plugin:** build it with the SDK from a README.md. Your next release will show its instructions and credits on the TV. [How the README works]({readme_page})"
+
+[plugin.readme]
+# The heading over the plugin's README.md
+title = "README"
+# Under that heading. Takes {tag}.
+lead = "README.md from `{tag}`. Images show as links."
+# Under that heading when the README can't be shown
+lead_not_shown = "It's in the plugin's repository."
+# The note when the README can't be shown. Takes {link}, the link below.
+not_shown = "The README can't be shown here. It isn't Markdown, or it's over 64 KB. {link}."
+# The link in that note
+github_link = "Read it on GitHub"
+
+[plugin.details]
+# The heading over the release details
+title = "Release details"
+# Under that heading
+lead = "From GitHub, when the plugin was listed."
+# The labels on the left of each detail
+release = "Release"
+image = "Image"
+api = "Plugin API"
+github = "GitHub"
+source = "Source"
+license = "License"
+credits = "Credits"
+sha256 = "SHA-256"
+# The Release detail. Takes {tag} and {date}.
+release_value = "`{tag}`, {date}"
+# The Image detail for a plugin that runs from RAM. Takes {size}.
+image_ram = "{size} bytes, loaded into RAM"
+# The Image detail for a plugin that runs from flash. Takes {size}.
+image_flash = "{size} bytes, runs from flash"
+# The GitHub detail for an example plugin
+not_public = "Not public yet"
+# The Source detail's link. Takes {tag}.
+source_value = "Code at `{tag}`"
+
+[plugin.notes]
+# The heading over the release notes
+title = "Release notes"
+# Under that heading
+lead = "Newest first."
+# For a version with no notes
+none = "No notes for this release."
+
+[plugin.install]
+# The install steps' heading
+title = "Put it on your cart"
+# Step 1. The title takes {file}, the .CVP's name.
+download_title = "Download {file}"
+download_text = "Its SHA-256 is listed above."
+# Step 2
+copy_title = "Copy it to /PLUGINS"
+copy_text = "On the cart's microSD card."
+# Step 3, only for a plugin that opens files. The title takes {folder}, the text {types}.
+files_title = "Put your files in {folder}"
+files_text = "Your {types} files go here."
+# The last step. The text takes {name}.
+start_title = "Start it"
+start_text = "Press B for Home, open Plugins, pick {name} and press A."
+
+
+# ==== The submit page ==========================================================
+
+[submit]
+# The browser tab
+page_title = "Submit a plugin: Parrot Cart plugins"
+# The summary search engines show
+description = "Add your plugin to the Parrot Cart registry. Open a GitHub issue with your repo, and we'll check your release."
+
+[submit.hero]
+# The big headline
+title = "Submit an Issue in the repository to add your Plugin"
+# The line under the headline
+lead = "Tell us your repo. We'll check your release and add your plugin."
+# The first button under the headline (it opens the GitHub form)
+issue_button = "Open an issue"
+# The second button under the headline
+rules_button = "See the requirements"
+# Under the buttons, only while the site isn't on GitHub yet
+not_open = "Submissions open once the registry is on GitHub."
+
+[submit.steps]
+# The boxes' name for screen readers
+label = "From your release to the cart"
+# The small line under the boxes
+note = "We never run anything from your repo."
+
+# The boxes beside the headline, in order. The last one loops back.
+[[submit.steps.boxes]]
+title = "Your release"
+text = "The .CVP, with its README inside."
+
+[[submit.steps.boxes]]
+title = "An issue"
+text = "Your repo and a one-line description."
+
+[[submit.steps.boxes]]
+title = "The check"
+text = "We read your files and reply on the issue."
+
+[[submit.steps.boxes]]
+title = "Your listing"
+text = "Made from your release."
+
+[[submit.steps.boxes]]
+title = "A review"
+text = "We look it over and approve it."
+
+[[submit.steps.boxes]]
+title = "This site"
+text = "Your plugin gets its own page."
+
+[[submit.steps.boxes]]
+title = "SD cards"
+text = "People copy it to /PLUGINS."
+
+[[submit.steps.boxes]]
+title = "Your next release"
+text = "Picked up within a day."
+
+[submit.requirements]
+# The requirements' heading
+title = "Requirements"
+
+# The requirements, a bold start and the rest. They can use {readme_page} and
+# {screenshots_page}, the links to those help pages.
+[[submit.requirements.rows]]
+title = "The .CVP"
+text = "Under 1 MB."
+
+[[submit.requirements.rows]]
+title = "The README"
+text = "Goes [inside the .CVP]({readme_page})."
+
+[[submit.requirements.rows]]
+title = "Screenshots"
+text = "Up to three, as [256 × 192 PNGs]({screenshots_page})."
+
+[[submit.requirements.rows]]
+title = "Your repo"
+text = "Public, with a license."
+
+[submit.check]
+# The last band's heading
+title = "Check your plugin before you release it"
+# Under that heading
+text = "Clone this repo and run this. It shows your plugin's details and anything the cart would refuse."
+# The command in the box
+command = "python3 tools/cvp.py YOURPLUGIN.CVP"
+
+
+# ==== The pages for plugin authors =============================================
+
+[authors]
+# The browser tab of the first authors' page
+page_title = "For plugin authors: Parrot Cart plugins"
+# The summary search engines show
+description = "What your Parrot Cart plugin's release needs: a .CVP, a README and a license. Screenshots and icons are optional."
+# The starter kit link's text (on this page and the README page)
+starter_kit = "the starter kit"
+# The starter kit's text while it isn't on GitHub yet. Takes {starter_kit}.
+starter_kit_not_public = "{starter_kit} (not public yet)"
+
+[authors.hero]
+# The big headline
+title = "Packaging your plugin"
+# The line under the headline
+lead = "To be listed, a plugin needs a .CVP, a README and a license. Screenshots and icons help people find it."
+# The two buttons under it
+submit_button = "Submit a plugin"
+editor_button = "Open the icon editor"
+# The small line under the buttons. Takes {starter_kit}, the link.
+starter_note = "Start from {starter_kit}. It's a working plugin with a README, icons and a release workflow."
+
+[authors.pages]
+# The tiles' name for screen readers
+label = "Pages for plugin authors"
+# The four tiles beside the headline
+readme_title = "The README"
+readme_text = "One README.md for this site and the cart."
+screenshots_title = "Screenshots"
+screenshots_text = "Up to three, 256 × 192 each."
+icons_title = "Icons"
+icons_text = "Two 8 × 8 icons. The menu colours them."
+editor_title = "The icon editor"
+editor_text = "Draw your icons and save them as .txt files."
+
+[authors.needs]
+# The table's heading
+title = "What your release needs"
+# Under that heading
+lead = "Three things are required. The rest are optional."
+# The table's column headings
+columns = ["Part", "", "What it is"]
+
+# The table's rows. The text can use {readme_page}, {screenshots_page} and
+# {icons_page}, the links to those help pages.
+[[authors.needs.rows]]
+part = "The .CVP"
+status = "Required"
+text = "Your plugin, built with the SDK. Under 1 MB."
+
+[[authors.needs.rows]]
+part = "README"
+status = "Required"
+text = "Goes [inside the .CVP]({readme_page}), so the cart can show it. The SDK puts your README.md there."
+
+[[authors.needs.rows]]
+part = "LICENSE"
+status = "Required"
+text = "In your public repo, at the release's tag."
+
+[[authors.needs.rows]]
+part = "Release notes"
+status = "Optional"
+text = "The text of your GitHub release. Shown for each version."
+
+[[authors.needs.rows]]
+part = "Screenshots"
+status = "Optional"
+text = "[Up to three PNGs]({screenshots_page}), 256 × 192, attached to the release."
+
+[[authors.needs.rows]]
+part = "Two icons"
+status = "Optional"
+text = "[8 × 8, one colour]({icons_page}). One for the plugin and one for its files."
+
+[authors.check]
+# The last band on the authors' pages: its heading
+title = "Check your plugin before you release it"
+# Under that heading
+text = "Clone this repo and run this. It shows your plugin's details, its README and anything the cart would refuse."
+# The command in the box
+command = "python3 tools/cvp.py YOURPLUGIN.CVP"
+
+# ---- The README page ----
+
+[authors.readme]
+# The browser tab
+page_title = "The README: Parrot Cart plugins"
+# The summary search engines show
+description = "How to write a README for your Parrot Cart plugin. It shows on this site and on the cart, 30 characters wide."
+
+[authors.readme.hero]
+# The big headline
+title = "One README for the web and the TV"
+# The line under the headline
+lead = "Write README.md once. It shows on your plugin's page here, and the SDK adds it to the .CVP for the cart."
+# The two buttons under it
+write_button = "What to write"
+format_button = "The format"
+# Under the TV picture
+card_caption = "A README on the cart"
+# The tag at the right under the TV picture
+card_code = "30 × 19"
+# The example README drawn on the TV picture, as Markdown
+sample = '''
+# Star Sweeper
+
+A small game for Parrot Cart: clear the sky before the sun comes up.
+
+## Controls
+
+- Joystick: move
+- Left button: sweep
+- `*`: pause
+
+## Credits
+
+Code and art by **A. Author**. Sound driver from the [Parrot Cart SDK](https://example.com/sdk).
+
+## Source
+
+https://github.com/author/star-sweeper
+'''
+
+[authors.readme.write]
+# The section's heading
+title = "What to write"
+# Under that heading
+lead = "People read it on the TV, often with no computer nearby."
+
+# The tips, each a title and a line
+[[authors.readme.write.rows]]
+title = "What it does"
+text = "Put a line or two first. The cart shows 19 lines at a time."
+
+[[authors.readme.write.rows]]
+title = "How to use it"
+text = "The controls, and which folder the files go in."
+
+[[authors.readme.write.rows]]
+title = "Credits"
+text = "Under a Credits heading, say whose work it uses. Required."
+
+[[authors.readme.write.rows]]
+title = "Source"
+text = "A line with the word “source” and a link. Required."
+
+[authors.readme.convert]
+# The section's heading
+title = "How the SDK converts it"
+# Under that heading
+lead = "The SDK converts README.md when it builds your plugin."
+# The table's column headings
+columns = ["Markdown", "On the cart"]
+# The commands in the box under the table
+command = '''
+cvcart_plugin(sweeper ID author.sweeper NAME "Star Sweeper" VERSION 1.0.0
+               README README.md)
+
+python3 cvreadme.py README.md    # prints what the cart will show'''
+# The small note under the box. Takes {starter_kit}, the link.
+note = "Both come with {starter_kit}. Text over 16384 bytes is cut at the end of a line, and the last line says it was cut."
+
+# The table's rows: what Markdown becomes on the cart
+[[authors.readme.convert.rows]]
+markdown = "A heading"
+cart = "Capitals, with a blank line before and after."
+
+[[authors.readme.convert.rows]]
+markdown = "A paragraph"
+cart = "Wrapped to 30 characters."
+
+[[authors.readme.convert.rows]]
+markdown = "A list"
+cart = "`-` or `1.`, with wrapped lines indented under the first word."
+
+[[authors.readme.convert.rows]]
+markdown = "A link"
+cart = "The text, then the URL. A long URL goes on its own line."
+
+[[authors.readme.convert.rows]]
+markdown = "Code"
+cart = "Inline code stays as text. A code block is kept as it is, with each line cut at 30."
+
+[[authors.readme.convert.rows]]
+markdown = "Bold and italics"
+cart = "Dropped. The cart has one style of text."
+
+[[authors.readme.convert.rows]]
+markdown = "An image"
+cart = "Shown as `[image: alt]`."
+
+[[authors.readme.convert.rows]]
+markdown = "A table"
+cart = "One `header: value` line for each cell, row by row."
+
+[[authors.readme.convert.rows]]
+markdown = "Raw HTML"
+cart = "Tags are dropped. Their text stays."
+
+[[authors.readme.convert.rows]]
+markdown = "Non-ASCII characters"
+cart = "Curly quotes, dashes and accented letters become plain look-alikes. Anything else becomes `?`."
+
+[authors.readme.format]
+# The section's heading
+title = "The format in the .CVP"
+# Under that heading
+lead = "You only need this if you build a .CVP without the SDK."
+# The table's column headings
+columns = ["Where", "Type", "What"]
+
+[[authors.readme.format.rows]]
+where = "Offset 280"
+type = "u32, little-endian"
+what = "Where the text starts, counted from the start of the file. 0 means no README."
+
+[[authors.readme.format.rows]]
+where = "Offset 284"
+type = "u32, little-endian"
+what = "The text's length in bytes, up to 16384."
+
+[[authors.readme.format.rows]]
+where = "The text"
+type = "After the image"
+what = "Printable ASCII (0x20 to 0x7E) and line feeds only. No line over 30 characters. The last line ends with a line feed."
+
+[[authors.readme.format.rows]]
+where = "SHA-256"
+type = "Unchanged"
+what = "The image's hash doesn't include the README. Changing the README won't make the cart copy the plugin again."
+
+[authors.readme.checks]
+# The section's heading
+title = "What we check"
+# Under that heading
+lead = "We never change your text. Your page shows it exactly as it is in the .CVP."
+# The table's column headings
+columns = ["Check", "Rule", "If it fails"]
+
+[[authors.readme.checks.rows]]
+check = "In bounds"
+rule = "The text starts after the image and ends inside the file."
+result = "Refused"
+
+[[authors.readme.checks.rows]]
+check = "Length"
+rule = "Up to 16384 bytes."
+result = "Refused"
+
+[[authors.readme.checks.rows]]
+check = "Characters"
+rule = "0x20 to 0x7E and line feeds only. No tabs or carriage returns."
+result = "Refused"
+
+[[authors.readme.checks.rows]]
+check = "Width"
+rule = "Up to 30 characters per line."
+result = "Refused"
+
+[[authors.readme.checks.rows]]
+check = "No README at all"
+rule = "Both fields are 0, as in plugins built before the README existed."
+result = "Listed, with a note on its page"
+
+[authors.readme.web]
+# The section's heading
+title = "On your plugin's page"
+# Under that heading
+lead = "We show README.md from the release's tag, as GitHub Markdown."
+# The table's column headings
+columns = ["Part", "What happens"]
+
+[[authors.readme.web.rows]]
+part = "Shown"
+what = "Headings, lists, task lists, tables, code, quotes and links."
+
+[[authors.readme.web.rows]]
+part = "Images"
+what = "Shown as links. This site doesn't load anything from other sites."
+
+[[authors.readme.web.rows]]
+part = "Raw HTML"
+what = "Dropped, along with any scripts or styles. The text stays."
+
+[[authors.readme.web.rows]]
+part = "Links"
+what = "Only https links work. Relative links point to your repo at the release's tag."
+
+[[authors.readme.web.rows]]
+part = "Size"
+what = "Up to 64 KB. A bigger README is linked instead of shown."
+
+# ---- The screenshots page ----
+
+[authors.screenshots]
+# The browser tab
+page_title = "Screenshots: Parrot Cart plugins"
+# The summary search engines show
+description = "How to add screenshots to your Parrot Cart plugin. Up to three PNGs, 256 × 192, 100 KB max each, named screenshot-1.png to screenshot-3.png."
+
+[authors.screenshots.hero]
+# The big headline
+title = "Screenshots at the console's real size"
+# The line under the headline
+lead = "Up to three PNGs, 256 × 192 each. Attach them to your release."
+# The two buttons under it
+spec_button = "Requirements"
+taking_button = "How to take one"
+# Under the example screenshot beside the headline
+card_caption = "Just the picture. We add the TV frame."
+# The example screenshot's description for screen readers. Takes {name}.
+card_alt = "A 256 by 192 picture in the TV frame, from {name}"
+# Under the TV picture, when no plugin has screenshots yet
+fallback_caption = "The console's picture is 256 × 192"
+fallback_code = "256 × 192"
+
+[authors.screenshots.spec]
+# The section's heading
+title = "Requirements"
+# Under that heading
+lead = "The console's picture is 256 × 192 pixels."
+# The table's column headings
+columns = ["", "Rule"]
+
+# The rules. They can use {width}, {height} and {max_kb}.
+[[authors.screenshots.spec.rows]]
+name = "How many"
+rule = "Up to three."
+
+[[authors.screenshots.spec.rows]]
+name = "Format"
+rule = "PNG. No animation."
+
+[[authors.screenshots.spec.rows]]
+name = "Size"
+rule = "Exactly {width} × {height} pixels. No border, scaling or filters."
+
+[[authors.screenshots.spec.rows]]
+name = "File size"
+rule = "{max_kb} KB max each. A real screen is usually a few KB."
+
+[[authors.screenshots.spec.rows]]
+name = "Names"
+rule = "`screenshot-1.png`, `screenshot-2.png` and `screenshot-3.png`, in lower case."
+
+[[authors.screenshots.spec.rows]]
+name = "Where"
+rule = "Attach them to your GitHub release, next to the .CVP."
+
+[authors.screenshots.show]
+# The section's heading
+title = "What to show"
+
+[[authors.screenshots.show.rows]]
+title = "The plugin itself"
+text = "Show its own screens. Put the one people see most first."
+
+[[authors.screenshots.show.rows]]
+title = "Nothing you can't share"
+text = "For an emulator, show homebrew or your own test files, not a commercial game."
+
+[[authors.screenshots.show.rows]]
+title = "One set per release"
+text = "If a release has several .CVP files, they share the screenshots."
+
+[authors.screenshots.taking]
+# The section's heading
+title = "How to take one"
+# Under that heading
+lead = "Use any ColecoVision emulator that can save the picture at its real size."
+
+[[authors.screenshots.taking.rows]]
+title = "Save at 1x"
+text = "Turn off scaling, filters and scanlines."
+
+[[authors.screenshots.taking.rows]]
+title = "Crop the border"
+text = "If the file is bigger than 256 × 192, it includes the border. Crop it out."
+
+[[authors.screenshots.taking.rows]]
+title = "Save an indexed PNG"
+text = "The console only has 15 colours, so an indexed PNG is exact and small."
+
+[authors.screenshots.refused]
+# The section's heading
+title = "What gets refused"
+# Under that heading
+lead = "A bad screenshot stops your submission. We'll tell you which one and why."
+# The table's column headings
+columns = ["Refused", "For example"]
+
+[[authors.screenshots.refused.rows]]
+what = "The wrong size"
+example = "640 × 480, 280 × 216 with the border, or a photo of the TV."
+
+[[authors.screenshots.refused.rows]]
+what = "Not a PNG"
+example = "A renamed JPEG, a broken upload or an animated PNG."
+
+[[authors.screenshots.refused.rows]]
+what = "Over 100 KB"
+example = "Usually it was scaled up, or saved in full colour from a photo."
+
+[[authors.screenshots.refused.rows]]
+what = "A fourth screenshot"
+example = "`screenshot-4.png` or higher."
+
+[authors.screenshots.used]
+# The section's heading
+title = "Where they show up"
+# Under that heading
+lead = "Once your plugin is listed."
+# The table's column headings
+columns = ["Place", "How"]
+
+[[authors.screenshots.used.rows]]
+place = "Your plugin's page"
+how = "Each one in a TV frame, scaled up without blur."
+
+[[authors.screenshots.used.rows]]
+place = "The plugin list"
+how = "The first one, as a thumbnail."
+
+[[authors.screenshots.used.rows]]
+place = "registry.json"
+how = "Links to each one, for apps that install plugins."
+
+# ---- The icons page ----
+
+[authors.icons]
+# The browser tab
+page_title = "Icons: Parrot Cart plugins"
+# The summary search engines show
+description = "How to make your Parrot Cart plugin's two 8 × 8 icons, and the .txt file the SDK reads."
+
+[authors.icons.hero]
+# The big headline
+title = "Two 8 × 8 icons"
+# The line under the headline
+lead = "One for the plugin and one for the files it opens. Each pixel is on or off, and the menu picks the colour."
+# The two buttons under it
+editor_button = "Open the icon editor"
+txt_button = "The .txt file"
+# Under the TV picture
+card_caption = "Each plugin's icon on the Plugins page"
+card_code = "/PLUGINS"
+
+[authors.icons.spec]
+# The section's heading
+title = "What an icon is"
+# Under that heading
+lead = "Both icons together take 16 bytes of the .CVP's header."
+# The table's column headings
+columns = ["", "Rule"]
+
+[[authors.icons.spec.rows]]
+name = "Size"
+rule = "8 × 8 pixels. Each pixel is on or off."
+
+[[authors.icons.spec.rows]]
+name = "The plugin's icon"
+rule = "8 bytes at header offset 264. Shown next to the plugin on the Plugins page and in Open with."
+
+[[authors.icons.spec.rows]]
+name = "The file icon"
+rule = "8 bytes at header offset 272. Shown next to each file the plugin opens."
+
+[[authors.icons.spec.rows]]
+name = "One byte per row"
+rule = "Top row first. Bit 7 is the left pixel."
+
+[[authors.icons.spec.rows]]
+name = "Colour"
+rule = "The menu picks it. Plugin icons are magenta and file icons are light green. The background is black, or dark blue on the selected row."
+
+[[authors.icons.spec.rows]]
+name = "All zeros"
+rule = "No icon. The menu shows its own plug or plain file icon instead."
+
+[[authors.icons.spec.rows]]
+name = "Per screen"
+rule = "The menu shows up to seven plugin icons and six different file icons on a page. Any more get the plug and the plain file icon."
+
+[authors.icons.txt]
+# The section's heading
+title = "The .txt file the SDK reads"
+# Under that heading
+lead = "Eight lines of eight characters. # is a pixel and . is empty."
+# The heading over the example file
+file_title = "padtest_icon.txt"
+# The heading over the same icon as bytes
+header_title = "In the header"
+# The small note under the bytes
+note = "Blank lines and spaces around a line are ignored. Anything else stops the build."
+# The commands in the box under them
+command = '''
+cvcart_plugin(padtest ID author.padtest NAME "Pad Test" VERSION 1.0.0
+               ICON padtest_icon.txt FILE_ICON padtest_file_icon.txt)
+
+mkcvp.py IN.uf2 OUT.cvp ... --icon padtest_icon.txt --file-icon padtest_file_icon.txt'''
+
+[authors.icons.design]
+# The section's heading
+title = "Tips for a clear icon"
+# Under that heading
+lead = "Menu rows touch, so there's no gap between one icon and the next."
+
+[[authors.icons.design.rows]]
+title = "Leave an edge clear"
+text = "The menu's icons leave the top row and the right column empty, so they don't run into each other."
+
+[[authors.icons.design.rows]]
+title = "Use solid shapes"
+text = "There's only one colour, so the outline does the work. Solid shapes look better than thin lines on a TV."
+
+[[authors.icons.design.rows]]
+title = "Check it on the selected row"
+text = "The selected row is dark blue. The editor shows both backgrounds."
+
+[authors.icons.family]
+# The five big icons in the tips section: each one's name for screen readers
+# and the line under it
+folder_label = "The menu's folder icon"
+folder_caption = "A folder"
+rom_label = "The menu's cartridge icon"
+rom_caption = "A ROM"
+file_label = "The menu's plain file icon"
+file_caption = "A plugin's file with no icon"
+plug_label = "The menu's plug icon"
+plug_caption = "A plugin with no icon"
+padtest_label = "The Pad Test plugin's icon"
+padtest_caption = "Pad Test's icon"
+
+[authors.icons.close]
+# The last band: its heading, the line under it and its button
+title = "Draw them in your browser"
+text = "See them on the menu as you draw, then save the .txt files for the SDK."
+editor_button = "Open the icon editor"
+
+# ---- The icon editor ----
+
+[authors.editor]
+# The browser tab
+page_title = "The icon editor: Parrot Cart plugins"
+# The summary search engines show
+description = "Draw your Parrot Cart plugin's two 8 × 8 icons and save them as .txt files for the SDK."
+# The big headline
+title = "Draw your plugin's two icons"
+# The line under the headline
+lead = "Click the grid or use the keyboard. The menu preview updates as you draw. Nothing is uploaded."
+# Shown instead of the editor when JavaScript is off. Takes {txt_section}, the link.
+no_script = "**The editor needs JavaScript.** Without it, write each icon as a text file with eight lines of eight characters. Use # for a pixel and . for an empty one. [The .txt file]({txt_section})"
+# The first grid's name, and the line beside it
+plugin_icon = "The plugin's icon"
+plugin_icon_note = "Magenta, header offset 264"
+# The second grid's name, and the line beside it
+file_icon = "The file icon"
+file_icon_note = "Light green, header offset 272"
+# Each grid's name for screen readers. Takes {icon}, the grid's name above.
+grid_label = "{icon}, 8 by 8 pixels"
+# Each pixel's name for screen readers. Takes {row} and {column}.
+cell_label = "Row {row}, column {column}"
+# The tool buttons' group name for screen readers
+tools_label = "Change the whole icon"
+# The tool buttons
+clear = "Clear"
+invert = "Invert"
+# The arrow buttons' names for screen readers
+move_left = "Move left"
+move_right = "Move right"
+move_up = "Move up"
+move_down = "Move down"
+# The label over the hex box
+hex_label = "Hex, as in the header"
+# The buttons under each grid. The first takes {file}, the file's name.
+save_button = "Save {file}"
+open_button = "Open a .txt file"
+copy_button = "Copy hex"
+# The small note under the two grids
+keys = "Keyboard: the arrows move. Space or Enter turns a pixel on or off. Hold Shift with an arrow to copy the pixel as you move. An empty icon means the menu uses its own."
+# The preview's name for screen readers
+preview_label = "Your icons on the cart's menu"
+# Under the first preview picture, and its tag
+plugins_caption = "The Plugins page, selected and not selected"
+plugins_code = "magenta"
+# Under the second preview picture, and its tag
+folder_caption = "A folder of its files"
+folder_code = "light green"
+# The small note under the previews. Takes {icons_page}, the link.
+sdk_note = "Pass the files to the SDK with `ICON icon.txt FILE_ICON file_icon.txt`. Your drawing is saved in this page's address, so you can bookmark it. [Icon requirements]({icons_page})"
+
+
+# ==== The header and footer on every page ======================================
+
+[header]
+# The hidden link for keyboard users, first on every page
+skip = "Skip to content"
+# The name at the top left
+wordmark = "Parrot Cart plugins"
+# That name's link, for screen readers
+home_label = "Parrot Cart plugins home"
+# The menu's name for screen readers
+nav_label = "The registry"
+# The menu at the top right
+nav_plugins = "Plugins"
+nav_install = "Install"
+nav_authors = "For authors"
+nav_submit = "Submit a plugin"
+
+[footer]
+# The first column: a heading and a line
+title = "Parrot Cart plugins"
+tagline = "Free plugins for your Parrot Flash cartridge, all in one place."
+# The second column's heading (the plugins' names follow)
+plugins_heading = "Plugins"
+# The third column's heading and links
+links_heading = "The registry"
+submit = "Submit a plugin"
+rules = "The rules"
+authors = "For plugin authors"
+icon_editor = "The icon editor"
+install = "Install a plugin"
+registry_json = "registry.json"
+source_code = "Source code on GitHub"
+# The small print at the bottom
+font_credit = "The TV screens use the cart menu's font, Empty Windows Unboxed by VEXED ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/))."
+
+
+# ==== Our replies on GitHub ====================================================
+# These are GitHub Markdown, so **bold** and `code` work as GitHub shows them.
+
+[bot]
+# A repo and its tag, used as {where} below. Takes {repo} and {tag}.
+repo_at_tag = "{repo} at `{tag}`"
+# The first line of the reply. Takes {where} and {result}, one of the results below.
+checked = "**We checked {where}. {result}**"
+# The first line when GitHub couldn't be read. Takes {where}.
+checked_retry = "**We couldn't finish checking {where}.**"
+# The results
+passed = "It passed."
+new_version = "It's a new version."
+nothing_new = "It passed, but there's nothing new to add."
+failed = "It didn't pass."
+# Over the list of problems
+errors = "What needs fixing:"
+# Over the list of problems when GitHub couldn't be read
+errors_retry = "What went wrong:"
+# Over the list of warnings
+warnings = "Worth a look, but these don't stop it:"
+# Over the list of what the plugin's page will show
+page_shows = "Your plugin's page will show:"
+# One line of that list. Takes {name} and {parts}, the parts below joined by commas.
+page_shows_line = "{name}: {parts}"
+# The parts
+shows_cart_readme = "the README from the .CVP"
+shows_no_cart_readme = "no README on the cart"
+shows_readme = "README.md"
+shows_readme_link = "a link to the README"
+shows_notes = "your release notes"
+shows_no_notes = "no release notes"
+shows_one_screenshot = "1 screenshot"
+# Takes {count}
+shows_screenshots = "{count} screenshots"
+shows_no_screenshots = "no screenshots"
+# The last line, after a pass
+next_passed = "Next, we'll make sure it has no commercial game art or ROMs, then add it to the site. This issue closes when your plugin is listed."
+# The last line, when GitHub couldn't be read
+next_retry = "This isn't a problem with your plugin. Edit this issue to run the check again."
+# The last line, after a fail
+next_failed = "Fix these and publish a new release if the .CVP changed. Then edit this issue, and we'll check it again."
+
+[bot.table]
+# The table's column headings
+file = "File"
+plugin = "Plugin"
+id = "ID"
+version = "Version"
+result = "Result"
+# The Result column's words
+new = "new"
+update = "update"
+same = "already listed"
+unlisted = "not listed yet"
+fix = "needs fixing"
+hold = "on hold"
+ok = "ok"
+
+[bot.pr]
+# A pull request's title for a new plugin. Takes {plugins}, names and versions.
+title_new = "Add {plugins}"
+# A pull request's title for a new version. Takes {plugins}.
+title_update = "Update {plugins}"
+# Over the checklist
+checklist_intro = "Before merging, check that:"
+# The checklist, one box each
+checklist = [
+    "The repo and the release have no commercial game art, ROMs or other files the author can't share.",
+    "The description is accurate.",
+    "The screenshots in `plugins/<id>/` show the plugin itself, with no commercial game art.",
+    "The README and release notes are fine to show on the site.",
+]
+# One line per plugin under the checklist. Takes {id}, {repo_url}, {tag}, {download_url} and {sha256}.
+source_line = "`{id}` from {repo_url} at `{tag}`: {download_url} (SHA-256 `{sha256}`)."

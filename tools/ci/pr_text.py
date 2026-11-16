@@ -12,15 +12,15 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 import registry  # noqa: E402
+import sitecopy  # noqa: E402
 
-CHECKLIST = """
-Before merging, check that:
+T = sitecopy.COPY
 
-- [ ] The repo and the release have no commercial game art, ROMs or other files the author can't share.
-- [ ] The description is accurate.
-- [ ] The screenshots in `plugins/<id>/` show the plugin itself, with no commercial game art.
-- [ ] The README and release notes are fine to show on the site.
-"""
+
+def checklist():
+    """the reviewer's checklist: site/copy.toml's [bot.pr]"""
+    items = "".join(f"- [ ] {c}\n" for c in T.texts("bot.pr.checklist"))
+    return "\n" + T.text("bot.pr.checklist_intro") + "\n\n" + items
 
 
 def main():
@@ -32,14 +32,15 @@ def main():
     os.makedirs(out, exist_ok=True)
     names = ", ".join(f"{e['name']} {e['version']}" for e in es)
     issue = os.environ.get("ISSUE_NUMBER", "")
-    kind = "Add" if issue else "Update"
-    title = f"{kind} {names}"[:200]
+    title = (T.text("bot.pr.title_new", plugins=names) if issue
+             else T.text("bot.pr.title_update", plugins=names))[:200]
     with open(os.path.join(src, "report.md")) as f:
         report = f.read()
-    body = [report, CHECKLIST]
+    body = [report, checklist()]
     for e in es:
-        body.append(f"`{e['id']}` from https://github.com/{e['repo']} at `{e['release']['tag']}`: "
-                    f"{e['download']['url']} (SHA-256 `{e['download']['sha256']}`).")
+        body.append(T.text("bot.pr.source_line", id=e["id"], repo_url=f"https://github.com/{e['repo']}",
+                           tag=e["release"]["tag"], download_url=e["download"]["url"],
+                           sha256=e["download"]["sha256"]))
     if issue.isdigit():
         body.append(f"\nCloses #{issue}")
     with open(os.path.join(out, "title.txt"), "w") as f:

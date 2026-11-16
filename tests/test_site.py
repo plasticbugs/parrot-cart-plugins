@@ -14,6 +14,7 @@ import build_site
 import ghapi
 import markdown
 import registry
+import sitecopy
 import tvscreen
 import validate
 
@@ -162,6 +163,52 @@ class Site(unittest.TestCase):
         self.assertIn("prefers-reduced-motion", css)
         new = css[css.index("/* ---- screenshots"):css.index("/* ---- the footer")]
         self.assertFalse(re.search(r"#[0-9a-fA-F]{3,8}\b|rgb\(|oklch\(|font-family:(?!\s*var\()", new))
+
+
+class Copy(unittest.TestCase):
+    """site/copy.toml holds every word the pages and the bot use"""
+    CODE = ("tools/build_site.py", "tools/validate.py", "tools/ci/pr_text.py")
+
+    def test_every_key_the_code_reads_is_there(self):
+        used = set()
+        for name in self.CODE:
+            with open(os.path.join(ROOT, name)) as f:
+                used |= set(re.findall(r'\bT\.\w+\(\s*"([a-z0-9_.]+)"', f.read()))
+        have = set(sitecopy.COPY.keys())
+        self.assertEqual(sorted(used - have), [], "read by the code but missing from site/copy.toml")
+        self.assertEqual(sorted(have - used), [], "in site/copy.toml but nothing reads it")
+        # a missing key stops the build, and says which
+        data = copy.deepcopy(sitecopy.COPY.data())
+        del data["home"]["hero"]["lead"]
+        old, build_site.T = build_site.T, sitecopy.Copy(data=data)
+        try:
+            with self.assertRaises(sitecopy.CopyError) as cm:
+                build_site.build(os.path.join(tmp(), "_site"))
+        finally:
+            build_site.T = old
+        self.assertIn("home.hero.lead is missing", str(cm.exception))
+        # so does a placeholder the line can't take, and a row without a field
+        data = copy.deepcopy(sitecopy.COPY.data())
+        data["home"]["browse"]["by"] = "By {nmae}"
+        del data["home"]["install"]["steps"][1]["text"]
+        t = sitecopy.Copy(data=data)
+        with self.assertRaises(sitecopy.CopyError) as cm:
+            t.html("home.browse.by", name="x")
+        self.assertIn("home.browse.by uses {nmae}", str(cm.exception))
+        with self.assertRaises(sitecopy.CopyError) as cm:
+            t.rows("home.install.steps", ("title", "text"))
+        self.assertIn("home.install.steps (block 2).text is missing", str(cm.exception))
+
+    def test_what_you_type_stays_text(self):
+        t = sitecopy.Copy(data={"a": "Tom & Jerry <b>x</b> 'q' \"r\" `<i>` **B** [l](../x/?a=1&b=2) {n}",
+                                "bad": "[x](javascript:void)", "odd": "[x](javascript:alert(1))"})
+        self.assertEqual(t.html("a", n="<v>"),
+                         "Tom &amp; Jerry &lt;b&gt;x&lt;/b&gt; 'q' \"r\" <span class=\"code\">&lt;i&gt;</span> "
+                         "<b>B</b> <a class=\"link\" href=\"../x/?a=1&amp;b=2\">l</a> <v>")
+        self.assertNotIn('"r"', t.attr("a", n=""))
+        with self.assertRaises(sitecopy.CopyError):
+            t.html("bad")
+        self.assertNotIn("<a", t.html("odd"))
 
 
 class Markdown(unittest.TestCase):

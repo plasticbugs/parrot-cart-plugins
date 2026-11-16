@@ -46,8 +46,10 @@ import ghapi  # noqa: E402
 import issue_form  # noqa: E402
 import png  # noqa: E402
 import registry  # noqa: E402
+import sitecopy  # noqa: E402
 
 MARK = "<!-- parrotcart-registry-report -->"
+T = sitecopy.COPY
 CREDITS = re.compile(r"^[ \t]{0,3}(?:#{1,6}[ \t]+|\*\*|__|<h[1-6][^>]*>)?[ \t]*(?:credits?|acknowledge?ments?|thanks|"
                      r"authors?|attributions?)\b", re.I | re.M)
 URL = re.compile(r"https?://[^\s)>\]\"']+")
@@ -385,27 +387,32 @@ def sentence(s):
 
 
 def report(res, update=False):
-    """the issue comment (or an update PR's body), as markdown"""
-    tag = f" at `{md(res['tag'])}`" if res["tag"] else ""
+    """the issue comment (or an update PR's body), as markdown; its words are site/copy.toml's [bot]"""
+    where = (T.text("bot.repo_at_tag", repo=md(res["repo"]), tag=md(res["tag"])) if res["tag"]
+             else md(res["repo"]))
     out = [MARK]
     if res.get("retry"):
-        out.append(f"**We couldn't finish checking {md(res['repo'])}{tag}.**")
+        out.append(T.text("bot.checked_retry", where=where))
     else:
         if res["ok"] and res["changed"]:
-            head = "It passed." if not update else "It's a new version."
+            head = T.text("bot.passed") if not update else T.text("bot.new_version")
         elif res["ok"]:
-            head = "It passed, but there's nothing new to add."
+            head = T.text("bot.nothing_new")
         else:
-            head = "It didn't pass."
-        out.append(f"**We checked {md(res['repo'])}{tag}. {head}**")
+            head = T.text("bot.failed")
+        out.append(T.text("bot.checked", where=where, result=head))
     out.append("")
     if res["plugins"]:
-        out.append("| File | Plugin | ID | Version | Result |")
+        cols = [T.text("bot.table.file"), T.text("bot.table.plugin"), T.text("bot.table.id"),
+                T.text("bot.table.version"), T.text("bot.table.result")]
+        out.append("| " + " | ".join(cols) + " |")
         out.append("|---|---|---|---|---|")
+        words = {"new": T.text("bot.table.new"), "update": T.text("bot.table.update"),
+                 "same": T.text("bot.table.same"), "unlisted": T.text("bot.table.unlisted")}
         for p in res["plugins"]:
-            what = {"new": "new", "update": "update", "same": "already listed", "unlisted": "not listed yet"}.get(
-                p["change"], "")
-            verdict = "needs fixing" if p["errors"] else "on hold" if not res["ok"] else what or "ok"
+            what = words.get(p["change"], "")
+            verdict = (T.text("bot.table.fix") if p["errors"] else T.text("bot.table.hold") if not res["ok"]
+                       else what or T.text("bot.table.ok"))
             out.append(f"| {md(p['file'])} | {md(p.get('name') or '')} | {md(p['id'] or '')} | "
                        f"{md(p['version'] or '')} | {verdict} |")
         out.append("")
@@ -414,36 +421,35 @@ def report(res, update=False):
     warns = [sentence(w) for w in res["warnings"]] + [sentence(f"{p['file']}: {w}") for p in res["plugins"]
                                                       for w in p["warnings"]]
     if errs:
-        out.append("What went wrong:" if res.get("retry") else "What needs fixing:")
+        out.append(T.text("bot.errors_retry") if res.get("retry") else T.text("bot.errors"))
         out.append("")
         out += [f"- {md(e)}" for e in errs]
         out.append("")
     if warns:
-        out.append("Worth a look, but these don't stop it:")
+        out.append(T.text("bot.warnings"))
         out.append("")
         out += [f"- {md(w)}" for w in warns]
         out.append("")
     shown = [p for p in res["plugins"] if p.get("entry") and p["id"] in res["changed"]]
     if res["ok"] and shown:
-        out.append("Your plugin's page will show:")
+        out.append(T.text("bot.page_shows"))
         out.append("")
         for p in shown:
             e = p["entry"]
             n = len(e["screenshots"])
-            out.append(f"- {md(e['name'])}: "
-                       + ("the README from the .CVP, " if e["readme"]["cart"] else "no README on the cart, ")
-                       + ("README.md, " if e["readme"]["web"] else "a link to the README, ")
-                       + ("your release notes, " if e["history"][0]["notes"] else "no release notes, ")
-                       + (f"{n} screenshot{'s' if n != 1 else ''}" if n else "no screenshots"))
+            parts = [T.text("bot.shows_cart_readme") if e["readme"]["cart"] else T.text("bot.shows_no_cart_readme"),
+                     T.text("bot.shows_readme") if e["readme"]["web"] else T.text("bot.shows_readme_link"),
+                     T.text("bot.shows_notes") if e["history"][0]["notes"] else T.text("bot.shows_no_notes"),
+                     T.text("bot.shows_one_screenshot") if n == 1 else
+                     T.text("bot.shows_screenshots", count=n) if n else T.text("bot.shows_no_screenshots")]
+            out.append("- " + T.text("bot.page_shows_line", name=md(e["name"]), parts=", ".join(parts)))
         out.append("")
     if res["ok"] and res["changed"] and not update:
-        out.append("Next, we'll make sure it has no commercial game art or ROMs, then add it to the site. "
-                   "This issue closes when your plugin is listed.")
+        out.append(T.text("bot.next_passed"))
     elif res.get("retry"):
-        out.append("This isn't a problem with your plugin. Edit this issue to run the check again.")
+        out.append(T.text("bot.next_retry"))
     elif not res["ok"] and not update:
-        out.append("Fix these and publish a new release if the .CVP changed. Then edit this issue, and we'll "
-                   "check it again.")
+        out.append(T.text("bot.next_failed"))
     return "\n".join(out).rstrip() + "\n"
 
 
