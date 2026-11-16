@@ -121,7 +121,7 @@ class Site(unittest.TestCase):
         with open(os.path.join(here, "cart-readme.txt")) as f:
             cart = f.read()
         self.assertIn('<pre class="plain">' + build_site.e_(cart) + "</pre>", page)
-        self.assertIn("Its README, on the cart", page)
+        self.assertIn("README on the cart", page)
         self.assertEqual(page.count('<use href="#tvg'), len([c for c in cart if c not in " \n"])
                          + sum(1 for c in "".join(tvscreen.details_page(e).lines) if c != " "))
         # README.md, as safe GitHub-flavoured Markdown
