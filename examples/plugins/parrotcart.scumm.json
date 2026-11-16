@@ -4,7 +4,7 @@
   "name": "SCUMM",
   "version": "0.2.7",
   "by": "Parrot Cart",
-  "description": "Plays SCUMM adventure games from /SCUMM, with saves.",
+  "description": "Engine for classic point-and-click adventure games",
   "repo": "OWNER/parrotcart-scumm",
   "repo_id": null,
   "owner": "OWNER",
@@ -44,14 +44,14 @@
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 411,
-      "sha256": "ac810304487bd7208572ab5819483d2b8d5ed8bded38b6d00ea84e8476724d2e",
-      "lines": 29
+      "size": 455,
+      "sha256": "8fd704ec4ad4b5fda20bc186fea78e24babae92747fab34576325ece3f2f53e3",
+      "lines": 30
     },
     "web": {
       "file": "README.md",
-      "size": 455,
-      "sha256": "89f4f4d21634e61d904011acc5e2d40dbcf3a49fa931481dbdfa8bdca7078aab",
+      "size": 496,
+      "sha256": "9d9e93f170537dd4cb495633d59b80f16b056dde9a3390988e592259d05bcdfa",
       "url": "https://github.com/OWNER/parrotcart-scumm#credits"
     }
   },
@@ -73,7 +73,7 @@
       "url": "https://github.com/OWNER/parrotcart-scumm/releases/tag/v0.2.7",
       "published": "2026-11-15",
       "version": "0.2.7",
-      "notes": "An example entry. When SCUMM is listed, the notes of its 0.2.7 release on GitHub show here."
+      "notes": "This is an example. When SCUMM is listed, the notes from the 0.2.7 release on GitHub will show here."
     }
   ],
   "added": "2026-11-15",

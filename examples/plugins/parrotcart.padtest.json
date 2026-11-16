@@ -4,7 +4,7 @@
   "name": "Pad Test",
   "version": "0.1.2",
   "by": "Parrot Cart",
-  "description": "Shows a USB pad's buttons and sticks on the TV as they move.",
+  "description": "Tester for USB gamepads",
   "repo": "OWNER/parrotcart-padtest",
   "repo_id": null,
   "owner": "OWNER",
@@ -42,14 +42,14 @@
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 409,
-      "sha256": "eb1190758c8afe66fcdeecf9d31483219a23df626a946d3db0a88b8eef65e197",
+      "size": 432,
+      "sha256": "b626a9d361149e62c1b775bf4024933628eb9155bfef540c6b348b3bff3ea27e",
       "lines": 30
     },
     "web": {
       "file": "README.md",
-      "size": 443,
-      "sha256": "6871168589a0ef9b63f9d9c03b4ddad77ec0cd0a91002f50c1c9caa90f64e966",
+      "size": 463,
+      "sha256": "410dca411ce783773a72a106085c912a8c98a64af3cab5935251f1a02081dacf",
       "url": "https://github.com/OWNER/parrotcart-padtest#credits"
     }
   },
@@ -71,7 +71,7 @@
       "url": "https://github.com/OWNER/parrotcart-padtest/releases/tag/v0.1.2",
       "published": "2026-11-15",
       "version": "0.1.2",
-      "notes": "An example entry. When Pad Test is listed, the notes of its 0.1.2 release on GitHub show here."
+      "notes": "This is an example. When Pad Test is listed, the notes from the 0.1.2 release on GitHub will show here."
     }
   ],
   "added": "2026-11-15",

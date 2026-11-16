@@ -4,7 +4,7 @@
   "name": "Master System",
   "version": "0.2.3",
   "by": "Parrot Cart",
-  "description": "Plays Master System, Game Gear and SG-1000 games, with saves.",
+  "description": "Emulator for Sega Master System",
   "repo": "OWNER/parrotcart-mastersystem",
   "repo_id": null,
   "owner": "OWNER",
@@ -25,7 +25,7 @@
     "spdx": "GPL-3.0",
     "name": "GNU General Public License v3.0",
     "url": "https://github.com/OWNER/parrotcart-mastersystem/blob/v0.2.3/LICENSE",
-    "note": "Its Z80 core's notice allows non-commercial use only."
+    "note": "The Z80 core's notice allows non-commercial use only."
   },
   "source_url": "https://github.com/OWNER/parrotcart-mastersystem/tree/v0.2.3",
   "credits_url": "https://github.com/OWNER/parrotcart-mastersystem#credits",
@@ -45,18 +45,18 @@
     "sha256": "689ac6d70e82678834ee82861b3fdd035a7a0fffcf3ea0fa74c6f085b4fd8175",
     "kind": "sram"
   },
-  "credits": "SMS Plus by Charles MacDonald; pico-smsplus by Frank Hoedemakers; the Z80 core by Juergen Buchmueller",
+  "credits": "SMS Plus by Charles MacDonald, pico-smsplus by Frank Hoedemakers and the Z80 core by Juergen Buchmueller",
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 515,
-      "sha256": "ca133e3c2c532f8ae95515dad1c57fed55354de96a8884d8653950cbbdf3d006",
-      "lines": 32
+      "size": 542,
+      "sha256": "dafe124042549af1abbc31f05434b09cb1368aa1b753f74da5f34e9b8d0a1233",
+      "lines": 33
     },
     "web": {
       "file": "README.md",
-      "size": 561,
-      "sha256": "8189c45b8658efb2893b580dacfa1b2f6efbd828b3abc5e7524f367f305dfb66",
+      "size": 585,
+      "sha256": "5c0fcafb351fcd266c36c2a4ce992990224c6fcf40ab0d172035368aa9ee0b2d",
       "url": "https://github.com/OWNER/parrotcart-mastersystem#credits"
     }
   },
@@ -78,7 +78,7 @@
       "url": "https://github.com/OWNER/parrotcart-mastersystem/releases/tag/v0.2.3",
       "published": "2026-11-15",
       "version": "0.2.3",
-      "notes": "An example entry. When Master System is listed, the notes of its 0.2.3 release on GitHub show here."
+      "notes": "This is an example. When Master System is listed, the notes from the 0.2.3 release on GitHub will show here."
     }
   ],
   "added": "2026-11-15",

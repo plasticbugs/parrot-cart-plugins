@@ -1,12 +1,12 @@
 # NES Info for Parrot Cart
 
-Shows a .nes file's header and CRC-32: the SDK's smallest example.
+The NES Info plugin is a viewer for NES ROM headers.
 
 ## Install
 
 1. Copy `NESINFO.CVP` to `/PLUGINS` on the cart's microSD card.
 2. Put your .nes files in `/NES`.
-3. On the cart: Home, Plugins, NES Info, then A.
+3. On the cart, press B for Home, open Plugins, pick NES Info and press A.
 
 ## What it needs
 
@@ -16,8 +16,8 @@ Shows a .nes file's header and CRC-32: the SDK's smallest example.
 
 ## Credits
 
-Written for Parrot Cart with its SDK.
+It was written for Parrot Cart with the SDK.
 
 ## Source
 
-An example entry: this plugin's repository isn't public yet.
+This is an example. The source code isn't public yet.

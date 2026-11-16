@@ -1,7 +1,8 @@
 GAME BOY FOR PARROT CART
 
-Plays Game Boy games from /GB,
-with saves and USB pads.
+The Game Boy plugin is an
+emulator for the handheld
+console.
 
 INSTALL
 
@@ -9,8 +10,9 @@ INSTALL
    the cart's microSD card.
 2. Put your .gb .gbc files in
    /gb.
-3. On the cart: Home, Plugins,
-   Game Boy, then A.
+3. On the cart, press B for
+   Home, open Plugins, pick
+   Game Boy and press A.
 
 WHAT IT NEEDS
 
@@ -24,6 +26,5 @@ Peanut-GB and minigb_apu
 
 SOURCE
 
-An example entry: this
-plugin's repository isn't
-public yet.
+This is an example. The source
+code isn't public yet.

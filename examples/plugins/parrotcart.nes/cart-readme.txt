@@ -1,7 +1,7 @@
 NES FOR PARROT CART
 
-Plays NES games from /NES,
-with USB pads.
+The NES plugin is an emulator
+for Nintendo's 8-bit console.
 
 INSTALL
 
@@ -9,8 +9,9 @@ INSTALL
    the cart's microSD card.
 2. Put your .nes files in
    /NES.
-3. On the cart: Home, Plugins,
-   NES, then A.
+3. On the cart, press B for
+   Home, open Plugins, pick
+   NES and press A.
 
 WHAT IT NEEDS
 
@@ -21,11 +22,10 @@ Uses: USB host, PSRAM
 CREDITS
 
 QuickNES by Shay Green
-(blargg), via frank-nes;
+(blargg), via frank-nes, and
 emu2413 by Mitsutaka Okazaki
 
 SOURCE
 
-An example entry: this
-plugin's repository isn't
-public yet.
+This is an example. The source
+code isn't public yet.

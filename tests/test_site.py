@@ -189,12 +189,12 @@ class Copy(unittest.TestCase):
         self.assertIn("home.hero.lead is missing", str(cm.exception))
         # so does a placeholder the line can't take, and a row without a field
         data = copy.deepcopy(sitecopy.COPY.data())
-        data["home"]["browse"]["by"] = "By {nmae}"
+        data["home"]["files"]["before_text"] = "Three {extt} files"
         del data["home"]["install"]["steps"][1]["text"]
         t = sitecopy.Copy(data=data)
         with self.assertRaises(sitecopy.CopyError) as cm:
-            t.html("home.browse.by", name="x")
-        self.assertIn("home.browse.by uses {nmae}", str(cm.exception))
+            t.html("home.files.before_text", ext="x", folder="y")
+        self.assertIn("home.files.before_text uses {extt}", str(cm.exception))
         with self.assertRaises(sitecopy.CopyError) as cm:
             t.rows("home.install.steps", ("title", "text"))
         self.assertIn("home.install.steps (block 2).text is missing", str(cm.exception))

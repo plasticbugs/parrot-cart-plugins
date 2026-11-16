@@ -116,14 +116,14 @@ def screenshots(gh, rel, full, err, warn):
         m = SHOT.fullmatch(name)
         if not m:
             if name.lower().endswith(".png") and "screenshot" in name.lower():
-                warn(f"{name} isn't shown. Name screenshots screenshot-1.png, screenshot-2.png and screenshot-3.png")
+                warn(f"{name} isn't shown. Name your screenshots screenshot-1.png, screenshot-2.png and screenshot-3.png")
             continue
         if name not in registry.SHOTS:
             err(f"{name}: you can attach three screenshots at most, screenshot-1.png to screenshot-3.png")
             continue
         url, size = a.get("browser_download_url") or "", a.get("size")
         if not url.lower().startswith(prefix) or a.get("state", "uploaded") != "uploaded":
-            err(f"{name}: it isn't a finished upload on this repository's release")
+            err(f"{name}: it hasn't finished uploading to this repo's release")
             continue
         if not isinstance(size, int) or size > png.MAX_BYTES:
             err(f"{name}: it's {size} bytes, and a screenshot can be {png.MAX_BYTES} at most")
@@ -131,10 +131,10 @@ def screenshots(gh, rel, full, err, warn):
         try:
             data = gh.download(url, png.MAX_BYTES)
         except ghapi.TooBig:
-            err(f"{name}: it is over {png.MAX_BYTES} bytes")
+            err(f"{name}: it's over {png.MAX_BYTES} bytes")
             continue
         except ghapi.Refused as e:
-            err(f"{name}: its download went somewhere else: {e}")
+            err(f"{name}: the download went somewhere else ({e})")
             continue
         why = png.check(data) if len(data) == size else f"GitHub says it's {size} bytes, but we got {len(data)}"
         if why:
@@ -160,10 +160,10 @@ def validate(gh, repo, tag=None, description=None, root=registry.ROOT, config=No
            "plugins": [], "changed": []}
     err, warn = res["errors"].append, res["warnings"].append
     if not issue_form.REPO.fullmatch(repo or "") or repo.split("/")[1] in (".", ".."):
-        err("give the repository as owner/repo")
+        err("give the repo as owner/repo")
         return res
     if not rules_ok:
-        err("tick every rule in the form")
+        err("check all three rules in the form")
 
     r = gh.repo(repo)
     if r is None:
@@ -172,7 +172,7 @@ def validate(gh, repo, tag=None, description=None, root=registry.ROOT, config=No
     full = r.get("full_name") or repo
     res["repo"] = full
     if r.get("private") or r.get("visibility", "public") != "public":
-        err(f"{full} isn't public. We only list plugins whose source anyone can read")
+        err(f"{full} isn't public. We only list plugins whose source code anyone can read")
         return res
     if r.get("archived"):
         warn(f"{full} is archived")
@@ -201,7 +201,7 @@ def validate(gh, repo, tag=None, description=None, root=registry.ROOT, config=No
         name = l.get("name") or "Other"
         if not spdx or spdx == "NOASSERTION":
             spdx = None
-            warn("GitHub couldn't tell which licence this is, so we'll read it ourselves")
+            warn("GitHub couldn't tell which license this is, so we'll read it ourselves")
         license_ = {"spdx": spdx, "name": name if spdx else "See the LICENSE file",
                     "url": lic.get("html_url") or f"https://github.com/{full}/blob/{tag}/LICENSE"}
 
@@ -216,16 +216,17 @@ def validate(gh, repo, tag=None, description=None, root=registry.ROOT, config=No
         rname = str((rd or {}).get("name") or "")
         raw = text.encode("utf-8")
         if not rname.lower().endswith((".md", ".markdown")):
-            warn(f"the README ({rname or 'no name'}) isn't Markdown, so the plugin's page will link to it "
-                 "instead of showing it. Name it README.md to show it")
+            warn(f"{rname or 'the README'} isn't Markdown, so your plugin's page will link to it instead of "
+                 "showing it. Rename it README.md to show it")
         elif len(raw) > registry.WEB_README_MAX or (rd or {}).get("size", 0) > registry.WEB_README_MAX:
-            warn(f"the README is over {registry.WEB_README_MAX} bytes, so the plugin's page will link to it "
+            warn(f"the README is over {registry.WEB_README_MAX} bytes, so your plugin's page will link to it "
                  "instead of showing it")
         elif raw.strip():
             web_file = raw
     notes, cut = clean_notes(rel.get("body"))
     if cut:
-        warn(f"the release notes are long, so the plugin's page shows only the first {registry.NOTES_MAX} characters")
+        warn(f"the release notes are long, so your plugin's page will only show the first {registry.NOTES_MAX} "
+             "characters")
     if not notes:
         warn("the release has no notes")
     shots = screenshots(gh, rel, full, err, warn)
@@ -237,7 +238,7 @@ def validate(gh, repo, tag=None, description=None, root=registry.ROOT, config=No
     if not assets:
         err(f"the release {tag} has no .CVP file attached")
     elif len(assets) > limits["assets_per_release_max"]:
-        err(f"the release has {len(assets)} .CVP files. We read {limits['assets_per_release_max']} at most")
+        err(f"the release has {len(assets)} .CVP files, but we can read {limits['assets_per_release_max']} at most")
         assets = []
 
     entries = registry.load_entries(root) if entries is None else entries
@@ -250,7 +251,7 @@ def validate(gh, repo, tag=None, description=None, root=registry.ROOT, config=No
         res["plugins"].append(pr)
         url, size = a.get("browser_download_url") or "", a.get("size")
         if not url.lower().startswith(prefix) or "/" in name:
-            pr["errors"].append("it isn't a file on this repository's release")
+            pr["errors"].append("it isn't a file on this repo's release")
             continue
         if a.get("state", "uploaded") != "uploaded":
             pr["errors"].append("it hasn't finished uploading")
@@ -261,10 +262,10 @@ def validate(gh, repo, tag=None, description=None, root=registry.ROOT, config=No
         try:
             data = gh.download(url, limits["asset_max_bytes"])
         except ghapi.TooBig:
-            pr["errors"].append(f"it is over {limits['asset_max_bytes']} bytes")
+            pr["errors"].append(f"it's over {limits['asset_max_bytes']} bytes")
             continue
         except ghapi.Refused as e:
-            pr["errors"].append(f"its download went somewhere else: {e}")
+            pr["errors"].append(f"the download went somewhere else ({e})")
             continue
         if len(data) != size:
             pr["errors"].append(f"GitHub says it's {size} bytes, but we got {len(data)}")
@@ -277,14 +278,14 @@ def validate(gh, repo, tag=None, description=None, root=registry.ROOT, config=No
         pid = pr["id"] = info["id"]
         pr["version"], pr["name"] = info["version"], info["name"]
         if info["readme"] is None and not any("README" in e for e in errs):
-            pr["errors"].append("It has no README inside. Build it with the SDK from a README.md "
-                                "(README README.md in cvcart_plugin()) to add one")
+            pr["errors"].append("It has no README inside. To add one, build it with the SDK from a README.md, "
+                                "with README README.md in cvcart_plugin()")
         if pid in seen:
             pr["errors"].append(f"{seen[pid]} in this release has the same ID")
             continue
         seen[pid] = name
         if info["version"] and info["version"] not in tag:
-            pr["warnings"].append(f"its version {info['version']} isn't in the release tag {tag}")
+            pr["warnings"].append(f"the version {info['version']} isn't in the release tag {tag}")
         why = registry.ownership(entries, pid, repo_id, full, config.get("shared_prefixes", ()))
         if why:
             pr["errors"].append(why)
@@ -357,7 +358,8 @@ def validate(gh, repo, tag=None, description=None, root=registry.ROOT, config=No
             entry["credits"] = credits_line
         problems = registry.check_entry(entry)
         if problems:
-            pr["errors"] += ["the entry came out wrong: " + p for p in problems]
+            pr["errors"] += ["something went wrong on our side while making your listing. " + sentence(p)
+                             for p in problems]
             continue
         pr["entry"], pr["files"] = entry, files
 

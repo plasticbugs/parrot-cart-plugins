@@ -231,22 +231,22 @@ def readme_text_problems(text):
     """what is wrong with a README's text (bytes) for the cart's page: [] if nothing"""
     bad = []
     if not text:
-        return ["it is empty"]
+        return ["it's empty"]
     if len(text) > README_MAX:
-        bad.append(f"it is {len(text)} bytes; the menu's README page takes {README_MAX} at most")
+        bad.append(f"it's {len(text)} bytes, but the menu's README page takes {README_MAX} at most")
     odd = sorted({c for c in text if c != 10 and not 32 <= c <= 126})
     if odd:
         at = next(i for i, c in enumerate(text) if c in odd)
         line = text.count(b"\n", 0, at) + 1
         bad.append("it has bytes that aren't printable ASCII or a line feed ("
                    + ", ".join(f"0x{c:02x}" for c in odd[:6]) + ("..." if len(odd) > 6 else "")
-                   + f"; the first is on line {line})")
+                   + f"), and the first one is on line {line}")
     lines = text.split(b"\n")
     wide = [i + 1 for i, ln in enumerate(lines) if len(ln) > README_COLS]
     if wide:
-        bad.append(f"line {wide[0]} is {len(lines[wide[0] - 1])} characters"
-                   + (f" (and {len(wide) - 1} more lines are too long)" if len(wide) > 1 else "")
-                   + f"; the page is {README_COLS} wide")
+        bad.append(f"line {wide[0]} is {len(lines[wide[0] - 1])} characters, but the page is {README_COLS} wide"
+                   + (f". {len(wide) - 1} other {'line is' if len(wide) == 2 else 'lines are'} too long as well"
+                      if len(wide) > 1 else ""))
     return bad
 
 
@@ -260,16 +260,17 @@ def readme(data, p):
     if not off and not n:
         return None, []
     if not off or not n:
-        return None, [f"its README fields don't agree: offset {off}, length {n} (both are 0 for no README)"]
+        return None, [f"the README fields don't agree. The offset is {off} and the length is {n}, but both are 0 when "
+                      "there's no README"]
     end = p["hdr_size"] + p["image_size"]
     if off < end:
-        return None, [f"its README is at {off}, inside the header or the image, which end at {end}"]
+        return None, [f"the README starts at {off}, inside the header or the image, which end at {end}"]
     if off + n > len(data):
-        return None, [f"its README ({n} bytes at {off}) runs past the end of the {len(data)}-byte file"]
+        return None, [f"the README ({n} bytes at {off}) runs past the end of the {len(data)}-byte file"]
     text = data[off:off + n]
     bad = readme_text_problems(text)
     if bad:
-        return None, ["its README: " + b for b in bad]
+        return None, ["in the README, " + b for b in bad]
     return text.decode("ascii"), []
 
 
@@ -295,15 +296,15 @@ def check(data, api_max=API_MENU):
     errors, warnings = [], []
     code, p = parse(data)
     if code == EMAGIC or (code == ESIZE and p["hdr_size"] == 0):
-        errors.append(f"the menu would list it as a file, not a plugin: {ERR_TEXT[code]}")
+        errors.append(f"the menu would list it as a plain file, not a plugin. It would say \"{ERR_TEXT[code]}\"")
         return None, errors, warnings
     if code == ESIZE:
-        errors.append(f"the menu says it is {ERR_TEXT[code]}: a {p['hdr_size']}-byte header and a "
+        errors.append(f"the menu would say \"{ERR_TEXT[code]}\". A {p['hdr_size']}-byte header and a "
                       f"{p['image_size']}-byte image don't fit in a {len(data)}-byte file")
         return None, errors, warnings
     if code == EID:
-        errors.append(f"the menu says {ERR_TEXT[code]}: {p['id']!r} isn't developer.pluginname "
-                      "(lower case, digits, . - _)")
+        errors.append(f"the menu would say \"{ERR_TEXT[code]}\". {p['id']!r} isn't developer.pluginname, written with "
+                      "lowercase letters, digits, . - and _")
         return None, errors, warnings
 
     # the menu takes it from here; what it finds later
@@ -311,63 +312,63 @@ def check(data, api_max=API_MENU):
         errors.append(f"it needs plugin API {p['api']}, and the cart's newest firmware has {api_max} "
                       "(the menu says \"It needs newer cart firmware\")")
     if p["api"] == 0:
-        errors.append("its API version is 0: the SDK writes 1 or more")
+        errors.append("the API version is 0, but the SDK writes 1 or more")
     hdr, isz = p["hdr_size"], p["image_size"]
     if hdr % 512:
-        errors.append(f"its header is {hdr} bytes, not whole 512-byte sectors (plugslot.c: "
-                      "\"its header isn't whole sectors\")")
+        errors.append(f"the header is {hdr} bytes, not whole 512-byte sectors. The cart would say "
+                      "\"its header isn't whole sectors\"")
     if not isz:
-        errors.append("it has no image (plugslot.c: \"it has no image\")")
+        errors.append("it has no image, so the cart would refuse it")
     elif isz > SLOT_ROOM:
-        errors.append(f"its image is {isz} bytes; a flash slot holds {SLOT_ROOM} "
-                      "(plugslot.c: \"it's too big for a slot\")")
+        errors.append(f"the image is {isz} bytes, but a flash slot holds {SLOT_ROOM}. The cart would say "
+                      "\"it's too big for a slot\"")
     readme_text, readme_errors = readme(data, p)
     errors += readme_errors
     if readme_text is not None and not readme_text.endswith("\n"):
-        warnings.append("its README's last line doesn't end with a line feed, as the SDK writes it")
+        warnings.append("the README's last line doesn't end with a line feed. The SDK always ends it with one")
     tail = len(data) - hdr - isz - (p["readme_len"] if readme_text is not None else 0)
     if tail and not readme_errors:
-        warnings.append(f"{tail} bytes after the image" + (" besides its README" if readme_text is not None else "")
+        warnings.append(f"{tail} bytes after the image" + (" besides the README" if readme_text is not None else "")
                         + ", which the menu ignores")
     image = data[hdr:hdr + isz]
     if isz and hashlib.sha256(image).hexdigest() != p["sha256"]:
-        errors.append("the image doesn't match the SHA-256 in its header: the cart would refuse the "
-                      "copy (plugslot.c: \"the copy doesn't match its SHA-256\")")
+        errors.append("the image doesn't match the SHA-256 in the header, so the cart would refuse to copy it. "
+                      "It would say \"the copy doesn't match its SHA-256\"")
     kind = None
     if isz and isz <= SLOT_ROOM:
         why, kind = chainable(image)
         if why:
-            errors.append(f"the menu couldn't start it from a flash slot: \"{why}\" (sdplayer.c plug_chainable)")
+            errors.append(f"the menu couldn't start it from a flash slot. It would say \"{why}\"")
 
     # the SDK's rules (mkcvp.py), which the registry holds every plugin to
     pid = p["id"]
     if not ID_SDK.fullmatch(pid):
-        errors.append(f"its ID {pid!r} isn't developer.pluginname as the SDK writes it: "
-                      "parts of a-z 0-9 - _ joined by single dots")
+        errors.append(f"the ID {pid!r} isn't developer.pluginname. The SDK writes it as parts of a-z 0-9 - _ "
+                      "joined by single dots")
     if p["nonascii"]:
-        errors.append("bytes outside printable ASCII in: " + ", ".join(sorted(set(p["nonascii"])))
-                      + " (the menu shows them as ?)")
+        errors.append("some fields have bytes outside printable ASCII, and the menu shows them as ?. They're in "
+                      + ", ".join(sorted(set(p["nonascii"]))))
     if not p["name_raw"]:
-        errors.append("it has no name (the menu would show its ID)")
+        errors.append("it has no name, so the menu would show its ID instead")
     if not VERSION_SDK.fullmatch(p["version_raw"]):
-        errors.append(f"its version {p['version_raw']!r} isn't major.minor.patch")
+        errors.append(f"the version {p['version_raw']!r} isn't major.minor.patch")
     if not p["dev"]:
-        warnings.append("it has no developer (BY): the menu shows \"By ?\"")
+        warnings.append("it has no developer (BY), so the menu shows \"By ?\"")
     exts = [e for e in p["ext"] if e]
     for e in exts:
         if not EXT_SDK.fullmatch(e):
-            errors.append(f"it opens {e!r}: an extension is a dot and 1-7 letters or digits")
+            errors.append(f"it opens {e!r}, but an extension is a dot and 1-7 letters or digits")
     low = [e.lower() for e in exts]
     if len(set(low)) != len(low):
         warnings.append("it lists an extension twice")
     for e in sorted(set(low) & {".rom", ".col"}):
-        warnings.append(f"it opens {e}: the menu opens ColecoVision ROMs itself, so it only gets "
+        warnings.append(f"it opens {e}, but the menu opens ColecoVision ROMs itself. The plugin only gets "
                         f"{e} files that aren't ROMs")
     home = p["home"]
     if home and not home.startswith("/"):
-        warnings.append(f"its folder {home!r} doesn't start with /")
+        warnings.append(f"the folder {home!r} doesn't start with /")
     if home.strip("/").upper() == "PLUGINS":
-        errors.append("its folder is /PLUGINS, which the menu hides")
+        errors.append("the folder is /PLUGINS, which the menu hides")
     known = sum(bit for bit, _, _ in FLAGS)
     if p["flags"] & ~known:
         warnings.append(f"flag bits {p['flags'] & ~known:#x} mean nothing to the menu")

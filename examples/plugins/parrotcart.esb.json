@@ -4,7 +4,7 @@
   "name": "Empire Strikes Back",
   "version": "0.1.2",
   "by": "Parrot Cart",
-  "description": "Plays the 1985 Empire Strikes Back arcade game from your own ROM files, with a USB pad.",
+  "description": "Emulator for the vector-based arcade sequel",
   "repo": "OWNER/parrotcart-esb",
   "repo_id": null,
   "owner": "OWNER",
@@ -39,18 +39,18 @@
     "sha256": "d714f7eee7c0db53e14025ae582900bab322a7f77097ebea7806855ad1ddf5b5",
     "kind": "sram"
   },
-  "credits": "Parts ported from MAME (BSD-3-Clause): Steve Baines, Frank Palazzolo, Mathis Rosenhauer, Aaron Giles and others. Star Wars is a trademark of Lucasfilm Ltd. The plugin contains none of the game.",
+  "credits": "Parts are ported from MAME (BSD-3-Clause), from code by Steve Baines, Frank Palazzolo, Mathis Rosenhauer, Aaron Giles and others. Star Wars is a trademark of Lucasfilm Ltd. The plugin contains none of the game.",
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 724,
-      "sha256": "749723d5a1610d65df8d86a94fa1491307ac47f69ff7d926625a5365b22ca994",
+      "size": 762,
+      "sha256": "aaf13ec2e6b4a74691a552aeca45d30353760e217964d2bf7a8db70733295b72",
       "lines": 42
     },
     "web": {
       "file": "README.md",
-      "size": 757,
-      "sha256": "e0073508f789892972ef7bd150ab053a61bb504b61a0573207640c3c2e7d9827",
+      "size": 792,
+      "sha256": "861baedf9862e3c0c54cff53783359858a86ed8f71a1c8cce77b910f6a8bac31",
       "url": "https://github.com/OWNER/parrotcart-esb#credits"
     }
   },
@@ -72,7 +72,7 @@
       "url": "https://github.com/OWNER/parrotcart-esb/releases/tag/v0.1.2",
       "published": "2026-11-15",
       "version": "0.1.2",
-      "notes": "An example entry. When Empire Strikes Back is listed, the notes of its 0.1.2 release on GitHub show here."
+      "notes": "This is an example. When Empire Strikes Back is listed, the notes from the 0.1.2 release on GitHub will show here."
     }
   ],
   "added": "2026-11-15",

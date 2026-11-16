@@ -1,5 +1,5 @@
 name: Submit a plugin
-description: Add your Parrot Cart plugin to the registry, or another plugin from the same repo.
+description: Add your Parrot Cart plugin to the site. You can also use it for another plugin from the same repo.
 title: "Plugin: "
 labels: ["plugin-submission"]
 body:
@@ -8,7 +8,7 @@ body:
       value: |
         Tell us which GitHub repo your plugin is in. We'll check your latest
         release and reply here. If it passes, we'll add your plugin to the
-        registry. We only read your files; we never run anything.
+        registry. We only read your files. We never run anything.
 
         After that, new releases are picked up automatically.
 
@@ -22,7 +22,7 @@ body:
     id: repo
     attributes:
       label: Repository
-      description: owner/repo on GitHub. It must be public.
+      description: Type it as owner/repo. It has to be public.
       placeholder: yourname/your-plugin
     validations:
       required: true
@@ -30,7 +30,7 @@ body:
     id: tag
     attributes:
       label: Release tag
-      description: Leave empty to use your latest release. Drafts and pre-releases aren't accepted.
+      description: Leave it empty to use your latest release. We can't use drafts or pre-releases.
       placeholder: v1.0.0
     validations:
       required: false
@@ -38,7 +38,7 @@ body:
     id: description
     attributes:
       label: Short description
-      description: One line about your plugin, up to 160 characters.
+      description: Describe your plugin in one line, up to 160 characters.
       placeholder: Plays .xyz files on the console, with USB pads.
     validations:
       required: true
@@ -52,5 +52,5 @@ body:
           required: true
         - label: The repo and the release, including screenshots, have no commercial game art, ROMs or other files I don't have the right to share.
           required: true
-        - label: The registry may copy this release's README, release notes and screenshots and show them on the plugin's page.
+        - label: You can copy this release's README, release notes and screenshots and show them on the plugin's page.
           required: true

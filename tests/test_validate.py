@@ -137,7 +137,7 @@ class Submissions(unittest.TestCase):
         e = res["plugins"][0]["entry"]
         self.assertIsNone(e["license"]["spdx"])
         self.assertEqual(e["image"]["kind"], "xip")
-        self.assertTrue(any("couldn't tell which licence" in w for w in res["warnings"]))
+        self.assertTrue(any("couldn't tell which license" in w for w in res["warnings"]))
 
     def test_too_big_isnt_downloaded(self):
         t = gh("too-big")
@@ -226,7 +226,7 @@ class PageContent(unittest.TestCase):
             store: {"file": path}, "https://api.github.com/repos/fixture-dev/nes-plugin/releases/latest": {"body": rel}})),
             "fixture-dev/nes-plugin", None, "x", root=tmp(), config=CONFIG, today=TODAY)
         self.assertFalse(res["ok"])
-        self.assertTrue(any("its README: line 1 is 47 characters" in e for e in res["plugins"][0]["errors"]), res)
+        self.assertTrue(any("in the README, line 1 is 47 characters" in e for e in res["plugins"][0]["errors"]), res)
 
     def shots(self, shots, **kw):
         s = custom(scenarios.nes_good, shots=shots, **kw)

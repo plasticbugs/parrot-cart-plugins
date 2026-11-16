@@ -83,7 +83,7 @@ class MenuRules(unittest.TestCase):
 
     def test_sdk_id_stricter(self):
         _, errors, _ = cvp.check(make_cvp(self.img, id="a..b"))
-        self.assertTrue(any("as the SDK writes it" in e for e in errors))
+        self.assertTrue(any("The SDK writes it as" in e for e in errors))
 
     def test_fallbacks(self):
         _, p = cvp.parse(make_cvp(self.img, name="", version=""))
@@ -238,7 +238,7 @@ class Readme(unittest.TestCase):
     def test_other_bytes_after_the_image(self):
         _, errors, warnings = self.check(readme="Hi.\n", gap=b"\0" * 12)
         self.assertEqual(errors, [])
-        self.assertTrue(any("12 bytes after the image besides its README" in w for w in warnings), warnings)
+        self.assertTrue(any("12 bytes after the image besides the README" in w for w in warnings), warnings)
 
 
 @unittest.skipUnless(os.environ.get("PARROTCART_CVP_DIR"), "PARROTCART_CVP_DIR isn't set: no real builds to read")

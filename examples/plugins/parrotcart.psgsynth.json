@@ -4,7 +4,7 @@
   "name": "PSG Synth",
   "version": "1.0.0",
   "by": "Parrot Cart",
-  "description": "Plays the console's sound chip from a USB MIDI keyboard.",
+  "description": "Synth for USB MIDI keyboards",
   "repo": "OWNER/parrotcart-psgsynth",
   "repo_id": null,
   "owner": "OWNER",
@@ -42,14 +42,14 @@
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 408,
-      "sha256": "0d49852d6bf6b1aa00ca2e81d9ce849d5739cdb2fa6482e825941fdc8b3025de",
+      "size": 441,
+      "sha256": "e6016f2bea9baf57ae68918512ebb3e4e2a31d5ffd02fc01035ac9353f7a0d95",
       "lines": 30
     },
     "web": {
       "file": "README.md",
-      "size": 442,
-      "sha256": "0dc83ccd773e0860be7f4c5b2b12e413cbac7814c5fca45bd37c9d54588f6216",
+      "size": 472,
+      "sha256": "d35d24cae8ed0be1131f6dff5742db486434b637a1afd7fc219231e2b76e4e50",
       "url": "https://github.com/OWNER/parrotcart-psgsynth#credits"
     }
   },
@@ -76,7 +76,7 @@
       "url": "https://github.com/OWNER/parrotcart-psgsynth/releases/tag/v1.0.0",
       "published": "2026-11-15",
       "version": "1.0.0",
-      "notes": "An example entry. When PSG Synth is listed, the notes of its 1.0.0 release on GitHub show here."
+      "notes": "This is an example. When PSG Synth is listed, the notes from the 1.0.0 release on GitHub will show here."
     }
   ],
   "added": "2026-11-15",

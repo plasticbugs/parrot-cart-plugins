@@ -4,7 +4,7 @@
   "name": "Game Boy",
   "version": "0.1.2",
   "by": "Parrot Cart",
-  "description": "Plays Game Boy games from /GB, with saves and USB pads.",
+  "description": "Emulator for the handheld console",
   "repo": "OWNER/parrotcart-gameboy",
   "repo_id": null,
   "owner": "OWNER",
@@ -47,14 +47,14 @@
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 411,
-      "sha256": "165740ab7e068c6e8fab367a71ef58aac74753a6e8f1264457c7f79859279df3",
-      "lines": 29
+      "size": 438,
+      "sha256": "cd8f34f7ace6e8bfa541577288413411423f7d44df394676bd8732064c8f650d",
+      "lines": 30
     },
     "web": {
       "file": "README.md",
-      "size": 455,
-      "sha256": "6df8dd4378bd52eb3a6984a555c00801677a730e32a21f717a577015072ec249",
+      "size": 479,
+      "sha256": "247249a27465cb5fbf094d615f6fb654e562f71eb264ab3b5f84eb842b0f507e",
       "url": "https://github.com/OWNER/parrotcart-gameboy#credits"
     }
   },
@@ -76,7 +76,7 @@
       "url": "https://github.com/OWNER/parrotcart-gameboy/releases/tag/v0.1.2",
       "published": "2026-11-15",
       "version": "0.1.2",
-      "notes": "An example entry. When Game Boy is listed, the notes of its 0.1.2 release on GitHub show here."
+      "notes": "This is an example. When Game Boy is listed, the notes from the 0.1.2 release on GitHub will show here."
     }
   ],
   "added": "2026-11-15",

@@ -19,9 +19,9 @@
   // as mkcvp.py reads it: blank lines and the space around a line don't count
   const fromTxt = (s) => {
     const lines = s.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
-    if (lines.length !== 8) return `It has ${lines.length} lines; an icon is 8.`;
+    if (lines.length !== 8) return `It has ${lines.length} lines, but an icon has 8.`;
     const bad = lines.findIndex((l) => !/^[#.]{8}$/.test(l));
-    if (bad >= 0) return `Line ${bad + 1} isn't 8 characters of # or .`;
+    if (bad >= 0) return `Line ${bad + 1} should be 8 characters, each one # or .`;
     return lines.map((l) => parseInt(l.replace(/#/g, '1').replace(/\./g, '0'), 2));
   };
   // the same runs of pixels the site's own screens are drawn with
@@ -66,7 +66,7 @@
       if (from !== txt) { txt.value = toTxt(pad.rows); txt.removeAttribute('aria-invalid'); }
       const empty = pad.rows.every((b) => !b);
       if (glyph) glyph.setAttribute('d', toPath(empty ? fromHex(fallback[kind]) : pad.rows));
-      if (!from) say(empty ? 'Empty: the menu draws its own icon.' : '');
+      if (!from) say(empty ? "It's empty, so the menu will draw its own icon." : '');
       saveHash();
     };
     const set = (x, y, on) => {
@@ -142,7 +142,7 @@
       hex.toggleAttribute('aria-invalid', !rows);
       if (rows) { hex.removeAttribute('aria-invalid'); pad.load(rows, hex); say(''); } else {
         hex.setAttribute('aria-invalid', 'true');
-        say('The hex is 16 digits, two a row: 0-9 and a-f.', true);
+        say('The hex should be 16 digits from 0-9 and a-f, two for each row.', true);
       }
     });
     txt.addEventListener('input', () => {
@@ -179,7 +179,7 @@
       } catch (err) {
         hex.focus();
         hex.select();
-        say('Select the hex and copy it.');
+        say("Copying didn't work. Select the hex and copy it yourself.");
       }
     });
   });

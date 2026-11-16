@@ -29,17 +29,17 @@ def _chunks(data):
     out, at = [], 8
     while at < len(data):
         if at + 12 > len(data):
-            raise ValueError("it is cut short")
+            raise ValueError("it's cut short")
         (n,) = struct.unpack_from(">I", data, at)
         kind = data[at + 4:at + 8]
         if n > len(data) - at - 12:
-            raise ValueError("it is cut short")
+            raise ValueError("it's cut short")
         if not all(65 <= c <= 90 or 97 <= c <= 122 for c in kind):
             raise ValueError("it has a chunk with a bad name")
         body = data[at + 8:at + 8 + n]
         (crc,) = struct.unpack_from(">I", data, at + 8 + n)
         if zlib.crc32(kind + body) != crc:
-            raise ValueError(f"its {kind.decode()} chunk is damaged (CRC)")
+            raise ValueError(f"the {kind.decode()} chunk is damaged (its CRC is wrong)")
         out.append((kind, body))
         at += 12 + n
         if kind == b"IEND":
@@ -64,7 +64,7 @@ def _pass_sizes(w, h, interlace):
 def check(data, width=WIDTH, height=HEIGHT, max_bytes=MAX_BYTES):
     """why data isn't an acceptable screenshot, or None"""
     if len(data) > max_bytes:
-        return f"it is {len(data)} bytes; a screenshot is {max_bytes} at most"
+        return f"it's {len(data)} bytes, but a screenshot can be {max_bytes} at most"
     try:
         chunks = _chunks(data)
     except ValueError as e:
@@ -72,29 +72,29 @@ def check(data, width=WIDTH, height=HEIGHT, max_bytes=MAX_BYTES):
     if not chunks or chunks[0][0] != b"IHDR" or len(chunks[0][1]) != 13:
         return "it isn't a PNG file (no IHDR)"
     if chunks[-1][0] != b"IEND":
-        return "it is cut short (no IEND)"
+        return "it's cut short (no IEND)"
     w, h, depth, ctype, comp, filt, interlace = struct.unpack(">IIBBBBB", chunks[0][1])
     if (w, h) != (width, height):
-        return f"it is {w} x {h} pixels; a screenshot is exactly {width} x {height}"
+        return f"it's {w} x {h} pixels, but a screenshot has to be exactly {width} x {height}"
     if ctype not in TYPES or depth not in TYPES[ctype][1] or comp or filt or interlace > 1:
-        return "its header describes no kind of PNG"
+        return "the header doesn't describe any kind of PNG"
     names = [k for k, _ in chunks]
     if b"acTL" in names or b"fcTL" in names or b"fdAT" in names:
-        return "it is an animated PNG; a screenshot is one still picture"
+        return "it's an animated PNG, but a screenshot has to be one still picture"
     if ctype == 3 and b"PLTE" not in names:
         return "it has no palette"
     idat = [i for i, k in enumerate(names) if k == b"IDAT"]
     if not idat or idat != list(range(idat[0], idat[-1] + 1)):
-        return "it has no picture data" if not idat else "its picture data is out of order"
+        return "it has no picture data" if not idat else "the picture data is out of order"
     bits = TYPES[ctype][0] * depth
     want = sum(ph * (1 + (pw * bits + 7) // 8) for pw, ph in _pass_sizes(w, h, interlace))
     z = zlib.decompressobj()
     try:
         raw = z.decompress(b"".join(b for k, b in chunks if k == b"IDAT"), want + 1)
     except zlib.error:
-        return "its picture data is damaged"
+        return "the picture data is damaged"
     if len(raw) != want or not z.eof:
-        return "its picture data isn't the size its header says"
+        return "the picture data isn't the size the header says"
     return None
 
 

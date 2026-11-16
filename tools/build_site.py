@@ -182,12 +182,10 @@ def catalogue_rows(entries, pre=""):
     no_files, nothing = T.html("home.browse.no_files"), T.html("home.browse.needs_nothing")
     for e in sorted(entries, key=lambda e: e["name"].lower()):
         text = " ".join([e["name"], e["id"], opens(e), needs(e), e["by"], e["owner"], e["description"]]).lower()
-        who = (T.html("home.browse.example") if e.get("example")
-               else T.html("home.browse.by", name=e_(e["by"] or e["owner"])))
         rows.append(
             f'<tr data-text="{e_(text)}">'
             f'<td class="first"><div class="plugin">{thumb(e, pre)}'
-            f'<div><a href="{pre}plugins/{e_(e["id"])}/">{e_(e["name"])}</a><small>{who}</small></div></div></td>'
+            f'<div><a href="{pre}plugins/{e_(e["id"])}/">{e_(e["name"])}</a><small>{e_(e["description"])}</small></div></div></td>'
             f'<td data-label="{col["id"]}"><span class="code code--id">{e_(e["id"])}</span></td>'
             f'<td data-label="{col["opens"]}">{f"<span class=code>{e_(opens(e))}</span>" if e["opens"] else f"<span class=muted>{no_files}</span>"}</td>'
             f'<td data-label="{col["needs"]}">{e_(needs(e)) or f"<span class=muted>{nothing}</span>"}</td>'
@@ -197,13 +195,8 @@ def catalogue_rows(entries, pre=""):
 
 
 def home(entries, config):
-    examples = [e for e in entries if e.get("example")]
     plugins_screen = tvscreen.plugins_page(entries)
     screens = [plugins_screen]
-    if len(examples) == len(entries):
-        line = T.html("home.browse.lead_examples", count=len(entries))
-    else:
-        line = T.html("home.browse.lead", count=len(entries) - len(examples))
     body = [f"""<section class="hero" aria-labelledby="hero-title"><div class="container">
 <div class="hero__text">
 <h1 id="hero-title">{keep_together(T.html("home.hero.title"))}</h1>
@@ -214,7 +207,7 @@ def home(entries, config):
              T.text("home.hero.card_alt"))}
 </div></section>""",
             f"""<section class="section" id="plugins" aria-labelledby="plugins-title"><div class="container">
-<div class="headblock"><h2 id="plugins-title">{T.html("home.browse.title")}</h2><p class="lead">{line}</p></div>
+<div class="headblock"><h2 id="plugins-title">{T.html("home.browse.title")}</h2></div>
 <div class="finder" data-finder="catalogue" data-empty="catalogue-empty" hidden>
 <label for="q">{T.html("home.browse.search_label")}<input id="q" type="search" autocomplete="off" spellcheck="false"></label>
 <p role="status" aria-live="polite"></p></div>
@@ -426,7 +419,8 @@ def plugin_page(e, entries, config, root=ROOT):
 <div class="headblock"><h2 id="install-title">{T.html("plugin.install.title")}</h2></div>
 <ol class="steps{" steps--4" if len(steps) == 4 else ""}">{li_rows(steps)}</ol>
 </div></section>"""
-    desc = T.text("plugin.description", name=e["name"], version=e["version"], description=e["description"])
+    desc = T.text("plugin.description", name=e["name"], version=e["version"],
+                  description=e["description"].rstrip(". "))
     return page(T.text("plugin.page_title", name=e["name"]), desc,
                 hero + extra + specs + notes_section(e, live) + install,
                 pre, "plugins", [details] + ([strip] if strip else []), entries, config)

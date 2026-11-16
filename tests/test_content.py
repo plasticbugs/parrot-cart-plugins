@@ -91,7 +91,7 @@ class Png(unittest.TestCase):
             (self.build(hdr, b"not zlib data"), "damaged"),
             (self.build(hdr, rows, plte=False), "no palette"),
             (self.build(hdr, rows, self.chunk(b"acTL", bytes(8))), "animated"),
-            (self.build(struct.pack(">IIBBBBB", 256, 192, 3, 2, 0, 0, 0), rows), "no kind of PNG"),
+            (self.build(struct.pack(">IIBBBBB", 256, 192, 3, 2, 0, 0, 0), rows), "any kind of PNG"),
             (png.SIGNATURE + self.chunk(b"IHDR", hdr) + self.chunk(b"PLTE", bytes(6)) + self.chunk(b"IEND", b""),
              "no picture data"),
             (png.SIGNATURE + self.chunk(b"IDAT", rows) + self.chunk(b"IEND", b""), "no IHDR"),

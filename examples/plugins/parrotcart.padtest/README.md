@@ -1,22 +1,22 @@
 # Pad Test for Parrot Cart
 
-Shows a USB pad's buttons and sticks on the TV as they move.
+The Pad Test plugin is a tester for USB gamepads.
 
 ## Install
 
 1. Copy `PADTEST.CVP` to `/PLUGINS` on the cart's microSD card.
-2. On the cart: Home, Plugins, Pad Test, then A.
+2. On the cart, press B for Home, open Plugins, pick Pad Test and press A.
 
 ## What it needs
 
 | Opens | Folder | Uses |
 |---|---|---|
-| No files: it is an app | None | USB host |
+| No files, since it's an app | None | USB host |
 
 ## Credits
 
-Written for Parrot Cart with its SDK.
+It was written for Parrot Cart with the SDK.
 
 ## Source
 
-An example entry: this plugin's repository isn't public yet.
+This is an example. The source code isn't public yet.

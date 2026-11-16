@@ -1,12 +1,12 @@
 # Master System for Parrot Cart
 
-Plays Master System, Game Gear and SG-1000 games, with saves.
+The Master System plugin is an emulator for Sega Master System.
 
 ## Install
 
 1. Copy `SMS.CVP` to `/PLUGINS` on the cart's microSD card.
 2. Put your .sms .gg .sg files in `/SMS`.
-3. On the cart: Home, Plugins, Master System, then A.
+3. On the cart, press B for Home, open Plugins, pick Master System and press A.
 
 ## What it needs
 
@@ -16,8 +16,8 @@ Plays Master System, Game Gear and SG-1000 games, with saves.
 
 ## Credits
 
-SMS Plus by Charles MacDonald; pico-smsplus by Frank Hoedemakers; the Z80 core by Juergen Buchmueller
+SMS Plus by Charles MacDonald, pico-smsplus by Frank Hoedemakers and the Z80 core by Juergen Buchmueller
 
 ## Source
 
-An example entry: this plugin's repository isn't public yet.
+This is an example. The source code isn't public yet.

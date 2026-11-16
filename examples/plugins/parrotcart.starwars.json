@@ -4,7 +4,7 @@
   "name": "Star Wars",
   "version": "0.1.2",
   "by": "Parrot Cart",
-  "description": "Plays the 1983 Star Wars arcade game from your own ROM files, with a USB pad as the yoke.",
+  "description": "Emulator for the vector-based arcade game",
   "repo": "OWNER/parrotcart-starwars",
   "repo_id": null,
   "owner": "OWNER",
@@ -39,18 +39,18 @@
     "sha256": "b0f29c17195ed422af14e86c98ee118d6fc171acdfba967ca9ec198bc79596af",
     "kind": "sram"
   },
-  "credits": "Parts ported from MAME (BSD-3-Clause): Steve Baines, Frank Palazzolo, Mathis Rosenhauer, Aaron Giles and others. Star Wars is a trademark of Lucasfilm Ltd. The plugin contains none of the game.",
+  "credits": "Parts are ported from MAME (BSD-3-Clause), from code by Steve Baines, Frank Palazzolo, Mathis Rosenhauer, Aaron Giles and others. Star Wars is a trademark of Lucasfilm Ltd. The plugin contains none of the game.",
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 724,
-      "sha256": "058c01e6badb16ed18a10a7a770a9c618f2df487590911099f9d31c441fc2936",
-      "lines": 43
+      "size": 748,
+      "sha256": "5dcec76d383590dec2d5204c9704ef1b700fed755b5b5e6f90a17d719cb8c0a3",
+      "lines": 42
     },
     "web": {
       "file": "README.md",
-      "size": 754,
-      "sha256": "2274bef0430d13d83a2ad8edd5c501b39d02c510117e5a698e6b95c345aec2e4",
+      "size": 775,
+      "sha256": "c102a69bc419da283342e4668ced20b042c273495809fc5c2c093116d41c6516",
       "url": "https://github.com/OWNER/parrotcart-starwars#credits"
     }
   },
@@ -72,7 +72,7 @@
       "url": "https://github.com/OWNER/parrotcart-starwars/releases/tag/v0.1.2",
       "published": "2026-11-15",
       "version": "0.1.2",
-      "notes": "An example entry. When Star Wars is listed, the notes of its 0.1.2 release on GitHub show here."
+      "notes": "This is an example. When Star Wars is listed, the notes from the 0.1.2 release on GitHub will show here."
     }
   ],
   "added": "2026-11-15",

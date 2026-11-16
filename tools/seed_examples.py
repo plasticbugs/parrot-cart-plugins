@@ -48,37 +48,37 @@ OWNER = "OWNER"                # nobody: an example's repository isn't public
 # id: repository name, licence (spdx, name, note), description
 SEEDS = {
     "parrotcart.nes": ("parrotcart-nes", ("LGPL-2.1", "GNU Lesser General Public License v2.1", None),
-                      "Plays NES games from /NES, with USB pads."),
+                      "Emulator for Nintendo's 8-bit console"),
     "parrotcart.gameboy": ("parrotcart-gameboy", ("MIT", "MIT License", None),
-                          "Plays Game Boy games from /GB, with saves and USB pads."),
+                          "Emulator for the handheld console"),
     "parrotcart.mastersystem": ("parrotcart-mastersystem", ("GPL-3.0", "GNU General Public License v3.0",
-                                                           "Its Z80 core's notice allows non-commercial use only."),
-                               "Plays Master System, Game Gear and SG-1000 games, with saves."),
+                                                           "The Z80 core's notice allows non-commercial use only."),
+                               "Emulator for Sega Master System"),
     "parrotcart.scumm": ("parrotcart-scumm", ("GPL-3.0", "GNU General Public License v3.0", None),
-                        "Plays SCUMM adventure games from /SCUMM, with saves."),
+                        "Engine for classic point-and-click adventure games"),
     "parrotcart.padtest": ("parrotcart-padtest", (None, "Not chosen yet", None),
-                          "Shows a USB pad's buttons and sticks on the TV as they move."),
+                          "Tester for USB gamepads"),
     "parrotcart.nesinfo": ("parrotcart-nesinfo", (None, "Not chosen yet", None),
-                          "Shows a .nes file's header and CRC-32: the SDK's smallest example."),
+                          "Viewer for NES ROM headers"),
     "parrotcart.psgsynth": ("parrotcart-psgsynth", (None, "Not chosen yet", None),
-                           "Plays the console's sound chip from a USB MIDI keyboard."),
+                           "Synth for USB MIDI keyboards"),
     "parrotcart.starwars": ("parrotcart-starwars", ("BSD-3-Clause", "BSD 3-Clause License", None),
-                            "Plays the 1983 Star Wars arcade game from your own ROM files, with a USB pad as the yoke."),
+                            "Emulator for the vector-based arcade game"),
     "parrotcart.esb": ("parrotcart-esb", ("BSD-3-Clause", "BSD 3-Clause License", None),
-                       "Plays the 1985 Empire Strikes Back arcade game from your own ROM files, with a USB pad."),
+                       "Emulator for the vector-based arcade sequel"),
 }
 
 CREDITS = {
-    "parrotcart.nes": "QuickNES by Shay Green (blargg), via frank-nes; emu2413 by Mitsutaka Okazaki",
+    "parrotcart.nes": "QuickNES by Shay Green (blargg), via frank-nes, and emu2413 by Mitsutaka Okazaki",
     "parrotcart.gameboy": "Peanut-GB and minigb_apu",
-    "parrotcart.mastersystem": "SMS Plus by Charles MacDonald; pico-smsplus by Frank Hoedemakers; "
+    "parrotcart.mastersystem": "SMS Plus by Charles MacDonald, pico-smsplus by Frank Hoedemakers and "
                               "the Z80 core by Juergen Buchmueller",
     "parrotcart.scumm": "ScummVM, via frank-quest",
-    "parrotcart.starwars": "Parts ported from MAME (BSD-3-Clause): Steve Baines, Frank Palazzolo, Mathis Rosenhauer, "
-                           "Aaron Giles and others. Star Wars is a trademark of Lucasfilm Ltd. The plugin contains "
+    "parrotcart.starwars": "Parts are ported from MAME (BSD-3-Clause), from code by Steve Baines, Frank Palazzolo, "
+                           "Mathis Rosenhauer, Aaron Giles and others. Star Wars is a trademark of Lucasfilm Ltd. The plugin contains "
                            "none of the game.",
-    "parrotcart.esb": "Parts ported from MAME (BSD-3-Clause): Steve Baines, Frank Palazzolo, Mathis Rosenhauer, "
-                      "Aaron Giles and others. Star Wars is a trademark of Lucasfilm Ltd. The plugin contains "
+    "parrotcart.esb": "Parts are ported from MAME (BSD-3-Clause), from code by Steve Baines, Frank Palazzolo, "
+                      "Mathis Rosenhauer, Aaron Giles and others. Star Wars is a trademark of Lucasfilm Ltd. The plugin contains "
                       "none of the game.",
 }
 # a step of its own, for an app that needs files but opens none
@@ -95,23 +95,32 @@ NO_SHOTS = set()
 NEEDS = {"usb-host": "USB host", "usb-device": "USB device", "psram": "PSRAM"}
 
 
+def what_it_is(e):
+    """the one-line description as a sentence: "Emulator for X" becomes "The NES plugin is an emulator for X." """
+    first, _, rest = e["description"].rstrip(".").partition(" ")
+    if first[1:].islower():
+        first = first.lower()
+    article = "an" if first[:1].lower() in "aeiou" else "a"
+    return f"The {e['name']} plugin is {article} {' '.join(w for w in (first, rest) if w)}."
+
+
 def readme_md(e):
     steps = [f"Copy `{e['download']['name']}` to `/PLUGINS` on the cart's microSD card."]
     if e["opens"] and e["home"]:
         steps.append(f"Put your {' '.join(e['opens'])} files in `{e['home']}`.")
     if e["id"] in ROMS:
         steps.append(ROMS[e["id"]])
-    steps.append(f"On the cart: Home, Plugins, {e['name']}, then A.")
-    facts = [("Opens", " ".join(f"`{x}`" for x in e["opens"]) or "No files: it is an app"),
+    steps.append(f"On the cart, press B for Home, open Plugins, pick {e['name']} and press A.")
+    facts = [("Opens", " ".join(f"`{x}`" for x in e["opens"]) or "No files, since it's an app"),
              ("Folder", f"`{e['home']}`" if e["home"] else "None"),
              ("Uses", ", ".join(NEEDS[u] for u in e["uses"]) or "Nothing extra")]
     return "\n".join([
-        f"# {e['name']} for Parrot Cart", "", e["description"], "",
+        f"# {e['name']} for Parrot Cart", "", what_it_is(e), "",
         "## Install", "", *[f"{i}. {s}" for i, s in enumerate(steps, 1)], "",
         "## What it needs", "", "| " + " | ".join(k for k, _ in facts) + " |", "|---|---|---|",
         "| " + " | ".join(v for _, v in facts) + " |", "",
-        "## Credits", "", e.get("credits") or "Written for Parrot Cart with its SDK.", "",
-        "## Source", "", "An example entry: this plugin's repository isn't public yet.", ""])
+        "## Credits", "", e.get("credits") or "It was written for Parrot Cart with the SDK.", "",
+        "## Source", "", "This is an example. The source code isn't public yet.", ""])
 
 
 def shots(e):
@@ -192,8 +201,8 @@ def build(today, cvp_dir=None):
         e["readme"] = {"cart": cart, "web": meta(registry.WEB_README, md, url=e["credits_url"])}
         e["screenshots"] = [meta(n, files[n]) for n in registry.SHOTS if n in files]
         e["history"] = [dict(release, version=e["version"],
-                             notes=f"An example entry. When {e['name']} is listed, the notes of its "
-                                   f"{e['version']} release on GitHub show here.")]
+                             notes=f"This is an example. When {e['name']} is listed, the notes from the "
+                                   f"{e['version']} release on GitHub will show here.")]
         e.update(added=old.get("added", today), updated=today, submission=None, example=True)
         bad = registry.check_entry(e)
         if bad:

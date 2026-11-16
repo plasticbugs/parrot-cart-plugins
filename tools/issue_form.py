@@ -66,7 +66,7 @@ def parse(body, description_max=160):
     if repo.endswith(".git"):
         repo = repo[:-4]
     if not REPO.fullmatch(repo):
-        raise FormError("give the repository as owner/repo, the way GitHub shows it")
+        raise FormError("give the repo as owner/repo, like yourname/your-plugin")
     tag = s.get(LABELS["tag"], "").strip()
     if tag == NO_RESPONSE:
         tag = ""

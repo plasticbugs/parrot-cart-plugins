@@ -4,7 +4,7 @@
   "name": "NES",
   "version": "0.4.7",
   "by": "Parrot Cart",
-  "description": "Plays NES games from /NES, with USB pads.",
+  "description": "Emulator for Nintendo's 8-bit console",
   "repo": "OWNER/parrotcart-nes",
   "repo_id": null,
   "owner": "OWNER",
@@ -42,18 +42,18 @@
     "sha256": "91be49c104a736789f169aedffcb3927976f5c0eb4eeb338cac17e13ffd0f0b0",
     "kind": "sram"
   },
-  "credits": "QuickNES by Shay Green (blargg), via frank-nes; emu2413 by Mitsutaka Okazaki",
+  "credits": "QuickNES by Shay Green (blargg), via frank-nes, and emu2413 by Mitsutaka Okazaki",
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 434,
-      "sha256": "d93fbe4ea174f19eaadc1085b605cf6e02af17e897085c4b3b4324cc401e4b48",
+      "size": 478,
+      "sha256": "515b1a38bf491a30af3343489a496723bfa9789e3d74fe2502ba7fde84b546e3",
       "lines": 31
     },
     "web": {
       "file": "README.md",
-      "size": 476,
-      "sha256": "71fd30693b62dc76ab023b7ccdf282d81e94583f621b0f1fc8fccc67fdaf949d",
+      "size": 517,
+      "sha256": "a501ed5e1bfa047901e672e7262e048a5df044f383e54e77d44833467524098e",
       "url": "https://github.com/OWNER/parrotcart-nes#credits"
     }
   },
@@ -75,7 +75,7 @@
       "url": "https://github.com/OWNER/parrotcart-nes/releases/tag/v0.4.7",
       "published": "2026-11-15",
       "version": "0.4.7",
-      "notes": "An example entry. When NES is listed, the notes of its 0.4.7 release on GitHub show here."
+      "notes": "This is an example. When NES is listed, the notes from the 0.4.7 release on GitHub will show here."
     }
   ],
   "added": "2026-11-15",

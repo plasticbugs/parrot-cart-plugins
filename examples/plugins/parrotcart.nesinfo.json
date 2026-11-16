@@ -4,7 +4,7 @@
   "name": "NES Info",
   "version": "1.0.1",
   "by": "Parrot Cart",
-  "description": "Shows a .nes file's header and CRC-32: the SDK's smallest example.",
+  "description": "Viewer for NES ROM headers",
   "repo": "OWNER/parrotcart-nesinfo",
   "repo_id": null,
   "owner": "OWNER",
@@ -43,8 +43,8 @@
     "cart": null,
     "web": {
       "file": "README.md",
-      "size": 474,
-      "sha256": "1ccd1105d5c995341c3e329af9cef0fd4a0338fcd74b4dc2e2023ce38f764b04",
+      "size": 486,
+      "sha256": "bd487810ed87bd173a1816d69f7e5ce605ddcac4065b942b16fbc4e8d77639ce",
       "url": "https://github.com/OWNER/parrotcart-nesinfo#credits"
     }
   },
@@ -66,7 +66,7 @@
       "url": "https://github.com/OWNER/parrotcart-nesinfo/releases/tag/v1.0.1",
       "published": "2026-11-15",
       "version": "1.0.1",
-      "notes": "An example entry. When NES Info is listed, the notes of its 1.0.1 release on GitHub show here."
+      "notes": "This is an example. When NES Info is listed, the notes from the 1.0.1 release on GitHub will show here."
     }
   ],
   "added": "2026-11-15",
