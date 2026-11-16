@@ -92,8 +92,7 @@ def footer(pre, entries, config):
 <li><a href="{pre}authors/">For plugin authors</a></li><li><a href="{pre}authors/icon-editor/">The icon editor</a></li>
 <li><a href="{pre}index.html#install">Install a plugin</a></li><li><a href="{pre}registry.json">registry.json</a></li>{repo}</ul></div>
 </div>
-<p class="fine">The TV screens use the cart menu's font, Empty Windows Unboxed by VEXED
-(<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>).</p>
+<p class="fine">The TV screens use the cart menu's font, Empty Windows Unboxed by VEXED (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>).</p>
 </div></footer>"""
 
 
@@ -234,16 +233,14 @@ def home(entries, config):
             f'<figcaption><span>{t}</span><span class="code">{e_(code)}</span></figcaption></figure>'
             for k, t, s, sc, code in states)
         body.append(f"""<section class="section" aria-labelledby="change-title"><div class="container">
-<div class="headblock"><h2 id="change-title">How plugins work with files</h2><p class="lead">The card only shows files
-that are associated with a plugin.</p></div>
+<div class="headblock"><h2 id="change-title">How plugins work with files</h2><p class="lead">The card only shows files that are associated with a plugin.</p></div>
 <div class="switch" data-switch>
 <div class="switch__tabs" role="tablist" aria-label="Step by step" aria-orientation="vertical">{tabs}</div>
 <div class="switch__panels">{panels}</div>
 </div></div></section>""")
 
     body.append("""<section class="section" id="install" aria-labelledby="install-title"><div class="container">
-<div class="headblock"><h2 id="install-title">No installer. Manage your plugins on the cartridge.</h2><p class="lead">Three
-easy steps.</p></div>
+<div class="headblock"><h2 id="install-title">No installer. Manage your plugins on the cartridge.</h2><p class="lead">Three easy steps.</p></div>
 <ol class="steps">
 <li><h3>Download the .CVP</h3><p>From the plugin's page on this site.</p></li>
 <li><h3>Copy it to /PLUGINS</h3><p>On the cart's microSD card.</p></li>
@@ -251,8 +248,7 @@ easy steps.</p></div>
 </ol></div></section>""")
 
     body.append(f"""<section class="band band--ink figure-band" id="flash" aria-labelledby="flash-title"><div class="container">
-<div><p class="big" aria-hidden="true">{FLASH_SLOTS}</p><h2 id="flash-title"><span class="visually-hidden">{FLASH_SLOTS} </span>plugins
-stay ready on the cart</h2></div>
+<div><p class="big" aria-hidden="true">{FLASH_SLOTS}</p><h2 id="flash-title"><span class="visually-hidden">{FLASH_SLOTS} </span>plugins stay ready on the cart</h2></div>
 <ul class="ruled">
 <li><b>The first time you start one</b><span>it's copied into a 1 MB slot. That happens once per version.</span></li>
 <li><b>A new version</b><span>uses the old version's slot.</span></li>
@@ -261,8 +257,7 @@ stay ready on the cart</h2></div>
 </ul></div></section>""")
 
     body.append("""<section class="band band--paper close" aria-labelledby="close-title"><div class="container">
-<div><h2 id="close-title">Add your plugin by submitting a GitHub issue in the registry.</h2><p>We'll check your release
-and list it here.</p></div>
+<div><h2 id="close-title">Add your plugin by submitting a GitHub issue in the registry.</h2><p>We'll check your release and list it here.</p></div>
 <div class="actions"><a class="btn" href="submit/">Submit a plugin</a>
 <a class="btn btn--secondary" href="registry.json">registry.json</a></div>
 </div></section>""")
@@ -300,16 +295,13 @@ def cart_readme_section(e, text, pre):
     """the .CVP's README text as it is, in the menu's font, and the same text to read or copy"""
     if text is None:
         return f"""<section class="section" id="on-the-cart" aria-labelledby="cart-title"><div class="container">
-<div class="headblock"><h2 id="cart-title">No README on the cart</h2><p class="lead">This plugin's .CVP
-doesn't include a README, so the cart has nothing to show.</p></div>
-<p class="warn"><b>If you wrote this plugin:</b> build it with the SDK from a README.md. Your next release will
-show its instructions and credits on the TV. <a class="link" href="{pre}authors/readme/">How the README works</a></p>
+<div class="headblock"><h2 id="cart-title">No README on the cart</h2><p class="lead">This plugin's .CVP doesn't include a README, so the cart has nothing to show.</p></div>
+<p class="warn"><b>If you wrote this plugin:</b> build it with the SDK from a README.md. Your next release will show its instructions and credits on the TV. <a class="link" href="{pre}authors/readme/">How the README works</a></p>
 </div></section>""", None
     strip = tvscreen.readme_strip(text)
     meta = e["readme"]["cart"]
     return f"""<section class="section" id="on-the-cart" aria-labelledby="cart-title"><div class="container">
-<div class="headblock"><h2 id="cart-title">README on the cart</h2><p class="lead">What the cart shows for this
-plugin: {meta["lines"]} lines, 30 characters wide.</p></div>
+<div class="headblock"><h2 id="cart-title">README on the cart</h2><p class="lead">What the cart shows for this plugin: {meta["lines"]} lines, 30 characters wide.</p></div>
 <div class="cartreadme">
 <figure class="card"><div class="scroll" tabindex="0" role="region" aria-label="The README in the cart's font. The same text follows as plain text.">{strip.svg()}</div>
 <figcaption><span>From the details page on the cart</span><span class="code">{meta["size"]:,} bytes</span></figcaption></figure>
@@ -399,8 +391,7 @@ def plugin_page(e, entries, config, root=ROOT):
     items += (f'<div class="wide"><dt>SHA-256</dt><dd><span class="code hash">{e_(e["download"]["sha256"])}</span>'
               "</dd></div>")
     specs = f"""<section class="section" aria-labelledby="specs-title"><div class="container">
-<div class="headblock"><h2 id="specs-title">Release details</h2><p class="lead">From GitHub, when the plugin
-was listed.</p></div>
+<div class="headblock"><h2 id="specs-title">Release details</h2><p class="lead">From GitHub, when the plugin was listed.</p></div>
 <dl class="specs">{items}</dl>
 </div></section>"""
 
@@ -463,8 +454,7 @@ def submit_page(entries, config):
 <ul class="ruled">{need_rows}</ul>
 </div></section>
 <section class="band band--paper close" aria-labelledby="close-title"><div class="container">
-<div><h2 id="close-title">Check your plugin before you release it</h2><p>Clone this repo and run this. It shows your
-plugin's details and anything the cart would refuse.</p></div>
+<div><h2 id="close-title">Check your plugin before you release it</h2><p>Clone this repo and run this. It shows your plugin's details and anything the cart would refuse.</p></div>
 <pre class="cmd"><code>python3 tools/cvp.py YOURPLUGIN.CVP</code></pre>
 </div></section>"""
     return page("Submit a plugin: Parrot Cart plugins",
@@ -528,8 +518,7 @@ def doc_hero(title, lead, actions, card):
 
 def authors_close(pre):
     return f"""<section class="band band--paper close" aria-labelledby="close-title"><div class="container">
-<div><h2 id="close-title">Check your plugin before you release it</h2><p>Clone this repo and run this. It shows your
-plugin's details, its README and anything the cart would refuse.</p></div>
+<div><h2 id="close-title">Check your plugin before you release it</h2><p>Clone this repo and run this. It shows your plugin's details, its README and anything the cart would refuse.</p></div>
 <pre class="cmd"><code>python3 tools/cvp.py YOURPLUGIN.CVP</code></pre>
 </div></section>"""
 
@@ -577,15 +566,15 @@ def readme_doc(entries, config):
     rules = [
         ("A heading", "Capitals, with a blank line before and after."),
         ("A paragraph", "Wrapped to 30 characters."),
-        ("A list", "<span class=code>-</span> or <span class=code>1.</span>, with wrapped lines indented under the first word."),
+        ('A list', '<span class="code">-</span> or <span class="code">1.</span>, with wrapped lines indented under the first word.'),
         ("A link", "The text, then the URL. A long URL goes on its own line."),
         ("Code", "Inline code stays as text. A code block is kept as it is, with each line cut at 30."),
         ("Bold and italics", "Dropped. The cart has one style of text."),
-        ("An image", "Shown as <span class=code>[image: alt]</span>."),
-        ("A table", "One <span class=code>header: value</span> line for each cell, row by row."),
+        ('An image', 'Shown as <span class="code">[image: alt]</span>.'),
+        ('A table', 'One <span class="code">header: value</span> line for each cell, row by row.'),
         ("Raw HTML", "Tags are dropped. Their text stays."),
         ("Non-ASCII characters", "Curly quotes, dashes and accented letters become plain look-alikes. Anything "
-         "else becomes <span class=code>?</span>."),
+         'else becomes <span class="code">?</span>.'),
     ]
     fmt = [
         ("Offset 280", "u32, little-endian", "Where the text starts, counted from the start of the file. 0 means no "
@@ -658,15 +647,15 @@ def screenshots_doc(entries, config):
         ("Format", "PNG. No animation."),
         ("Size", f"Exactly {png.WIDTH} × {png.HEIGHT} pixels. No border, scaling or filters."),
         ("File size", f"{png.MAX_BYTES // 1024} KB max each. A real screen is usually a few KB."),
-        ("Names", "<span class=code>screenshot-1.png</span>, <span class=code>screenshot-2.png</span> and "
-         "<span class=code>screenshot-3.png</span>, in lower case."),
+        ('Names', '<span class="code">screenshot-1.png</span>, <span class="code">screenshot-2.png</span> and '
+         '<span class="code">screenshot-3.png</span>, in lower case.'),
         ("Where", "Attach them to your GitHub release, next to the .CVP."),
     ]
     refused = [
         ("The wrong size", "640 × 480, 280 × 216 with the border, or a photo of the TV."),
         ("Not a PNG", "A renamed JPEG, a broken upload or an animated PNG."),
         ("Over 100 KB", "Usually it was scaled up, or saved in full colour from a photo."),
-        ("A fourth screenshot", "<span class=code>screenshot-4.png</span> or higher."),
+        ('A fourth screenshot', '<span class="code">screenshot-4.png</span> or higher.'),
     ]
     used = [("Your plugin's page", "Each one in a TV frame, scaled up without blur."),
             ("The plugin list", "The first one, as a thumbnail."),
@@ -794,21 +783,17 @@ def icon_editor(entries, config):
 <h1 id="hero-title">Draw your plugin's two icons</h1>
 <p class="lead">Click the grid or use the keyboard. The menu preview updates as you draw. Nothing is uploaded.</p>
 </div>
-<noscript><p class="warn"><b>The editor needs JavaScript.</b> Without it, write each icon as a text file with
-eight lines of eight characters. Use # for a pixel and . for an empty one. <a class="link" href="../icons/#txt">The .txt file</a></p></noscript>
+<noscript><p class="warn"><b>The editor needs JavaScript.</b> Without it, write each icon as a text file with eight lines of eight characters. Use # for a pixel and . for an empty one. <a class="link" href="../icons/#txt">The .txt file</a></p></noscript>
 <div class="editor" data-editor data-plug="{icons["plugin"]}" data-file="{icons["file"]}">
 <div class="editor__pads">
 {pad("plugin", "The plugin's icon", "Magenta, header offset 264", "m", "icon.txt")}
 {pad("file", "The file icon", "Light green, header offset 272", "g", "file_icon.txt")}
-<p class="docnote" id="keys">Keyboard: the arrows move. Space or Enter turns a pixel on or off. Hold Shift with
-an arrow to copy the pixel as you move. An empty icon means the menu uses its own.</p>
+<p class="docnote" id="keys">Keyboard: the arrows move. Space or Enter turns a pixel on or off. Hold Shift with an arrow to copy the pixel as you move. An empty icon means the menu uses its own.</p>
 </div>
 <div class="editor__preview" aria-label="Your icons on the cart's menu">
 {screen_card(a, "The Plugins page, selected and not selected", "magenta")}
 {screen_card(b, "A folder of its files", "light green")}
-<p class="docnote">Pass the files to the SDK with <span class="code">ICON icon.txt FILE_ICON file_icon.txt</span>.
-Your drawing is saved in this page's address, so you can bookmark it.
-<a class="link" href="../icons/">Icon requirements</a></p>
+<p class="docnote">Pass the files to the SDK with <span class="code">ICON icon.txt FILE_ICON file_icon.txt</span>. Your drawing is saved in this page's address, so you can bookmark it. <a class="link" href="../icons/">Icon requirements</a></p>
 </div>
 </div>
 </div></section>"""
