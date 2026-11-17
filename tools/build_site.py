@@ -536,6 +536,15 @@ def template_link(config):
     return T.html("authors.starter_kit_not_public", starter_kit=text)
 
 
+def hardware_link(config):
+    """the starter kit's page on the chips and what a plugin can use, once the kit is public"""
+    repo = config.get("template_repo") or ""
+    if repo and repo.split("/")[0] != "OWNER":
+        return (f'<a class="link" href="https://github.com/{e_(repo)}/blob/main/docs/hardware.md">'
+                f'{T.html("authors.hardware_link")}</a>')
+    return T.html("authors.hardware_link")
+
+
 def spec_table(heads, rows, caption=None):
     head = "".join(f'<th scope="col">{h}</th>' for h in heads)
     body = "".join(f'<tr><th scope="row">{r[0]}</th>' + "".join(f"<td>{c}</td>" for c in r[1:]) + "</tr>"
@@ -726,7 +735,7 @@ def authors_index(entries, config):
 <h1 id="hero-title">{T.html("authors.hero.title")}</h1>
 <p class="lead">{T.html("authors.hero.lead")}</p>
 <div class="actions"><a class="btn" href="../submit/">{T.html("authors.hero.submit_button")}</a><a class="btn btn--secondary" href="tools/">{T.html("authors.hero.tools_button")}</a></div>
-<p class="soon">{T.html("authors.hero.starter_note", starter_kit=template_link(config))}</p>
+<p class="soon">{T.html("authors.hero.starter_note", starter_kit=template_link(config), hardware=hardware_link(config))}</p>
 </div>
 <nav aria-label="{T.attr("authors.pages.label")}"><ol class="map map--links">{tiles}</ol></nav>
 </div></section>

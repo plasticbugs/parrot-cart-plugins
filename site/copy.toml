@@ -398,6 +398,9 @@ description = "Your Parrot Cart plugin's release needs a .CVP, a README and a li
 starter_kit = "the starter kit"
 # The starter kit's text while it isn't on GitHub yet. Takes {starter_kit}.
 starter_kit_not_public = "{starter_kit} (not public yet)"
+# The link to the starter kit's page on the cart's chips (in the line under
+# the authors page's buttons)
+hardware_link = "The hardware page"
 # The small link under each part's heading
 back_to_top = "Back to the top"
 
@@ -410,7 +413,8 @@ lead = "Your plugin needs a .CVP, a README and a license before we can list it. 
 submit_button = "Submit a plugin"
 tools_button = "Tools for authors"
 # The small line under the buttons. Takes {starter_kit}, the link.
-starter_note = "Start from {starter_kit}. It's a working plugin with a README and icons, and it builds your releases on GitHub for you."
+# Takes {hardware} too, the link to the hardware page.
+starter_note = "Start from {starter_kit}. It's a working plugin with a README and icons, and it builds your releases on GitHub for you. {hardware} lists the chips and what a plugin can use."
 
 [authors.pages]
 # The tiles' name for screen readers
