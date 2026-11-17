@@ -191,4 +191,14 @@
   };
   fromHash();
   window.addEventListener('hashchange', fromHash);
+
+  // the ready-made icons: "Use it" puts one in the plugin's grid (its link sets #p=, read above)
+  // and brings the editor into view; without this script the links stay hidden
+  document.querySelectorAll('[data-use]').forEach((a) => {
+    a.hidden = false;
+    a.addEventListener('click', () => {
+      const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      requestAnimationFrame(() => root.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'start' }));
+    });
+  });
 })();

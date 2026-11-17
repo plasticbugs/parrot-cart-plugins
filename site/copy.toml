@@ -349,6 +349,8 @@ description = "Your Parrot Cart plugin's release needs a .CVP, a README and a li
 starter_kit = "the starter kit"
 # The starter kit's text while it isn't on GitHub yet. Takes {starter_kit}.
 starter_kit_not_public = "{starter_kit} (not public yet)"
+# The small link under each part's heading
+back_to_top = "Back to the top"
 
 [authors.hero]
 # The big headline
@@ -357,22 +359,23 @@ title = "Packaging your plugin"
 lead = "Your plugin needs a .CVP, a README and a license before we can list it. Screenshots and icons help people find it."
 # The two buttons under it
 submit_button = "Submit a plugin"
-editor_button = "Open the icon editor"
+tools_button = "Tools for authors"
 # The small line under the buttons. Takes {starter_kit}, the link.
 starter_note = "Start from {starter_kit}. It's a working plugin with a README and icons, and it builds your releases on GitHub for you."
 
 [authors.pages]
 # The tiles' name for screen readers
-label = "Pages for plugin authors"
-# The four tiles beside the headline
+label = "On this page"
+# The four tiles under the headline: the first three jump to the parts below,
+# and the last opens the Tools page
 readme_title = "The README"
 readme_text = "Write one README.md for this site and the cart."
 screenshots_title = "Screenshots"
 screenshots_text = "Add up to three, each 256 × 192."
 icons_title = "Icons"
 icons_text = "Draw two 8 × 8 icons, and the menu colors them."
-editor_title = "The icon editor"
-editor_text = "Draw your icons and save them as .txt files."
+tools_title = "Tools"
+tools_text = "An icon editor, and ready-made icons anyone can use."
 
 [authors.needs]
 # The table's heading
@@ -424,20 +427,11 @@ command = "python3 tools/cvp.py YOURPLUGIN.CVP"
 
 # ---- The README page ----
 
-[authors.readme]
-# The browser tab
-page_title = "The README: Parrot Cart plugins"
-# The summary search engines show
-description = "Write one README for your Parrot Cart plugin. It shows on this site and on the cart, where it's 30 characters wide."
-
 [authors.readme.hero]
-# The big headline
+# Part 1's heading
 title = "One README for the web and the TV"
 # The line under the headline
 lead = "Write README.md once. It shows on your plugin's page here, and the SDK adds it to the .CVP for the cart."
-# The two buttons under it
-write_button = "What to write"
-format_button = "The format"
 # Under the TV picture
 card_caption = "A README on the cart"
 # The tag at the right under the TV picture
@@ -634,20 +628,11 @@ what = "It can be up to 64 KB. If it's bigger, we link to it instead."
 
 # ---- The screenshots page ----
 
-[authors.screenshots]
-# The browser tab
-page_title = "Screenshots: Parrot Cart plugins"
-# The summary search engines show
-description = "You can add up to three screenshots to your Parrot Cart plugin. Each one is a 256 × 192 PNG of 100 KB or less, named screenshot-1.png to screenshot-3.png."
-
 [authors.screenshots.hero]
-# The big headline
+# Part 2's heading
 title = "Screenshots at the console's real size"
 # The line under the headline
 lead = "Attach up to three PNGs to your release, each 256 × 192."
-# The two buttons under it
-spec_button = "Requirements"
-taking_button = "How to take one"
 # Under the example screenshot beside the headline
 card_caption = "Send the picture only. We add the TV frame."
 # The example screenshot's description for screen readers. Takes {name}.
@@ -769,20 +754,14 @@ how = "It links to each one, for apps that install plugins."
 
 # ---- The icons page ----
 
-[authors.icons]
-# The browser tab
-page_title = "Icons: Parrot Cart plugins"
-# The summary search engines show
-description = "Make the two 8 × 8 icons for your Parrot Cart plugin, and save them as the .txt files the SDK reads."
-
 [authors.icons.hero]
-# The big headline
+# Part 3's heading
 title = "Two 8 × 8 icons"
 # The line under the headline
 lead = "You need one for the plugin and one for the files it opens. Each pixel is on or off, and the menu picks the color."
 # The two buttons under it
 editor_button = "Open the icon editor"
-txt_button = "The .txt file"
+gallery_button = "Pick a ready-made icon"
 # Under the TV picture
 card_caption = "Each plugin's icon on the Plugins page"
 card_code = "/PLUGINS"
@@ -873,20 +852,30 @@ plug_caption = "A plugin with no icon"
 padtest_label = "The Pad Test plugin's icon"
 padtest_caption = "Pad Test's icon"
 
-[authors.icons.close]
-# The last band: its heading, the line under it and its button
-title = "Draw them in your browser"
-text = "You'll see them on the menu as you draw. Then save the .txt files for the SDK."
-editor_button = "Open the icon editor"
+[authors.icons.files]
+# The section with icon files to start from: its heading, and the line under
+# it. The line takes {gallery}, the link to the ready-made icons.
+title = "Start from a file"
+lead = "Download one and change it, or [pick a ready-made icon]({gallery}). They're free to use in any plugin."
+# Each file's button. Takes {file}, the file's name.
+download = "Download {file}"
+# The blank template: its name for screen readers, its bold title and its line
+template_label = "An empty 8 by 8 icon"
+template_title = "A blank icon."
+template_text = "Eight lines of dots, ready for your drawing."
+# The sample plugin icon
+sample_label = "The Pad Test plugin's icon"
+sample_title = "A sample plugin icon."
+sample_text = "Pad Test's, as the SDK reads it."
+# The sample file icon
+file_sample_label = "A plain file icon"
+file_sample_title = "A sample file icon."
+file_sample_text = "For the files your plugin opens."
 
 # ---- The icon editor ----
 
 [authors.editor]
-# The browser tab
-page_title = "The icon editor: Parrot Cart plugins"
-# The summary search engines show
-description = "Draw your Parrot Cart plugin's two 8 × 8 icons and save them as .txt files for the SDK."
-# The big headline
+# The editor's heading on the Tools page
 title = "Draw your plugin's two icons"
 # The line under the headline
 lead = "Click the grid or use the keyboard, and the menu preview updates as you draw. Nothing gets uploaded."
@@ -931,6 +920,37 @@ folder_code = "light green"
 # The small note under the previews. Takes {icons_page}, the link.
 sdk_note = "Give the files to the SDK with `ICON icon.txt FILE_ICON file_icon.txt`. Your drawing is saved in this page's address, so you can bookmark it. [Icon requirements]({icons_page})"
 
+# ---- The Tools page ----
+
+[authors.tools]
+# The browser tab
+page_title = "Tools for plugin authors: Parrot Cart plugins"
+# The summary search engines show
+description = "Draw your Parrot Cart plugin's icons in your browser, or pick a ready-made one. Save them as .txt files for the SDK."
+# The big headline
+title = "Tools for plugin authors"
+# The line under the headline
+lead = "Everything here runs in your browser. Nothing gets uploaded."
+# The ready-made icons: their heading and the line under it
+gallery_title = "Ready-made icons"
+gallery_lead = "Can't draw? Pick one of these. Use it opens it in the editor above, and Save downloads it as icon.txt."
+# The note under them
+gallery_note = "They're free to use in any plugin, with no credit needed."
+# Each icon's two links, and their names for screen readers. The names take {name}.
+use = "Use it"
+use_label = "Open the {name} icon in the editor"
+save = "Save"
+save_label = "Save the {name} icon as icon.txt"
+
+# ---- Old addresses ----
+
+[moved]
+# An old page's address sends you on. Its tab title, and its line and link
+# (for the moment before the new page opens)
+title = "This page has moved"
+text = "This page has moved."
+link = "Go to the new page"
+
 
 # ==== The header and footer on every page ======================================
 
@@ -961,7 +981,7 @@ links_heading = "This site"
 submit = "Submit a plugin"
 rules = "Requirements"
 authors = "For plugin authors"
-icon_editor = "The icon editor"
+icon_editor = "Tools for authors"
 install = "Install a plugin"
 converter = "Movie converter"
 registry_json = "registry.json"

@@ -122,7 +122,7 @@ def footer(pre, entries, config):
 <div><h2>{T.html("footer.title")}</h2><p>{T.html("footer.tagline")}</p></div>
 <div><h2>{T.html("footer.plugins_heading")}</h2><ul>{names}</ul></div>
 <div><h2>{T.html("footer.links_heading")}</h2><ul><li><a href="{pre}submit/">{T.html("footer.submit")}</a></li><li><a href="{pre}submit/#rules">{T.html("footer.rules")}</a></li>
-<li><a href="{pre}authors/">{T.html("footer.authors")}</a></li><li><a href="{pre}authors/icon-editor/">{T.html("footer.icon_editor")}</a></li>
+<li><a href="{pre}authors/">{T.html("footer.authors")}</a></li><li><a href="{pre}authors/tools/">{T.html("footer.icon_editor")}</a></li>
 <li><a href="{pre}index.html#install">{T.html("footer.install")}</a></li><li><a href="{pre}converter/">{T.html("footer.converter")}</a></li><li><a href="{pre}registry.json">{T.html("footer.registry_json")}</a></li>{repo}</ul></div>
 </div>
 <p class="fine">{T.html("footer.font_credit", _link=None)}</p>
@@ -327,7 +327,7 @@ def cart_readme_section(e, text, pre):
     if text is None:
         return f"""<section class="section" id="on-the-cart" aria-labelledby="cart-title"><div class="container">
 <div class="headblock"><h2 id="cart-title">{T.html("plugin.no_cart_readme.title")}</h2><p class="lead">{T.html("plugin.no_cart_readme.lead")}</p></div>
-<p class="warn">{T.html("plugin.no_cart_readme.author_note", readme_page=f"{pre}authors/readme/")}</p>
+<p class="warn">{T.html("plugin.no_cart_readme.author_note", readme_page=f"{pre}authors/#readme")}</p>
 </div></section>""", None
     strip = tvscreen.readme_strip(text)
     meta = e["readme"]["cart"]
@@ -460,8 +460,8 @@ def submit_page(entries, config):
                     for i, (t, s) in enumerate(nodes))
     # what a plugin needs, in a few lines
     need_rows = "".join(f"<li><b>{t}</b><span>{s}</span></li>" for t, s in
-                        T.rows("submit.requirements.rows", ("title", "text"), readme_page="../authors/readme/",
-                               screenshots_page="../authors/screenshots/"))
+                        T.rows("submit.requirements.rows", ("title", "text"), readme_page="../authors/#readme",
+                               screenshots_page="../authors/#screenshots"))
     if placeholder(config):
         primary = f'<a class="btn" aria-disabled="true">{T.html("submit.hero.issue_button")}</a>'
         soon = f'<p class="soon">{T.html("submit.hero.not_open")}</p>'
@@ -506,18 +506,21 @@ def spec_table(heads, rows, caption=None):
     return f'<table class="spec spec--rules spec--doc">{cap}<thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>'
 
 
-def doc_section(sid, title, lead, body):
+def doc_section(sid, title, lead, body, level=2):
     lead = f'<p class="lead">{lead}</p>' if lead else ""
     return (f'<section class="section" id="{sid}" aria-labelledby="{sid}-title"><div class="container">'
-            f'<div class="headblock"><h2 id="{sid}-title">{title}</h2>{lead}</div>\n{body}\n</div></section>')
+            f'<div class="headblock"><h{level} id="{sid}-title">{title}</h{level}>{lead}</div>\n{body}\n</div></section>')
 
 
-def doc_hero(title, lead, actions, card):
-    return f"""<section class="hero" aria-labelledby="hero-title"><div class="container">
-<div class="hero__text">
-<h1 id="hero-title">{title}</h1>
+def part(sid, num, title, lead, card, actions=""):
+    """one numbered part of the authors' page, with its picture; its sections (h3) follow it"""
+    actions = f'<div class="actions">{actions}</div>' if actions else ""
+    return f"""<section class="part" id="{sid}" aria-labelledby="{sid}-title"><div class="container">
+<div class="part__text">
+<p class="part__num" aria-hidden="true">{num}</p>
+<h2 id="{sid}-title">{title}</h2>
 <p class="lead">{lead}</p>
-<div class="actions">{actions}</div>
+{actions}<p class="part__top"><a class="link" href="#hero-title">{T.html("authors.back_to_top")}</a></p>
 </div>
 {card}
 </div></section>"""
@@ -530,58 +533,27 @@ def authors_close(pre):
 </div></section>"""
 
 
-def authors_index(entries, config):
-    needs = T.rows("authors.needs.rows", ("part", "status", "text"), readme_page="readme/",
-                   screenshots_page="screenshots/", icons_page="icons/")
-    cards = [
-        ("readme/", T.html("authors.pages.readme_title"), T.html("authors.pages.readme_text")),
-        ("screenshots/", T.html("authors.pages.screenshots_title"), T.html("authors.pages.screenshots_text")),
-        ("icons/", T.html("authors.pages.icons_title"), T.html("authors.pages.icons_text")),
-        ("icon-editor/", T.html("authors.pages.editor_title"), T.html("authors.pages.editor_text")),
-    ]
-    tiles = "".join(f'<li><h2><a href="{h}">{t}</a></h2><p>{d}</p></li>' for h, t, d in cards)
-    body = f"""<section class="banner" aria-labelledby="hero-title"><div class="container">
-<div class="banner__text">
-<h1 id="hero-title">{T.html("authors.hero.title")}</h1>
-<p class="lead">{T.html("authors.hero.lead")}</p>
-<div class="actions"><a class="btn" href="../submit/">{T.html("authors.hero.submit_button")}</a><a class="btn btn--secondary" href="icon-editor/">{T.html("authors.hero.editor_button")}</a></div>
-<p class="soon">{T.html("authors.hero.starter_note", starter_kit=template_link(config))}</p>
-</div>
-<ol class="map map--links" aria-label="{T.attr("authors.pages.label")}">{tiles}</ol>
-</div></section>
-{doc_section("needs", T.html("authors.needs.title"), T.html("authors.needs.lead"),
-             spec_table(T.list("authors.needs.columns"), needs))}
-{authors_close("../")}"""
-    return page(T.text("authors.page_title"), T.text("authors.description"), body, "../", "authors", [],
-                entries, config)
-
-
-def readme_doc(entries, config):
+def readme_part(config):
     cart = cvreadme_text(T.raw("authors.readme.hero.sample"))
     screen = tvscreen.readme_page("Star Sweeper", cart)
     card = screen_card(screen, T.html("authors.readme.hero.card_caption"), T.text("authors.readme.hero.card_code"))
-    body = f"""{doc_hero(T.html("authors.readme.hero.title"), T.html("authors.readme.hero.lead"),
-                     f'<a class="btn" href="#write">{T.html("authors.readme.hero.write_button")}</a>'
-                     f'<a class="btn btn--secondary" href="#format">{T.html("authors.readme.hero.format_button")}</a>',
-                     card)}
-{doc_section("write", T.html("authors.readme.write.title"), T.html("authors.readme.write.lead"),
-             '<ul class="rows">' + li_rows(T.rows("authors.readme.write.rows", ("title", "text"))) + '</ul>')}
-{doc_section("cart", T.html("authors.readme.convert.title"), T.html("authors.readme.convert.lead"),
+    body = f"""{part("readme", 1, T.html("authors.readme.hero.title"), T.html("authors.readme.hero.lead"), card)}
+{doc_section("readme-write", T.html("authors.readme.write.title"), T.html("authors.readme.write.lead"),
+             '<ul class="rows">' + li_rows(T.rows("authors.readme.write.rows", ("title", "text"))) + '</ul>', 3)}
+{doc_section("readme-cart", T.html("authors.readme.convert.title"), T.html("authors.readme.convert.lead"),
              spec_table(T.list("authors.readme.convert.columns"),
                         T.rows("authors.readme.convert.rows", ("markdown", "cart")))
              + f'<pre class="cmd"><code>{T.block("authors.readme.convert.command")}</code></pre>'
-             + f'<p class="docnote">{T.html("authors.readme.convert.note", starter_kit=template_link(config))}</p>')}
-{doc_section("format", T.html("authors.readme.format.title"), T.html("authors.readme.format.lead"),
+             + f'<p class="docnote">{T.html("authors.readme.convert.note", starter_kit=template_link(config))}</p>', 3)}
+{doc_section("readme-format", T.html("authors.readme.format.title"), T.html("authors.readme.format.lead"),
              spec_table(T.list("authors.readme.format.columns"),
-                        T.rows("authors.readme.format.rows", ("where", "type", "what"))))}
-{doc_section("checks", T.html("authors.readme.checks.title"), T.html("authors.readme.checks.lead"),
+                        T.rows("authors.readme.format.rows", ("where", "type", "what"))), 3)}
+{doc_section("readme-checks", T.html("authors.readme.checks.title"), T.html("authors.readme.checks.lead"),
              spec_table(T.list("authors.readme.checks.columns"),
-                        T.rows("authors.readme.checks.rows", ("check", "rule", "result"))))}
-{doc_section("web", T.html("authors.readme.web.title"), T.html("authors.readme.web.lead"),
-             spec_table(T.list("authors.readme.web.columns"), T.rows("authors.readme.web.rows", ("part", "what"))))}
-{authors_close("../../")}"""
-    return page(T.text("authors.readme.page_title"), T.text("authors.readme.description"), body,
-                "../../", "authors", [screen], entries, config)
+                        T.rows("authors.readme.checks.rows", ("check", "rule", "result"))), 3)}
+{doc_section("readme-web", T.html("authors.readme.web.title"), T.html("authors.readme.web.lead"),
+             spec_table(T.list("authors.readme.web.columns"), T.rows("authors.readme.web.rows", ("part", "what"))), 3)}"""
+    return body, [screen]
 
 
 def cvreadme_text(md):
@@ -589,38 +561,36 @@ def cvreadme_text(md):
     return cvreadme.convert(md)
 
 
-def screenshots_doc(entries, config):
+def screenshots_part(entries):
     pick = next((e for e in sorted(entries, key=lambda e: e["name"].lower()) if e["screenshots"]), None)
+    screens = []
     if pick:
-        src = f'../../plugins/{e_(pick["id"])}/{pick["screenshots"][0]["file"]}'
+        src = f'../plugins/{e_(pick["id"])}/{pick["screenshots"][0]["file"]}'
         card = (f'<figure class="card shot shot--hero"><div class="shot__tv"><img src="{src}" width="{png.WIDTH}" '
                 f'height="{png.HEIGHT}" alt="{T.attr("authors.screenshots.hero.card_alt", name=e_(pick["name"]))}">'
                 f'</div><figcaption><span>{T.html("authors.screenshots.hero.card_caption")}</span>'
                 f'<span class="code">{png.WIDTH} × {png.HEIGHT}</span></figcaption></figure>')
     else:
-        card = screen_card(tvscreen.plugins_page(entries), T.html("authors.screenshots.hero.fallback_caption"),
+        screen = tvscreen.plugins_page(entries)
+        screens.append(screen)
+        card = screen_card(screen, T.html("authors.screenshots.hero.fallback_caption"),
                            T.text("authors.screenshots.hero.fallback_code"))
     sizes = dict(width=png.WIDTH, height=png.HEIGHT, max_kb=png.MAX_BYTES // 1024)
-    body = f"""{doc_hero(T.html("authors.screenshots.hero.title"), T.html("authors.screenshots.hero.lead"),
-                     f'<a class="btn" href="#spec">{T.html("authors.screenshots.hero.spec_button")}</a>'
-                     f'<a class="btn btn--secondary" href="#taking">{T.html("authors.screenshots.hero.taking_button")}</a>',
-                     card)}
-{doc_section("spec", T.html("authors.screenshots.spec.title"), T.html("authors.screenshots.spec.lead"),
+    body = f"""{part("screenshots", 2, T.html("authors.screenshots.hero.title"), T.html("authors.screenshots.hero.lead"), card)}
+{doc_section("shots-spec", T.html("authors.screenshots.spec.title"), T.html("authors.screenshots.spec.lead"),
              spec_table(T.list("authors.screenshots.spec.columns"),
-                        T.rows("authors.screenshots.spec.rows", ("name", "rule"), **sizes)))}
-{doc_section("show", T.html("authors.screenshots.show.title"), None,
-             '<ul class="rows">' + li_rows(T.rows("authors.screenshots.show.rows", ("title", "text"))) + '</ul>')}
-{doc_section("taking", T.html("authors.screenshots.taking.title"), T.html("authors.screenshots.taking.lead"),
-             '<ul class="rows">' + li_rows(T.rows("authors.screenshots.taking.rows", ("title", "text"))) + '</ul>')}
-{doc_section("refused", T.html("authors.screenshots.refused.title"), T.html("authors.screenshots.refused.lead"),
+                        T.rows("authors.screenshots.spec.rows", ("name", "rule"), **sizes)), 3)}
+{doc_section("shots-show", T.html("authors.screenshots.show.title"), None,
+             '<ul class="rows">' + li_rows(T.rows("authors.screenshots.show.rows", ("title", "text"))) + '</ul>', 3)}
+{doc_section("shots-taking", T.html("authors.screenshots.taking.title"), T.html("authors.screenshots.taking.lead"),
+             '<ul class="rows">' + li_rows(T.rows("authors.screenshots.taking.rows", ("title", "text"))) + '</ul>', 3)}
+{doc_section("shots-refused", T.html("authors.screenshots.refused.title"), T.html("authors.screenshots.refused.lead"),
              spec_table(T.list("authors.screenshots.refused.columns"),
-                        T.rows("authors.screenshots.refused.rows", ("what", "example"))))}
-{doc_section("used", T.html("authors.screenshots.used.title"), T.html("authors.screenshots.used.lead"),
+                        T.rows("authors.screenshots.refused.rows", ("what", "example"))), 3)}
+{doc_section("shots-used", T.html("authors.screenshots.used.title"), T.html("authors.screenshots.used.lead"),
              spec_table(T.list("authors.screenshots.used.columns"),
-                        T.rows("authors.screenshots.used.rows", ("place", "how"))))}
-{authors_close("../../")}"""
-    return page(T.text("authors.screenshots.page_title"), T.text("authors.screenshots.description"),
-                body, "../../", "authors", [], entries, config)
+                        T.rows("authors.screenshots.used.rows", ("place", "how"))), 3)}"""
+    return body, screens
 
 
 def big_icon(hexstr, colour, label, caption):
@@ -630,9 +600,25 @@ def big_icon(hexstr, colour, label, caption):
 
 
 PAD_ICON = "3c4299819999423c"       # the Pad Test plugin's: firmware/revc/padtest/padtest_icon.txt
+BLANK_ICON = ('<svg class="tv-icon" viewBox="-2 -2 12 12" role="img" aria-label="{label}" shape-rendering="crispEdges">'
+              '<rect class="tv-bg" x="-2" y="-2" width="12" height="12"/>'
+              '<path class="tv-grid" d="M0 0h8v8h-8z"/></svg>')
 
 
-def icons_doc(entries, config):
+def icon_txt(hexstr):
+    """an icon as the .txt file the SDK reads"""
+    return "\n".join(cvp.icon_rows(hexstr)) + "\n"
+
+
+def starter_files():
+    """the files the Icons part offers: name, hex, colour, label key, caption key"""
+    icons = tvscreen.MENU["icons"]
+    return [("icon-template.txt", "00" * 8, "m"),
+            ("sample-icon.txt", PAD_ICON, "m"),
+            ("sample-file-icon.txt", icons["file"], "g")]
+
+
+def icons_part(entries):
     icons = tvscreen.MENU["icons"]
     with_icons = [e for e in entries if e["icon"] != "00" * 8] or entries
     screen = tvscreen.plugins_page(with_icons)
@@ -652,26 +638,68 @@ def icons_doc(entries, config):
         big_icon(PAD_ICON, "m", T.text("authors.icons.family.padtest_label"),
                  T.html("authors.icons.family.padtest_caption")),
     ])
-    body = f"""{doc_hero(T.html("authors.icons.hero.title"), T.html("authors.icons.hero.lead"),
-                     f'<a class="btn" href="../icon-editor/">{T.html("authors.icons.hero.editor_button")}</a>'
-                     f'<a class="btn btn--secondary" href="#txt">{T.html("authors.icons.hero.txt_button")}</a>', card)}
-{doc_section("spec", T.html("authors.icons.spec.title"), T.html("authors.icons.spec.lead"),
-             spec_table(T.list("authors.icons.spec.columns"), T.rows("authors.icons.spec.rows", ("name", "rule"))))}
-{doc_section("txt", T.html("authors.icons.txt.title"), T.html("authors.icons.txt.lead"),
-             f'<div class="pair"><div><h3>{T.html("authors.icons.txt.file_title")}</h3>'
+    (tname, _, _), (sname, shex, _), (fname, fhex, _) = starter_files()
+    dl = lambda name: (f'<a class="btn btn--secondary" href="files/{name}" download>'
+                       f'{T.html("authors.icons.files.download", file=name)}</a>')
+    starters = (
+        f'<figure class="iconfig">{BLANK_ICON.format(label=T.attr("authors.icons.files.template_label"))}'
+        f'<figcaption><b>{T.html("authors.icons.files.template_title")}</b> {T.html("authors.icons.files.template_text")}'
+        f'</figcaption>{dl(tname)}</figure>'
+        f'<figure class="iconfig">{tvscreen.icon_svg(shex, "m", T.text("authors.icons.files.sample_label"))}'
+        f'<figcaption><b>{T.html("authors.icons.files.sample_title")}</b> {T.html("authors.icons.files.sample_text")}'
+        f'</figcaption>{dl(sname)}</figure>'
+        f'<figure class="iconfig">{tvscreen.icon_svg(fhex, "g", T.text("authors.icons.files.file_sample_label"))}'
+        f'<figcaption><b>{T.html("authors.icons.files.file_sample_title")}</b> '
+        f'{T.html("authors.icons.files.file_sample_text")}</figcaption>{dl(fname)}</figure>')
+    actions = (f'<a class="btn" href="tools/#icon-editor">{T.html("authors.icons.hero.editor_button")}</a>'
+               f'<a class="btn btn--secondary" href="tools/#gallery">{T.html("authors.icons.hero.gallery_button")}</a>')
+    body = f"""{part("icons", 3, T.html("authors.icons.hero.title"), T.html("authors.icons.hero.lead"), card, actions)}
+{doc_section("icons-spec", T.html("authors.icons.spec.title"), T.html("authors.icons.spec.lead"),
+             spec_table(T.list("authors.icons.spec.columns"), T.rows("authors.icons.spec.rows", ("name", "rule"))), 3)}
+{doc_section("icons-files", T.html("authors.icons.files.title"), T.html("authors.icons.files.lead", gallery="tools/#gallery"),
+             f'<div class="iconrow iconrow--files">{starters}</div>', 3)}
+{doc_section("icons-txt", T.html("authors.icons.txt.title"), T.html("authors.icons.txt.lead"),
+             f'<div class="pair"><div><h4>{T.html("authors.icons.txt.file_title")}</h4>'
              f'<pre class="cmd"><code>{txt}</code></pre></div>'
-             f'<div><h3>{T.html("authors.icons.txt.header_title")}</h3><pre class="cmd"><code>{hexs}</code></pre>'
+             f'<div><h4>{T.html("authors.icons.txt.header_title")}</h4><pre class="cmd"><code>{hexs}</code></pre>'
              f'<p class="docnote">{T.html("authors.icons.txt.note")}</p></div></div>'
-             f'<pre class="cmd"><code>{T.block("authors.icons.txt.command")}</code></pre>')}
-{doc_section("design", T.html("authors.icons.design.title"), T.html("authors.icons.design.lead"),
+             f'<pre class="cmd"><code>{T.block("authors.icons.txt.command")}</code></pre>', 3)}
+{doc_section("icons-design", T.html("authors.icons.design.title"), T.html("authors.icons.design.lead"),
              f'<div class="iconrow">{family}</div>'
-             '<ul class="rows">' + li_rows(T.rows("authors.icons.design.rows", ("title", "text"))) + '</ul>')}
-<section class="band band--paper close" aria-labelledby="close-title"><div class="container">
-<div><h2 id="close-title">{T.html("authors.icons.close.title")}</h2><p>{T.html("authors.icons.close.text")}</p></div>
-<div class="actions"><a class="btn" href="../icon-editor/">{T.html("authors.icons.close.editor_button")}</a></div>
-</div></section>"""
-    return page(T.text("authors.icons.page_title"), T.text("authors.icons.description"), body, "../../", "authors",
-                [screen], entries, config)
+             '<ul class="rows">' + li_rows(T.rows("authors.icons.design.rows", ("title", "text"))) + '</ul>', 3)}"""
+    return body, [screen]
+
+
+def authors_index(entries, config):
+    needs = T.rows("authors.needs.rows", ("part", "status", "text"), readme_page="#readme",
+                   screenshots_page="#screenshots", icons_page="#icons")
+    cards = [
+        ("#readme", T.html("authors.pages.readme_title"), T.html("authors.pages.readme_text")),
+        ("#screenshots", T.html("authors.pages.screenshots_title"), T.html("authors.pages.screenshots_text")),
+        ("#icons", T.html("authors.pages.icons_title"), T.html("authors.pages.icons_text")),
+        ("tools/", T.html("authors.pages.tools_title"), T.html("authors.pages.tools_text")),
+    ]
+    tiles = "".join(f'<li><h2><a href="{h}">{t}</a></h2><p>{d}</p></li>' for h, t, d in cards)
+    readme, s1 = readme_part(config)
+    shots, s2 = screenshots_part(entries)
+    icons, s3 = icons_part(entries)
+    body = f"""<section class="banner" aria-labelledby="hero-title"><div class="container">
+<div class="banner__text">
+<h1 id="hero-title">{T.html("authors.hero.title")}</h1>
+<p class="lead">{T.html("authors.hero.lead")}</p>
+<div class="actions"><a class="btn" href="../submit/">{T.html("authors.hero.submit_button")}</a><a class="btn btn--secondary" href="tools/">{T.html("authors.hero.tools_button")}</a></div>
+<p class="soon">{T.html("authors.hero.starter_note", starter_kit=template_link(config))}</p>
+</div>
+<nav aria-label="{T.attr("authors.pages.label")}"><ol class="map map--links">{tiles}</ol></nav>
+</div></section>
+{doc_section("needs", T.html("authors.needs.title"), T.html("authors.needs.lead"),
+             spec_table(T.list("authors.needs.columns"), needs))}
+{readme}
+{shots}
+{icons}
+{authors_close("../")}"""
+    return page(T.text("authors.page_title"), T.text("authors.description"), body, "../", "authors",
+                s1 + s2 + s3, entries, config)
 
 
 def pad(kind, title, title_attr, note, colour, name):
@@ -705,19 +733,50 @@ def pad(kind, title, title_attr, note, colour, name):
 </fieldset>"""
 
 
-def icon_editor(entries, config):
+GALLERY = os.path.join(ROOT, "site", "icons.toml")
+
+
+def gallery_icons():
+    """the ready-made icons (site/icons.toml): slug, emoji, name, hex"""
+    import tomllib
+    with open(GALLERY, "rb") as f:
+        icons = tomllib.load(f)["icon"]
+    out, seen = [], set()
+    for i in icons:
+        rows = i["pixels"]
+        if len(rows) != 8 or any(len(r) != 8 or set(r) - set("#.") for r in rows) or not re.fullmatch(r"[a-z0-9-]+", i["slug"]) \
+                or i["slug"] in seen:
+            raise SystemExit(f"site/icons.toml: {i.get('slug')!r} isn't eight lines of eight # or . with a new slug")
+        seen.add(i["slug"])
+        out.append((i["slug"], i["emoji"], i["name"], "".join(f"{int(r.replace('#', '1').replace('.', '0'), 2):02x}" for r in rows)))
+    return out
+
+
+def tools_page(entries, config):
     icons = tvscreen.MENU["icons"]
     a, b = tvscreen.editor_pages("ed-plugin", "ed-file")
     plugin_pad = pad("plugin", T.html("authors.editor.plugin_icon"), T.attr("authors.editor.plugin_icon"),
                      T.html("authors.editor.plugin_icon_note"), "m", "icon.txt")
     file_pad = pad("file", T.html("authors.editor.file_icon"), T.attr("authors.editor.file_icon"),
                    T.html("authors.editor.file_icon_note"), "g", "file_icon.txt")
+    picks = "".join(
+        f'<li class="pick">{tvscreen.icon_svg(hx, "m")}'
+        f'<p class="pick__name"><span class="pick__emoji" aria-hidden="true">{e_(emoji)}</span> {e_(name)}</p>'
+        f'<p class="pick__do"><a class="link" href="#p={hx}" data-use hidden '
+        f'aria-label="{T.attr("authors.tools.use_label", name=name)}">{T.html("authors.tools.use")}</a>'
+        f'<a class="link" href="icons/{slug}.txt" download="icon.txt" '
+        f'aria-label="{T.attr("authors.tools.save_label", name=name)}">{T.html("authors.tools.save")}</a></p></li>'
+        for slug, emoji, name, hx in gallery_icons())
     body = f"""<section class="banner banner--tool" aria-labelledby="hero-title"><div class="container">
 <div class="banner__text">
-<h1 id="hero-title">{T.html("authors.editor.title")}</h1>
-<p class="lead">{T.html("authors.editor.lead")}</p>
+<h1 id="hero-title">{T.html("authors.tools.title")}</h1>
+<p class="lead">{T.html("authors.tools.lead")}</p>
+<ul class="jump"><li><a class="link" href="#icon-editor">{T.html("authors.editor.title")}</a></li><li><a class="link" href="#gallery">{T.html("authors.tools.gallery_title")}</a></li></ul>
 </div>
-<noscript><p class="warn">{T.html("authors.editor.no_script", txt_section="../icons/#txt")}</p></noscript>
+</div></section>
+<section class="section" id="icon-editor" aria-labelledby="icon-editor-title"><div class="container">
+<div class="headblock"><h2 id="icon-editor-title">{T.html("authors.editor.title")}</h2><p class="lead">{T.html("authors.editor.lead")}</p></div>
+<noscript><p class="warn">{T.html("authors.editor.no_script", txt_section="../#icons-txt")}</p></noscript>
 <div class="editor" data-editor data-plug="{icons["plugin"]}" data-file="{icons["file"]}">
 <div class="editor__pads">
 {plugin_pad}
@@ -727,22 +786,50 @@ def icon_editor(entries, config):
 <div class="editor__preview" aria-label="{T.attr("authors.editor.preview_label")}">
 {screen_card(a, T.html("authors.editor.plugins_caption"), T.text("authors.editor.plugins_code"))}
 {screen_card(b, T.html("authors.editor.folder_caption"), T.text("authors.editor.folder_code"))}
-<p class="docnote">{T.html("authors.editor.sdk_note", icons_page="../icons/")}</p>
+<p class="docnote">{T.html("authors.editor.sdk_note", icons_page="../#icons")}</p>
 </div>
 </div>
-</div></section>"""
-    return page(T.text("authors.editor.page_title"), T.text("authors.editor.description"), body, "../../",
+</div></section>
+{doc_section("gallery", T.html("authors.tools.gallery_title"), T.html("authors.tools.gallery_lead"),
+             f'<ul class="picks">{picks}</ul><p class="docnote">{T.html("authors.tools.gallery_note")}</p>')}
+{authors_close("../../")}"""
+    return page(T.text("authors.tools.page_title"), T.text("authors.tools.description"), body, "../../",
                 "authors", [a, b], entries, config, scripts=("icon-editor.js",))
 
 
+def moved(to):
+    """a page that has moved: an old address that sends you on"""
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{T.html("moved.title")}</title>
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url={to}">
+<link rel="canonical" href="{to}">
+</head>
+<body>
+<p>{T.html("moved.text")} <a href="{to}">{T.html("moved.link")}</a></p>
+</body>
+</html>
+"""
+
+
 def authors_pages(entries, config):
-    return {
+    pages = {
         "authors/index.html": authors_index(entries, config),
-        "authors/readme/index.html": readme_doc(entries, config),
-        "authors/screenshots/index.html": screenshots_doc(entries, config),
-        "authors/icons/index.html": icons_doc(entries, config),
-        "authors/icon-editor/index.html": icon_editor(entries, config),
+        "authors/tools/index.html": tools_page(entries, config),
+        # the README, screenshots and icons pages are parts of the authors' page now, and the editor is a tool
+        "authors/readme/index.html": moved("../#readme"),
+        "authors/screenshots/index.html": moved("../#screenshots"),
+        "authors/icons/index.html": moved("../#icons"),
+        "authors/icon-editor/index.html": moved("../tools/#icon-editor"),
     }
+    for name, hx, _ in starter_files():
+        pages[f"authors/files/{name}"] = icon_txt(hx)
+    for slug, _, _, hx in gallery_icons():
+        pages[f"authors/tools/icons/{slug}.txt"] = icon_txt(hx)
+    return pages
 
 
 ICON_SVG = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 12 12" shape-rendering="crispEdges">

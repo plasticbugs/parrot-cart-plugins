@@ -12,6 +12,7 @@ import html.parser
 
 from helpers import GH_DIR, ROOT, make_cvp, image, shot, tmp, SRAM_IMAGE
 import build_site
+import cvp
 import ghapi
 import markdown
 import registry
@@ -19,9 +20,11 @@ import sitecopy
 import tvscreen
 import validate
 
-CONVERTER = {"converter/index.html"}      # the movie converter, copied in as built
-AUTHORS = {"authors/index.html", "authors/readme/index.html", "authors/screenshots/index.html",
-           "authors/icons/index.html", "authors/icon-editor/index.html"}
+CONVERTER = {"converter/index.html"}
+MOVED = {"authors/readme/index.html": "../#readme", "authors/screenshots/index.html": "../#screenshots",
+         "authors/icons/index.html": "../#icons", "authors/icon-editor/index.html": "../tools/#icon-editor"}      # the movie converter, copied in as built
+AUTHORS = {"authors/index.html", "authors/tools/index.html", "authors/readme/index.html",
+           "authors/screenshots/index.html", "authors/icons/index.html", "authors/icon-editor/index.html"}
 
 
 def listed(root, description="Plays NES games.", **over):
@@ -97,8 +100,30 @@ class Site(unittest.TestCase):
         self.assertNotIn("[movie converter]", pages["index.html"])
         self.assertIn("<small>Player for movies made with the movie converter</small>", pages["index.html"])
         for name, text in pages.items():
-            if not name.startswith("converter/"):
+            if not name.startswith("converter/") and name not in MOVED:
                 self.assertIn('href="' + "../" * name.count("/") + 'converter/"', text, name)
+
+    def test_old_authors_pages_send_you_on(self):
+        _, pages, _ = self.build()
+        for name, to in MOVED.items():
+            self.assertIn(f'<meta http-equiv="refresh" content="0; url={to}">', pages[name])
+        page = pages["authors/index.html"]
+        for part in ("readme", "screenshots", "icons"):
+            self.assertIn(f'<li><h2><a href="#{part}">', page)
+            self.assertIn(f'<section class="part" id="{part}"', page)
+        self.assertIn('href="tools/"', page)
+        for f in ("icon-template.txt", "sample-icon.txt", "sample-file-icon.txt"):
+            self.assertIn(f'href="files/{f}" download', page)
+
+    def test_the_ready_made_icons(self):
+        out, pages, _ = self.build()
+        tools = pages["authors/tools/index.html"]
+        icons = build_site.gallery_icons()
+        self.assertGreaterEqual(len(icons), 30)
+        for slug, _, _, hx in icons:
+            self.assertIn(f'href="#p={hx}" data-use hidden', tools)
+            with open(os.path.join(out, "authors", "tools", "icons", slug + ".txt")) as f:
+                self.assertEqual(f.read(), "\n".join(cvp.icon_rows(hx)) + "\n")
 
     def test_entry_text_is_escaped(self):
         root = tmp()
@@ -170,7 +195,7 @@ class Site(unittest.TestCase):
         pages = self.build()[1]
         page = pages["plugins/parrotcart.nesinfo/index.html"]
         self.assertIn("No README on the cart", page)
-        self.assertIn('href="../../authors/readme/"', page)
+        self.assertIn('href="../../authors/#readme"', page)
         self.assertNotIn("No README on the cart", pages["plugins/parrotcart.nes/index.html"])
 
     def test_the_site_needs_no_script_and_calls_nobody(self):
@@ -179,7 +204,7 @@ class Site(unittest.TestCase):
             js = f.read()
         for call in ("fetch(", "XMLHttpRequest", "WebSocket", "sendBeacon", "import(", "http://", "https://"):
             self.assertNotIn(call, js, call)
-        ed = pages["authors/icon-editor/index.html"]
+        ed = pages["authors/tools/index.html"]
         self.assertIn("<noscript>", ed)
         self.assertEqual(ed.count('class="px__c"'), 128)
         self.assertEqual(ed.count('tabindex=-1'), 126)        # one tab stop a grid
