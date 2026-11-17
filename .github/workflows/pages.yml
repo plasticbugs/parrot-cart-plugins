@@ -1,6 +1,8 @@
 # The site: built from plugins/ (and the examples, while show_examples is
 # on) by tools/build_site.py, with registry.json beside it, and deployed to
-# GitHub Pages on every push to main.
+# GitHub Pages on every push to main. The developer portal goes in
+# developers/: tools/build_dev.py, from developers/ and the starter kit's
+# docs at its main (a change to the kit's docs shows here at the next run).
 name: Site
 
 on:
@@ -28,6 +30,13 @@ jobs:
         run: python3 -I tools/registry.py check
       - name: Build the site
         run: python3 -I tools/build_site.py --out _site
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          repository: plasticbugs/parrot-plugin-template
+          path: kit
+          persist-credentials: false
+      - name: Build the developer portal
+        run: python3 -I tools/build_dev.py --kit kit --out _site/developers
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5
         with:
           path: _site

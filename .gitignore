@@ -3,3 +3,5 @@ __pycache__/
 *.pyc
 .DS_Store
 .hallmark/shots/
+# the starter kit, where the Pages workflow checks it out for the developer portal
+/kit/

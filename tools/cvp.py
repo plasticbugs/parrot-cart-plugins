@@ -14,7 +14,7 @@ coleco repository (firmware/revc/):
 
 The README section is the text the menu shows as a plugin's README page:
 two header fields at 280 and 284, and plain text after the image, which
-the image's SHA-256 doesn't cover (the site's authors/readme page).
+the image's SHA-256 doesn't cover (the developer portal's packaging/#readme).
 
 parse() gives the fields exactly as cvp_parse() fills cvp_t, and its result
 code. check() then adds what the menu finds only later (installing into a

@@ -1,4 +1,5 @@
-"""sitecopy -- the site's words, read from site/copy.toml.
+"""sitecopy -- the site's words, read from site/copy.toml (and the developer portal's,
+from developers/copy.toml: Copy(path=...)).
 
 Every sentence the site shows, and the fixed sentences in the replies on
 submission issues and pull requests, lives in site/copy.toml so it can be
@@ -15,9 +16,9 @@ literal braces.
     T.attr("header.home_label")         for an attribute: escaped, no Markdown
     T.text("bot.checked", where=...)    as written (the bot's Markdown, or text the caller escapes)
     T.rows("home.install.steps", ("title", "text"))   an array of tables, each field as html
-    T.list("authors.needs.columns")     an array of strings, each as html
+    T.list("packaging.needs.columns")   an array of strings, each as html
     T.block("submit.check.command")     a code block: escaped, nothing else
-    T.raw("authors.readme.sample")      a string, untouched
+    T.raw("packaging.readme.hero.sample") a string, untouched
 
 A missing key, an unknown placeholder or a stray brace stops the build
 with the key's name. Standard library only (tomllib, Python 3.11+).

@@ -20,11 +20,9 @@ import sitecopy
 import tvscreen
 import validate
 
-CONVERTER = {"converter/index.html"}
-MOVED = {"authors/readme/index.html": "../#readme", "authors/screenshots/index.html": "../#screenshots",
-         "authors/icons/index.html": "../#icons", "authors/icon-editor/index.html": "../tools/#icon-editor"}      # the movie converter, copied in as built
-AUTHORS = {"authors/index.html", "authors/tools/index.html", "authors/readme/index.html",
-           "authors/screenshots/index.html", "authors/icons/index.html", "authors/icon-editor/index.html"}
+CONVERTER = {"converter/index.html"}     # the movie converter, copied in as built
+MOVED = build_site.MOVED                # the authors' old addresses, which send you on to the developer portal
+AUTHORS = set(MOVED)
 
 
 def listed(root, description="Plays NES games.", **over):
@@ -83,6 +81,8 @@ class Site(unittest.TestCase):
                     continue
                 self.assertFalse(re.match(r"^[a-z]+:", h) or h.startswith("/"), (name, h))
                 target = os.path.normpath(os.path.join(out, os.path.dirname(name), h.split("#")[0]))
+                if target.startswith(os.path.join(out, "developers")):
+                    continue                    # the developer portal's: tests/test_dev.py builds both and follows them
                 if h.split("#")[0].endswith("/"):
                     target = os.path.join(target, "index.html")
                 self.assertTrue(os.path.exists(target), (name, h))
@@ -120,24 +120,12 @@ class Site(unittest.TestCase):
     def test_old_authors_pages_send_you_on(self):
         _, pages, _ = self.build()
         for name, to in MOVED.items():
+            self.assertTrue(to.startswith("../" * name.count("/") + "developers/"), (name, to))
             self.assertIn(f'<meta http-equiv="refresh" content="0; url={to}">', pages[name])
-        page = pages["authors/index.html"]
-        for part in ("readme", "screenshots", "icons"):
-            self.assertIn(f'<li><h2><a href="#{part}">', page)
-            self.assertIn(f'<section class="part" id="{part}"', page)
-        self.assertIn('href="tools/"', page)
-        for f in ("icon-template.txt", "sample-icon.txt", "sample-file-icon.txt"):
-            self.assertIn(f'href="files/{f}" download', page)
-
-    def test_the_ready_made_icons(self):
-        out, pages, _ = self.build()
-        tools = pages["authors/tools/index.html"]
-        icons = build_site.gallery_icons()
-        self.assertGreaterEqual(len(icons), 30)
-        for slug, _, _, hx in icons:
-            self.assertIn(f'href="#p={hx}" data-use hidden', tools)
-            with open(os.path.join(out, "authors", "tools", "icons", slug + ".txt")) as f:
-                self.assertEqual(f.read(), "\n".join(cvp.icon_rows(hx)) + "\n")
+        for name, text in pages.items():
+            if name not in MOVED and name not in CONVERTER:
+                self.assertNotIn("authors/", text, name)
+                self.assertIn('href="' + "../" * name.count("/") + 'developers/"', text, name)
 
     def test_entry_text_is_escaped(self):
         root = tmp()
@@ -209,21 +197,16 @@ class Site(unittest.TestCase):
         pages = self.build()[1]
         page = pages["plugins/parrotcart.nesinfo/index.html"]
         self.assertIn("No README on the cart", page)
-        self.assertIn('href="../../authors/#readme"', page)
+        self.assertIn('href="../../developers/packaging/#readme"', page)
         self.assertNotIn("No README on the cart", pages["plugins/parrotcart.nes/index.html"])
 
     def test_the_site_needs_no_script_and_calls_nobody(self):
         out, pages, _ = self.build()
-        with open(os.path.join(out, "assets", "icon-editor.js")) as f:
-            js = f.read()
-        for call in ("fetch(", "XMLHttpRequest", "WebSocket", "sendBeacon", "import(", "http://", "https://"):
-            self.assertNotIn(call, js, call)
-        ed = pages["authors/tools/index.html"]
-        self.assertIn("<noscript>", ed)
-        self.assertEqual(ed.count('class="px__c"'), 128)
-        self.assertEqual(ed.count('tabindex=-1'), 126)        # one tab stop a grid
-        self.assertIn('<path id="ed-plugin"', ed)
-        self.assertIn('<path id="ed-file"', ed)
+        for name in ("site.js",):
+            with open(os.path.join(out, "assets", name)) as f:
+                js = f.read()
+            for call in ("fetch(", "XMLHttpRequest", "WebSocket", "sendBeacon", "import(", "http://", "https://"):
+                self.assertNotIn(call, js, (name, call))
         with open(os.path.join(out, "assets", "site.css")) as f:
             css = f.read()
         self.assertIn("image-rendering: pixelated", css)

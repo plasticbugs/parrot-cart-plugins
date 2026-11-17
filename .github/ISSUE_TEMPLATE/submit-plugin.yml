@@ -17,7 +17,7 @@ body:
         `screenshot-2.png` and `screenshot-3.png` (PNG, 256 × 192, 100 KB max
         each).
 
-        More details: https://plasticbugs.github.io/parrot-cart-plugins/authors/
+        More details: https://plasticbugs.github.io/parrot-cart-plugins/developers/packaging/
   - type: input
     id: repo
     attributes:
