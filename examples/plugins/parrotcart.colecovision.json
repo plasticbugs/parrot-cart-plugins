@@ -1,0 +1,78 @@
+{
+  "schema": 2,
+  "id": "parrotcart.colecovision",
+  "name": "ColecoVision",
+  "version": "1.0.1",
+  "by": "Parrot Cart",
+  "description": "Player for ColecoVision games from the SD card",
+  "repo": "OWNER/parrotcart-colecovision",
+  "repo_id": null,
+  "owner": "OWNER",
+  "api": 1,
+  "home": "",
+  "opens": [],
+  "uses": [
+    "usb-device"
+  ],
+  "icon": "00feaafe8282fe00",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": null,
+    "name": "Not chosen yet",
+    "url": "https://github.com/OWNER/parrotcart-colecovision/blob/v1.0.1/LICENSE"
+  },
+  "source_url": "https://github.com/OWNER/parrotcart-colecovision/tree/v1.0.1",
+  "credits_url": "https://github.com/OWNER/parrotcart-colecovision#credits",
+  "release": {
+    "tag": "v1.0.1",
+    "url": "https://github.com/OWNER/parrotcart-colecovision/releases/tag/v1.0.1",
+    "published": "2026-11-15"
+  },
+  "download": {
+    "name": "CVGAMES.CVP",
+    "url": "https://github.com/OWNER/parrotcart-colecovision/releases/download/v1.0.1/CVGAMES.CVP",
+    "size": 58094,
+    "sha256": "f55491f7b730a211bb84b410f2964dea6b38c637cb2e7ab1828a3e2dec437d46"
+  },
+  "image": {
+    "size": 56576,
+    "sha256": "cc28cba550850b9a35761b5fda31de6b168e471d6c7240ec13563055b857d9e1",
+    "kind": "xip"
+  },
+  "credits": "TinyUSB by Ha Thach. The menu font is Empty Windows Unboxed by VEXED, under CC BY 4.0.",
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 1006,
+      "sha256": "47224e9b4b5abb5850b94fcea6e006ae943c29316127fbdefa725741ede00f7d",
+      "lines": 49
+    },
+    "web": {
+      "file": "README.md",
+      "size": 1003,
+      "sha256": "45874815a34aa37ff084c0be6cfb0b571032b6682cd2f794e718cd9beec9cfb8",
+      "url": "https://github.com/OWNER/parrotcart-colecovision#credits"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1224,
+      "sha256": "00fd54f0d984bd5c693da4ab98aff0d4faf948d6c55a2f21de1af987a9d56afa"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v1.0.1",
+      "url": "https://github.com/OWNER/parrotcart-colecovision/releases/tag/v1.0.1",
+      "published": "2026-11-15",
+      "version": "1.0.1",
+      "notes": "ColecoVision 1.0.1 is built into the cart."
+    }
+  ],
+  "added": "2026-11-15",
+  "updated": "2026-11-15",
+  "submission": null,
+  "example": true,
+  "built_in": true
+}

@@ -74,9 +74,12 @@ SEEDS = {
     # an example's description may link, from the site's root; the list shows the words only
     "parrotcart.movies": ("parrotcart-movies", (None, "Not chosen yet", None),
                           "Player for movies made with the [movie converter](converter/)"),
+    "parrotcart.colecovision": ("parrotcart-colecovision", (None, "Not chosen yet", None),
+                                "Player for ColecoVision games from the SD card"),
 }
 
 CREDITS = {
+    "parrotcart.colecovision": "TinyUSB by Ha Thach. The menu font is Empty Windows Unboxed by VEXED, under CC BY 4.0.",
     "parrotcart.movies": "TinyUSB by Ha Thach",
     "parrotcart.nes": "QuickNES by Shay Green (blargg), via frank-nes, and emu2413 by Mitsutaka Okazaki",
     "parrotcart.gameboy": "Peanut-GB and minigb_apu",
@@ -101,8 +104,8 @@ ROMS = {
 SCREENS = {"parrotcart.psgsynth": ["psgsynth-playing.png"]}
 NO_README = {"parrotcart.nesinfo"}          # as a plugin built before the README existed
 NO_SHOTS = set()
-BUILT_IN = {"parrotcart.movies"}
-REAL_README = {"parrotcart.movies"}
+BUILT_IN = {"parrotcart.movies", "parrotcart.colecovision"}
+REAL_README = {"parrotcart.movies", "parrotcart.colecovision"}
 NEEDS = {"usb-host": "USB host", "usb-device": "USB device", "psram": "PSRAM"}
 
 
