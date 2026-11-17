@@ -18,6 +18,7 @@ import sitecopy
 import tvscreen
 import validate
 
+CONVERTER = {"converter/index.html"}      # the movie converter, copied in as built
 AUTHORS = {"authors/index.html", "authors/readme/index.html", "authors/screenshots/index.html",
            "authors/icons/index.html", "authors/icon-editor/index.html"}
 
@@ -67,7 +68,7 @@ class Site(unittest.TestCase):
     def test_the_registry_builds(self):
         out, pages, idx = self.build()
         examples = registry.load_entries(ROOT, examples=True)
-        want = {"index.html", "submit/index.html"} | AUTHORS | {f"plugins/{i}/index.html" for i in examples}
+        want = {"index.html", "submit/index.html"} | AUTHORS | CONVERTER | {f"plugins/{i}/index.html" for i in examples}
         self.assertEqual(set(pages), want)
         self.assertEqual(idx["plugins"], [e for e in idx["plugins"] if e["id"] not in examples])
         for name, text in pages.items():
@@ -85,7 +86,18 @@ class Site(unittest.TestCase):
     def test_examples_can_be_hidden(self):
         config = dict(registry.load_config(ROOT), show_examples=False)
         _, pages, _ = self.build(config=config)
-        self.assertEqual(set(pages), {"index.html", "submit/index.html"} | AUTHORS)
+        self.assertEqual(set(pages), {"index.html", "submit/index.html"} | AUTHORS | CONVERTER)
+
+    def test_a_built_in_plugin(self):
+        _, pages, _ = self.build()
+        page = pages["plugins/parrotcart.movies/index.html"]
+        self.assertIn('<a class="link" href="../../converter/">movie converter</a>', page)
+        self.assertNotIn('id="install"', page)
+        self.assertNotIn("[movie converter]", pages["index.html"])
+        self.assertIn("<small>Player for movies made with the movie converter</small>", pages["index.html"])
+        for name, text in pages.items():
+            if not name.startswith("converter/"):
+                self.assertIn('href="' + "../" * name.count("/") + 'converter/"', text, name)
 
     def test_entry_text_is_escaped(self):
         root = tmp()

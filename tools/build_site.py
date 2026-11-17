@@ -61,6 +61,28 @@ def opens(e):
     return " ".join(e["opens"])
 
 
+_MDLINK = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
+
+
+def desc_text(e):
+    """the one-line description as plain text: our examples' may hold a Markdown link"""
+    return _MDLINK.sub(r"\1", e["description"])
+
+
+def desc_html(e, pre):
+    """the description on the plugin's own page, where an example's links work (relative ones
+    from the site's root). A listed plugin's description is always plain text."""
+    d = e["description"]
+    if not e.get("example"):
+        return e_(d)
+    out, at = [], 0
+    for m in _MDLINK.finditer(d):
+        href = m[2] if m[2].startswith("https://") else pre + m[2]
+        out += [e_(d[at:m.start()]), f'<a class="link" href="{e_(href)}">{e_(m[1])}</a>']
+        at = m.end()
+    return "".join(out) + e_(d[at:])
+
+
 def keep_together(s):
     """the last two words on one line: no word on its own under a big heading"""
     head, sep, tail = s.rpartition(" ")
@@ -79,6 +101,7 @@ def slab(pre, current):
             f'<nav aria-label="{T.attr("header.nav_label")}"><ul>'
             + link(f"{pre}index.html#plugins", T.html("header.nav_plugins"), "plugins")
             + link(f"{pre}index.html#install", T.html("header.nav_install"), "install")
+            + link(f"{pre}converter/", T.html("header.nav_converter"), "converter")
             + link(f"{pre}authors/", T.html("header.nav_authors"), "authors")
             + link(f"{pre}submit/", T.html("header.nav_submit"), "submit")
             + "</ul></nav></div></header>")
@@ -100,7 +123,7 @@ def footer(pre, entries, config):
 <div><h2>{T.html("footer.plugins_heading")}</h2><ul>{names}</ul></div>
 <div><h2>{T.html("footer.links_heading")}</h2><ul><li><a href="{pre}submit/">{T.html("footer.submit")}</a></li><li><a href="{pre}submit/#rules">{T.html("footer.rules")}</a></li>
 <li><a href="{pre}authors/">{T.html("footer.authors")}</a></li><li><a href="{pre}authors/icon-editor/">{T.html("footer.icon_editor")}</a></li>
-<li><a href="{pre}index.html#install">{T.html("footer.install")}</a></li><li><a href="{pre}registry.json">{T.html("footer.registry_json")}</a></li>{repo}</ul></div>
+<li><a href="{pre}index.html#install">{T.html("footer.install")}</a></li><li><a href="{pre}converter/">{T.html("footer.converter")}</a></li><li><a href="{pre}registry.json">{T.html("footer.registry_json")}</a></li>{repo}</ul></div>
 </div>
 <p class="fine">{T.html("footer.font_credit", _link=None)}</p>
 </div></footer>"""
@@ -181,11 +204,11 @@ def catalogue_rows(entries, pre=""):
            "size": T.attr("home.browse.columns.size")}
     no_files, nothing = T.html("home.browse.no_files"), T.html("home.browse.needs_nothing")
     for e in sorted(entries, key=lambda e: e["name"].lower()):
-        text = " ".join([e["name"], e["id"], opens(e), needs(e), e["by"], e["owner"], e["description"]]).lower()
+        text = " ".join([e["name"], e["id"], opens(e), needs(e), e["by"], e["owner"], desc_text(e)]).lower()
         rows.append(
             f'<tr data-text="{e_(text)}">'
             f'<td class="first"><div class="plugin">{thumb(e, pre)}'
-            f'<div><a href="{pre}plugins/{e_(e["id"])}/">{e_(e["name"])}</a><small>{e_(e["description"])}</small></div></div></td>'
+            f'<div><a href="{pre}plugins/{e_(e["id"])}/">{e_(e["name"])}</a><small>{e_(desc_text(e))}</small></div></div></td>'
             f'<td data-label="{col["id"]}"><span class="code code--id">{e_(e["id"])}</span></td>'
             f'<td data-label="{col["opens"]}">{f"<span class=code>{e_(opens(e))}</span>" if e["opens"] else f"<span class=muted>{no_files}</span>"}</td>'
             f'<td data-label="{col["needs"]}">{e_(needs(e)) or f"<span class=muted>{nothing}</span>"}</td>'
@@ -368,13 +391,15 @@ def plugin_page(e, entries, config, root=ROOT):
                   f'{T.html("plugin.hero.download_button", file=e_(e["download"]["name"]))}</a>'
                   f'<a class="btn btn--secondary" href="{e_(e["source_url"])}">'
                   f'{T.html("plugin.hero.source_button")}</a></div>')
+    elif e.get("built_in"):
+        action = f'<p class="note">{T.html("plugin.hero.built_in_note")}</p>'
     else:
         action = (f'<div class="actions"><a class="btn" href="#install">{T.html("plugin.hero.example_button")}</a>'
                   f'</div><p class="note">{T.html("plugin.hero.example_note")}</p>')
     hero = f"""<section class="hero" aria-labelledby="hero-title"><div class="container">
 <div class="hero__text">
 <h1 id="hero-title">{e_(e["name"])}</h1>
-<p class="lead">{e_(e["description"])}</p>
+<p class="lead">{desc_html(e, pre)}</p>
 {action}
 </div>
 {screen_card(details, T.html("plugin.hero.card_caption"), e["download"]["name"], "details",
@@ -415,12 +440,12 @@ def plugin_page(e, entries, config, root=ROOT):
         steps.append((T.html("plugin.install.files_title", folder=e_(e["home"])),
                       T.html("plugin.install.files_text", types=e_(opens(e)))))
     steps.append((T.html("plugin.install.start_title"), T.html("plugin.install.start_text", name=e_(e["name"]))))
-    install = f"""<section class="section" id="install" aria-labelledby="install-title"><div class="container">
+    install = "" if e.get("built_in") else f"""<section class="section" id="install" aria-labelledby="install-title"><div class="container">
 <div class="headblock"><h2 id="install-title">{T.html("plugin.install.title")}</h2></div>
 <ol class="steps{" steps--4" if len(steps) == 4 else ""}">{li_rows(steps)}</ol>
 </div></section>"""
     desc = T.text("plugin.description", name=e["name"], version=e["version"],
-                  description=e["description"].rstrip(". "))
+                  description=desc_text(e).rstrip(". "))
     return page(T.text("plugin.page_title", name=e["name"]), desc,
                 hero + extra + specs + notes_section(e, live) + install,
                 pre, "plugins", [details] + ([strip] if strip else []), entries, config)
@@ -762,6 +787,9 @@ def build(out, config=None, root=ROOT):
     for rel, text in authors_pages(entries, config).items():
         write(rel, text)
     registry.write_json(os.path.join(out, "registry.json"), registry.index(live, config))
+    conv = os.path.join(root, "converter")
+    if os.path.isdir(conv):             # the movie converter: a built web app, copied as it is
+        shutil.copytree(conv, os.path.join(out, "converter"))
     write(".nojekyll", "")
     return entries
 

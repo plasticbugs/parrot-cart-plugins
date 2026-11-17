@@ -173,6 +173,8 @@ def check_entry(e, filename=None):
         bad.append("credits: one line, 400 at most")
     if "example" in e and not isinstance(e["example"], bool):
         bad.append("example: true or false")
+    if "built_in" in e and not (e["built_in"] is True and e.get("example") is True):
+        bad.append("built_in: only true, and only on an example (one of the cart's own)")
     if filename and e.get("id") and os.path.basename(filename) != e["id"] + ".json":
         bad.append(f"the file is {os.path.basename(filename)}, the ID {e['id']}")
     return bad

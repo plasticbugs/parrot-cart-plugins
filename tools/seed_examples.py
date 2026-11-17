@@ -21,6 +21,10 @@ so on the page:
                    "chord" screen, 1 pixel in 3)
   history          one line saying the release's notes will show there
 
+REAL_README examples carry the README their plugin really has instead
+(examples/readmes/<id>.md, from the cart's source), and BUILT_IN ones are
+built into the cart: their page has no download or install steps.
+
 NO_README and NO_SHOTS leave an example without, to show those pages too.
 Each entry says "example": true, its links point at a placeholder owner,
 and the site shows it as an unpublished example with no download. They
@@ -33,6 +37,7 @@ import datetime
 import glob
 import hashlib
 import os
+import re
 import shutil
 import sys
 
@@ -66,9 +71,13 @@ SEEDS = {
                             "Emulator for the vector-based arcade game"),
     "parrotcart.esb": ("parrotcart-esb", ("BSD-3-Clause", "BSD 3-Clause License", None),
                        "Emulator for the vector-based arcade sequel"),
+    # an example's description may link, from the site's root; the list shows the words only
+    "parrotcart.movies": ("parrotcart-movies", (None, "Not chosen yet", None),
+                          "Player for movies made with the [movie converter](converter/)"),
 }
 
 CREDITS = {
+    "parrotcart.movies": "TinyUSB by Ha Thach",
     "parrotcart.nes": "QuickNES by Shay Green (blargg), via frank-nes, and emu2413 by Mitsutaka Okazaki",
     "parrotcart.gameboy": "Peanut-GB and minigb_apu",
     "parrotcart.mastersystem": "SMS Plus by Charles MacDonald, pico-smsplus by Frank Hoedemakers and "
@@ -92,12 +101,15 @@ ROMS = {
 SCREENS = {"parrotcart.psgsynth": ["psgsynth-playing.png"]}
 NO_README = {"parrotcart.nesinfo"}          # as a plugin built before the README existed
 NO_SHOTS = set()
+BUILT_IN = {"parrotcart.movies"}
+REAL_README = {"parrotcart.movies"}
 NEEDS = {"usb-host": "USB host", "usb-device": "USB device", "psram": "PSRAM"}
 
 
 def what_it_is(e):
     """the one-line description as a sentence: "Emulator for X" becomes "The NES plugin is an emulator for X." """
-    first, _, rest = e["description"].rstrip(".").partition(" ")
+    plain = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", e["description"])
+    first, _, rest = plain.rstrip(".").partition(" ")
     if first[1:].islower():
         first = first.lower()
     article = "an" if first[:1].lower() in "aeiou" else "a"
@@ -130,7 +142,9 @@ def shots(e):
         with open(os.path.join(registry.ROOT, "examples", "screens", name), "rb") as f:
             pics.append(f.read())
     pages = [tvscreen.details_page(e)]
-    if e["opens"] and e["home"]:
+    if e["id"] in BUILT_IN:
+        pass                            # it isn't on the Plugins page: the menu starts it
+    elif e["opens"] and e["home"]:
         pages.append(tvscreen.folder_page(e["home"], ["Sample 1", "Sample 2", "Sample 3"], e["file_icon"]))
     else:
         pages.append(tvscreen.plugins_page([e]))
@@ -191,7 +205,11 @@ def build(today, cvp_dir=None):
         if pid in CREDITS:
             e["credits"] = CREDITS[pid]
         files = {} if pid in NO_SHOTS else dict(shots(e))
-        md = readme_md(e).encode()
+        if pid in REAL_README:
+            with open(os.path.join(registry.ROOT, "examples", "readmes", pid + ".md"), "rb") as f:
+                md = f.read()
+        else:
+            md = readme_md(e).encode()
         files[registry.WEB_README] = md
         cart = None
         if pid not in NO_README:
@@ -200,10 +218,13 @@ def build(today, cvp_dir=None):
             cart = meta(registry.CART_README, text, lines=text.count(b"\n"))
         e["readme"] = {"cart": cart, "web": meta(registry.WEB_README, md, url=e["credits_url"])}
         e["screenshots"] = [meta(n, files[n]) for n in registry.SHOTS if n in files]
-        e["history"] = [dict(release, version=e["version"],
-                             notes=f"This is an example. When {e['name']} is listed, the notes from the "
-                                   f"{e['version']} release on GitHub will show here.")]
+        notes = (f"{e['name']} {e['version']} is built into the cart." if pid in BUILT_IN else
+                 f"This is an example. When {e['name']} is listed, the notes from the "
+                 f"{e['version']} release on GitHub will show here.")
+        e["history"] = [dict(release, version=e["version"], notes=notes)]
         e.update(added=old.get("added", today), updated=today, submission=None, example=True)
+        if pid in BUILT_IN:
+            e["built_in"] = True
         bad = registry.check_entry(e)
         if bad:
             raise SystemExit(f"{pid}: {bad}")

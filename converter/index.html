@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Parrot Cart movie converter</title>
+  <meta name="description" content="Turn a video into a ROM for the ColecoVision SD cart, in your browser.">
+  <script type="module" crossorigin src="./assets/main-LvePNBgp.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-BkoXaQcb.css">
+</head>
+<body>
+  <header class="bar">
+    <div class="bar-in">
+      <div class="bar-brand">
+        <span class="wordmark">Movie converter</span>
+        <a class="bar-link" href="../">Parrot Cart plugins</a>
+      </div>
+      <div class="bar-file">
+        <span class="file-name" id="fileName" hidden></span>
+        <button class="btn btn--secondary" id="openAgain" type="button" hidden>Open a video</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="bench" id="bench" data-phase="empty">
+    <h1 class="visually-hidden">Turn a video into a movie for your Parrot Cart</h1>
+    <input type="file" id="fileInput" accept="video/*,.mp4,.m4v,.mov,.webm,.mkv" hidden>
+
+    <section class="screens" aria-label="Pictures">
+      <figure class="screen">
+        <div class="frame" id="dropZone">
+          <canvas id="srcCanvas" width="256" height="192" aria-label="Your video, fitted to the console's screen"></canvas>
+          <div class="frame-msg" id="srcMsg">
+            <h2 id="srcHead">Drop a video here</h2>
+            <p id="srcText">Or open one. Any video your browser can play will work, like MP4, MOV or WebM.</p>
+            <button class="btn btn--primary" id="openFirst" type="button">Open a video</button>
+          </div>
+        </div>
+        <figcaption><span>Your video</span><span class="num" id="srcTime"></span></figcaption>
+      </figure>
+      <figure class="screen">
+        <div class="frame">
+          <canvas id="cvCanvas" width="256" height="192" aria-label="The same frame as the ColecoVision shows it"></canvas>
+          <div class="frame-msg frame-msg--quiet" id="cvMsg" hidden>
+            <p>The ColecoVision’s picture appears here.</p>
+          </div>
+        </div>
+        <figcaption><span>On the ColecoVision</span><span id="cvNote"></span></figcaption>
+      </figure>
+    </section>
+
+    <section class="timeline" aria-label="Trim">
+      <button class="btn btn--secondary btn--icon" id="playSrc" type="button" disabled>
+        <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path id="playGlyph" d="M2 1l9 5-9 5z" fill="currentColor"/></svg>
+        <span id="playLabel">Play</span>
+      </button>
+      <div class="track" id="track" aria-disabled="true">
+        <div class="track-range" id="range"></div>
+        <div class="handle handle--in" id="hIn" role="slider" tabindex="-1" aria-label="Start" aria-valuemin="0"></div>
+        <div class="handle handle--out" id="hOut" role="slider" tabindex="-1" aria-label="End" aria-valuemin="0"></div>
+        <div class="playhead" id="head" role="slider" tabindex="-1" aria-label="Position" aria-valuemin="0"></div>
+      </div>
+      <dl class="times">
+        <div><dt>Start</dt><dd class="num" id="tIn">0:00.0</dd></div>
+        <div><dt>End</dt><dd class="num" id="tOut">0:00.0</dd></div>
+        <div><dt>Length</dt><dd class="num" id="tLen">0:00.0</dd></div>
+      </dl>
+      <div class="marks">
+        <button class="btn btn--quiet" id="setIn" type="button" disabled>Start here <kbd>I</kbd></button>
+        <button class="btn btn--quiet" id="setOut" type="button" disabled>End here <kbd>O</kbd></button>
+      </div>
+    </section>
+
+    <section class="settings" aria-label="Settings">
+      <fieldset class="choice">
+        <legend>Look</legend>
+        <div class="seg" id="lookSeg"></div>
+        <p class="about"><span class="swatches" id="lookSw" aria-hidden="true"></span><span id="lookAbout"></span></p>
+      </fieldset>
+      <div class="palette" id="palettePanel" hidden>
+        <div class="palette-row">
+          <span class="palette-label" id="presetsLabel">Palettes</span>
+          <div class="presets" id="presets" role="radiogroup" aria-labelledby="presetsLabel"></div>
+        </div>
+        <div class="palette-row">
+          <span class="palette-label" id="coloursLabel">Colors</span>
+          <div class="toggles" id="toggles" role="group" aria-labelledby="coloursLabel"></div>
+          <span class="palette-label" id="mapLabel">Shade by</span>
+          <div class="seg" id="mapSeg" aria-labelledby="mapLabel"></div>
+        </div>
+      </div>
+      <fieldset class="choice">
+        <legend>Sound</legend>
+        <div class="seg" id="soundSeg"></div>
+        <p class="about" id="soundAbout"></p>
+      </fieldset>
+      <fieldset class="choice">
+        <legend>Fit</legend>
+        <div class="seg" id="fitSeg"></div>
+        <p class="about" id="fitAbout"></p>
+      </fieldset>
+      <button class="btn btn--primary make" id="makeBtn" type="button" disabled>Make ROM</button>
+    </section>
+
+    <section class="outcome" id="outcome" aria-live="polite">
+      <div class="meter" id="meter" role="progressbar" aria-label="Encoding" aria-valuemin="0" aria-valuemax="100" hidden><span id="meterFill"></span></div>
+      <p class="hint" id="hint">Make ROM converts the part between Start and End.<span class="keys"> Press Space to play, and I and O to set the start and end.</span></p>
+
+      <div class="progress" id="progress" hidden>
+        <p><span id="progText">Starting</span> <span class="muted num" id="progLeft"></span></p>
+        <button class="btn btn--secondary" id="cancelBtn" type="button">Cancel</button>
+      </div>
+
+      <p class="problem" id="problem" role="alert" hidden></p>
+
+      <div class="result" id="result" hidden>
+        <dl class="figures">
+          <div><dt>Frames shown</dt><dd class="num" id="fLen"></dd></div>
+          <div><dt>Picture</dt><dd class="num" id="fFps"></dd></div>
+          <div><dt>ROM</dt><dd class="num" id="fSize"></dd></div>
+        </dl>
+        <div class="name">
+          <label for="romName">Menu name</label>
+          <span class="menu-name" id="menuName" aria-live="off"></span>
+          <input id="romName" type="text" maxlength="40" spellcheck="false" autocomplete="off" aria-describedby="menuName">
+        </div>
+        <div class="result-actions">
+          <button class="btn btn--secondary" id="playCv" type="button">Play as the console would</button>
+          <button class="btn btn--primary" id="saveBtn" type="button">Save to SD card</button>
+        </div>
+        <p class="saved" id="saved" hidden></p>
+        <p class="stale" id="stale" hidden>Settings changed since this ROM was made. Make ROM again to use them.</p>
+      </div>
+    </section>
+  </main>
+
+  <noscript><p class="noscript">The movie converter runs in your browser and needs JavaScript turned on.</p></noscript>
+</body>
+</html>

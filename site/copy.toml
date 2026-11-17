@@ -145,6 +145,8 @@ source_button = "Source code"
 example_button = "Put it on your cart"
 # Under that button, for an example plugin
 example_note = "This is an example. The source code isn't public yet, so there's no download."
+# Instead of a button, for one of the plugins built into the cart
+built_in_note = "It's built into the cart, so there's nothing to download."
 # Under the TV picture beside the plugin's name
 card_caption = "The details page on the cart"
 # The TV picture's description for screen readers. Takes {name}.
@@ -944,6 +946,7 @@ nav_label = "Main"
 # The menu at the top right
 nav_plugins = "Plugins"
 nav_install = "Install"
+nav_converter = "Movie converter"
 nav_authors = "For authors"
 nav_submit = "Submit a plugin"
 
@@ -960,6 +963,7 @@ rules = "Requirements"
 authors = "For plugin authors"
 icon_editor = "The icon editor"
 install = "Install a plugin"
+converter = "Movie converter"
 registry_json = "registry.json"
 source_code = "Source code on GitHub"
 # The small print at the bottom

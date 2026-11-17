@@ -322,7 +322,8 @@ main:has(> .band:last-child) + .foot { margin-top: 0; border-top: var(--rule-hai
 }
 @media (max-width: 40rem) {
   :root { --shadow-card: 6px 6px 0 var(--color-paper-3); --shadow-card-hover: 6px 6px 0 var(--color-ink); }
-  .slab nav ul { gap: var(--space-sm); }
+  .slab nav { flex: 1 1 100%; min-width: 0; }
+  .slab nav ul { flex-wrap: wrap; column-gap: var(--space-md); row-gap: 0; }
   /* the hero's TV runs edge to edge, its backdrop cropped, so the menu's rows stay legible */
   .hero .card { margin-inline: calc(-1 * var(--gutter)); border-inline: 0; box-shadow: none; }
   .hero .screen { aspect-ratio: 264 / 200; overflow: hidden; }

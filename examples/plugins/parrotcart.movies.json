@@ -1,0 +1,79 @@
+{
+  "schema": 2,
+  "id": "parrotcart.movies",
+  "name": "Movies",
+  "version": "1.0.4",
+  "by": "Parrot Cart",
+  "description": "Player for movies made with the [movie converter](converter/)",
+  "repo": "OWNER/parrotcart-movies",
+  "repo_id": null,
+  "owner": "OWNER",
+  "api": 1,
+  "home": "",
+  "opens": [],
+  "uses": [
+    "usb-host",
+    "usb-device"
+  ],
+  "icon": "00aafec6c6feaa00",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": null,
+    "name": "Not chosen yet",
+    "url": "https://github.com/OWNER/parrotcart-movies/blob/v1.0.4/LICENSE"
+  },
+  "source_url": "https://github.com/OWNER/parrotcart-movies/tree/v1.0.4",
+  "credits_url": "https://github.com/OWNER/parrotcart-movies#credits",
+  "release": {
+    "tag": "v1.0.4",
+    "url": "https://github.com/OWNER/parrotcart-movies/releases/tag/v1.0.4",
+    "published": "2026-11-15"
+  },
+  "download": {
+    "name": "MOVIES.CVP",
+    "url": "https://github.com/OWNER/parrotcart-movies/releases/download/v1.0.4/MOVIES.CVP",
+    "size": 84428,
+    "sha256": "0fb3ccec742b57c9893ee5f6ff2c58e7b5c3ad5fe9452d10965a3109d06432b9"
+  },
+  "image": {
+    "size": 82688,
+    "sha256": "21327655db1a01b060101fc9dca6ec35239e01693595c78f537db93cad8044db",
+    "kind": "xip"
+  },
+  "credits": "TinyUSB by Ha Thach",
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 1228,
+      "sha256": "46b023b6a84f092301bfd0939bed4e409e58b610e00c77d5f776b6c41cc709c1",
+      "lines": 58
+    },
+    "web": {
+      "file": "README.md",
+      "size": 1225,
+      "sha256": "fe0b279bcb5149220824a4dbf9cb5650648a8a924cb3bd1bebee9ede6f0fc4a4",
+      "url": "https://github.com/OWNER/parrotcart-movies#credits"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1200,
+      "sha256": "cd14bfb517ce1076f4e2cd9c40846359cffc6a7d854c8ea8a66e71659ff5938a"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v1.0.4",
+      "url": "https://github.com/OWNER/parrotcart-movies/releases/tag/v1.0.4",
+      "published": "2026-11-15",
+      "version": "1.0.4",
+      "notes": "Movies 1.0.4 is built into the cart."
+    }
+  ],
+  "added": "2026-11-15",
+  "updated": "2026-11-15",
+  "submission": null,
+  "example": true,
+  "built_in": true
+}
