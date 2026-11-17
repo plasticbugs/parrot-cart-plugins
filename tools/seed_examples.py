@@ -58,7 +58,7 @@ SEEDS = {
                           "Emulator for the handheld console"),
     "parrotcart.mastersystem": ("parrotcart-mastersystem", ("GPL-3.0", "GNU General Public License v3.0",
                                                            "The Z80 core's notice allows non-commercial use only."),
-                               "Emulator for Sega Master System"),
+                               "Emulator for Sega Master System and Game Gear"),
     "parrotcart.scumm": ("parrotcart-scumm", ("GPL-3.0", "GNU General Public License v3.0", None),
                         "Engine for classic point-and-click adventure games"),
     "parrotcart.padtest": ("parrotcart-padtest", (None, "Not chosen yet", None),

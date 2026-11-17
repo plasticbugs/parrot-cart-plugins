@@ -189,6 +189,8 @@ def entry_files(e):
             out[r[k]["file"]] = r[k]
     for s in e.get("screenshots") or []:
         out[s["file"]] = s
+    if not e.get("example") and isinstance(e.get("download"), dict):    # the site serves its own copy
+        out[e["download"]["name"]] = e["download"]
     return out
 
 
@@ -223,6 +225,11 @@ def check_files(folder, e):
                 data.decode("utf-8")
             except UnicodeDecodeError:
                 bad.append(f"{name}: not UTF-8 text")
+        elif name.lower().endswith(".cvp"):
+            info, errs, _ = cvp.check(data, max(e.get("api") or 0, cvp.API_MENU))     # the API was checked when listed
+            bad += [f"{name}: {p}" for p in errs]
+            if info and (info["id"], info["version"]) != (e.get("id"), e.get("version")):
+                bad.append(f"{name}: it's {info['id']} {info['version']}, and the entry says {e.get('id')} {e.get('version')}")
         else:
             why = png.check(data)
             if why:
@@ -275,6 +282,9 @@ def index(entries, config, now=None):
             continue
         p = {k: e[k] for k in keep if k in e}
         here = f"{site}plugins/{e['id']}/"
+        d = e["download"]                       # our copy, checked; the release's own file is "from"
+        p["download"] = {"name": d["name"], "url": here + d["name"], "size": d["size"], "sha256": d["sha256"],
+                         "from": d["url"]}
         p["page"] = here
         p["readme_url"] = here + CART_README if e["readme"]["cart"] else None
         p["screenshots"] = [here + s["file"] for s in e["screenshots"]]

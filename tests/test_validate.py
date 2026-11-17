@@ -474,7 +474,7 @@ class Jobs(unittest.TestCase):
         src, dst = tmp(), tmp()
         validate.write_out(res, src)
         self.assertEqual(sorted(os.listdir(os.path.join(src, "plugins", "parrotcart.nes"))),
-                         ["README.md", "cart-readme.txt", "screenshot-1.png", "screenshot-2.png"])
+                         ["NES-0.4.6.CVP", "README.md", "cart-readme.txt", "screenshot-1.png", "screenshot-2.png"])
         os.makedirs(os.path.join(dst, "plugins", "parrotcart.nes"))
         with open(os.path.join(dst, "plugins", "parrotcart.nes", "screenshot-3.png"), "wb") as f:
             f.write(shot(3))                                 # left from an older version: it must go

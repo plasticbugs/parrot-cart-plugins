@@ -14,7 +14,8 @@ has, a version newer than the one listed. The repository's README.md is
 shown when there is one; credits and a source link aren't required.
 
 What the plugin's page shows is copied into the entry, so the site stays
-static and hotlinks nothing: the release's notes, the README.md at the tag,
+static and hotlinks nothing: the .CVP itself (the site's Download button
+serves this copy, so nobody has to go to GitHub), the release's notes, the README.md at the tag,
 the .CVP's README section (the text the cart shows) and up to three
 screenshots (screenshot-1.png to screenshot-3.png on the release, each a
 256 x 192 PNG of 100 KB at most).
@@ -314,6 +315,7 @@ def validate(gh, repo, tag=None, description=None, root=registry.ROOT, config=No
             continue
         desc = description if description else (old or {}).get("description", "")
         files = dict(shots)
+        files[name] = data                      # the site serves this copy, so people needn't go to GitHub
         cart = web = None
         if info["readme"] is not None:
             files[registry.CART_README] = cb = info["readme"].encode("ascii")

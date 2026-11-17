@@ -387,7 +387,7 @@ def plugin_page(e, entries, config, root=ROOT):
     extra = shots_section(e) + cart_html + web_readme_section(e, text_of(registry.WEB_README), live)
     lic = e["license"]
     if live:
-        action = (f'<div class="actions"><a class="btn" href="{e_(e["download"]["url"])}">'
+        action = (f'<div class="actions"><a class="btn" href="{e_(e["download"]["name"])}" download>'
                   f'{T.html("plugin.hero.download_button", file=e_(e["download"]["name"]))}</a>'
                   f'<a class="btn btn--secondary" href="{e_(e["source_url"])}">'
                   f'{T.html("plugin.hero.source_button")}</a></div>')

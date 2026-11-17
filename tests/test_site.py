@@ -2,6 +2,7 @@
 https, and an entry's text can never become markup"""
 import copy
 import glob
+import hashlib
 import json
 import os
 import re
@@ -149,6 +150,21 @@ class Site(unittest.TestCase):
                          [f"https://plasticbugs.github.io/parrot-cart-plugins/plugins/parrotcart.nes/screenshot-{i}.png"
                           for i in (1, 2)])
         self.assertTrue(idx["plugins"][0]["readme_url"].endswith("/plugins/parrotcart.nes/cart-readme.txt"))
+        # the download: the site's own copy of the release's .CVP, so nobody has to go to GitHub for it
+        with open(os.path.join(here, "NES-0.4.6.CVP"), "rb") as f:
+            data = f.read()
+        self.assertEqual(hashlib.sha256(data).hexdigest(), e["download"]["sha256"])
+        self.assertIn('<a class="btn" href="NES-0.4.6.CVP" download>', page)
+        self.assertNotIn('href="https://github.com/fixture-dev/nes-plugin/releases/download', page)
+        d = idx["plugins"][0]["download"]
+        self.assertEqual(d["url"], "https://plasticbugs.github.io/parrot-cart-plugins/plugins/parrotcart.nes/NES-0.4.6.CVP")
+        self.assertEqual(d["from"], e["download"]["url"])
+        # a copy that isn't the release's file stops the build
+        with open(os.path.join(root, "plugins", "parrotcart.nes", "NES-0.4.6.CVP"), "r+b") as f:
+            f.seek(600)
+            f.write(b"\xff")
+        self.assertTrue(any("NES-0.4.6.CVP" in b for b in registry.check_files(
+            os.path.join(root, "plugins", "parrotcart.nes"), e)))
 
     def test_a_plugin_without_a_readme_says_so(self):
         pages = self.build()[1]
