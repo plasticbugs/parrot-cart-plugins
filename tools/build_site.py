@@ -91,7 +91,13 @@ def keep_together(s):
 
 # ---- the frame of every page --------------------------------------------------------
 
-def slab(pre, current):
+def shop_link(config, cls, text):
+    """the link to the cart's own shop, if the config names one (text is html)"""
+    url = config.get("shop_url")
+    return f'<a class="{cls}" href="{e_(url)}">{text}</a>' if url else ""
+
+
+def slab(pre, current, config):
     def link(href, text, key):
         cur = ' aria-current="page"' if key == current else ""
         return f'<li><a href="{href}"{cur}>{text}</a></li>'
@@ -104,7 +110,7 @@ def slab(pre, current):
             + link(f"{pre}converter/", T.html("header.nav_converter"), "converter")
             + link(f"{pre}authors/", T.html("header.nav_authors"), "authors")
             + link(f"{pre}submit/", T.html("header.nav_submit"), "submit")
-            + "</ul></nav></div></header>")
+            + "</ul></nav>" + shop_link(config, "slab__shop", T.html("header.shop")) + "</div></header>")
 
 
 def placeholder(config):
@@ -119,7 +125,7 @@ def footer(pre, entries, config):
                     for e in sorted(entries, key=lambda e: e["name"].lower()))
     return f"""<footer class="foot"><div class="container">
 <div class="cols">
-<div><h2>{T.html("footer.title")}</h2><p>{T.html("footer.tagline")}</p></div>
+<div><h2>{T.html("footer.title")}</h2><p>{T.html("footer.tagline")}</p><p class="foot__shop">{shop_link(config, "link", T.html("footer.shop"))}</p></div>
 <div><h2>{T.html("footer.plugins_heading")}</h2><ul>{names}</ul></div>
 <div><h2>{T.html("footer.links_heading")}</h2><ul><li><a href="{pre}submit/">{T.html("footer.submit")}</a></li><li><a href="{pre}submit/#rules">{T.html("footer.rules")}</a></li>
 <li><a href="{pre}authors/">{T.html("footer.authors")}</a></li><li><a href="{pre}authors/tools/">{T.html("footer.icon_editor")}</a></li>
@@ -147,7 +153,7 @@ def page(title, description, body, pre, current, screens, entries, config, scrip
 <body>
 <a class="skip" href="#main">{T.html("header.skip")}</a>
 {tvscreen.glyph_defs(screens)}
-{slab(pre, current)}
+{slab(pre, current, config)}
 <main id="main">
 {body}
 </main>
@@ -200,9 +206,8 @@ def thumb(e, pre=""):
 def catalogue_rows(entries, pre=""):
     rows = []
     col = {"id": T.attr("home.browse.columns.id"), "opens": T.attr("home.browse.columns.opens"),
-           "needs": T.attr("home.browse.columns.needs"), "version": T.attr("home.browse.columns.version"),
-           "size": T.attr("home.browse.columns.size")}
-    no_files, nothing = T.html("home.browse.no_files"), T.html("home.browse.needs_nothing")
+           "version": T.attr("home.browse.columns.version"), "size": T.attr("home.browse.columns.size")}
+    no_files = T.html("home.browse.no_files")
     for e in sorted(entries, key=lambda e: e["name"].lower()):
         text = " ".join([e["name"], e["id"], opens(e), needs(e), e["by"], e["owner"], desc_text(e)]).lower()
         rows.append(
@@ -211,7 +216,6 @@ def catalogue_rows(entries, pre=""):
             f'<div><a href="{pre}plugins/{e_(e["id"])}/">{e_(e["name"])}</a><small>{e_(desc_text(e))}</small></div></div></td>'
             f'<td data-label="{col["id"]}"><span class="code code--id">{e_(e["id"])}</span></td>'
             f'<td data-label="{col["opens"]}">{f"<span class=code>{e_(opens(e))}</span>" if e["opens"] else f"<span class=muted>{no_files}</span>"}</td>'
-            f'<td data-label="{col["needs"]}">{e_(needs(e)) or f"<span class=muted>{nothing}</span>"}</td>'
             f'<td data-label="{col["version"]}" class="num"><span class="code">{e_(e["version"])}</span></td>'
             f'<td data-label="{col["size"]}" class="num"><span class="code">{kb(e["download"]["size"])}</span></td></tr>')
     return "".join(rows)
@@ -235,7 +239,7 @@ def home(entries, config):
 <label for="q">{T.html("home.browse.search_label")}<input id="q" type="search" autocomplete="off" spellcheck="false"></label>
 <p role="status" aria-live="polite"></p></div>
 <table class="spec" id="catalogue">
-<thead><tr><th scope="col">{T.html("home.browse.columns.plugin")}</th><th scope="col">{T.html("home.browse.columns.id")}</th><th scope="col">{T.html("home.browse.columns.opens")}</th><th scope="col">{T.html("home.browse.columns.needs")}</th>
+<thead><tr><th scope="col">{T.html("home.browse.columns.plugin")}</th><th scope="col">{T.html("home.browse.columns.id")}</th><th scope="col">{T.html("home.browse.columns.opens")}</th>
 <th scope="col" class="num">{T.html("home.browse.columns.version")}</th><th scope="col" class="num">{T.html("home.browse.columns.size")}</th></tr></thead>
 <tbody>{catalogue_rows(entries)}</tbody></table>
 <p class="empty" id="catalogue-empty" hidden>{T.html("home.browse.no_match")}</p>
@@ -375,6 +379,24 @@ def notes_section(e, live):
 </div></section>"""
 
 
+def source_section(e, live):
+    """where the plugin's code is: a card that links to its repo (none for the cart's built-in plugins)"""
+    if e.get("built_in"):
+        return ""
+    if live:
+        owner, name = e["repo"].split("/", 1)
+        body = (f'<a class="repo" href="https://github.com/{e_(e["repo"])}">'
+                f'<span class="repo__host">{T.html("plugin.source.host")}</span>'
+                f'<span class="repo__name">{e_(owner)}/<b>{e_(name)}</b></span>'
+                f'<span class="repo__desc">{e_(desc_text(e))}</span>'
+                f'<span class="repo__meta"><span>{e_(e["license"]["name"])}</span>'
+                f'<span>{T.html("plugin.source.release", tag=e_(e["release"]["tag"]))}</span></span>'
+                f'<span class="repo__go">{T.html("plugin.source.go")}</span></a>')
+    else:
+        body = f'<p class="note">{T.html("plugin.source.not_public")}</p>'
+    return doc_section("source", T.html("plugin.source.title"), T.html("plugin.source.lead"), body)
+
+
 def plugin_page(e, entries, config, root=ROOT):
     live = not e.get("example")
     pre = "../../"
@@ -447,7 +469,7 @@ def plugin_page(e, entries, config, root=ROOT):
     desc = T.text("plugin.description", name=e["name"], version=e["version"],
                   description=desc_text(e).rstrip(". "))
     return page(T.text("plugin.page_title", name=e["name"]), desc,
-                hero + extra + specs + notes_section(e, live) + install,
+                hero + extra + specs + source_section(e, live) + notes_section(e, live) + install,
                 pre, "plugins", [details] + ([strip] if strip else []), entries, config)
 
 

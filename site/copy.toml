@@ -44,8 +44,6 @@ title = "Browse Plugins"
 search_label = "Search by name or file type"
 # In the Opens column, for a plugin that opens no files
 no_files = "An app"
-# In the Needs column, for a plugin that needs nothing extra
-needs_nothing = "None"
 # When a search finds nothing
 no_match = "No plugins match. Try a file type like .nes, or clear the search."
 
@@ -54,7 +52,6 @@ no_match = "No plugins match. Try a file type like .nes, or clear the search."
 plugin = "Plugin"
 id = "ID"
 opens = "Opens"
-needs = "Needs"
 version = "Version"
 size = "Size"
 
@@ -222,6 +219,19 @@ image_flash = "{size} bytes, runs from flash"
 not_public = "Not public yet"
 # The Source detail's link. Takes {tag}.
 source_value = "Code at `{tag}`"
+
+[plugin.source]
+# The section that links to the plugin's code: its heading and the line under it
+title = "The code"
+lead = "Every plugin here has a public repo on GitHub, so you can read how it works."
+# The card's first line
+host = "GitHub"
+# On the card, after the license. Takes {tag}.
+release = "Release {tag}"
+# The card's last line
+go = "Browse the code"
+# Instead of the card, for one of our examples whose repo isn't public yet
+not_public = "Its code goes up on GitHub with its first release."
 
 [plugin.notes]
 # The heading over the release notes
@@ -969,11 +979,15 @@ nav_install = "Install"
 nav_converter = "Movie converter"
 nav_authors = "For authors"
 nav_submit = "Submit a plugin"
+# The small button at the header's right, to the cart's shop (registry.config.json shop_url)
+shop = "Get a Parrot Cart"
 
 [footer]
 # The first column: a heading and a line
 title = "Parrot Cart plugins"
-tagline = "Free plugins for your Parrot Flash cartridge, all in one place."
+tagline = "Free plugins for your Parrot Cart, all in one place."
+# The link under that line, to the cart's shop
+shop = "Get a Parrot Cart"
 # The second column's heading (the plugins' names follow)
 plugins_heading = "Plugins"
 # The third column's heading and links

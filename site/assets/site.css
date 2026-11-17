@@ -31,6 +31,10 @@
 .slab nav a:hover { border-bottom-color: var(--color-paper); }
 .slab nav a[aria-current="page"] { border-bottom-color: var(--color-accent); }
 .slab a:focus-visible { outline: 2px solid var(--color-plate); outline-offset: 2px; }
+.slab nav { margin-left: auto; }
+.slab__shop { display: inline-flex; align-items: center; min-height: 40px; padding: 0 var(--space-md); border: var(--rule-hair) solid var(--color-paper); color: var(--color-paper); font-size: var(--text-sm); font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out); }
+.slab__shop:hover { background: var(--color-paper); color: var(--color-ink); }
+.slab__shop:active { transform: translateY(1px); }
 
 /* ---- buttons ---- */
 .actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
@@ -159,6 +163,18 @@ html:not(.js) .switch__panels { grid-template-columns: repeat(3, minmax(0, 1fr))
 .hash { word-break: break-all; }
 /* a full-width row keeps its value on the half rows' value column */
 .specs .wide { grid-column: 1 / -1; grid-template-columns: calc(((100% - var(--gap-columns)) / 2 - var(--space-md)) / 3) minmax(0, 1fr); }
+
+/* the plugin's code on GitHub */
+.repo { display: grid; gap: var(--space-xs); max-width: 40rem; padding: var(--space-lg); background: var(--color-plate); border: var(--rule-bar) solid var(--color-ink); box-shadow: var(--shadow-card); color: var(--color-ink); text-decoration: none; transition: box-shadow var(--dur-micro) var(--ease-out); }
+.repo:hover { box-shadow: var(--shadow-card-hover); }
+.repo:active { transform: translateY(1px); }
+.repo__host { font: 500 var(--text-xs)/1 var(--font-outlier); color: var(--color-ink-2); letter-spacing: 0.04em; text-transform: uppercase; }
+.repo__name { font: var(--display-weight) var(--text-title)/1.2 var(--font-display); letter-spacing: var(--tracking-display); overflow-wrap: anywhere; }
+.repo__name b { font-weight: inherit; }
+.repo__desc { color: var(--color-ink-2); }
+.repo__meta { display: flex; flex-wrap: wrap; gap: var(--space-2xs) var(--space-md); color: var(--color-muted); font-size: var(--text-sm); }
+.repo__go { margin-top: var(--space-xs); font-weight: 500; text-decoration: underline; text-underline-offset: 0.2em; }
+.foot__shop { margin-top: var(--space-md); }
 
 /* ---- the submit page ---- */
 .banner .container { display: grid; align-content: center; gap: var(--space-lg); min-height: calc(100dvh - var(--slab-height)); padding-block: var(--space-xl); }
@@ -346,7 +362,8 @@ main:has(> .band:last-child) + .foot { margin-top: 0; border-top: var(--rule-hai
 }
 @media (max-width: 40rem) {
   :root { --shadow-card: 6px 6px 0 var(--color-paper-3); --shadow-card-hover: 6px 6px 0 var(--color-ink); }
-  .slab nav { flex: 1 1 100%; min-width: 0; }
+  .slab nav { flex: 1 1 100%; min-width: 0; order: 3; }
+  .slab__shop { order: 2; min-height: 36px; }
   .slab nav ul { flex-wrap: wrap; column-gap: var(--space-md); row-gap: 0; }
   /* the hero's TV runs edge to edge, its backdrop cropped, so the menu's rows stay legible */
   .hero .card { margin-inline: calc(-1 * var(--gutter)); border-inline: 0; box-shadow: none; }
@@ -361,6 +378,6 @@ main:has(> .band:last-child) + .foot { margin-top: 0; border-top: var(--rule-hai
   .thumb .tv-icon { width: 32px; height: 32px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .btn, a.card, .spec tbody tr, .switch__tabs button, .slab nav a, a.link, .prose a, .tool, .map--links > li { transition: none; }
+  .btn, a.card, .spec tbody tr, .switch__tabs button, .slab nav a, a.link, .prose a, .tool, .map--links > li, .slab__shop, .repo { transition: none; }
   .btn:active, .tool:active { transform: none; }
 }

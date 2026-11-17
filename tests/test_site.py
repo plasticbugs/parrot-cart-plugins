@@ -103,6 +103,20 @@ class Site(unittest.TestCase):
             if not name.startswith("converter/") and name not in MOVED:
                 self.assertIn('href="' + "../" * name.count("/") + 'converter/"', text, name)
 
+    def test_the_shop_and_the_code(self):
+        root = tmp()
+        listed(root)
+        _, pages, _ = self.build(root)
+        for name, text in pages.items():
+            if name not in MOVED:
+                self.assertIn('<a class="slab__shop" href="https://parrotcart.com/">Get a Parrot Cart</a>', text, name)
+        page = pages["plugins/parrotcart.nes/index.html"]
+        self.assertIn('<a class="repo" href="https://github.com/fixture-dev/nes-plugin">', page)
+        self.assertNotIn(">Needs<", pages["index.html"])
+        _, pages, _ = self.build()
+        self.assertIn("Its code goes up on GitHub", pages["plugins/parrotcart.nes/index.html"])
+        self.assertNotIn('id="source"', pages["plugins/parrotcart.movies/index.html"])
+
     def test_old_authors_pages_send_you_on(self):
         _, pages, _ = self.build()
         for name, to in MOVED.items():
