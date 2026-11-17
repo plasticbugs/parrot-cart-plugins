@@ -31,8 +31,8 @@
   "download": {
     "name": "NESINFO.CVP",
     "url": "https://github.com/OWNER/parrotcart-nesinfo/releases/download/v1.0.1/NESINFO.CVP",
-    "size": 67756,
-    "sha256": "c8c2ecd6c4b041c1f03f816011815605a1374ae51060105b643e277fa3e1f903"
+    "size": 68137,
+    "sha256": "04ca764abdc3c194fd15b260b62969bedbf4b0b42ef68594614ceb53122ac00a"
   },
   "image": {
     "size": 66304,
@@ -69,8 +69,8 @@
       "notes": "This is an example. When NES Info is listed, the notes from the 1.0.1 release on GitHub will show here."
     }
   ],
-  "added": "2026-11-15",
-  "updated": "2026-11-15",
+  "added": "2026-11-16",
+  "updated": "2026-11-16",
   "submission": null,
   "example": true
 }

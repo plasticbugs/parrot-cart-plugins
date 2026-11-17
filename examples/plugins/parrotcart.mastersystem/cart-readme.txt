@@ -1,8 +1,9 @@
-MASTER SYSTEM FOR PARROT CART
+SMS & GAME GEAR FOR PARROT
+CART
 
-The Master System plugin is an
-emulator for Sega Master
-System.
+The SMS & Game Gear plugin is
+an emulator for Sega Master
+System and Game Gear.
 
 INSTALL
 
@@ -12,7 +13,8 @@ INSTALL
    in /SMS.
 3. On the cart, press B for
    Home, open Plugins, pick
-   Master System and press A.
+   SMS & Game Gear and press
+   A.
 
 WHAT IT NEEDS
 

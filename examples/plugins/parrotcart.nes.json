@@ -34,8 +34,8 @@
   "download": {
     "name": "NES.CVP",
     "url": "https://github.com/OWNER/parrotcart-nes/releases/download/v0.4.7/NES.CVP",
-    "size": 206008,
-    "sha256": "233a3e5908aa547551702caf133ab51be4c4a8675cc3fc25e3725b3b5aa4a244"
+    "size": 206287,
+    "sha256": "f6cb2bc71df19ce932a2c469ca66c472a4acbc2d8951addc8dcb7b60b543dde3"
   },
   "image": {
     "size": 203776,
@@ -78,8 +78,8 @@
       "notes": "This is an example. When NES is listed, the notes from the 0.4.7 release on GitHub will show here."
     }
   ],
-  "added": "2026-11-15",
-  "updated": "2026-11-15",
+  "added": "2026-11-16",
+  "updated": "2026-11-16",
   "submission": null,
   "example": true
 }

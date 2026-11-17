@@ -1,12 +1,12 @@
-# Master System for Parrot Cart
+# SMS & Game Gear for Parrot Cart
 
-The Master System plugin is an emulator for Sega Master System.
+The SMS & Game Gear plugin is an emulator for Sega Master System and Game Gear.
 
 ## Install
 
 1. Copy `SMS.CVP` to `/PLUGINS` on the cart's microSD card.
 2. Put your .sms .gg .sg files in `/SMS`.
-3. On the cart, press B for Home, open Plugins, pick Master System and press A.
+3. On the cart, press B for Home, open Plugins, pick SMS & Game Gear and press A.
 
 ## What it needs
 

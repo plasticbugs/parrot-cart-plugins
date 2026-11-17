@@ -32,8 +32,8 @@
   "download": {
     "name": "SCUMM.CVP",
     "url": "https://github.com/OWNER/parrotcart-scumm/releases/download/v0.2.7/SCUMM.CVP",
-    "size": 973305,
-    "sha256": "8c95323b0b9b54ef86ba342237889979067eb3c15968dbfeadf2fe42aa02dcb2"
+    "size": 973902,
+    "sha256": "0eec0edb6895d2a1bebf6f21c820517d78a0faf50bd224c8008c4854df10df3a"
   },
   "image": {
     "size": 970752,
@@ -59,7 +59,7 @@
     {
       "file": "screenshot-1.png",
       "size": 1041,
-      "sha256": "b5ee2735cb7d503017cb81030ca24b6a26b4dfa53a673469b36c4c8e88fe943e"
+      "sha256": "738b2656734371c6a3abaf0abfa75a256619912814d6e4b2c2afeac333f9d767"
     },
     {
       "file": "screenshot-2.png",
@@ -76,8 +76,8 @@
       "notes": "This is an example. When SCUMM is listed, the notes from the 0.2.7 release on GitHub will show here."
     }
   ],
-  "added": "2026-11-15",
-  "updated": "2026-11-15",
+  "added": "2026-11-16",
+  "updated": "2026-11-16",
   "submission": null,
   "example": true
 }

@@ -35,8 +35,8 @@
   "download": {
     "name": "GB.CVP",
     "url": "https://github.com/OWNER/parrotcart-gameboy/releases/download/v0.1.2/GB.CVP",
-    "size": 145376,
-    "sha256": "b3f51139e9610a05bf84ed57b0dede1762383aa7cb378d8e4a4e26ca65a40e65"
+    "size": 145723,
+    "sha256": "7c8fcf9a3d2cf9d6b79b0bc886e183c48d1dbd1188a118420ef717e36af5ce75"
   },
   "image": {
     "size": 143104,
@@ -62,7 +62,7 @@
     {
       "file": "screenshot-1.png",
       "size": 1207,
-      "sha256": "68b39cbfdf548ece2ef58950fe907dd4b2c2435b0bf7e025eda853f6e0a55fc9"
+      "sha256": "e8bb1137e6f94564c91de0ee9e5324a9c11fc985f8c25fa7a481d5bdc7cf3309"
     },
     {
       "file": "screenshot-2.png",
@@ -79,8 +79,8 @@
       "notes": "This is an example. When Game Boy is listed, the notes from the 0.1.2 release on GitHub will show here."
     }
   ],
-  "added": "2026-11-15",
-  "updated": "2026-11-15",
+  "added": "2026-11-16",
+  "updated": "2026-11-16",
   "submission": null,
   "example": true
 }

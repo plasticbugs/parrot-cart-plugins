@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.starwars",
   "name": "Star Wars",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "by": "Parrot Cart",
   "description": "Emulator for the vector-based arcade game",
   "repo": "OWNER/parrotcart-starwars",
@@ -14,25 +14,25 @@
   "uses": [
     "usb-host"
   ],
-  "icon": "8142249999244281",
+  "icon": "1f3f381c0e07fffe",
   "file_icon": "0000000000000000",
   "license": {
     "spdx": "BSD-3-Clause",
     "name": "BSD 3-Clause License",
-    "url": "https://github.com/OWNER/parrotcart-starwars/blob/v0.1.2/LICENSE"
+    "url": "https://github.com/OWNER/parrotcart-starwars/blob/v0.1.4/LICENSE"
   },
-  "source_url": "https://github.com/OWNER/parrotcart-starwars/tree/v0.1.2",
+  "source_url": "https://github.com/OWNER/parrotcart-starwars/tree/v0.1.4",
   "credits_url": "https://github.com/OWNER/parrotcart-starwars#credits",
   "release": {
-    "tag": "v0.1.2",
-    "url": "https://github.com/OWNER/parrotcart-starwars/releases/tag/v0.1.2",
+    "tag": "v0.1.4",
+    "url": "https://github.com/OWNER/parrotcart-starwars/releases/tag/v0.1.4",
     "published": "2026-11-15"
   },
   "download": {
     "name": "STARWARS.CVP",
-    "url": "https://github.com/OWNER/parrotcart-starwars/releases/download/v0.1.2/STARWARS.CVP",
-    "size": 178432,
-    "sha256": "1aad821f60c61c122b7cfd19300ea78a3259c0c6f5a6eb39789897a0884a85eb"
+    "url": "https://github.com/OWNER/parrotcart-starwars/releases/download/v0.1.4/STARWARS.CVP",
+    "size": 181290,
+    "sha256": "706299b88a73d4da88c81c5ef1ac1f35afb89913d7d35990e4879ad94070a6ad"
   },
   "image": {
     "size": 177920,
@@ -57,26 +57,26 @@
   "screenshots": [
     {
       "file": "screenshot-1.png",
-      "size": 1219,
-      "sha256": "f28e8bfe61f4911c38360c8be0ce70109845a48287d30fe1615b219477209671"
+      "size": 1221,
+      "sha256": "a88a3d089c51fc23cd6d6a2f139e050473e94f0d24b6c14f5e6374436a6b579c"
     },
     {
       "file": "screenshot-2.png",
-      "size": 464,
-      "sha256": "6535f7c7dc9b533cd9987bf6c25d6364b40661b9089f13a861677518a2fee226"
+      "size": 468,
+      "sha256": "b46fcf3922555ac74cbcb79f166056cbb751d02cd4826a0b4c8541bba4ea8182"
     }
   ],
   "history": [
     {
-      "tag": "v0.1.2",
-      "url": "https://github.com/OWNER/parrotcart-starwars/releases/tag/v0.1.2",
+      "tag": "v0.1.4",
+      "url": "https://github.com/OWNER/parrotcart-starwars/releases/tag/v0.1.4",
       "published": "2026-11-15",
-      "version": "0.1.2",
-      "notes": "This is an example. When Star Wars is listed, the notes from the 0.1.2 release on GitHub will show here."
+      "version": "0.1.4",
+      "notes": "This is an example. When Star Wars is listed, the notes from the 0.1.4 release on GitHub will show here."
     }
   ],
-  "added": "2026-11-15",
-  "updated": "2026-11-15",
+  "added": "2026-11-16",
+  "updated": "2026-11-16",
   "submission": null,
   "example": true
 }

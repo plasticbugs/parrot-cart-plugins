@@ -31,8 +31,8 @@
   "download": {
     "name": "PSGSYNTH.CVP",
     "url": "https://github.com/OWNER/parrotcart-psgsynth/releases/download/v1.0.0/PSGSYNTH.CVP",
-    "size": 95922,
-    "sha256": "a817f89f9fea237465e51b3f2a4a965736b39c24606cc1a217e31228c5ed6f35"
+    "size": 96583,
+    "sha256": "1fc83b462a9aa4bc3e8f251bf8449e209fceed453978e1146b0019e08b15c135"
   },
   "image": {
     "size": 93952,
@@ -61,8 +61,8 @@
     },
     {
       "file": "screenshot-2.png",
-      "size": 1222,
-      "sha256": "6445cdfeafa914e4245f14bcadd51b9058fcdb95d3d8afdbf364bf922a8b8852"
+      "size": 1224,
+      "sha256": "b0555b36f35bac34628faa0a9a89ada7e1a6f3231a150b345e08d1a7a8ff69b3"
     },
     {
       "file": "screenshot-3.png",
@@ -79,8 +79,8 @@
       "notes": "This is an example. When PSG Synth is listed, the notes from the 1.0.0 release on GitHub will show here."
     }
   ],
-  "added": "2026-11-15",
-  "updated": "2026-11-15",
+  "added": "2026-11-16",
+  "updated": "2026-11-16",
   "submission": null,
   "example": true
 }
