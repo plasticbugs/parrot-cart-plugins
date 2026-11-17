@@ -213,12 +213,27 @@ def catalogue_rows(entries, pre=""):
         rows.append(
             f'<tr data-text="{e_(text)}">'
             f'<td class="first"><div class="plugin">{thumb(e, pre)}'
-            f'<div><a href="{pre}plugins/{e_(e["id"])}/">{e_(e["name"])}</a><small>{e_(desc_text(e))}</small></div></div></td>'
+            f'<div><span class="plugin__title">{tvscreen.icon_svg(e["icon"], "m")}'
+            f'<a href="{pre}plugins/{e_(e["id"])}/">{e_(e["name"])}</a></span><small>{e_(desc_text(e))}</small></div></div></td>'
             f'<td data-label="{col["id"]}"><span class="code code--id">{e_(e["id"])}</span></td>'
             f'<td data-label="{col["opens"]}">{f"<span class=code>{e_(opens(e))}</span>" if e["opens"] else f"<span class=muted>{no_files}</span>"}</td>'
             f'<td data-label="{col["version"]}" class="num"><span class="code">{e_(e["version"])}</span></td>'
             f'<td data-label="{col["size"]}" class="num"><span class="code">{kb(e["download"]["size"])}</span></td></tr>')
     return "".join(rows)
+
+
+def about(config):
+    """what Parrot Cart is, under the hero: a few plain lines, the way to get one, and the hardware for the technical"""
+    shop = shop_link(config, "btn", T.html("home.about.shop_button"))
+    rows = "".join(f"<div><dt>{n}</dt><dd>{v}</dd></div>" for n, v in T.rows("home.about.specs", ("name", "value")))
+    return f"""<section class="section about" id="about" aria-labelledby="about-title"><div class="container">
+<div class="about__text">
+<h2 id="about-title">{T.html("home.about.title")}</h2>
+<p class="lead">{T.html("home.about.text")}</p>
+{f'<div class="actions">{shop}</div>' if shop else ""}
+</div>
+<div class="about__specs"><h3>{T.html("home.about.specs_title")}</h3><dl class="specs specs--one">{rows}</dl></div>
+</div></section>"""
 
 
 def home(entries, config):
@@ -232,7 +247,7 @@ def home(entries, config):
 </div>
 {screen_card(plugins_screen, T.html("home.hero.card_caption"), T.text("home.hero.card_code"), "hero-screen",
              T.text("home.hero.card_alt"))}
-</div></section>""",
+</div></section>""", about(config),
             f"""<section class="section" id="plugins" aria-labelledby="plugins-title"><div class="container">
 <div class="headblock"><h2 id="plugins-title">{T.html("home.browse.title")}</h2></div>
 <div class="finder" data-finder="catalogue" data-empty="catalogue-empty" hidden>
@@ -420,7 +435,7 @@ def plugin_page(e, entries, config, root=ROOT):
                   f'</div><p class="note">{T.html("plugin.hero.example_note")}</p>')
     hero = f"""<section class="hero" aria-labelledby="hero-title"><div class="container">
 <div class="hero__text">
-<h1 id="hero-title">{e_(e["name"])}</h1>
+<h1 id="hero-title" class="titled">{tvscreen.icon_svg(e["icon"], "m")}<span>{e_(e["name"])}</span></h1>
 <p class="lead">{desc_html(e, pre)}</p>
 {action}
 </div>

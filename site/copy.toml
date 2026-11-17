@@ -25,7 +25,7 @@ description = "Free plugins for Parrot Cart, the ColecoVision cartridge with a m
 # The big headline. Its last two words stay on one line.
 title = "Plugins for your Parrot Cart"
 # The line under the headline
-lead = "Emulators, utilities and more to enhance your ColecoVision."
+lead = "Emulators, utilities and more for Parrot Cart, the ColecoVision flash cartridge."
 # The first button under the headline
 browse_button = "Browse plugins"
 # The second button under the headline
@@ -36,6 +36,43 @@ card_caption = "The cart's Plugins page"
 card_code = "/PLUGINS"
 # The TV picture's description for screen readers
 card_alt = "A TV showing the cart's Plugins page with these plugins"
+
+[home.about]
+# The section under the headline that says what the cart is: its heading,
+# its line, and the button to the shop (registry.config.json shop_url)
+title = "What is Parrot Cart?"
+text = "Parrot Cart is a flash cartridge for the ColecoVision. It plays your games and movies from a microSD card, and it runs plugins: programs that turn the console into something new."
+shop_button = "Get a Parrot Cart"
+# The hardware list beside it, for the technical
+specs_title = "The hardware"
+
+[[home.about.specs]]
+name = "Chip"
+value = "Raspberry Pi RP2350, the chip in the Pico 2. Two Arm Cortex-M33 cores at 150 MHz: one serves the cartridge port, and the other runs the plugin."
+
+[[home.about.specs]]
+name = "Memory"
+value = "520 KB of RAM on the chip, plus 8 MB of PSRAM."
+
+[[home.about.specs]]
+name = "Flash"
+value = "16 MB. A plugin runs from RAM or straight from flash."
+
+[[home.about.specs]]
+name = "Storage"
+value = "A microSD card holds your games, movies, plugins and saves."
+
+[[home.about.specs]]
+name = "USB‑C"
+value = "Gamepads, keyboards, mice and MIDI keyboards plug in through a powered hub. Plug it into a computer instead, and a plugin can send it music as MIDI."
+
+[[home.about.specs]]
+name = "The console"
+value = "Plugins draw with the ColecoVision's TMS9918A video chip and play through its SN76489 sound chip."
+
+[[home.about.specs]]
+name = "Plugins"
+value = ".CVP files up to 1 MB, written in C with the Raspberry Pi Pico SDK."
 
 [home.browse]
 # The plugin list's heading
