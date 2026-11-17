@@ -3,8 +3,8 @@
 #
 # Each one is eight lines of eight characters, as the SDK reads an icon's .txt
 # file: # is a pixel and . is empty. Keep the top row or the right column clear
-# when you can, so rows on the menu don't run together. The emoji is only a
-# hint shown beside the name; the cart never sees it.
+# when you can, so rows on the menu don't run together. The emoji says which
+# emoji the drawing follows; the page shows only the drawing and its name.
 
 [[icon]]
 slug = "heart"

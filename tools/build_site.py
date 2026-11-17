@@ -183,7 +183,7 @@ def screen_card(screen, caption, code, slot=None, alt=None, extra=""):
     """caption is html; code and alt are plain text"""
     slot_attr = f' data-slot="{slot}" data-alt="{e_(alt)}"' if slot else ""
     return (f'<figure class="card{extra}"><div class="screen"{slot_attr} data-kind="product">{screen.svg()}</div>'
-            f'<figcaption><span>{caption}</span><span class="code">{e_(code)}</span></figcaption></figure>')
+            f'<figcaption><span>{caption}</span><code class="code">{e_(code)}</code></figcaption></figure>')
 
 
 def li_rows(rows, sep=""):
@@ -217,8 +217,8 @@ def catalogue_rows(entries, pre=""):
             f'<a href="{pre}plugins/{e_(e["id"])}/">{e_(e["name"])}</a></span><small>{e_(desc_text(e))}</small></div></div></td>'
             f'<td data-label="{col["id"]}"><span class="code code--id">{e_(e["id"])}</span></td>'
             f'<td data-label="{col["opens"]}">{f"<span class=code>{e_(opens(e))}</span>" if e["opens"] else f"<span class=muted>{no_files}</span>"}</td>'
-            f'<td data-label="{col["version"]}" class="num"><span class="code">{e_(e["version"])}</span></td>'
-            f'<td data-label="{col["size"]}" class="num"><span class="code">{kb(e["download"]["size"])}</span></td></tr>')
+            f'<td data-label="{col["version"]}" class="num"><code class="code">{e_(e["version"])}</code></td>'
+            f'<td data-label="{col["size"]}" class="num"><code class="code">{kb(e["download"]["size"])}</code></td></tr>')
     return "".join(rows)
 
 
@@ -229,6 +229,7 @@ def about(config):
     return f"""<section class="section about" id="about" aria-labelledby="about-title"><div class="container">
 <div class="about__text">
 <h2 id="about-title">{T.html("home.about.title")}</h2>
+<p class="about__big">{T.html("home.about.big")}</p>
 <p class="lead">{T.html("home.about.text")}</p>
 {f'<div class="actions">{shop}</div>' if shop else ""}
 </div>
@@ -286,7 +287,7 @@ def home(entries, config):
         panels = "".join(
             f'<figure class="card panel" role="tabpanel" id="p-{k}" aria-labelledby="t-{k}">'
             f'<div class="screen" data-kind="product">{sc.svg()}</div>'
-            f'<figcaption><span>{t}</span><span class="code">{e_(code)}</span></figcaption></figure>'
+            f'<figcaption><span>{t}</span><code class="code">{e_(code)}</code></figcaption></figure>'
             for k, t, s, sc, code in states)
         body.append(f"""<section class="section" aria-labelledby="change-title"><div class="container">
 <div class="headblock"><h2 id="change-title">{T.html("home.files.title")}</h2><p class="lead">{T.html("home.files.lead")}</p></div>
@@ -332,7 +333,7 @@ def shots_section(e):
         f'<figure class="card shot"><div class="shot__tv"><img src="{s["file"]}" width="{png.WIDTH}" '
         f'height="{png.HEIGHT}" alt="{T.attr("plugin.shots.alt", name=e_(e["name"]), number=i, count=n)}" '
         f'loading="lazy" decoding="async"></div><figcaption><span>{T.html("plugin.shots.caption", number=i)}</span>'
-        f'<span class="code">{png.WIDTH} × {png.HEIGHT}</span></figcaption></figure>'
+        f'<code class="code">{png.WIDTH} × {png.HEIGHT}</code></figcaption></figure>'
         for i, s in enumerate(e["screenshots"], 1))
     lead = T.html("plugin.shots.lead_example") if e.get("example") else T.html("plugin.shots.lead")
     return f"""<section class="section" id="screenshots" aria-labelledby="shots-title"><div class="container">
@@ -354,7 +355,7 @@ def cart_readme_section(e, text, pre):
 <div class="headblock"><h2 id="cart-title">{T.html("plugin.cart_readme.title")}</h2><p class="lead">{T.html("plugin.cart_readme.lead", lines=meta["lines"])}</p></div>
 <div class="cartreadme">
 <figure class="card"><div class="scroll" tabindex="0" role="region" aria-label="{T.attr("plugin.cart_readme.scroll_label")}">{strip.svg()}</div>
-<figcaption><span>{T.html("plugin.cart_readme.caption")}</span><span class="code">{T.html("plugin.cart_readme.size", size=f"{meta['size']:,}")}</span></figcaption></figure>
+<figcaption><span>{T.html("plugin.cart_readme.caption")}</span><code class="code">{T.html("plugin.cart_readme.size", size=f"{meta['size']:,}")}</code></figcaption></figure>
 <div class="cartreadme__text"><h3>{T.html("plugin.cart_readme.text_title")}</h3>
 <pre class="plain">{e_(text)}</pre>
 <p><a class="link" href="{registry.CART_README}">{registry.CART_README}</a></p></div>
@@ -386,7 +387,7 @@ def notes_section(e, live):
         notes = (f'<div class="prose">{markdown.render(h["notes"], base, 4)}</div>' if h["notes"].strip()
                  else f'<p class="muted">{T.html("plugin.notes.none")}</p>')
         items.append(f'<li><div><h3>{e_(h["version"])}</h3><p class="muted">{e_(h["published"])}, '
-                     f'{link_or_text(h["url"], f"""<span class="code">{e_(h["tag"])}</span>""", live)}</p></div>'
+                     f'{link_or_text(h["url"], f"""<code class="code">{e_(h["tag"])}</code>""", live)}</p></div>'
                      f"{notes}</li>")
     return f"""<section class="section" id="notes" aria-labelledby="notes-title"><div class="container">
 <div class="headblock"><h2 id="notes-title">{T.html("plugin.notes.title")}</h2><p class="lead">{T.html("plugin.notes.lead")}</p></div>
@@ -451,7 +452,7 @@ def plugin_page(e, entries, config, root=ROOT):
         (T.html("plugin.details.release"), T.html("plugin.details.release_value", tag=e_(e["release"]["tag"]),
                                                   date=e_(e["release"]["published"]))),
         (T.html("plugin.details.image"), image),
-        (T.html("plugin.details.api"), f'<span class="code">{e["api"]}</span>'),
+        (T.html("plugin.details.api"), f'<code class="code">{e["api"]}</code>'),
         (T.html("plugin.details.github"), link_or_text(f"https://github.com/{e['repo']}", e_(e["repo"]), True) if live
          else T.html("plugin.details.not_public")),
         (T.html("plugin.details.license"), link_or_text(lic["url"], e_(lic["name"]), live)
@@ -606,7 +607,7 @@ def screenshots_part(entries):
         card = (f'<figure class="card shot shot--hero"><div class="shot__tv"><img src="{src}" width="{png.WIDTH}" '
                 f'height="{png.HEIGHT}" alt="{T.attr("authors.screenshots.hero.card_alt", name=e_(pick["name"]))}">'
                 f'</div><figcaption><span>{T.html("authors.screenshots.hero.card_caption")}</span>'
-                f'<span class="code">{png.WIDTH} × {png.HEIGHT}</span></figcaption></figure>')
+                f'<code class="code">{png.WIDTH} × {png.HEIGHT}</code></figcaption></figure>')
     else:
         screen = tvscreen.plugins_page(entries)
         screens.append(screen)
@@ -752,10 +753,10 @@ def pad(kind, title, title_attr, note, colour, name):
 <div class="pad__tools" role="group" aria-label="{T.attr("authors.editor.tools_label")}">
 <button type="button" class="tool" data-do="clear">{T.html("authors.editor.clear")}</button>
 <button type="button" class="tool" data-do="invert">{T.html("authors.editor.invert")}</button>
-<button type="button" class="tool" data-do="left" aria-label="{T.attr("authors.editor.move_left")}">&larr;</button>
-<button type="button" class="tool" data-do="right" aria-label="{T.attr("authors.editor.move_right")}">&rarr;</button>
-<button type="button" class="tool" data-do="up" aria-label="{T.attr("authors.editor.move_up")}">&uarr;</button>
-<button type="button" class="tool" data-do="down" aria-label="{T.attr("authors.editor.move_down")}">&darr;</button>
+<button type="button" class="tool" data-do="left" aria-label="{T.attr("authors.editor.move_left")}"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false" transform="rotate(180)"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.75"/></svg></button>
+<button type="button" class="tool" data-do="right" aria-label="{T.attr("authors.editor.move_right")}"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.75"/></svg></button>
+<button type="button" class="tool" data-do="up" aria-label="{T.attr("authors.editor.move_up")}"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false" transform="rotate(-90)"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.75"/></svg></button>
+<button type="button" class="tool" data-do="down" aria-label="{T.attr("authors.editor.move_down")}"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false" transform="rotate(90)"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.75"/></svg></button>
 </div>
 <label class="field">{T.html("authors.editor.hex_label")}<input class="code" type="text" data-hex value="0000000000000000"
  maxlength="64" spellcheck="false" autocomplete="off" autocapitalize="off"></label>
@@ -798,7 +799,7 @@ def tools_page(entries, config):
                    T.html("authors.editor.file_icon_note"), "g", "file_icon.txt")
     picks = "".join(
         f'<li class="pick">{tvscreen.icon_svg(hx, "m")}'
-        f'<p class="pick__name"><span class="pick__emoji" aria-hidden="true">{e_(emoji)}</span> {e_(name)}</p>'
+        f'<p class="pick__name">{e_(name)}</p>'
         f'<p class="pick__do"><a class="link" href="#p={hx}" data-use hidden '
         f'aria-label="{T.attr("authors.tools.use_label", name=name)}">{T.html("authors.tools.use")}</a>'
         f'<a class="link" href="icons/{slug}.txt" download="icon.txt" '

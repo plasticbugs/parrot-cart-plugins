@@ -51,7 +51,7 @@ def inline(s, link=LINK):
         out.append(_esc(s[at:m.start()]))
         code, bold, text, url = m.groups()
         if code is not None:
-            out.append(f'<span class="code">{_esc(code)}</span>')
+            out.append(f'<code class="code">{_esc(code)}</code>')
         elif bold is not None:
             out.append(f"<b>{inline(bold, link)}</b>")
         else:

@@ -4,7 +4,7 @@
   "name": "ColecoVision",
   "version": "1.0.1",
   "by": "Parrot Cart",
-  "description": "Player for ColecoVision games from the SD card",
+  "description": "Play ColecoVision games from your SD card",
   "repo": "OWNER/parrotcart-colecovision",
   "repo_id": null,
   "owner": "OWNER",

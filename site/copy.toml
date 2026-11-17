@@ -41,14 +41,16 @@ card_alt = "A TV showing the cart's Plugins page with these plugins"
 # The section under the headline that says what the cart is: its heading,
 # its line, and the button to the shop (registry.config.json shop_url)
 title = "What is Parrot Cart?"
-text = "Parrot Cart is a flash cartridge for the ColecoVision. It plays your games and movies from a microSD card, and it runs plugins: programs that turn the console into something new."
+# The bigger line right under that heading
+big = "More than a flash cart."
+text = "It's a flash cartridge for the ColecoVision that plays your games and movies from a microSD card. It also runs plugins, programs that turn the console into something new."
 shop_button = "Get a Parrot Cart"
 # The hardware list beside it, for the technical
 specs_title = "The hardware"
 
 [[home.about.specs]]
 name = "Chip"
-value = "Raspberry Pi RP2350, the chip in the Pico 2. Two Arm Cortex-M33 cores at 150 MHz: one serves the cartridge port, and the other runs the plugin."
+value = "Raspberry Pi RP2350, the chip in the Pico 2. Two Arm Cortex-M33 cores at 150 MHz. One serves the cartridge port, and the other runs the plugin."
 
 [[home.about.specs]]
 name = "Memory"
@@ -1022,7 +1024,7 @@ shop = "Get a Parrot Cart"
 [footer]
 # The first column: a heading and a line
 title = "Parrot Cart plugins"
-tagline = "Free plugins for your Parrot Cart, all in one place."
+tagline = "Free plugins for Parrot Cart, the flash cartridge for the ColecoVision."
 # The link under that line, to the cart's shop
 shop = "Get a Parrot Cart"
 # The second column's heading (the plugins' names follow)

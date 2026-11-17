@@ -75,7 +75,7 @@ SEEDS = {
     "parrotcart.movies": ("parrotcart-movies", (None, "Not chosen yet", None),
                           "Player for movies made with the [movie converter](converter/)"),
     "parrotcart.colecovision": ("parrotcart-colecovision", (None, "Not chosen yet", None),
-                                "Player for ColecoVision games from the SD card"),
+                                "Play ColecoVision games from your SD card"),
 }
 
 CREDITS = {

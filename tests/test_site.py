@@ -270,7 +270,7 @@ class Copy(unittest.TestCase):
         t = sitecopy.Copy(data={"a": "Tom & Jerry <b>x</b> 'q' \"r\" `<i>` **B** [l](../x/?a=1&b=2) {n}",
                                 "bad": "[x](javascript:void)", "odd": "[x](javascript:alert(1))"})
         self.assertEqual(t.html("a", n="<v>"),
-                         "Tom &amp; Jerry &lt;b&gt;x&lt;/b&gt; 'q' \"r\" <span class=\"code\">&lt;i&gt;</span> "
+                         "Tom &amp; Jerry &lt;b&gt;x&lt;/b&gt; 'q' \"r\" <code class=\"code\">&lt;i&gt;</code> "
                          "<b>B</b> <a class=\"link\" href=\"../x/?a=1&amp;b=2\">l</a> <v>")
         self.assertNotIn('"r"', t.attr("a", n=""))
         with self.assertRaises(sitecopy.CopyError):
