@@ -139,7 +139,7 @@ class Portal(unittest.TestCase):
         self.assertIn(f'href="{REPO}/tree/main/examples/sound"', page)
         self.assertIn(f'href="{REPO}/tree/main/src"', page)
         self.assertIn('<h2 id="two-kinds-of-plugin">Two kinds of plugin</h2>', page)
-        self.assertIn('<h2 id="building-them">Building them</h2>', page)
+        self.assertIn('<h2 id="building-the-examples">Building the examples</h2>', page)
         self.assertNotIn("<table", page)                   # the kit's list of examples is the cards
         self.assertIn("never both (<code>sound</code>)", page)      # a bare name isn't a path: no link
         self.assertEqual(page.count('<path class="tv-m" d="'), 2)      # each one's icon

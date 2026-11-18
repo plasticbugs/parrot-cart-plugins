@@ -174,7 +174,7 @@ def check_entry(e, filename=None):
     if "example" in e and not isinstance(e["example"], bool):
         bad.append("example: true or false")
     if "built_in" in e and not (e["built_in"] is True and e.get("example") is True):
-        bad.append("built_in: only true, and only on an example (one of the cart's own)")
+        bad.append("built_in: it can only be true, and only on an example (one of the plugins we make)")
     if filename and e.get("id") and os.path.basename(filename) != e["id"] + ".json":
         bad.append(f"the file is {os.path.basename(filename)}, the ID {e['id']}")
     return bad
@@ -265,7 +265,7 @@ def ownership(entries, pid, repo_id, full, shared=()):
         for e in entries.values():
             if e["id"].split(".")[0] == prefix and e.get("owner", "").lower() != owner:
                 return (f"the developer part {prefix!r} is already used by {e['owner']} "
-                        f"({e['id']}). Use one of your own")
+                        f"({e['id']}). Please pick a different one, such as your GitHub username")
     return None
 
 

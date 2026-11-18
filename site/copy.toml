@@ -43,14 +43,14 @@ card_alt = "A TV showing the cart's Plugins page with these plugins"
 title = "What is Parrot Cart?"
 # The bigger line right under that heading
 big = "More than a flash cart."
-text = "It's a flash cartridge for the ColecoVision that plays your games and movies from a microSD card. It also runs plugins, programs that turn the console into something new."
+text = "It's a flash cartridge for the ColecoVision that plays your games and movies from a microSD card. It also runs plugins, which are programs that turn the console into something new."
 shop_button = "Get a Parrot Cart"
 # The hardware list beside it, for the technical
 specs_title = "The hardware"
 
 [[home.about.specs]]
 name = "Chip"
-value = "Raspberry Pi RP2350, the chip in the Pico 2. Two Arm Cortex-M33 cores at 150 MHz. One serves the cartridge port, and the other runs the plugin."
+value = "A Raspberry Pi RP2350, the chip in the Pico 2, with two Arm Cortex-M33 cores at 150 MHz. One core talks to the console, and the other runs the plugin."
 
 [[home.about.specs]]
 name = "Memory"
@@ -66,11 +66,11 @@ value = "A microSD card holds your games, movies, plugins and saves."
 
 [[home.about.specs]]
 name = "USB‑C"
-value = "Gamepads, keyboards, mice and MIDI keyboards plug in through a powered hub. Plug it into a computer instead, and a plugin can send it music as MIDI."
+value = "Gamepads, keyboards, mice and MIDI keyboards plug in through a powered hub. If you plug the cart into a computer instead, a plugin can send music to it as MIDI."
 
 [[home.about.specs]]
 name = "The console"
-value = "Plugins draw with the ColecoVision's TMS9918A video chip and play through its SN76489 sound chip."
+value = "Plugins use the ColecoVision's TMS9918A video chip for the picture and its SN76489 sound chip for sound."
 
 [[home.about.specs]]
 name = "Plugins"
@@ -78,7 +78,7 @@ value = ".CVP files up to 1 MB, written in C with the Raspberry Pi Pico SDK."
 
 [home.browse]
 # The plugin list's heading
-title = "Browse Plugins"
+title = "Browse plugins"
 # The search box's label
 search_label = "Search by name or file type"
 # In the Opens column, for a plugin that opens no files
@@ -98,7 +98,7 @@ size = "Size"
 # The heading over the Before / Copied / After pictures
 title = "How plugins work with files"
 # Under that heading
-lead = "The card only shows files that are associated with a plugin."
+lead = "The menu hides a type of file until you add a plugin that opens it."
 # The tab list's name for screen readers
 tabs_label = "Step by step"
 # The first tab. Its text takes {ext} and {folder}.
@@ -194,7 +194,7 @@ title = "On the TV"
 # Under that heading, for a listed plugin
 lead = "These are the author's screenshots, shown pixel for pixel."
 # Under that heading, for an example plugin
-lead_example = "These pictures show this example on the cart. A real plugin shows the author's own screenshots here."
+lead_example = "These pictures show this example on the cart. A listed plugin shows its author's screenshots here."
 # Under each screenshot. Takes {number}.
 caption = "Picture {number}"
 # Each screenshot's description for screen readers. Takes {name}, {number} and {count}.
@@ -270,7 +270,7 @@ release = "Release {tag}"
 # The card's last line
 go = "Browse the code"
 # Instead of the card, for one of our examples whose repo isn't public yet
-not_public = "Its code goes up on GitHub with its first release."
+not_public = "We'll put the code on GitHub with the first release."
 
 [plugin.notes]
 # The heading over the release notes
@@ -346,7 +346,7 @@ text = "We look it over and approve it."
 
 [[submit.steps.boxes]]
 title = "This site"
-text = "Your plugin gets its own page."
+text = "Your plugin gets a page here."
 
 [[submit.steps.boxes]]
 title = "SD cards"
@@ -364,19 +364,19 @@ title = "Requirements"
 # {screenshots_page}, the links to those help pages.
 [[submit.requirements.rows]]
 title = "The .CVP"
-text = "Under 1 MB."
+text = "It has to be under 1 MB."
 
 [[submit.requirements.rows]]
 title = "The README"
-text = "Goes [inside the .CVP]({readme_page})."
+text = "It goes [inside the .CVP]({readme_page})."
 
 [[submit.requirements.rows]]
 title = "Screenshots"
-text = "Up to three, as [256 × 192 PNGs]({screenshots_page})."
+text = "You can add up to three, as [256 × 192 PNGs]({screenshots_page})."
 
 [[submit.requirements.rows]]
 title = "Your repo"
-text = "Public, with a license."
+text = "It has to be public and have a license."
 
 [submit.check]
 # The last band's heading

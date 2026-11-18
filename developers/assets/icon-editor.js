@@ -66,7 +66,7 @@
       if (from !== txt) { txt.value = toTxt(pad.rows); txt.removeAttribute('aria-invalid'); }
       const empty = pad.rows.every((b) => !b);
       if (glyph) glyph.setAttribute('d', toPath(empty ? fromHex(fallback[kind]) : pad.rows));
-      if (!from) say(empty ? "It's empty, so the menu will draw its own icon." : '');
+      if (!from) say(empty ? "It's empty, so the menu will use its standard icon." : '');
       saveHash();
     };
     const set = (x, y, on) => {

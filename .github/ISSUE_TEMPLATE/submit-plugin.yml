@@ -8,16 +8,18 @@ body:
       value: |
         Tell us which GitHub repo your plugin is in. We'll check your latest
         release and reply here. If it passes, we'll add your plugin to the
-        registry. We only read your files. We never run anything.
+        registry. We only read your files, and we never run anything from
+        your repo.
 
-        After that, new releases are picked up automatically.
+        After that, we'll pick up your new releases automatically.
 
         Your plugin's page shows your README, your release notes and up to
-        three screenshots. Attach them to the release as `screenshot-1.png`,
-        `screenshot-2.png` and `screenshot-3.png` (PNG, 256 × 192, 100 KB max
-        each).
+        three screenshots. Attach the screenshots to the release as
+        `screenshot-1.png`, `screenshot-2.png` and `screenshot-3.png` (PNG,
+        256 × 192, 100 KB max each).
 
-        More details: https://plasticbugs.github.io/parrot-cart-plugins/developers/packaging/
+        You can read more on the Packaging page at
+        https://plasticbugs.github.io/parrot-cart-plugins/developers/packaging/
   - type: input
     id: repo
     attributes:
@@ -39,7 +41,7 @@ body:
     attributes:
       label: Short description
       description: Describe your plugin in one line, up to 160 characters.
-      placeholder: Plays .xyz files on the console, with USB pads.
+      placeholder: Player for .xyz files, with USB pad support
     validations:
       required: true
   - type: checkboxes
@@ -52,5 +54,5 @@ body:
           required: true
         - label: The repo and the release, including screenshots, have no commercial game art, ROMs or other files I don't have the right to share.
           required: true
-        - label: You can copy this release's README, release notes and screenshots and show them on the plugin's page.
+        - label: You may show this release's README, release notes and screenshots on the plugin's page.
           required: true

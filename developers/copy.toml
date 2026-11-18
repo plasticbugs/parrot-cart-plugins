@@ -1,6 +1,6 @@
 # All the words on the Parrot Cart developer portal (developers/ on the
-# plugins site), except the docs themselves: those are the starter kit's own
-# Markdown files, shown as they are. Edit the text inside the quotes. The
+# plugins site), except the docs themselves. Those are the Markdown files in
+# the starter kit, shown as they are. Edit the text inside the quotes. The
 # comment above each line says where it shows.
 #
 #   - Keep every {placeholder} in braces. The portal fills it in with a name,
@@ -80,44 +80,44 @@ font_credit = "The TV screens use the cart menu's font, Empty Windows Unboxed by
 # The browser tab
 page_title = "Parrot Cart developers"
 # The summary search engines show
-description = "Make plugins for Parrot Cart, the flash cartridge for the ColecoVision. The starter kit, the SDK, the hardware, examples and an icon editor."
+description = "Make plugins for Parrot Cart, the flash cartridge for the ColecoVision. Here you'll find the starter kit, the SDK reference, the hardware details, examples and an icon editor."
 
 [home.hero]
 # The big headline
 title = "Make plugins for Parrot Cart"
 # The line under it
-lead = "Write one in C, and the ColecoVision puts it on the TV."
+lead = "Plugins are C programs that use the ColecoVision's picture, sound and controllers."
 # The two buttons under it: the starter kit on GitHub, and the first doc
 kit_button = "Get the starter kit"
 start_button = "Get started"
 # Under the picture, and the tag at its right
-card_caption = "The starter kit's own plugin"
+card_caption = "The plugin in the starter kit"
 card_code = "256 × 192"
 # The picture's text for screen readers
-card_alt = "The TV showing the starter kit's plugin: HELLO, PARROT CART, the stick and fire button being pressed, and PRESSES 2."
+card_alt = "A TV showing the starter kit's plugin, with HELLO, PARROT CART, the stick and fire button being pressed, and PRESSES 2."
 
 [home.map]
 # The section under the hero: its heading, and the line under it
 title = "The docs"
-lead = "Read them in order the first time. After that, the SDK and the hardware pages are the ones you'll keep open."
+lead = "If this is your first plugin, start with [Get started](start/)."
 
 [map]
 # The line under each page's name in that section
 start = "Install the tools and build your first plugin."
-hardware = "The chips, the memory, and what you can use."
-sdk = "The libraries a plugin is built from."
-features = "Each USB feature, its API and its cost."
-examples = "One small plugin for each thing a plugin can do."
+hardware = "What's on the cart, and what your plugin can use."
+sdk = "The libraries you build a plugin with."
+features = "How to add game pads, keyboards, mice and MIDI."
+examples = "Small plugins that each show one thing you can do."
 testing = "Test on your computer, then on a console."
-rules = "IDs, versions, sizes, and what a plugin may do."
-packaging = "The README, the screenshots and the icons."
-release = "Tag it, and tell the plugins site."
+rules = "IDs, versions, size limits, and what a plugin is allowed to do."
+packaging = "Your README, screenshots and icons."
+release = "How to tag a release and get it listed."
 tools = "Draw your icons in the browser."
 
 [home.close]
 # The last band: its heading, the line under it, and its two buttons
 title = "Share your plugin"
-text = "When it works on a console, submit it to the plugins site. People find it and download it there."
+text = "When your plugin works on a console, submit it to the plugins site so people can find it and download it."
 submit_button = "Submit a plugin"
 plugins_button = "See the plugins"
 
@@ -133,8 +133,8 @@ previous = "Previous"
 next = "Next"
 # Those two links' name for screen readers
 pager_label = "Previous and next page"
-# The note at the top of the SDK page, over the SDK's own README
-sdk_note = "This is the SDK's own reference, as the starter kit carries it. Where it names `../nes`, `../padtest` or `docs/plugins.md`, those are in the cart's own repository. The cart's plugins are published with their source on [GitHub](https://github.com/plasticbugs)."
+# The note at the top of the SDK page, over the SDK's README
+sdk_note = "This is the SDK reference from the starter kit. When it mentions `../nes`, `../padtest` or `docs/plugins.md`, those are in the cart's repository. Our plugins and their source code are on [GitHub](https://github.com/plasticbugs)."
 
 
 # ==== The examples page (developers/examples/) ================================
@@ -147,12 +147,12 @@ description = "Small Parrot Cart plugins, one for each thing a plugin can do: th
 # The big headline
 title = "Examples"
 # The line under it
-lead = "One small plugin for each thing a plugin can do. Start from the one closest to yours."
+lead = "Each example is a small plugin that shows one thing. Start from the one closest to what you want to make."
 # Each example's link to its folder on GitHub, and its name for screen readers (takes {name})
-source = "Its code"
+source = "Code on GitHub"
 source_label = "{name}'s code on GitHub"
 # The heading over the starter kit's notes on the examples, under the list
-notes_title = "Building them"
+notes_title = "Building the examples"
 
 
 # ==== The Packaging page (developers/packaging/) ==============================
@@ -166,9 +166,9 @@ description = "Your Parrot Cart plugin's release needs a .CVP, a README and a li
 starter_kit = "the starter kit"
 # The link to the hardware page (in the line under the buttons)
 hardware_link = "The hardware page"
-# The line under each part's text, naming the starter kit's own copy of it.
+# The line under each part's text, naming the file for it in the starter kit.
 # Takes {file}, the link.
-in_kit = "Also in the starter kit as {file}."
+in_kit = "The starter kit has this as {file}."
 # The small link under each part's heading
 back_to_top = "Back to the top"
 
@@ -182,7 +182,7 @@ submit_button = "Submit a plugin"
 tools_button = "Icon editor"
 # The small line under the buttons. Takes {starter_kit}, the link.
 # Takes {hardware} too, the link to the hardware page.
-starter_note = "Start from {starter_kit}. It's a working plugin with a README and icons, and it builds your releases on GitHub for you. {hardware} lists the chips and what a plugin can use."
+starter_note = "Start from {starter_kit}. It's a working plugin with a README and icons, and its GitHub workflow builds your releases. {hardware} lists the chips and what a plugin can use."
 
 [packaging.pages]
 # The tiles' name for screen readers
@@ -194,7 +194,7 @@ readme_text = "Write one README.md for the plugins site and the cart."
 screenshots_title = "Screenshots"
 screenshots_text = "Add up to three, each 256 × 192."
 icons_title = "Icons"
-icons_text = "Draw two 8 × 8 icons, and the menu colors them."
+icons_text = "Draw two 8 × 8 icons. The menu picks their colors."
 tools_title = "Icon editor"
 tools_text = "Draw your icons, or pick a ready-made one."
 
@@ -305,7 +305,7 @@ text = "Add a line with the word “source” and a link to your code. This part
 # The section's heading
 title = "How the SDK converts it"
 # Under that heading
-lead = "The SDK converts README.md when it builds your plugin."
+lead = "It happens each time you build your plugin."
 # The table's column headings
 columns = ["Markdown", "On the cart"]
 # The commands in the box under the table
@@ -332,7 +332,7 @@ cart = "Each item starts with `-` or `1.`, and wrapped lines are indented under 
 
 [[packaging.readme.convert.rows]]
 markdown = "A link"
-cart = "You get the text, then the URL. A long URL goes on its own line."
+cart = "You get the text, then the URL. A long URL goes on a line by itself."
 
 [[packaging.readme.convert.rows]]
 markdown = "Code"
@@ -501,7 +501,7 @@ title = "What to show"
 
 [[packaging.screenshots.show.rows]]
 title = "The plugin itself"
-text = "Show the plugin's own screens, with the one people see most first."
+text = "Show the plugin's screens, starting with the one people see most."
 
 [[packaging.screenshots.show.rows]]
 title = "Nothing you can't share"
@@ -533,7 +533,7 @@ text = "The console only has 15 colors, so an indexed PNG is exact and small."
 # The section's heading
 title = "Screenshots we can't use"
 # Under that heading
-lead = "A bad screenshot stops your submission. We'll tell you which one and why."
+lead = "We can't list your plugin until every screenshot is right. We'll tell you which one has a problem and why."
 # The table's column headings
 columns = ["Problem", "For example"]
 
@@ -617,7 +617,7 @@ rule = "The menu picks it. Plugin icons are magenta and file icons are light gre
 
 [[packaging.icons.spec.rows]]
 name = "All zeros"
-rule = "That means no icon. The menu shows its own plug or plain file icon instead."
+rule = "That means no icon, so the menu shows its plug or plain file icon instead."
 
 [[packaging.icons.spec.rows]]
 name = "Per screen"
@@ -731,7 +731,7 @@ save_button = "Save {file}"
 open_button = "Open a .txt file"
 copy_button = "Copy hex"
 # The small note under the two grids
-keys = "On the keyboard, the arrow keys move around. Space or Enter turns a pixel on or off. Hold Shift with an arrow to copy the pixel as you move. If you leave an icon empty, the menu uses its own."
+keys = "On the keyboard, the arrow keys move around. Space or Enter turns a pixel on or off. Hold Shift with an arrow to copy the pixel as you move. If you leave an icon empty, the menu uses its standard icon."
 # The preview's name for screen readers
 preview_label = "Your icons on the cart's menu"
 # Under the first preview picture, and its tag
@@ -741,7 +741,7 @@ plugins_code = "magenta"
 folder_caption = "A folder of the plugin's files"
 folder_code = "light green"
 # The small note under the previews. Takes {icons_page}, the link.
-sdk_note = "Give the files to the SDK with `ICON icon.txt FILE_ICON file_icon.txt`. Your drawing is saved in this page's address, so you can bookmark it. [Icon requirements]({icons_page})"
+sdk_note = "Pass the files to the SDK with `ICON icon.txt FILE_ICON file_icon.txt`. Your drawing is saved in this page's address, so you can bookmark it. [Icon requirements]({icons_page})"
 
 # ---- The rest of the Tools page ----
 
@@ -756,7 +756,7 @@ title = "Icon editor"
 lead = "Everything here runs in your browser. Nothing gets uploaded."
 # The ready-made icons: their heading and the line under it
 gallery_title = "Ready-made icons"
-gallery_lead = "Can't draw? Pick one of these. Use it opens it in the editor above, and Save downloads it as icon.txt."
+gallery_lead = "You can also start from one of these. **Use it** opens an icon in the editor above, and **Save** downloads it as icon.txt."
 # The note under them
 gallery_note = "They're free to use in any plugin, with no credit needed."
 # Each icon's two links, and their names for screen readers. The names take {name}.

@@ -114,7 +114,7 @@ class Site(unittest.TestCase):
         self.assertIn('<a class="repo" href="https://github.com/fixture-dev/nes-plugin">', page)
         self.assertNotIn(">Needs<", pages["index.html"])
         _, pages, _ = self.build()
-        self.assertIn("Its code goes up on GitHub", pages["plugins/parrotcart.nes/index.html"])
+        self.assertIn("the code on GitHub with the first release", pages["plugins/parrotcart.nes/index.html"])
         self.assertNotIn('id="source"', pages["plugins/parrotcart.movies/index.html"])
 
     def test_old_authors_pages_send_you_on(self):
