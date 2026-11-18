@@ -649,7 +649,7 @@ lead = "Menu rows touch, so there's no gap between one icon and the next."
 
 [[packaging.icons.design.rows]]
 title = "Leave an edge clear"
-text = "The menu's icons leave the top row and the right column empty, so they don't run into each other."
+text = "The menu's icons leave the top row, the bottom row and the right column empty, so they don't run into each other or into the name beside them."
 
 [[packaging.icons.design.rows]]
 title = "Use solid shapes"

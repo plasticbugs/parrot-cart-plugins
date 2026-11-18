@@ -2,7 +2,7 @@
 # Anyone may use them in their plugin, for anything (they're CC0).
 #
 # Each one is eight lines of eight characters, as the SDK reads an icon's .txt
-# file: # is a pixel and . is empty. Keep the top row or the right column clear
+# file: # is a pixel and . is empty. Keep the top row, the bottom row and the right column clear
 # when you can, so rows on the menu don't run together. The emoji says which
 # emoji the drawing follows; the page shows only the drawing and its name.
 
