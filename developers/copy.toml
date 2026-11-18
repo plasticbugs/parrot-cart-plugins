@@ -194,7 +194,7 @@ readme_text = "Write one README.md for the plugins site and the cart."
 screenshots_title = "Screenshots"
 screenshots_text = "Add up to three, each 256 × 192."
 icons_title = "Icons"
-icons_text = "Draw two 8 × 8 icons. The menu picks their colors."
+icons_text = "Draw two 8 × 8 icons. The menu sets their colors."
 tools_title = "Icon editor"
 tools_text = "Draw your icons, or pick a ready-made one."
 
@@ -242,7 +242,7 @@ text = "[Two 8 × 8 one-color icons]({icons_page}), one for the plugin and one f
 # The last band on the Packaging and Tools pages: its heading
 title = "Check your plugin before you release it"
 # Under that heading. Takes {registry}, the plugins site's repo on GitHub.
-text = "Clone [the plugins site's repo]({registry}) and run this command. It shows your plugin's details, your README and anything the cart would refuse."
+text = "Clone [the plugins site's repo]({registry}) and run this command. It shows your plugin's details, your README and any problem that would keep it from loading on the cart."
 # The command in the box
 command = "python3 tools/cvp.py YOURPLUGIN.CVP"
 
@@ -579,7 +579,7 @@ how = "It links to each one, for apps that install plugins."
 # Part 3's heading
 title = "Two 8 × 8 icons"
 # The line under the headline
-lead = "You need one for the plugin and one for the files it opens. Each pixel is on or off, and the menu picks the color."
+lead = "You need one for the plugin and one for the files it opens. Each pixel is on or off, and the menu sets the color."
 # The two buttons under it
 editor_button = "Open the icon editor"
 gallery_button = "Pick a ready-made icon"
@@ -613,7 +613,7 @@ rule = "The top row comes first. Bit 7 is the left pixel."
 
 [[packaging.icons.spec.rows]]
 name = "Color"
-rule = "The menu picks it. Plugin icons are magenta and file icons are light green. The background is black, or dark blue on the selected row."
+rule = "The menu sets it. Plugin icons are magenta and file icons are light green. The background is black, or dark blue on the selected row."
 
 [[packaging.icons.spec.rows]]
 name = "All zeros"

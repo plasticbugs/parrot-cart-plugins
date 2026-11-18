@@ -382,7 +382,7 @@ text = "It has to be public and have a license."
 # The last band's heading
 title = "Check your plugin before you release it"
 # Under that heading
-text = "Clone this site's repo and run this command. It shows your plugin's details and anything the cart would refuse."
+text = "Clone this site's repo and run this command. It shows your plugin's details and any problem that would keep it from loading on the cart."
 # The command in the box
 command = "python3 tools/cvp.py YOURPLUGIN.CVP"
 
