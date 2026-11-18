@@ -55,13 +55,14 @@ PAGES = (
     ("docs/features.md",                 "features",  "build",   "nav.features"),
     (None,                               "examples",  "build",   "nav.examples"),
     ("docs/simulator.md",                "simulator", "build",   "nav.simulator"),
+    ("docs/lua.md",                      "lua",       "build",   "nav.lua"),
     ("docs/testing.md",                  "testing",   "build",   "nav.testing"),
     ("docs/plugin-rules.md",             "rules",     "publish", "nav.rules"),
     (None,                               "packaging", "publish", "nav.packaging"),
     ("docs/release-checklist.md",        "release",   "publish", "nav.release"),
     (None,                               "tools",     "tools",   "nav.tools"),
 )
-OPTIONAL = {"docs/features.md", "docs/simulator.md"}         # a kit without one of these just has no such page or link
+OPTIONAL = {"docs/features.md", "docs/simulator.md", "docs/lua.md"}         # a kit without one of these just has no such page or link
 GROUPS = ("start", "build", "publish", "tools")         # side.<group> names them
 TOP_NAV = ("start", "hardware", "sdk", "examples", "tools")     # the header's menu, before Plugins
 # kit docs the Packaging page covers: a link to one goes to its part there
