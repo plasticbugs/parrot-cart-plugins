@@ -5,9 +5,9 @@
   "version": "0.2.7",
   "by": "Parrot Cart",
   "description": "Engine for classic point-and-click adventure games",
-  "repo": "OWNER/parrotcart-scumm",
+  "repo": "plasticbugs/parrot-plugin-scumm",
   "repo_id": null,
-  "owner": "OWNER",
+  "owner": "plasticbugs",
   "api": 1,
   "home": "/SCUMM",
   "opens": [
@@ -20,18 +20,18 @@
   "license": {
     "spdx": "GPL-3.0",
     "name": "GNU General Public License v3.0",
-    "url": "https://github.com/OWNER/parrotcart-scumm/blob/v0.2.7/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-scumm/blob/main/LICENSE"
   },
-  "source_url": "https://github.com/OWNER/parrotcart-scumm/tree/v0.2.7",
-  "credits_url": "https://github.com/OWNER/parrotcart-scumm#credits",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-scumm",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-scumm#credits",
   "release": {
-    "tag": "v0.2.7",
-    "url": "https://github.com/OWNER/parrotcart-scumm/releases/tag/v0.2.7",
+    "tag": "main",
+    "url": "https://github.com/plasticbugs/parrot-plugin-scumm",
     "published": "2026-11-15"
   },
   "download": {
     "name": "SCUMM.CVP",
-    "url": "https://github.com/OWNER/parrotcart-scumm/releases/download/v0.2.7/SCUMM.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-scumm",
     "size": 973902,
     "sha256": "0eec0edb6895d2a1bebf6f21c820517d78a0faf50bd224c8008c4854df10df3a"
   },
@@ -44,15 +44,15 @@
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 455,
-      "sha256": "8fd704ec4ad4b5fda20bc186fea78e24babae92747fab34576325ece3f2f53e3",
-      "lines": 30
+      "size": 3059,
+      "sha256": "da0c1e0eaf4a260b74defe1f141ac9c1f118b568059c36ea2ffac2a96f4d1133",
+      "lines": 150
     },
     "web": {
       "file": "README.md",
-      "size": 496,
-      "sha256": "9d9e93f170537dd4cb495633d59b80f16b056dde9a3390988e592259d05bcdfa",
-      "url": "https://github.com/OWNER/parrotcart-scumm#credits"
+      "size": 5175,
+      "sha256": "7001512b6953fe132a198d999face2e8adc8ae57f1b6e8e55cb49600f6f7b577",
+      "url": "https://github.com/plasticbugs/parrot-plugin-scumm#credits"
     }
   },
   "screenshots": [
@@ -69,15 +69,15 @@
   ],
   "history": [
     {
-      "tag": "v0.2.7",
-      "url": "https://github.com/OWNER/parrotcart-scumm/releases/tag/v0.2.7",
+      "tag": "main",
+      "url": "https://github.com/plasticbugs/parrot-plugin-scumm",
       "published": "2026-11-15",
       "version": "0.2.7",
-      "notes": "This is an example. When SCUMM is listed, the notes from the 0.2.7 release on GitHub will show here."
+      "notes": "SCUMM has no release yet. The first one is coming."
     }
   ],
   "added": "2026-11-16",
-  "updated": "2026-11-16",
+  "updated": "2026-11-18",
   "submission": null,
   "example": true
 }

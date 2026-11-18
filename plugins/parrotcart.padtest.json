@@ -1,0 +1,81 @@
+{
+  "schema": 2,
+  "id": "parrotcart.padtest",
+  "name": "Pad Test",
+  "version": "0.1.2",
+  "by": "Parrot Cart",
+  "description": "Tester for USB gamepads",
+  "repo": "plasticbugs/parrot-plugin-padtest",
+  "repo_id": 1461218970,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "",
+  "opens": [],
+  "uses": [
+    "usb-host"
+  ],
+  "icon": "3c4299819999423c",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": "MIT",
+    "name": "MIT License",
+    "url": "https://github.com/plasticbugs/parrot-plugin-padtest/blob/v0.1.2/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-padtest/tree/v0.1.2",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-padtest/blob/v0.1.2/README.md",
+  "release": {
+    "tag": "v0.1.2",
+    "url": "https://github.com/plasticbugs/parrot-plugin-padtest/releases/tag/v0.1.2",
+    "published": "2026-11-17"
+  },
+  "download": {
+    "name": "PADTEST.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-padtest/releases/download/v0.1.2/PADTEST.CVP",
+    "size": 97935,
+    "sha256": "bbe16d4bcc56c7489999f7ce4f24f672c6b8e67dae12edeec556607f7e5a64b7"
+  },
+  "image": {
+    "size": 95744,
+    "sha256": "3f1cdc4cc59af7fccb3b425c3481b166342326c86454db06ed0faafc18ab3c2e",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 1679,
+      "sha256": "1164de0e99fbf8acc579219d6a9ca8d5e40beb770395d1057b10aa4237988166",
+      "lines": 82
+    },
+    "web": {
+      "file": "README.md",
+      "size": 2423,
+      "sha256": "75c755bbc3ad060a87490165336aeba6741c4102ab1cded38595b73f41c0053f",
+      "url": "https://github.com/plasticbugs/parrot-plugin-padtest/blob/v0.1.2/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1188,
+      "sha256": "058f9e9f4773608cebfe9b579d916a6d9ae97b4f818438563fa34fab19781382"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 460,
+      "sha256": "0b843e772816c9c4b1793c7e9adc5fd632e417e4853d01b998df9ec0f00e049c"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.2",
+      "url": "https://github.com/plasticbugs/parrot-plugin-padtest/releases/tag/v0.1.2",
+      "published": "2026-11-17",
+      "version": "0.1.2",
+      "notes": "**Full Changelog**: https://github.com/plasticbugs/parrot-plugin-padtest/commits/v0.1.2"
+    }
+  ],
+  "added": "2026-11-18",
+  "updated": "2026-11-18",
+  "submission": null,
+  "credits": "TinyUSB by Ha Thach, under the MIT license. The source is at https://github.com/hathach/tinyusb; The plugin itself is by Parrot Cart."
+}

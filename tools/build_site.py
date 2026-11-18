@@ -1,4 +1,5 @@
-"""build_site -- the registry's static site, from plugins/ (and the examples).
+"""build_site -- the registry's static site, from plugins/ (and examples/, our own
+plugins that have no release to download).
 
     python3 tools/build_site.py [--out _site]
 
@@ -67,13 +68,14 @@ _MDLINK = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
 
 
 def desc_text(e):
-    """the one-line description as plain text: our examples' may hold a Markdown link"""
+    """the one-line description as plain text: our own entries' may hold a Markdown link"""
     return _MDLINK.sub(r"\1", e["description"])
 
 
 def desc_html(e, pre):
-    """the description on the plugin's own page, where an example's links work (relative ones
-    from the site's root). A listed plugin's description is always plain text."""
+    """the description on the plugin's own page, where the links in one of our own entries
+    (examples/) work, relative ones from the site's root. A listed plugin's description is always
+    plain text."""
     d = e["description"]
     if not e.get("example"):
         return e_(d)
@@ -115,14 +117,8 @@ def slab(pre, current, config):
             + "</ul></nav>" + shop_link(config, "slab__shop", T.html("header.shop")) + "</div></header>")
 
 
-def placeholder(config):
-    """the registry's repository is still the OWNER/... stand-in: nothing on GitHub to link to yet"""
-    return config["registry_repo"].split("/")[0] == "OWNER"
-
-
 def footer(pre, entries, config):
-    repo = ("" if placeholder(config) else
-            f'\n<li><a href="https://github.com/{e_(config["registry_repo"])}">{T.html("footer.source_code")}</a></li>')
+    repo = f'\n<li><a href="https://github.com/{e_(config["registry_repo"])}">{T.html("footer.source_code")}</a></li>'
     names = "".join(f'<li><a href="{pre}plugins/{e_(e["id"])}/">{e_(e["name"])}</a></li>'
                     for e in sorted(entries, key=lambda e: e["name"].lower()))
     return f"""<footer class="foot"><div class="container">
@@ -337,7 +333,7 @@ def shots_section(e):
         f'loading="lazy" decoding="async"></div><figcaption><span>{T.html("plugin.shots.caption", number=i)}</span>'
         f'<code class="code">{png.WIDTH} × {png.HEIGHT}</code></figcaption></figure>'
         for i, s in enumerate(e["screenshots"], 1))
-    lead = T.html("plugin.shots.lead_example") if e.get("example") else T.html("plugin.shots.lead")
+    lead = T.html("plugin.shots.lead_menu") if e.get("example") else T.html("plugin.shots.lead")
     return f"""<section class="section" id="screenshots" aria-labelledby="shots-title"><div class="container">
 <div class="headblock"><h2 id="shots-title">{T.html("plugin.shots.title")}</h2><p class="lead">{lead}</p></div>
 <div class="shots" data-n="{n}">{figs}</div>
@@ -365,16 +361,20 @@ def cart_readme_section(e, text, pre):
 
 
 def web_readme_section(e, text, live):
+    """the README.md: a listed plugin's at its release's tag, a coming one's from its repository,
+    a built-in's as we wrote it"""
     tag = e["release"]["tag"]
+    linked = live or coming(e)
     where = e["readme"]["web"]["url"] if e["readme"]["web"] else e["credits_url"]
     if text is None:
-        link = link_or_text(where, T.html("plugin.readme.github_link"), live)
+        link = link_or_text(where, T.html("plugin.readme.github_link"), linked)
         body = f'<p class="warn">{T.html("plugin.readme.not_shown", link=link)}</p>'
         lead = T.html("plugin.readme.lead_not_shown")
     else:
-        base = f"https://github.com/{e['repo']}/blob/{tag}/" if live else None
-        body = f'<div class="prose">{markdown.render(text, base, 3, where if live else None)}</div>'
-        lead = T.html("plugin.readme.lead", tag=e_(tag))
+        base = f"https://github.com/{e['repo']}/blob/{tag}/" if linked else None
+        body = f'<div class="prose">{markdown.render(text, base, 3, where if linked else None)}</div>'
+        lead = (T.html("plugin.readme.lead", tag=e_(tag)) if live else
+                T.html("plugin.readme.lead_repo") if linked else T.html("plugin.readme.lead_built_in"))
     return f"""<section class="section" id="readme" aria-labelledby="readme-title"><div class="container">
 <div class="headblock"><h2 id="readme-title">{T.html("plugin.readme.title")}</h2><p class="lead">{lead}</p></div>
 {body}
@@ -397,21 +397,25 @@ def notes_section(e, live):
 </div></section>"""
 
 
+def coming(e):
+    """one of our plugins whose repository is public and whose first release isn't out yet"""
+    return bool(e.get("example")) and not e.get("built_in")
+
+
 def source_section(e, live):
     """where the plugin's code is: a card that links to its repo (none for the cart's built-in plugins)"""
     if e.get("built_in"):
         return ""
-    if live:
-        owner, name = e["repo"].split("/", 1)
-        body = (f'<a class="repo" href="https://github.com/{e_(e["repo"])}">'
-                f'<span class="repo__host">{T.html("plugin.source.host")}</span>'
-                f'<span class="repo__name">{e_(owner)}/<b>{e_(name)}</b></span>'
-                f'<span class="repo__desc">{e_(desc_text(e))}</span>'
-                f'<span class="repo__meta"><span>{e_(e["license"]["name"])}</span>'
-                f'<span>{T.html("plugin.source.release", tag=e_(e["release"]["tag"]))}</span></span>'
-                f'<span class="repo__go">{T.html("plugin.source.go")}</span></a>')
-    else:
-        body = f'<p class="note">{T.html("plugin.source.not_public")}</p>'
+    owner, name = e["repo"].split("/", 1)
+    release = (T.html("plugin.source.release", tag=e_(e["release"]["tag"])) if live else
+               T.html("plugin.source.no_release"))
+    body = (f'<a class="repo" href="https://github.com/{e_(e["repo"])}">'
+            f'<span class="repo__host">{T.html("plugin.source.host")}</span>'
+            f'<span class="repo__name">{e_(owner)}/<b>{e_(name)}</b></span>'
+            f'<span class="repo__desc">{e_(desc_text(e))}</span>'
+            f'<span class="repo__meta"><span>{e_(e["license"]["name"])}</span>'
+            f'<span>{release}</span></span>'
+            f'<span class="repo__go">{T.html("plugin.source.go")}</span></a>')
     return doc_section("source", T.html("plugin.source.title"), T.html("plugin.source.lead"), body)
 
 
@@ -434,8 +438,9 @@ def plugin_page(e, entries, config, root=ROOT):
     elif e.get("built_in"):
         action = f'<p class="note">{T.html("plugin.hero.built_in_note")}</p>'
     else:
-        action = (f'<div class="actions"><a class="btn" href="#install">{T.html("plugin.hero.example_button")}</a>'
-                  f'</div><p class="note">{T.html("plugin.hero.example_note")}</p>')
+        action = (f'<div class="actions"><a class="btn" href="{e_(e["source_url"])}">'
+                  f'{T.html("plugin.hero.source_button")}</a></div>'
+                  f'<p class="note">{T.html("plugin.hero.coming_note", name=e_(e["name"]))}</p>')
     hero = f"""<section class="hero" aria-labelledby="hero-title"><div class="container">
 <div class="hero__text">
 <h1 id="hero-title" class="titled">{tvscreen.icon_svg(e["icon"], "m")}<span>{e_(e["name"])}</span></h1>
@@ -450,26 +455,36 @@ def plugin_page(e, entries, config, root=ROOT):
     image = (T.html("plugin.details.image_ram", size=size) if e["image"]["kind"] == "sram"
              else T.html("plugin.details.image_flash", size=size))
     # the details screen above already shows the header; these are what the check read in the release
-    rows = [
-        (T.html("plugin.details.release"), T.html("plugin.details.release_value", tag=e_(e["release"]["tag"]),
-                                                  date=e_(e["release"]["published"]))),
-        (T.html("plugin.details.image"), image),
-        (T.html("plugin.details.api"), f'<code class="code">{e["api"]}</code>'),
-        (T.html("plugin.details.github"), link_or_text(f"https://github.com/{e['repo']}", e_(e["repo"]), True) if live
-         else T.html("plugin.details.not_public")),
-        (T.html("plugin.details.license"), link_or_text(lic["url"], e_(lic["name"]), live)
-         + (f'. {e_(lic["note"])}' if lic.get("note") else "")),
-    ]
-    rows.insert(4, (T.html("plugin.details.source"),
-                    link_or_text(e["source_url"], T.html("plugin.details.source_value", tag=e_(e["release"]["tag"])),
-                                 live)))
+    # (one of our own entries has no release: a coming plugin's rows link its repository, and a
+    # built-in's are the build's alone)
+    rows = [(T.html("plugin.details.image"), image),
+            (T.html("plugin.details.api"), f'<code class="code">{e["api"]}</code>')]
+    if live:
+        rows.insert(0, (T.html("plugin.details.release"),
+                        T.html("plugin.details.release_value", tag=e_(e["release"]["tag"]),
+                               date=e_(e["release"]["published"]))))
+    if not e.get("built_in"):
+        rows += [
+            (T.html("plugin.details.github"), link_or_text(f"https://github.com/{e['repo']}", e_(e["repo"]), True)),
+            (T.html("plugin.details.source"),
+             link_or_text(e["source_url"], T.html("plugin.details.source_value", tag=e_(e["release"]["tag"])), True)),
+            (T.html("plugin.details.license"), link_or_text(lic["url"], e_(lic["name"]), True)
+             + (f'. {e_(lic["note"])}' if lic.get("note") else "")),
+        ]
     items = "".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in rows)
     if e.get("credits"):        # the long ones run the full width, so the two columns stay even
         items += f'<div class="wide"><dt>{T.html("plugin.details.credits")}</dt><dd>{e_(e["credits"])}</dd></div>'
-    items += (f'<div class="wide"><dt>{T.html("plugin.details.sha256")}</dt><dd><span class="code hash">'
-              f'{e_(e["download"]["sha256"])}</span></dd></div>')
+    if live:
+        items += (f'<div class="wide"><dt>{T.html("plugin.details.sha256")}</dt><dd><span class="code hash">'
+                  f'{e_(e["download"]["sha256"])}</span></dd></div>')
+    if live:
+        title, lead = T.html("plugin.details.title"), T.html("plugin.details.lead")
+    elif e.get("built_in"):
+        title, lead = T.html("plugin.details.title_ours"), T.html("plugin.details.lead_built_in")
+    else:
+        title, lead = T.html("plugin.details.title_ours"), T.html("plugin.details.lead_coming")
     specs = f"""<section class="section" aria-labelledby="specs-title"><div class="container">
-<div class="headblock"><h2 id="specs-title">{T.html("plugin.details.title")}</h2><p class="lead">{T.html("plugin.details.lead")}</p></div>
+<div class="headblock"><h2 id="specs-title">{title}</h2><p class="lead">{lead}</p></div>
 <dl class="specs">{items}</dl>
 </div></section>"""
 
@@ -480,14 +495,15 @@ def plugin_page(e, entries, config, root=ROOT):
         steps.append((T.html("plugin.install.files_title", folder=e_(e["home"])),
                       T.html("plugin.install.files_text", types=e_(opens(e)))))
     steps.append((T.html("plugin.install.start_title"), T.html("plugin.install.start_text", name=e_(e["name"]))))
-    install = "" if e.get("built_in") else f"""<section class="section" id="install" aria-labelledby="install-title"><div class="container">
+    install = "" if not live else f"""<section class="section" id="install" aria-labelledby="install-title"><div class="container">
 <div class="headblock"><h2 id="install-title">{T.html("plugin.install.title")}</h2></div>
 <ol class="steps{" steps--4" if len(steps) == 4 else ""}">{li_rows(steps)}</ol>
 </div></section>"""
     desc = T.text("plugin.description", name=e["name"], version=e["version"],
                   description=desc_text(e).rstrip(". "))
     return page(T.text("plugin.page_title", name=e["name"]), desc,
-                hero + extra + specs + source_section(e, live) + notes_section(e, live) + install,
+                hero + extra + specs + source_section(e, live) + ("" if coming(e) else notes_section(e, live))
+                + install,
                 pre, "plugins", [details] + ([strip] if strip else []), entries, config)
 
 
@@ -502,17 +518,12 @@ def submit_page(entries, config):
     need_rows = "".join(f"<li><b>{t}</b><span>{s}</span></li>" for t, s in
                         T.rows("submit.requirements.rows", ("title", "text"), readme_page="../developers/packaging/#readme",
                                screenshots_page="../developers/packaging/#screenshots"))
-    if placeholder(config):
-        primary = f'<a class="btn" aria-disabled="true">{T.html("submit.hero.issue_button")}</a>'
-        soon = f'<p class="soon">{T.html("submit.hero.not_open")}</p>'
-    else:
-        primary, soon = f'<a class="btn" href="{e_(form)}">{T.html("submit.hero.issue_button")}</a>', ""
+    primary = f'<a class="btn" href="{e_(form)}">{T.html("submit.hero.issue_button")}</a>'
     body = f"""<section class="banner" aria-labelledby="hero-title"><div class="container">
 <div class="banner__text">
 <h1 id="hero-title">{T.html("submit.hero.title")}</h1>
 <p class="lead">{T.html("submit.hero.lead")}</p>
 <div class="actions">{primary}<a class="btn btn--secondary" href="#rules">{T.html("submit.hero.rules_button")}</a></div>
-{soon}
 </div>
 <ol class="map" aria-label="{T.attr("submit.steps.label")}">{items}</ol>
 <p class="map-legend">{T.html("submit.steps.note")}</p>
@@ -581,7 +592,8 @@ ICON_SVG = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 12 12" shap
 
 
 def site_entries(config, root=ROOT):
-    """the listed plugins, and the examples too if the config shows them: (entries, the listed ones by ID)"""
+    """the listed plugins, and our own with no release (examples/) if the config shows them:
+    (entries, the listed ones by ID)"""
     live = registry.load_entries(root)
     entries = list(live.values())
     if config.get("show_examples"):
@@ -638,8 +650,6 @@ def main(argv=None):
         entries = build(a.out)
     except sitecopy.CopyError as e:
         raise SystemExit(f"error: {e}") from None
-    if placeholder(registry.load_config(ROOT)):
-        print("note: registry_repo is still OWNER/...: the Submit button stays off until it names the real repository")
     print(f"built {a.out}: the catalogue, {len(entries)} plugin pages, the submit page and registry.json "
           "(the developer portal: tools/build_dev.py --out " + os.path.join(a.out, "developers") + ")")
 

@@ -1,0 +1,81 @@
+{
+  "schema": 2,
+  "id": "parrotcart.starwars",
+  "name": "Star Wars",
+  "version": "0.1.4",
+  "by": "Parrot Cart",
+  "description": "Emulator for the vector-based arcade game",
+  "repo": "plasticbugs/parrot-plugin-starwars",
+  "repo_id": 1461218538,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "/STARWARS",
+  "opens": [],
+  "uses": [
+    "usb-host"
+  ],
+  "icon": "1f3f381c0e07fffe",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": "BSD-3-Clause",
+    "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+    "url": "https://github.com/plasticbugs/parrot-plugin-starwars/blob/v0.1.4/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-starwars/tree/v0.1.4",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-starwars/blob/v0.1.4/README.md",
+  "release": {
+    "tag": "v0.1.4",
+    "url": "https://github.com/plasticbugs/parrot-plugin-starwars/releases/tag/v0.1.4",
+    "published": "2026-11-17"
+  },
+  "download": {
+    "name": "STARWARS.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-starwars/releases/download/v0.1.4/STARWARS.CVP",
+    "size": 181290,
+    "sha256": "706299b88a73d4da88c81c5ef1ac1f35afb89913d7d35990e4879ad94070a6ad"
+  },
+  "image": {
+    "size": 177920,
+    "sha256": "b0f29c17195ed422af14e86c98ee118d6fc171acdfba967ca9ec198bc79596af",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 2858,
+      "sha256": "5e75b60795f4de860043a07d7933df74f700aca79aeb10b149aa0cae8fa1fa6e",
+      "lines": 135
+    },
+    "web": {
+      "file": "README.md",
+      "size": 3590,
+      "sha256": "637cfa434995aa6b42324abb4ec9cd644413f693a93a76fa54438f9f7e8c7693",
+      "url": "https://github.com/plasticbugs/parrot-plugin-starwars/blob/v0.1.4/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1221,
+      "sha256": "a88a3d089c51fc23cd6d6a2f139e050473e94f0d24b6c14f5e6374436a6b579c"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 468,
+      "sha256": "b46fcf3922555ac74cbcb79f166056cbb751d02cd4826a0b4c8541bba4ea8182"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.4",
+      "url": "https://github.com/plasticbugs/parrot-plugin-starwars/releases/tag/v0.1.4",
+      "published": "2026-11-17",
+      "version": "0.1.4",
+      "notes": "**Full Changelog**: https://github.com/plasticbugs/parrot-plugin-starwars/commits/v0.1.4"
+    }
+  ],
+  "added": "2026-11-18",
+  "updated": "2026-11-18",
+  "submission": null,
+  "credits": "Parts of this plugin are ports of MAME's code, or were checked against it. That code is under the BSD-3-Clause license, and its authors are:; Steve Baines and Frank Palazzolo, for the Star Wars driver and the matrix processor.; Mathis Rosenhauer, for the vector generator, with thanks to Eric Smith,\u2026"
+}

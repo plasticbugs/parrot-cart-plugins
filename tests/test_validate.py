@@ -6,6 +6,7 @@ import json
 import os
 import shutil
 import unittest
+import unittest.mock
 
 from helpers import CVP_DIR, GH_DIR, ROOT, fixture, make_cvp, image, shot, tmp, SRAM_IMAGE
 import png
@@ -337,7 +338,7 @@ class AgainstTheRegistry(unittest.TestCase):
 
     def test_examples_hold_no_ids(self):
         with Root() as root:
-            ex = nes_entry(repo="OWNER/parrotcart-nes", owner="OWNER", repo_id=None, example=True)
+            ex = nes_entry(repo="parrot-dev/parrotcart-nes", owner="parrot-dev", repo_id=None, example=True)
             registry.write_json(registry.entry_path(root, ex["id"], examples=True), ex)
             self.assertTrue(run("nes-good", "fixture-dev/nes-plugin", root=root)["ok"])
 
@@ -386,8 +387,11 @@ class Command(unittest.TestCase):
 
     def test_issue_end_to_end(self):
         out = tmp()
-        code, text = cli(["--issue-json", self.issue(), "--out", out, "--fixtures",
-                          os.path.join(GH_DIR, "nes-good"), "--today", TODAY])
+        # (the command reads this checkout's plugins/, where the fixture's ID is the real NES
+        # plugin's: as on a registry that doesn't list it yet)
+        with unittest.mock.patch.object(registry, "load_entries", return_value={}):
+            code, text = cli(["--issue-json", self.issue(), "--out", out, "--fixtures",
+                              os.path.join(GH_DIR, "nes-good"), "--today", TODAY])
         self.assertEqual(code, 0, text)
         self.assertTrue(text.startswith(validate.MARK))
         self.assertTrue(os.path.isfile(os.path.join(out, "plugins", "parrotcart.nes", "screenshot-1.png")))

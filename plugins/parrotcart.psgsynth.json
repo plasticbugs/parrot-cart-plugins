@@ -1,0 +1,86 @@
+{
+  "schema": 2,
+  "id": "parrotcart.psgsynth",
+  "name": "PSG Synth",
+  "version": "1.0.0",
+  "by": "Parrot Cart",
+  "description": "Synth for USB MIDI keyboards",
+  "repo": "plasticbugs/parrot-plugin-psgsynth",
+  "repo_id": 1461218846,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "",
+  "opens": [],
+  "uses": [
+    "usb-host"
+  ],
+  "icon": "003e222222eeee00",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": "MIT",
+    "name": "MIT License",
+    "url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/blob/v1.0.0/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/tree/v1.0.0",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/blob/v1.0.0/README.md",
+  "release": {
+    "tag": "v1.0.0",
+    "url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/releases/tag/v1.0.0",
+    "published": "2026-11-17"
+  },
+  "download": {
+    "name": "PSGSYNTH.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/releases/download/v1.0.0/PSGSYNTH.CVP",
+    "size": 96583,
+    "sha256": "1fc83b462a9aa4bc3e8f251bf8449e209fceed453978e1146b0019e08b15c135"
+  },
+  "image": {
+    "size": 93952,
+    "sha256": "7353ee47b12633794e6d16786812a5e6a270680dca29c3284b0c140571b4c9c7",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 2119,
+      "sha256": "e20b93a9f7042b1ad747c7fd6cdb63a683be840d9c06990c392a1ac26c678cbb",
+      "lines": 102
+    },
+    "web": {
+      "file": "README.md",
+      "size": 2950,
+      "sha256": "aefbf1e5319193c5181d1ec84f1dca4dca22fa803fe529e5af9bbea1b2036249",
+      "url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/blob/v1.0.0/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1552,
+      "sha256": "6c46f8a5155ea344e063fe29b84bdb351f0c677ac364762e82f2cf8eda8c0845"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 1224,
+      "sha256": "b0555b36f35bac34628faa0a9a89ada7e1a6f3231a150b345e08d1a7a8ff69b3"
+    },
+    {
+      "file": "screenshot-3.png",
+      "size": 462,
+      "sha256": "353b2673f58a7a4888c699d50421eb67321edccef216a59ebb4fe08443cc33fa"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v1.0.0",
+      "url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/releases/tag/v1.0.0",
+      "published": "2026-11-17",
+      "version": "1.0.0",
+      "notes": "**Full Changelog**: https://github.com/plasticbugs/parrot-plugin-psgsynth/commits/v1.0.0"
+    }
+  ],
+  "added": "2026-11-18",
+  "updated": "2026-11-18",
+  "submission": null,
+  "credits": "TinyUSB by Ha Thach, under the MIT license. The source is at https://github.com/hathach/tinyusb; The plugin itself is by Parrot Cart."
+}

@@ -70,9 +70,16 @@ class Site(unittest.TestCase):
     def test_the_registry_builds(self):
         out, pages, idx = self.build()
         examples = registry.load_entries(ROOT, examples=True)
-        want = {"index.html", "submit/index.html"} | AUTHORS | CONVERTER | {f"plugins/{i}/index.html" for i in examples}
+        live = registry.load_entries(ROOT)
+        want = ({"index.html", "submit/index.html"} | AUTHORS | CONVERTER
+                | {f"plugins/{i}/index.html" for i in set(examples) | set(live)})
         self.assertEqual(set(pages), want)
-        self.assertEqual(idx["plugins"], [e for e in idx["plugins"] if e["id"] not in examples])
+        self.assertEqual([e["id"] for e in idx["plugins"]],
+                         [e["id"] for e in sorted(live.values(), key=lambda e: (e["name"].lower(), e["id"]))])
+        for e in idx["plugins"]:                # every listed plugin's download is a file on the site
+            self.assertTrue(os.path.exists(os.path.join(out, "plugins", e["id"], e["download"]["name"])), e["id"])
+            page = pages[f"plugins/{e['id']}/index.html"]
+            self.assertIn(f'<a class="btn" href="{e["download"]["name"]}" download>', page)
         for name, text in pages.items():
             self.assertIn('<html lang="en">', text, name)
             self.assertNotIn("${{", text, name)
@@ -90,7 +97,8 @@ class Site(unittest.TestCase):
     def test_examples_can_be_hidden(self):
         config = dict(registry.load_config(ROOT), show_examples=False)
         _, pages, _ = self.build(config=config)
-        self.assertEqual(set(pages), {"index.html", "submit/index.html"} | AUTHORS | CONVERTER)
+        self.assertEqual(set(pages), {"index.html", "submit/index.html"} | AUTHORS | CONVERTER
+                         | {f"plugins/{i}/index.html" for i in registry.load_entries(ROOT)})
 
     def test_a_built_in_plugin(self):
         _, pages, _ = self.build()
@@ -114,8 +122,22 @@ class Site(unittest.TestCase):
         self.assertIn('<a class="repo" href="https://github.com/fixture-dev/nes-plugin">', page)
         self.assertNotIn(">Needs<", pages["index.html"])
         _, pages, _ = self.build()
-        self.assertIn("the code on GitHub with the first release", pages["plugins/parrotcart.nes/index.html"])
         self.assertNotIn('id="source"', pages["plugins/parrotcart.movies/index.html"])
+
+    def test_one_of_ours_with_no_release_yet(self):
+        examples = registry.load_entries(ROOT, examples=True)
+        coming = [e for e in examples.values() if not e.get("built_in")]
+        if not coming:
+            self.skipTest("every plugin of ours has a release")
+        _, pages, idx = self.build()
+        for e in coming:
+            page = pages[f"plugins/{e['id']}/index.html"]
+            self.assertIn(f'<a class="repo" href="https://github.com/{e["repo"]}">', page)
+            self.assertIn("No release yet", page)
+            self.assertIn("has no release yet. The first one is coming", page)
+            self.assertNotIn('id="install"', page)
+            self.assertNotIn(" download>", page)
+            self.assertNotIn(e["id"], [p["id"] for p in idx["plugins"]])
 
     def test_old_authors_pages_send_you_on(self):
         _, pages, _ = self.build()
@@ -194,11 +216,15 @@ class Site(unittest.TestCase):
             os.path.join(root, "plugins", "parrotcart.nes"), e)))
 
     def test_a_plugin_without_a_readme_says_so(self):
-        pages = self.build()[1]
-        page = pages["plugins/parrotcart.nesinfo/index.html"]
+        root = tmp()
+        e = listed(root)
+        self.assertNotIn("No README on the cart", self.build(root)[1]["plugins/parrotcart.nes/index.html"])
+        e["readme"]["cart"] = None              # as a plugin built before the README existed
+        registry.write_json(registry.entry_path(root, e["id"]), e)
+        os.remove(os.path.join(registry.files_dir(root, e["id"]), registry.CART_README))
+        page = self.build(root)[1]["plugins/parrotcart.nes/index.html"]
         self.assertIn("No README on the cart", page)
         self.assertIn('href="../../developers/packaging/#readme"', page)
-        self.assertNotIn("No README on the cart", pages["plugins/parrotcart.nes/index.html"])
 
     def test_the_site_needs_no_script_and_calls_nobody(self):
         out, pages, _ = self.build()

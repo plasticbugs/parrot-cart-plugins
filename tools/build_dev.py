@@ -838,7 +838,7 @@ def build(out, kit=None, config=None, root=ROOT):
     """the portal from the kit at kit (found as --kit would be if None), into out"""
     config = config or registry.load_config(root)
     repo = config.get("template_repo") or ""
-    if not registry.REPO_RE.fullmatch(repo) or repo.startswith("OWNER/"):
+    if not registry.REPO_RE.fullmatch(repo):
         raise SystemExit("error: registry.config.json template_repo must name the starter kit's repo, owner/repo")
     kit = Kit(find_kit(kit), repo)
     files = pages_of(kit, config, root)

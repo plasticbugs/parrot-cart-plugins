@@ -177,10 +177,8 @@ description = "{description}. {name} {version} is a free plugin for Parrot Cart.
 download_button = "Download {file}"
 # The second button for a listed plugin
 source_button = "Source code"
-# The button for an example plugin
-example_button = "Put it on your cart"
-# Under that button, for an example plugin
-example_note = "This is an example. The source code isn't public yet, so there's no download."
+# Under the Source code button, for one of our plugins that has no release yet. Takes {name}.
+coming_note = "{name} has no release yet. The first one is coming, and you'll download it here."
 # Instead of a button, for one of the plugins built into the cart
 built_in_note = "It's built into the cart, so there's nothing to download."
 # Under the TV picture beside the plugin's name
@@ -193,8 +191,8 @@ card_alt = "A TV showing the cart's details page for {name}"
 title = "On the TV"
 # Under that heading, for a listed plugin
 lead = "These are the author's screenshots, shown pixel for pixel."
-# Under that heading, for an example plugin
-lead_example = "These pictures show this example on the cart. A listed plugin shows its author's screenshots here."
+# Under that heading, for one of our plugins that has no release
+lead_menu = "This is how it looks in the cart's menu."
 # Under each screenshot. Takes {number}.
 caption = "Picture {number}"
 # Each screenshot's description for screen readers. Takes {name}, {number} and {count}.
@@ -227,6 +225,10 @@ author_note = "**Did you write this plugin?** Add a README.md and build it with 
 title = "README"
 # Under that heading. Takes {tag}.
 lead = "This is the README.md from release `{tag}`. Images show up as links."
+# Under that heading, for one of our plugins that has no release yet
+lead_repo = "This is the README.md from the plugin's repo. Images show up as links."
+# Under that heading, for a plugin built into the cart
+lead_built_in = "This is what the plugin does and how to use it."
 # Under that heading when the README can't be shown
 lead_not_shown = "It's in the plugin's repo on GitHub."
 # The note when the README can't be shown. Takes {link}, the link below.
@@ -239,6 +241,10 @@ github_link = "Read it on GitHub"
 title = "Release details"
 # Under that heading
 lead = "We read these from GitHub when the plugin was listed."
+# The heading and the line under it, for one of our plugins that has no release
+title_ours = "Details"
+lead_coming = "These come from the build we're testing."
+lead_built_in = "This plugin is part of the cart's firmware."
 # The labels on the left of each detail
 release = "Release"
 image = "Image"
@@ -254,9 +260,7 @@ release_value = "`{tag}`, {date}"
 image_ram = "{size} bytes, loaded into RAM"
 # The Image detail for a plugin that runs from flash. Takes {size}.
 image_flash = "{size} bytes, runs from flash"
-# The GitHub detail for an example plugin
-not_public = "Not public yet"
-# The Source detail's link. Takes {tag}.
+# The Source detail's link. Takes {tag}, the release's tag, or main for a plugin with no release yet.
 source_value = "Code at `{tag}`"
 
 [plugin.source]
@@ -269,8 +273,8 @@ host = "GitHub"
 release = "Release {tag}"
 # The card's last line
 go = "Browse the code"
-# Instead of the card, for one of our examples whose repo isn't public yet
-not_public = "We'll put the code on GitHub with the first release."
+# On the card in place of the release, for one of our plugins that has no release yet
+no_release = "No release yet"
 
 [plugin.notes]
 # The heading over the release notes
@@ -314,8 +318,6 @@ lead = "Open an issue with a link to your repo. We'll check your latest release 
 issue_button = "Open an issue"
 # The second button under the headline
 rules_button = "See the requirements"
-# Under the buttons, only while the site isn't on GitHub yet
-not_open = "You'll be able to submit plugins once this site is on GitHub."
 
 [submit.steps]
 # The boxes' name for screen readers

@@ -1,0 +1,89 @@
+{
+  "schema": 2,
+  "id": "parrotcart.lua",
+  "name": "Lua",
+  "version": "0.1.0",
+  "by": "Parrot Cart",
+  "description": "Write and run Lua programs on the console",
+  "repo": "plasticbugs/parrot-plugin-lua",
+  "repo_id": 1463314970,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "/LUA",
+  "opens": [
+    ".lua"
+  ],
+  "uses": [
+    "usb-host",
+    "psram"
+  ],
+  "icon": "0676f8e4e4fc7800",
+  "file_icon": "f8fceec6c6eefe00",
+  "license": {
+    "spdx": "MIT",
+    "name": "MIT License",
+    "url": "https://github.com/plasticbugs/parrot-plugin-lua/blob/v0.1.0/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-lua/tree/v0.1.0",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-lua/blob/v0.1.0/README.md",
+  "release": {
+    "tag": "v0.1.0",
+    "url": "https://github.com/plasticbugs/parrot-plugin-lua/releases/tag/v0.1.0",
+    "published": "2026-11-18"
+  },
+  "download": {
+    "name": "LUA.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-lua/releases/download/v0.1.0/LUA.CVP",
+    "size": 256564,
+    "sha256": "f9d192c7aa1b9d2c3323098ca1a628640d9980d6bf54c3757f6edeffcd58818f"
+  },
+  "image": {
+    "size": 253952,
+    "sha256": "30a3e59a4230ec91551bf049e45d8b8a2254f25140e23788484bc121adb3487d",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 2100,
+      "sha256": "e400b4d841d6a76231407a8417532925313c3473a809bccb250906518f965393",
+      "lines": 106
+    },
+    "web": {
+      "file": "README.md",
+      "size": 3245,
+      "sha256": "0e04fc7f20466575ab8180522170e8672af8498af15a90ea3d054aeeebf4f4a7",
+      "url": "https://github.com/plasticbugs/parrot-plugin-lua/blob/v0.1.0/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 2080,
+      "sha256": "2bd999ac6b78d863eddcc79dcea99c72877da7751bb47133a4b03eff20657dcf"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 666,
+      "sha256": "cc9cbb553ee0e6a468ab85263ee4220ed437822b2c262f9e910fde6f871ed7ec"
+    },
+    {
+      "file": "screenshot-3.png",
+      "size": 572,
+      "sha256": "05d7a3169f84123bd20d04022851a4946f3be38edcb26c209079b33b55511303"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.0",
+      "url": "https://github.com/plasticbugs/parrot-plugin-lua/releases/tag/v0.1.0",
+      "published": "2026-11-18",
+      "version": "0.1.0",
+      "notes": "First release."
+    }
+  ],
+  "added": "2026-11-18",
+  "updated": "2026-11-18",
+  "submission": null,
+  "credits": "Lua 5.4.8, by Roberto Ierusalimschy, Luiz Henrique de Figueiredo and Waldemar Celes at PUC-Rio, MIT:; Parrot Cart plugin template and SDK, by the Parrot Cart contributors, MIT:; TinyUSB, by Ha Thach and contributors, MIT:; Raspberry Pi Pico SDK, BSD 3-Clause: Source"
+}

@@ -1,0 +1,84 @@
+{
+  "schema": 2,
+  "id": "parrotcart.pce",
+  "name": "PC Engine",
+  "version": "0.1.1",
+  "by": "Parrot Cart",
+  "description": "Emulator for PC Engine and TurboGrafx-16 HuCard games",
+  "repo": "plasticbugs/parrot-plugin-pcengine",
+  "repo_id": 1463314289,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "/PCE",
+  "opens": [
+    ".pce"
+  ],
+  "uses": [
+    "usb-host",
+    "psram"
+  ],
+  "icon": "007e425a5a7e5400",
+  "file_icon": "007e7e42427e5400",
+  "license": {
+    "spdx": "GPL-3.0",
+    "name": "GNU General Public License v3.0",
+    "url": "https://github.com/plasticbugs/parrot-plugin-pcengine/blob/v0.1.1/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-pcengine/tree/v0.1.1",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-pcengine/blob/v0.1.1/README.md",
+  "release": {
+    "tag": "v0.1.1",
+    "url": "https://github.com/plasticbugs/parrot-plugin-pcengine/releases/tag/v0.1.1",
+    "published": "2026-11-18"
+  },
+  "download": {
+    "name": "PCE.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-pcengine/releases/download/v0.1.1/PCE.CVP",
+    "size": 165367,
+    "sha256": "3e010b04fa1252268e43a6da51e7f08047ea192e683d9ed4fc771204fe31d81e"
+  },
+  "image": {
+    "size": 161792,
+    "sha256": "403b1bc6d21ed0b82bdb46cd8aa5dbba9ef1de81c7f823988d77ab947d4ad6d9",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 3063,
+      "sha256": "b107f00c35816335f45a1b096f903f383e380fbcb22e52b8fc81d4144640b29f",
+      "lines": 140
+    },
+    "web": {
+      "file": "README.md",
+      "size": 3724,
+      "sha256": "dc1747ac21c8a23a839a6a15f910b8f802cec3a7c8c3233549f2e76a1126f32a",
+      "url": "https://github.com/plasticbugs/parrot-plugin-pcengine/blob/v0.1.1/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1153,
+      "sha256": "2871f556c12dc16ea381f0f3aa50b70f4f8c37a74456c4f6e91c0a8272c0146a"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 498,
+      "sha256": "8803ea22c1fc8af2cd89b88efadb8008f85bd403b15f3fb0f41f026d19c6615c"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.1",
+      "url": "https://github.com/plasticbugs/parrot-plugin-pcengine/releases/tag/v0.1.1",
+      "published": "2026-11-18",
+      "version": "0.1.1",
+      "notes": "First release."
+    }
+  ],
+  "added": "2026-11-18",
+  "updated": "2026-11-18",
+  "submission": null,
+  "credits": "PCE-GO by Alex Duchesne, from retro-go, under the GPL-2.0. It comes from HuExpress, Hu-Go! and Bero's PCE emulator.; This copy of PCE-GO is from pico-pcePlus, under the GPL-3.0. The source is at; TinyUSB by Ha Thach, under the MIT license. The source is at; The plugin itself is by Parrot Cart, unde\u2026"
+}

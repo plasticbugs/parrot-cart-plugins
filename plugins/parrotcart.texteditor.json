@@ -1,0 +1,88 @@
+{
+  "schema": 2,
+  "id": "parrotcart.texteditor",
+  "name": "Text Editor",
+  "version": "0.1.0",
+  "by": "Parrot Cart",
+  "description": "Plain text editor for a USB keyboard",
+  "repo": "plasticbugs/parrot-plugin-texteditor",
+  "repo_id": 1463314644,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "/TEXT",
+  "opens": [
+    ".txt"
+  ],
+  "uses": [
+    "usb-host"
+  ],
+  "icon": "ff81bd81b981b5ff",
+  "file_icon": "f88cae82ba82bafe",
+  "license": {
+    "spdx": "MIT",
+    "name": "MIT License",
+    "url": "https://github.com/plasticbugs/parrot-plugin-texteditor/blob/v0.1.0/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-texteditor/tree/v0.1.0",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-texteditor/blob/v0.1.0/README.md",
+  "release": {
+    "tag": "v0.1.0",
+    "url": "https://github.com/plasticbugs/parrot-plugin-texteditor/releases/tag/v0.1.0",
+    "published": "2026-11-18"
+  },
+  "download": {
+    "name": "TEXTEDIT.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-texteditor/releases/download/v0.1.0/TEXTEDIT.CVP",
+    "size": 128824,
+    "sha256": "fdd8a23dee3a1a9153edced7300525868c6bc204ea9d2f5e599e9a5d6b30d3ef"
+  },
+  "image": {
+    "size": 125952,
+    "sha256": "33d6bd6c11f62687f5e4bfbfd7eb773af22cd46fb7ae51a3f4f84c7a31102e0c",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 2360,
+      "sha256": "4c49563b76e9a9a18cf520348d89dba921715e5f2c7d344bb03b7aeb4a3cdff4",
+      "lines": 114
+    },
+    "web": {
+      "file": "README.md",
+      "size": 3121,
+      "sha256": "39d9cdd1c5e0d42634da48631e0559a337b3195439e3049f3416e3d4e83398f8",
+      "url": "https://github.com/plasticbugs/parrot-plugin-texteditor/blob/v0.1.0/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 3292,
+      "sha256": "50becf9aeae1d703c33ff2e31b9fddc4c8a6739e796682dd026afa1520254243"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 1436,
+      "sha256": "2a60cdb69c45143f0d59a1494deb230c197dcaffe17201a7db0945c28827c75a"
+    },
+    {
+      "file": "screenshot-3.png",
+      "size": 748,
+      "sha256": "6a54e0bf2e02ae2ad2704170b565ccab9321bc70c951796e98806fd164f34de5"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.0",
+      "url": "https://github.com/plasticbugs/parrot-plugin-texteditor/releases/tag/v0.1.0",
+      "published": "2026-11-18",
+      "version": "0.1.0",
+      "notes": "First release."
+    }
+  ],
+  "added": "2026-11-18",
+  "updated": "2026-11-18",
+  "submission": null,
+  "credits": "The 6x8 font was drawn for the Parrot Cart SDK.; TinyUSB by Ha Thach, under the MIT license. The source is at https://github.com/hathach/tinyusb; The plugin itself is by Parrot Cart."
+}

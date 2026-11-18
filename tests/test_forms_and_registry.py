@@ -76,8 +76,8 @@ class Files(unittest.TestCase):
         self.assertNotIn("example", idx["plugins"][0])
 
     def test_pages_url(self):
-        self.assertEqual(registry.pages_url({"registry_repo": "OWNER/parrotcart-plugins"}),
-                         "https://owner.github.io/parrotcart-plugins/")
+        self.assertEqual(registry.pages_url({"registry_repo": "Someone/parrotcart-plugins"}),
+                         "https://someone.github.io/parrotcart-plugins/")
         self.assertEqual(registry.pages_url({"registry_repo": "Parrot/parrot.github.io"}), "https://parrot.github.io/")
 
     def test_entry_paths(self):

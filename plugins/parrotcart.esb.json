@@ -1,0 +1,81 @@
+{
+  "schema": 2,
+  "id": "parrotcart.esb",
+  "name": "Empire Strikes Back",
+  "version": "0.1.4",
+  "by": "Parrot Cart",
+  "description": "Emulator for the vector-based arcade sequel",
+  "repo": "plasticbugs/parrot-plugin-esb",
+  "repo_id": 1461218701,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "/ESB",
+  "opens": [],
+  "uses": [
+    "usb-host"
+  ],
+  "icon": "3e7f004c5ef3cc7f",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": "BSD-3-Clause",
+    "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+    "url": "https://github.com/plasticbugs/parrot-plugin-esb/blob/v0.1.4/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-esb/tree/v0.1.4",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-esb/blob/v0.1.4/README.md",
+  "release": {
+    "tag": "v0.1.4",
+    "url": "https://github.com/plasticbugs/parrot-plugin-esb/releases/tag/v0.1.4",
+    "published": "2026-11-18"
+  },
+  "download": {
+    "name": "ESB.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-esb/releases/download/v0.1.4/ESB.CVP",
+    "size": 199164,
+    "sha256": "9f00b0d466cf43d00f7809a9d30cdefb7634d949477b6d689334adfd1ca5ce62"
+  },
+  "image": {
+    "size": 195840,
+    "sha256": "7ec7aa5bc55c4bb7d2d61b7d114bde330bd7072e4118dfa8aabee34ae97192a2",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 2812,
+      "sha256": "cb9408dec285ce0d12d57e83591adf14a012f2eff2da7b3649b4495f2e7a369c",
+      "lines": 133
+    },
+    "web": {
+      "file": "README.md",
+      "size": 3530,
+      "sha256": "beacf725fe1e0315d2fdf612802d4350c41c5c2702db384fccbba7c341fd4909",
+      "url": "https://github.com/plasticbugs/parrot-plugin-esb/blob/v0.1.4/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1215,
+      "sha256": "b5318c619fb02b4ddec728595cc317468c2de82b8740d8da35b2c1f26fb42924"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 530,
+      "sha256": "591215219d00ffa7d8093cf073c2d4dcbb9d79a8e9f2c867ace9eea61434c859"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.4",
+      "url": "https://github.com/plasticbugs/parrot-plugin-esb/releases/tag/v0.1.4",
+      "published": "2026-11-18",
+      "version": "0.1.4",
+      "notes": "Fixes the glitches on the console. The cart now reads the console's address lines twice before it answers."
+    }
+  ],
+  "added": "2026-11-18",
+  "updated": "2026-11-18",
+  "submission": null,
+  "credits": "Parts of this plugin are ports of MAME's code, or were checked against it. That code is under the BSD-3-Clause license, and its authors are:; Steve Baines and Frank Palazzolo, for the Star Wars driver and the matrix processor.; Aaron Giles, for the slapstic chip.; Mathis Rosenhauer, for the vector\u2026"
+}
