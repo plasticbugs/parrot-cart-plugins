@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.starwars",
   "name": "Star Wars",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "by": "Parrot Cart",
   "description": "Emulator for the vector-based arcade game",
   "repo": "plasticbugs/parrot-plugin-starwars",
@@ -19,24 +19,24 @@
   "license": {
     "spdx": "BSD-3-Clause",
     "name": "BSD 3-Clause \"New\" or \"Revised\" License",
-    "url": "https://github.com/plasticbugs/parrot-plugin-starwars/blob/v0.1.4/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-starwars/blob/v0.1.5/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-starwars/tree/v0.1.4",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-starwars/blob/v0.1.4/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-starwars/tree/v0.1.5",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-starwars/blob/v0.1.5/README.md",
   "release": {
-    "tag": "v0.1.4",
-    "url": "https://github.com/plasticbugs/parrot-plugin-starwars/releases/tag/v0.1.4",
-    "published": "2026-11-17"
+    "tag": "v0.1.5",
+    "url": "https://github.com/plasticbugs/parrot-plugin-starwars/releases/tag/v0.1.5",
+    "published": "2026-11-19"
   },
   "download": {
     "name": "STARWARS.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-starwars/releases/download/v0.1.4/STARWARS.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-starwars/releases/download/v0.1.5/STARWARS.CVP",
     "size": 181290,
-    "sha256": "706299b88a73d4da88c81c5ef1ac1f35afb89913d7d35990e4879ad94070a6ad"
+    "sha256": "b9fc27361d7dc6a87c5e344578e8ad9ecf25c1faddd9805244f30dcd811c7526"
   },
   "image": {
     "size": 177920,
-    "sha256": "b0f29c17195ed422af14e86c98ee118d6fc171acdfba967ca9ec198bc79596af",
+    "sha256": "c124470c980a35370dc988ed9f9ea98ac29fd6d0e59fed67c223bb900231445a",
     "kind": "sram"
   },
   "readme": {
@@ -50,22 +50,29 @@
       "file": "README.md",
       "size": 3590,
       "sha256": "637cfa434995aa6b42324abb4ec9cd644413f693a93a76fa54438f9f7e8c7693",
-      "url": "https://github.com/plasticbugs/parrot-plugin-starwars/blob/v0.1.4/README.md"
+      "url": "https://github.com/plasticbugs/parrot-plugin-starwars/blob/v0.1.5/README.md"
     }
   },
   "screenshots": [
     {
       "file": "screenshot-1.png",
-      "size": 1221,
-      "sha256": "a88a3d089c51fc23cd6d6a2f139e050473e94f0d24b6c14f5e6374436a6b579c"
+      "size": 1218,
+      "sha256": "d4f504a9bbc7ed935b59b7fe61046874fa750737bda45f7df9080c75a5c70340"
     },
     {
       "file": "screenshot-2.png",
-      "size": 468,
-      "sha256": "b46fcf3922555ac74cbcb79f166056cbb751d02cd4826a0b4c8541bba4ea8182"
+      "size": 469,
+      "sha256": "a2250f2861b715216f37d91a07154e01ed5dea8d6971bd7f27ae267deb9f0974"
     }
   ],
   "history": [
+    {
+      "tag": "v0.1.5",
+      "url": "https://github.com/plasticbugs/parrot-plugin-starwars/releases/tag/v0.1.5",
+      "published": "2026-11-19",
+      "version": "0.1.5",
+      "notes": "The cart now reads the console's address lines twice, and answers only when the two agree. This is the bus loop that fixed the glitches in The Empire Strikes Back 0.1.4."
+    },
     {
       "tag": "v0.1.4",
       "url": "https://github.com/plasticbugs/parrot-plugin-starwars/releases/tag/v0.1.4",

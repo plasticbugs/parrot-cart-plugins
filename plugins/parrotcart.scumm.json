@@ -1,0 +1,82 @@
+{
+  "schema": 2,
+  "id": "parrotcart.scumm",
+  "name": "SCUMM",
+  "version": "0.2.9",
+  "by": "Parrot Cart",
+  "description": "Engine for classic point-and-click adventure games",
+  "repo": "plasticbugs/parrot-plugin-scumm",
+  "repo_id": 1461218388,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "/SCUMM",
+  "opens": [
+    ".lfl",
+    ".000"
+  ],
+  "uses": [],
+  "icon": "3c42a581bda5423c",
+  "file_icon": "7e81ad81b981b57e",
+  "license": {
+    "spdx": "GPL-3.0",
+    "name": "GNU General Public License v3.0",
+    "url": "https://github.com/plasticbugs/parrot-plugin-scumm/blob/v0.2.9/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-scumm/tree/v0.2.9",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-scumm/blob/v0.2.9/README.md",
+  "release": {
+    "tag": "v0.2.9",
+    "url": "https://github.com/plasticbugs/parrot-plugin-scumm/releases/tag/v0.2.9",
+    "published": "2026-11-19"
+  },
+  "download": {
+    "name": "SCUMM.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-scumm/releases/download/v0.2.9/SCUMM.CVP",
+    "size": 973130,
+    "sha256": "73aaaa55cab4178a055a4ada72c80875d05e60c05f6bc82cdea96a52a9389c2a"
+  },
+  "image": {
+    "size": 969216,
+    "sha256": "05ec8603ca7ffe1c78e258383b16d98ab5afd99210c406183dceb79f660b900f",
+    "kind": "xip"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 3402,
+      "sha256": "6ff988d7a71bbed5098c10434272dd62f131c44271c30789abb1b0d34a6307ce",
+      "lines": 163
+    },
+    "web": {
+      "file": "README.md",
+      "size": 5496,
+      "sha256": "613c847ce3f7c5e7cb38f7a0149b3fdd205b3b49364ee83c0111bf4d50659d08",
+      "url": "https://github.com/plasticbugs/parrot-plugin-scumm/blob/v0.2.9/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1044,
+      "sha256": "1eb52d04353952115ec4e976b8c6c4e7738731817f255a1eaf512f53d595f91e"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 537,
+      "sha256": "393796d3fee127e22383d79f1d70cd048774526b2456ebc35d663966a4bbea34"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.2.9",
+      "url": "https://github.com/plasticbugs/parrot-plugin-scumm/releases/tag/v0.2.9",
+      "published": "2026-11-19",
+      "version": "0.2.9",
+      "notes": "The first release.\n\n- The verbs get their own view only in games that have a verb area. Games without one, such as Indiana Jones and the Fate of Atlantis in its opening, show the whole screen as one view.\n- Keypad 1 shows the whole screen as one view. Press it again to give the verbs their own view.\n- The cart now reads the console's address lines twice, and answers only when the two agree. This is the bus loop that fixed the glitches in The Empire Strikes Back 0.1.4."
+    }
+  ],
+  "added": "2026-11-18",
+  "updated": "2026-11-18",
+  "submission": null,
+  "credits": "frank-quest by Mikhail Matveev, a port of ScummVM to the RP2350, under the GPL-3.0. The source is at https://github.com/rh1tech/frank-quest; The engine is Cabal, a community fork of ScummVM, by the ScummVM and Cabal authors, under the GPL-2.0-or-later. The source is at https://github.com/project-ca\u2026"
+}

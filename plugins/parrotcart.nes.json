@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.nes",
   "name": "NES",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "by": "Parrot Cart",
   "description": "Emulator for Nintendo's 8-bit console",
   "repo": "plasticbugs/parrot-plugin-nes",
@@ -22,24 +22,24 @@
   "license": {
     "spdx": "LGPL-2.1",
     "name": "GNU Lesser General Public License v2.1",
-    "url": "https://github.com/plasticbugs/parrot-plugin-nes/blob/v0.4.7/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-nes/blob/v0.4.8/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-nes/tree/v0.4.7",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-nes/blob/v0.4.7/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-nes/tree/v0.4.8",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-nes/blob/v0.4.8/README.md",
   "release": {
-    "tag": "v0.4.7",
-    "url": "https://github.com/plasticbugs/parrot-plugin-nes/releases/tag/v0.4.7",
-    "published": "2026-11-17"
+    "tag": "v0.4.8",
+    "url": "https://github.com/plasticbugs/parrot-plugin-nes/releases/tag/v0.4.8",
+    "published": "2026-11-19"
   },
   "download": {
     "name": "NES.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-nes/releases/download/v0.4.7/NES.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-nes/releases/download/v0.4.8/NES.CVP",
     "size": 206287,
-    "sha256": "f6cb2bc71df19ce932a2c469ca66c472a4acbc2d8951addc8dcb7b60b543dde3"
+    "sha256": "da28c1a467d631397930012ebea8771702f4461a9126e92d76327ea0f3e92649"
   },
   "image": {
     "size": 203776,
-    "sha256": "91be49c104a736789f169aedffcb3927976f5c0eb4eeb338cac17e13ffd0f0b0",
+    "sha256": "e14483cdcf99551331297361104ad58c9740ff09b0dbfee5b077d9a76322d79f",
     "kind": "sram"
   },
   "readme": {
@@ -53,14 +53,14 @@
       "file": "README.md",
       "size": 2719,
       "sha256": "6e9675202047efbc96b5571aba044ec4a82c53dc80b8f46f286d09b71c7b5533",
-      "url": "https://github.com/plasticbugs/parrot-plugin-nes/blob/v0.4.7/README.md"
+      "url": "https://github.com/plasticbugs/parrot-plugin-nes/blob/v0.4.8/README.md"
     }
   },
   "screenshots": [
     {
       "file": "screenshot-1.png",
-      "size": 1111,
-      "sha256": "16c9362f925c26609284ab461feb08b0b549484900e23980491721f7e1aa99ee"
+      "size": 1116,
+      "sha256": "812c6688773e7d8496358b88f49d47a4d1b4cd5640ea745204f153aea8386ac5"
     },
     {
       "file": "screenshot-2.png",
@@ -69,6 +69,13 @@
     }
   ],
   "history": [
+    {
+      "tag": "v0.4.8",
+      "url": "https://github.com/plasticbugs/parrot-plugin-nes/releases/tag/v0.4.8",
+      "published": "2026-11-19",
+      "version": "0.4.8",
+      "notes": "The cart now reads the console's address lines twice, and answers only when the two agree. This is the bus loop that fixed the glitches in The Empire Strikes Back 0.1.4."
+    },
     {
       "tag": "v0.4.7",
       "url": "https://github.com/plasticbugs/parrot-plugin-nes/releases/tag/v0.4.7",

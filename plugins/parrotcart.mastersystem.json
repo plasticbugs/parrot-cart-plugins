@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.mastersystem",
   "name": "SMS & Game Gear",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "by": "Parrot Cart",
   "description": "Emulator for Sega Master System and Game Gear",
   "repo": "plasticbugs/parrot-plugin-sms-gamegear",
@@ -24,24 +24,24 @@
   "license": {
     "spdx": "GPL-3.0",
     "name": "GNU General Public License v3.0",
-    "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/blob/v0.2.4/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/blob/v0.2.5/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/tree/v0.2.4",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/blob/v0.2.4/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/tree/v0.2.5",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/blob/v0.2.5/README.md",
   "release": {
-    "tag": "v0.2.4",
-    "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/releases/tag/v0.2.4",
-    "published": "2026-11-17"
+    "tag": "v0.2.5",
+    "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/releases/tag/v0.2.5",
+    "published": "2026-11-19"
   },
   "download": {
     "name": "SMS.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/releases/download/v0.2.4/SMS.CVP",
-    "size": 205058,
-    "sha256": "efb52d225eec487cf635c65d19b98f358011174ece42999a537fbbaff9f71ca6"
+    "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/releases/download/v0.2.5/SMS.CVP",
+    "size": 205314,
+    "sha256": "59f6d0f9402f26d57fc187f9cbd6426d79f1bd1a3ce9bb9c1c5caa5dc03c3693"
   },
   "image": {
-    "size": 201984,
-    "sha256": "689ac6d70e82678834ee82861b3fdd035a7a0fffcf3ea0fa74c6f085b4fd8175",
+    "size": 202240,
+    "sha256": "24274e204f03794817a46adb1f584188ed1e889f833dcd26fdea6dacf8bf4e33",
     "kind": "sram"
   },
   "readme": {
@@ -55,14 +55,14 @@
       "file": "README.md",
       "size": 3258,
       "sha256": "9ca04a90eb3453927278dade4ab3f93b68af100d9d427af2d524f0d88f596b29",
-      "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/blob/v0.2.4/README.md"
+      "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/blob/v0.2.5/README.md"
     }
   },
   "screenshots": [
     {
       "file": "screenshot-1.png",
-      "size": 1281,
-      "sha256": "5cc0ce7eccf6ce907c44c99b7bc797b0a7151ca26c77c9928d6592948411ec83"
+      "size": 1286,
+      "sha256": "70600877a82a041ff111c16826d7c5788f29fce408ba55d2c1b7f1ac556ef7d3"
     },
     {
       "file": "screenshot-2.png",
@@ -71,6 +71,13 @@
     }
   ],
   "history": [
+    {
+      "tag": "v0.2.5",
+      "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/releases/tag/v0.2.5",
+      "published": "2026-11-19",
+      "version": "0.2.5",
+      "notes": "The cart now reads the console's address lines twice, and answers only when the two agree. This is the bus loop that fixed the glitches in The Empire Strikes Back 0.1.4."
+    },
     {
       "tag": "v0.2.4",
       "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/releases/tag/v0.2.4",

@@ -1,6 +1,5 @@
-"""seed_examples -- the entries the site shows for our plugins that have
-no release to download: Movies, which is built into the cart, and SCUMM,
-whose repository is public and whose first release is coming.
+"""seed_examples -- the entry the site shows for our plugin that has no
+release to download: Movies, which is built into the cart.
 
     python3 tools/seed_examples.py [--cvp-dir DIR] [--today YYYY-MM-DD]
 
@@ -10,8 +9,7 @@ version, icons, sizes and hashes) is kept from the entry already there, or,
 with --cvp-dir, read again by tools/cvp.py from the real builds in DIR
 (they aren't kept in this repository). The rest is written here:
 
-  README.md        the plugin's own README (examples/readmes/<id>.md: for
-                   SCUMM, the README.md in its repository)
+  README.md        the plugin's own README (examples/readmes/<id>.md)
   cart-readme.txt  the text the cart shows (examples/readmes/<id>.cart.md
                    if there is one, else README.md) through the SDK's
                    converter (tools/cvreadme.py), as the build holds it
@@ -49,8 +47,6 @@ SITE = "https://plasticbugs.github.io/parrot-cart-plugins/"
 
 # id: repository (None for a built-in), licence (spdx, name), description
 SEEDS = {
-    "parrotcart.scumm": ("parrot-plugin-scumm", ("GPL-3.0", "GNU General Public License v3.0"),
-                         "Engine for classic point-and-click adventure games"),
     # the description may link, from the site's root; the list shows the words only
     "parrotcart.movies": (None, (None, "Parrot Cart firmware"),
                           "Player for movies made with the [movie converter](converter/)"),
@@ -58,12 +54,10 @@ SEEDS = {
 
 CREDITS = {
     "parrotcart.movies": "TinyUSB by Ha Thach",
-    "parrotcart.scumm": "ScummVM, via frank-quest",
 }
 BUILT_IN = {"parrotcart.movies"}
 NOTES = {
     "parrotcart.movies": "{name} {version} is built into the cart.",
-    "parrotcart.scumm": "{name} has no release yet. The first one is coming.",
 }
 
 

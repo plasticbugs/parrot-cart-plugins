@@ -42,6 +42,10 @@ controller:
 - Keypad 5 centers the view
   and lets it follow the
   pointer again.
+- Keypad 1 shows the whole
+  screen as one view. Press it
+  again to give the verbs
+  their own view.
 - Hold keypad 7 for a second
   to save to slot 1, or 9 to
   load it.
@@ -82,6 +86,15 @@ NOTES
   pixels of the game's 320 by
   200. The view follows the
   pointer.
+- The verbs and inventory at
+  the bottom have a view of
+  their own, so they stay on
+  screen when the room
+  scrolls. When a game uses
+  the whole screen for the
+  room, as Fate of Atlantis
+  does at the start, the
+  plugin uses one view.
 - Music and sound play on the
   console's sound chip.
 
