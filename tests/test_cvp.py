@@ -156,7 +156,7 @@ class LaterRules(unittest.TestCase):
     def test_extensions(self):
         self.assertTrue(any("1-7 letters" in e for e in self.errors(make_cvp(self.img, opens=["nes"]))))
         _, _, warnings = cvp.check(make_cvp(self.img, opens=[".col"]))
-        self.assertTrue(any("ColecoVision ROMs" in w for w in warnings))
+        self.assertTrue(any("ColecoVision header" in w for w in warnings))
         info, _, _ = cvp.check(make_cvp(self.img, opens=[".NES"]))
         self.assertEqual(info["opens"], [".nes"])                # the menu lower-cases them
 

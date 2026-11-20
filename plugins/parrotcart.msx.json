@@ -1,0 +1,91 @@
+{
+  "schema": 2,
+  "id": "parrotcart.msx",
+  "name": "MSX",
+  "version": "0.1.0",
+  "by": "Parrot Cart",
+  "description": "Emulator for MSX1 cartridge games",
+  "repo": "plasticbugs/parrot-plugin-msx",
+  "repo_id": 1465023252,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "/MSX",
+  "opens": [
+    ".rom",
+    ".mx1",
+    ".mx2"
+  ],
+  "uses": [
+    "usb-host",
+    "psram"
+  ],
+  "icon": "81c3a59981818100",
+  "file_icon": "7e425a427e7e5600",
+  "license": {
+    "spdx": "GPL-3.0",
+    "name": "GNU General Public License v3.0",
+    "url": "https://github.com/plasticbugs/parrot-plugin-msx/blob/v0.1.0/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-msx/tree/v0.1.0",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-msx/blob/v0.1.0/README.md",
+  "release": {
+    "tag": "v0.1.0",
+    "url": "https://github.com/plasticbugs/parrot-plugin-msx/releases/tag/v0.1.0",
+    "published": "2026-11-20"
+  },
+  "download": {
+    "name": "MSX.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-msx/releases/download/v0.1.0/MSX.CVP",
+    "size": 246105,
+    "sha256": "761a4b040394a86e165072d8056d8aa146f122dcd347bb6873c4e9780b1c22db"
+  },
+  "image": {
+    "size": 240640,
+    "sha256": "0deb74c65f1bfe708429545307e3213fe03b5f759a8410d6df16cb763659feb9",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 4953,
+      "sha256": "365eedec8af75f90f8930d8e59e4152684e07d002244fc6d33703436cc7fcac4",
+      "lines": 224
+    },
+    "web": {
+      "file": "README.md",
+      "size": 6085,
+      "sha256": "41724fa61794abc4fd75c9e68c9383171a5d9305342989fd9461a5b6748397dd",
+      "url": "https://github.com/plasticbugs/parrot-plugin-msx/blob/v0.1.0/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1003,
+      "sha256": "493a3709394e9f426b36c3e209b11d63dac2715eb6381914f8b4c671efb06e4e"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 1554,
+      "sha256": "8f18c0c02d23e86f7cf895b64c75cc8628ad8487e2ef5dcb20e938ff9f9db22b"
+    },
+    {
+      "file": "screenshot-3.png",
+      "size": 797,
+      "sha256": "91b650c4a213c56a2a0ca81d5b37775ec161f7981346b55caa0506b3fac6ad35"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.0",
+      "url": "https://github.com/plasticbugs/parrot-plugin-msx/releases/tag/v0.1.0",
+      "published": "2026-11-20",
+      "version": "0.1.0",
+      "notes": "The first release. It plays MSX1 cartridge games with C-BIOS built in, or your own BIOS, and supports the ASCII8, ASCII16, Konami, Konami SCC and R-Type cartridges and battery saves. The ColecoVision controller, USB pads, a USB keyboard and a USB mouse all work as MSX controls."
+    }
+  ],
+  "added": "2026-11-19",
+  "updated": "2026-11-19",
+  "submission": null,
+  "credits": "The Z80 core by Juergen Buchmueller, from MAME, free for non-commercial use. It came by way of pico-smsplus by Frank Hoedemakers, under the GPL-3.0. The source is at https://github.com/PicoPlus-devel/pico-smsplus; C-BIOS 0.29 by the C-BIOS team, under a BSD license. Its notice is below. The source\u2026"
+}

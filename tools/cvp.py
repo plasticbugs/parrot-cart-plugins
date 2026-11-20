@@ -362,8 +362,8 @@ def check(data, api_max=API_MENU):
     if len(set(low)) != len(low):
         warnings.append("it lists an extension twice")
     for e in sorted(set(low) & {".rom", ".col"}):
-        warnings.append(f"it opens {e}, but the menu opens ColecoVision ROMs itself. The plugin only gets "
-                        f"{e} files that aren't ROMs")
+        warnings.append(f"it opens {e}, but the menu keeps {e} files with the ColecoVision header for itself. "
+                        f"The plugin gets the others, on menus from November 19, 2026 on")
     home = p["home"]
     if home and not home.startswith("/"):
         warnings.append(f"the folder {home!r} doesn't start with /")
