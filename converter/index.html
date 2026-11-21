@@ -6,8 +6,8 @@
   <meta name="color-scheme" content="dark">
   <title>Parrot Cart movie converter</title>
   <meta name="description" content="Turn a video into a ROM for the ColecoVision SD cart, in your browser.">
-  <script type="module" crossorigin src="./assets/main-LvePNBgp.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-BkoXaQcb.css">
+  <script type="module" crossorigin src="./assets/main-B5cND4_R.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-DIbSUcK8.css">
 </head>
 <body>
   <header class="bar">
@@ -90,6 +90,21 @@
           <div class="seg" id="mapSeg" aria-labelledby="mapLabel"></div>
         </div>
       </div>
+      <fieldset class="choice picture">
+        <legend>Picture</legend>
+        <div class="sliders">
+          <div class="slider">
+            <label for="contrast">Contrast</label>
+            <input type="range" id="contrast" min="0.5" max="2" step="0.05" value="1" autocomplete="off">
+            <output class="num" id="contrastOut" for="contrast">100%</output>
+          </div>
+          <div class="slider">
+            <label for="black">Black level</label>
+            <input type="range" id="black" min="0" max="0.3" step="0.01" value="0" autocomplete="off">
+            <output class="num" id="blackOut" for="black">0%</output>
+          </div>
+        </div>
+      </fieldset>
       <fieldset class="choice">
         <legend>Sound</legend>
         <div class="seg" id="soundSeg"></div>
