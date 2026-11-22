@@ -2,7 +2,7 @@
 
 Write programs for the ColecoVision in Lua, on the console, and run them. Lua is a small programming language that's easy to learn. A script can draw, move sprites, play sound and read the controllers.
 
-Scripts are `.lua` files in the `/LUA` folder of the card. Open one from the cart's menu, or start Lua by itself to see the list and make a new one. You need a USB keyboard to type. Without one you can still open scripts and run them.
+Scripts are `.lua` files in the `/LUA` folder of the card. Open one from the cart's menu, or start Lua from Apps on the menu's Home page to see the list and make a new one. You need a USB keyboard to type. Without one you can still open scripts and run them.
 
 ## Controls
 
@@ -57,6 +57,12 @@ Source: <https://github.com/plasticbugs/parrot-plugin-lua>
 | `colours.lua` | a pattern in all 15 colours, drawn a little at a time |
 | `snake.lua` | a small game with a score that's saved on the card |
 
+## On your computer
+
+With the [starter kit](https://github.com/plasticbugs/parrot-plugin-template) you can write and try scripts on your
+computer in a simulator, and build a script into a plugin with a name and
+icon in the cart's menu. The guide has the steps (`docs/lua.md`).
+
 ## Build it yourself
 
 You need the Raspberry Pi Pico SDK 2.1.1, an Arm GNU toolchain, CMake,
@@ -75,10 +81,10 @@ On Ubuntu, `tools/ci/setup.sh` installs the same tools that GitHub uses to
 build each release.
 
 `CART-README.md` is the text the cart shows on the plugin's page. It is
-the start of this README, with its own short license section.
+the start of this README, with a short license section added.
 
 ## License
 
-The plugin is under the MIT license (`LICENSE`). Lua keeps its own MIT
-license, in `lua/vendor/lua-5.4.8/LICENSE`. `THIRD-PARTY.md` lists the
+The plugin is under the MIT license (`LICENSE`). Lua is under the MIT
+license too, in `lua/vendor/lua-5.4.8/LICENSE`. `THIRD-PARTY.md` lists the
 parts that came from elsewhere, and their licenses.

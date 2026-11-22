@@ -9,10 +9,10 @@ SETUP
 
 Copy TEXTEDIT.CVP into the
 /PLUGINS folder on the card.
-Start Text Editor from the
-Plugins page in the menu, or
-pick a .txt file on the card
-and it opens in the editor.
+Start Text Editor from Apps on
+the menu's Home page, or pick
+a .txt file on the card and it
+opens in the editor.
 
 The cart can't power a
 keyboard. Plug the keyboard

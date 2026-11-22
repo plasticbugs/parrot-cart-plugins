@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.lua",
   "name": "Lua",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "by": "Parrot Cart",
   "description": "Write and run Lua programs on the console",
   "repo": "plasticbugs/parrot-plugin-lua",
@@ -15,45 +15,46 @@
   ],
   "uses": [
     "usb-host",
-    "psram"
+    "psram",
+    "standalone"
   ],
   "icon": "0676f8e4e4fc7800",
   "file_icon": "f8fceec6c6eefe00",
   "license": {
     "spdx": "MIT",
     "name": "MIT License",
-    "url": "https://github.com/plasticbugs/parrot-plugin-lua/blob/v0.1.0/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-lua/blob/v0.1.4/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-lua/tree/v0.1.0",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-lua/blob/v0.1.0/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-lua/tree/v0.1.4",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-lua/blob/v0.1.4/README.md",
   "release": {
-    "tag": "v0.1.0",
-    "url": "https://github.com/plasticbugs/parrot-plugin-lua/releases/tag/v0.1.0",
-    "published": "2026-11-18"
+    "tag": "v0.1.4",
+    "url": "https://github.com/plasticbugs/parrot-plugin-lua/releases/tag/v0.1.4",
+    "published": "2026-11-22"
   },
   "download": {
     "name": "LUA.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-lua/releases/download/v0.1.0/LUA.CVP",
-    "size": 256564,
-    "sha256": "f9d192c7aa1b9d2c3323098ca1a628640d9980d6bf54c3757f6edeffcd58818f"
+    "url": "https://github.com/plasticbugs/parrot-plugin-lua/releases/download/v0.1.4/LUA.CVP",
+    "size": 258636,
+    "sha256": "56cd46367768c375b28515643fe41ef0505426418b9c14bfc4c149963ffbbff7"
   },
   "image": {
-    "size": 253952,
-    "sha256": "30a3e59a4230ec91551bf049e45d8b8a2254f25140e23788484bc121adb3487d",
+    "size": 256000,
+    "sha256": "a27574e67ba0ada6d1ff6d0134c504bd5805ab5fea2a1d229a910e8602ac514c",
     "kind": "sram"
   },
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 2100,
-      "sha256": "e400b4d841d6a76231407a8417532925313c3473a809bccb250906518f965393",
-      "lines": 106
+      "size": 2124,
+      "sha256": "e87c6864d7633cb19ea45f23ae76726efda8ca0e1c387b5fcbed03c437de6e4e",
+      "lines": 107
     },
     "web": {
       "file": "README.md",
-      "size": 3245,
-      "sha256": "0e04fc7f20466575ab8180522170e8672af8498af15a90ea3d054aeeebf4f4a7",
-      "url": "https://github.com/plasticbugs/parrot-plugin-lua/blob/v0.1.0/README.md"
+      "size": 3550,
+      "sha256": "76c1beacee848d85a2f97415159611281657bc26f64cc7f26f643f829bbd2a24",
+      "url": "https://github.com/plasticbugs/parrot-plugin-lua/blob/v0.1.4/README.md"
     }
   },
   "screenshots": [
@@ -75,6 +76,13 @@
   ],
   "history": [
     {
+      "tag": "v0.1.4",
+      "url": "https://github.com/plasticbugs/parrot-plugin-lua/releases/tag/v0.1.4",
+      "published": "2026-11-22",
+      "version": "0.1.4",
+      "notes": "- Lua starts without a file too, so the cart's menu lists it in Apps. It opens with the list of scripts on the card.\n- The sound goes out to the console every 0.1 s as well as whenever a script changes it. The console misreads a byte from the cart now and then, and before this one bad byte could leave a note playing until RESET.\n- A USB pad, keyboard, mouse or MIDI keyboard on a powered hub is found when it was plugged in before Lua started, and when it's plugged in or pulled out while Lua runs. With some hubs it wasn't found before."
+    },
+    {
       "tag": "v0.1.0",
       "url": "https://github.com/plasticbugs/parrot-plugin-lua/releases/tag/v0.1.0",
       "published": "2026-11-18",
@@ -83,7 +91,7 @@
     }
   ],
   "added": "2026-11-18",
-  "updated": "2026-11-18",
+  "updated": "2026-11-22",
   "submission": null,
   "credits": "Lua 5.4.8, by Roberto Ierusalimschy, Luiz Henrique de Figueiredo and Waldemar Celes at PUC-Rio, MIT:; Parrot Cart plugin template and SDK, by the Parrot Cart contributors, MIT:; TinyUSB, by Ha Thach and contributors, MIT:; Raspberry Pi Pico SDK, BSD 3-Clause: Source"
 }

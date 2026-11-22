@@ -12,7 +12,8 @@ controllers.
 Scripts are .lua files in the
 /LUA folder of the card. Open
 one from the cart's menu, or
-start Lua by itself to see the
+start Lua from Apps on the
+menu's Home page to see the
 list and make a new one. You
 need a USB keyboard to type.
 Without one you can still open

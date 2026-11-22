@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.texteditor",
   "name": "Text Editor",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "by": "Parrot Cart",
   "description": "Plain text editor for a USB keyboard",
   "repo": "plasticbugs/parrot-plugin-texteditor",
@@ -14,45 +14,46 @@
     ".txt"
   ],
   "uses": [
-    "usb-host"
+    "usb-host",
+    "standalone"
   ],
   "icon": "ff81bd81b981b5ff",
   "file_icon": "f88cae82ba82bafe",
   "license": {
     "spdx": "MIT",
     "name": "MIT License",
-    "url": "https://github.com/plasticbugs/parrot-plugin-texteditor/blob/v0.1.0/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-texteditor/blob/v0.1.3/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-texteditor/tree/v0.1.0",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-texteditor/blob/v0.1.0/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-texteditor/tree/v0.1.3",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-texteditor/blob/v0.1.3/README.md",
   "release": {
-    "tag": "v0.1.0",
-    "url": "https://github.com/plasticbugs/parrot-plugin-texteditor/releases/tag/v0.1.0",
-    "published": "2026-11-18"
+    "tag": "v0.1.3",
+    "url": "https://github.com/plasticbugs/parrot-plugin-texteditor/releases/tag/v0.1.3",
+    "published": "2026-11-22"
   },
   "download": {
     "name": "TEXTEDIT.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-texteditor/releases/download/v0.1.0/TEXTEDIT.CVP",
-    "size": 128824,
-    "sha256": "fdd8a23dee3a1a9153edced7300525868c6bc204ea9d2f5e599e9a5d6b30d3ef"
+    "url": "https://github.com/plasticbugs/parrot-plugin-texteditor/releases/download/v0.1.3/TEXTEDIT.CVP",
+    "size": 130872,
+    "sha256": "be29dddd61a940df36569bba533231c1323a9444d771327987f5dbfe64d33127"
   },
   "image": {
-    "size": 125952,
-    "sha256": "33d6bd6c11f62687f5e4bfbfd7eb773af22cd46fb7ae51a3f4f84c7a31102e0c",
+    "size": 128000,
+    "sha256": "56b0af8e8b03e9f8e63692ea122fc14d9a8740cb392fc7c72455fd2c8d8a227e",
     "kind": "sram"
   },
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
       "size": 2360,
-      "sha256": "4c49563b76e9a9a18cf520348d89dba921715e5f2c7d344bb03b7aeb4a3cdff4",
+      "sha256": "7ce1a6bca18cd837ded0946600e69e949619ee5aed248806d8ea44e822c54960",
       "lines": 114
     },
     "web": {
       "file": "README.md",
       "size": 3121,
-      "sha256": "39d9cdd1c5e0d42634da48631e0559a337b3195439e3049f3416e3d4e83398f8",
-      "url": "https://github.com/plasticbugs/parrot-plugin-texteditor/blob/v0.1.0/README.md"
+      "sha256": "5da009f930a181e58d4c4381d580d768d3f7066abd6417648aa94fbe01b240b8",
+      "url": "https://github.com/plasticbugs/parrot-plugin-texteditor/blob/v0.1.3/README.md"
     }
   },
   "screenshots": [
@@ -74,6 +75,13 @@
   ],
   "history": [
     {
+      "tag": "v0.1.3",
+      "url": "https://github.com/plasticbugs/parrot-plugin-texteditor/releases/tag/v0.1.3",
+      "published": "2026-11-22",
+      "version": "0.1.3",
+      "notes": "- Text Editor starts without a file too, so the cart's menu lists it in Apps.\n- A USB keyboard on a powered hub is found when it was plugged in before the editor started, and when it's plugged in while the editor runs. With some hubs it wasn't found before."
+    },
+    {
       "tag": "v0.1.0",
       "url": "https://github.com/plasticbugs/parrot-plugin-texteditor/releases/tag/v0.1.0",
       "published": "2026-11-18",
@@ -82,7 +90,7 @@
     }
   ],
   "added": "2026-11-18",
-  "updated": "2026-11-18",
+  "updated": "2026-11-22",
   "submission": null,
   "credits": "The 6x8 font was drawn for the Parrot Cart SDK.; TinyUSB by Ha Thach, under the MIT license. The source is at https://github.com/hathach/tinyusb; The plugin itself is by Parrot Cart."
 }
