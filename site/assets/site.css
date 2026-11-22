@@ -424,6 +424,7 @@ main:has(> .band:last-child) + .foot { margin-top: 0; border-top: var(--rule-hai
 .foot a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
 .foot a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .foot .fine { margin-top: var(--space-2xl); padding-top: var(--space-md); border-top: var(--rule-hair) solid var(--color-rule); color: var(--color-muted); font-size: var(--text-sm); max-width: none; }
+.foot .fine + .fine { margin-top: var(--space-xs); padding-top: 0; border-top: 0; }
 
 @media (max-width: 60rem) {
   .slab .container { flex-wrap: wrap; row-gap: 0; padding-block: var(--space-xs); }

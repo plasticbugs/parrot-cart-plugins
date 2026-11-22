@@ -142,6 +142,7 @@ def footer(pre, entries, config):
 <li><a href="{pre}index.html#install">{T.html("footer.install")}</a></li><li><a href="{pre}converter/">{T.html("footer.converter")}</a></li><li><a href="{pre}registry.json">{T.html("footer.registry_json")}</a></li>{repo}</ul></div>
 </div>
 <p class="fine">{T.html("footer.font_credit", _link=None)}</p>
+<p class="fine">{T.html("footer.trademarks", _link=None)}</p>
 </div></footer>"""
 
 

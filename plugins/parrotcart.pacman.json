@@ -1,0 +1,87 @@
+{
+  "schema": 2,
+  "id": "parrotcart.pacman",
+  "name": "Pac-Man",
+  "version": "0.1.5",
+  "by": "Parrot Cart",
+  "description": "Emulator for the 1980 maze arcade game",
+  "repo": "plasticbugs/parrot-plugin-pacman",
+  "repo_id": null,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "/PACMAN",
+  "opens": [],
+  "uses": [
+    "usb-host"
+  ],
+  "tags": [
+    "arcade"
+  ],
+  "works_with": [
+    "gamepad"
+  ],
+  "icon": "3c7efcf8f8fc7e3c",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": "BSD-3-Clause",
+    "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+    "url": "https://github.com/plasticbugs/parrot-plugin-pacman/blob/v0.1.5/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-pacman/tree/v0.1.5",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-pacman/blob/v0.1.5/README.md",
+  "release": {
+    "tag": "v0.1.5",
+    "url": "https://github.com/plasticbugs/parrot-plugin-pacman/releases/tag/v0.1.5",
+    "published": "2026-11-22"
+  },
+  "download": {
+    "name": "PACMAN.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-pacman/releases/download/v0.1.5/PACMAN.CVP",
+    "size": 249752,
+    "sha256": "4a58acaa8bf531b30afa06dfa4a7f9d786b601b0383dc7ddb88a035b8f761821"
+  },
+  "image": {
+    "size": 246528,
+    "sha256": "02005d1e5ac11a12125e8aacf8f31562e4fa79a2cf927abffa48bba268b97377",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 2712,
+      "sha256": "fc41d5e273a097b024085b4ddeac43561de12249ba12cb895f5d04bea16dff76",
+      "lines": 132
+    },
+    "web": {
+      "file": "README.md",
+      "size": 3549,
+      "sha256": "e3e121e4fe68962cf66d95e89c88a00b0617045f2051524729ce0e2bde5a3c1c",
+      "url": "https://github.com/plasticbugs/parrot-plugin-pacman/blob/v0.1.5/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1260,
+      "sha256": "b66a79997dea21a1895031ccb43c18e601b4592ad946811776b42e81fab86584"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 398,
+      "sha256": "10f683b1fd5a5659a8cb8fb9212d5eae3114ea8260fef14ca49a2b1ed099c3f5"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.5",
+      "url": "https://github.com/plasticbugs/parrot-plugin-pacman/releases/tag/v0.1.5",
+      "published": "2026-11-22",
+      "version": "0.1.5",
+      "notes": "The first release."
+    }
+  ],
+  "added": "2026-11-22",
+  "updated": "2026-11-22",
+  "submission": null,
+  "credits": "The arcade emulation is a port of MAME 0.288's code, under the BSD-3-Clause license. Its authors are:; Nicola Salmoria and Stephane Humbert, for the Pac-Man driver.; Nicola Salmoria and Aaron Giles, for the Namco sound chip.; Aaron Giles, for MAME's scheduler and the watchdog.; Juergen Buchmueller\u2026"
+}

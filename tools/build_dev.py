@@ -311,6 +311,7 @@ def footer(pre, pages, config, kit):
 <li><a href="{site}index.html">{T.html("footer.plugins")}</a></li><li><a href="{site}submit/">{T.html("footer.submit")}</a></li></ul></div>
 </div>
 <p class="fine">{T.html("footer.font_credit", _link=None)}</p>
+<p class="fine">{T.html("footer.trademarks", _link=None)}</p>
 </div></footer>"""
 
 

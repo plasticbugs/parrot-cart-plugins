@@ -270,7 +270,8 @@ class Browse(unittest.TestCase):
         self.assertEqual(cards(self.page), ids)                     # A to Z, all of them, with or without script
         self.assertEqual([p["id"] for p in self.index["plugins"]], ids)
         for e in self.entries:
-            self.assertIn(f'<a href="{e["id"]}/">{build_site.e_(e["name"])}</a>', self.page)
+            # (the page's text has typographic apostrophes: Dragon’s Lair)
+            self.assertIn(f'<a href="{e["id"]}/">{build_site.typeset(build_site.e_(e["name"]))}</a>', self.page)
         more = re.findall(r'<li class="pcard" data-id="([^"]+)" data-more>', self.page)
         self.assertEqual(more, ids[build_site.PER_PAGE:])           # held back until the script pages them
         self.assertIn('<script src="../assets/browse.js" defer></script>', self.page)

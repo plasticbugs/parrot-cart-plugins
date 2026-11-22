@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.esb",
   "name": "Empire Strikes Back",
-  "version": "0.1.4",
+  "version": "0.1.7",
   "by": "Parrot Cart",
   "description": "Emulator for the vector-based arcade sequel",
   "repo": "plasticbugs/parrot-plugin-esb",
@@ -25,53 +25,60 @@
   "license": {
     "spdx": "BSD-3-Clause",
     "name": "BSD 3-Clause \"New\" or \"Revised\" License",
-    "url": "https://github.com/plasticbugs/parrot-plugin-esb/blob/v0.1.4/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-esb/blob/v0.1.7/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-esb/tree/v0.1.4",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-esb/blob/v0.1.4/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-esb/tree/v0.1.7",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-esb/blob/v0.1.7/README.md",
   "release": {
-    "tag": "v0.1.4",
-    "url": "https://github.com/plasticbugs/parrot-plugin-esb/releases/tag/v0.1.4",
-    "published": "2026-11-18"
+    "tag": "v0.1.7",
+    "url": "https://github.com/plasticbugs/parrot-plugin-esb/releases/tag/v0.1.7",
+    "published": "2026-11-22"
   },
   "download": {
     "name": "ESB.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-esb/releases/download/v0.1.4/ESB.CVP",
-    "size": 199164,
-    "sha256": "9f00b0d466cf43d00f7809a9d30cdefb7634d949477b6d689334adfd1ca5ce62"
+    "url": "https://github.com/plasticbugs/parrot-plugin-esb/releases/download/v0.1.7/ESB.CVP",
+    "size": 202753,
+    "sha256": "7324ae15d29790a0dd52cf78dbcec1d2d9bc94e088aca47f3469466bfc92ef43"
   },
   "image": {
-    "size": 195840,
-    "sha256": "7ec7aa5bc55c4bb7d2d61b7d114bde330bd7072e4118dfa8aabee34ae97192a2",
+    "size": 199424,
+    "sha256": "5cb849d48b6951b46194e4a6e9cb9c8df11990c4f6651294d6cbaf6c658519da",
     "kind": "sram"
   },
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 2812,
-      "sha256": "cb9408dec285ce0d12d57e83591adf14a012f2eff2da7b3649b4495f2e7a369c",
+      "size": 2817,
+      "sha256": "50f6a49d227284a04fa81851393bc702da482b09d1ea7ee7e33deaa23066440a",
       "lines": 133
     },
     "web": {
       "file": "README.md",
-      "size": 3530,
-      "sha256": "beacf725fe1e0315d2fdf612802d4350c41c5c2702db384fccbba7c341fd4909",
-      "url": "https://github.com/plasticbugs/parrot-plugin-esb/blob/v0.1.4/README.md"
+      "size": 3626,
+      "sha256": "58fdae23dadade628588ffae8c1d6047a447b456549b678ffe8291deb500a57b",
+      "url": "https://github.com/plasticbugs/parrot-plugin-esb/blob/v0.1.7/README.md"
     }
   },
   "screenshots": [
     {
       "file": "screenshot-1.png",
-      "size": 1215,
-      "sha256": "b5318c619fb02b4ddec728595cc317468c2de82b8740d8da35b2c1f26fb42924"
+      "size": 1284,
+      "sha256": "d3a7323b37d816aeaa5a58e49224e2631573fcdaebe31c493f4ede5cdb3bc8df"
     },
     {
       "file": "screenshot-2.png",
-      "size": 530,
-      "sha256": "591215219d00ffa7d8093cf073c2d4dcbb9d79a8e9f2c867ace9eea61434c859"
+      "size": 488,
+      "sha256": "76fe2a3a9db0b6fdef605bc6a3f64510b9f4b9c0242c37709e6a4c5f639a9eb0"
     }
   ],
   "history": [
+    {
+      "tag": "v0.1.7",
+      "url": "https://github.com/plasticbugs/parrot-plugin-esb/releases/tag/v0.1.7",
+      "published": "2026-11-22",
+      "version": "0.1.7",
+      "notes": "- Keypad * or # adds a coin, and keypad 1 starts the game, the same keys as the other arcade plugins. On a USB pad, minus is the coin and plus the start, as before.\n- The plugin now finds a pad that is already on a powered hub when the game starts, and one you plug in while it runs.\n- The cart now sends the sound chip's whole state with every frame, so a byte the console misreads can't leave a tone stuck on."
+    },
     {
       "tag": "v0.1.4",
       "url": "https://github.com/plasticbugs/parrot-plugin-esb/releases/tag/v0.1.4",
@@ -81,7 +88,7 @@
     }
   ],
   "added": "2026-11-18",
-  "updated": "2026-11-18",
+  "updated": "2026-11-22",
   "submission": null,
   "credits": "Parts of this plugin are ports of MAME's code, or were checked against it. That code is under the BSD-3-Clause license, and its authors are:; Steve Baines and Frank Palazzolo, for the Star Wars driver and the matrix processor.; Aaron Giles, for the slapstic chip.; Mathis Rosenhauer, for the vector\u2026"
 }

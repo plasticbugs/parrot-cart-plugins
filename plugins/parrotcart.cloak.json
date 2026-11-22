@@ -1,0 +1,87 @@
+{
+  "schema": 2,
+  "id": "parrotcart.cloak",
+  "name": "Cloak & Dagger",
+  "version": "0.1.2",
+  "by": "Parrot Cart",
+  "description": "Emulator for the 1983 twin-stick spy arcade game",
+  "repo": "plasticbugs/parrot-plugin-cloak",
+  "repo_id": null,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "/CLOAK",
+  "opens": [],
+  "uses": [
+    "usb-host"
+  ],
+  "tags": [
+    "arcade"
+  ],
+  "works_with": [
+    "gamepad"
+  ],
+  "icon": "3c7e183c7e7e6666",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": "BSD-3-Clause",
+    "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+    "url": "https://github.com/plasticbugs/parrot-plugin-cloak/blob/v0.1.2/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-cloak/tree/v0.1.2",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-cloak/blob/v0.1.2/README.md",
+  "release": {
+    "tag": "v0.1.2",
+    "url": "https://github.com/plasticbugs/parrot-plugin-cloak/releases/tag/v0.1.2",
+    "published": "2026-11-22"
+  },
+  "download": {
+    "name": "CLOAK.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-cloak/releases/download/v0.1.2/CLOAK.CVP",
+    "size": 268725,
+    "sha256": "a2ad887dbf46c91d383107d081cba1d8c81647ae5457f0106c9a41cf1eaa188b"
+  },
+  "image": {
+    "size": 265216,
+    "sha256": "eaab218bf57ee289f2e99f4a1cbaeb8bf002db4a541405ce44cc30eca9ed91ce",
+    "kind": "xip"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 2997,
+      "sha256": "829f725f7cd3b058d6e758bd44f63a043c8f5679a62c6c258416310c0cd7d60b",
+      "lines": 140
+    },
+    "web": {
+      "file": "README.md",
+      "size": 3821,
+      "sha256": "b2d27503dd586ae17bb2695d7b86bcd75de70ac4e310d7b309ecfb8fcd3462b7",
+      "url": "https://github.com/plasticbugs/parrot-plugin-cloak/blob/v0.1.2/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1249,
+      "sha256": "f1030cd4d02bff964506a42fc839519353800472ca5c7c07effd3f303bd0c0f9"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 441,
+      "sha256": "8577945a8ea0708655d3dc5a0624ea47a8fd0e595efa935156e7bdf9bb7f8ce7"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.2",
+      "url": "https://github.com/plasticbugs/parrot-plugin-cloak/releases/tag/v0.1.2",
+      "published": "2026-11-22",
+      "version": "0.1.2",
+      "notes": "The first release."
+    }
+  ],
+  "added": "2026-11-22",
+  "updated": "2026-11-22",
+  "submission": null,
+  "credits": "The arcade emulation is a port of MAME 0.288's code, under the BSD-3-Clause license. Its authors are:; Dan Boris and Mirko Buffoni, for the Cloak & Dagger driver.; Olivier Galibert, for the 6502 CPU.; Brad Oliver, Eric Smith and Juergen Buchmueller, for the POKEY sound chip.; Aaron Giles, for MAME'\u2026"
+}

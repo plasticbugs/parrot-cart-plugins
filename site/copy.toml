@@ -529,6 +529,9 @@ registry_json = "registry.json"
 source_code = "Source code on GitHub"
 # The small print at the bottom
 font_credit = "The TV screens use the cart menu's font, Empty Windows Unboxed by VEXED, under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)."
+# The second line of small print: the games' and machines' names that the
+# plugins use, and whose they are
+trademarks = "Donkey Kong, NES and Game Boy are trademarks of Nintendo. Pac-Man, Ms. Pac-Man and Pole Position are trademarks of Bandai Namco. Master System and Game Gear are trademarks of Sega. Star Wars and The Empire Strikes Back are trademarks of Lucasfilm Ltd. Time Pilot is a trademark of Konami, Mr. Do! of Universal, Q*bert of Sony Pictures Entertainment, and Dragon's Lair of Bluth Group, Ltd. Cloak & Dagger is a trademark of its owner. ColecoVision, MSX, PC Engine, TurboGrafx-16, Vectrex and MT-32 are trademarks of their owners. Parrot Cart isn't made or approved by any of them."
 
 
 # ==== Our replies on GitHub ====================================================

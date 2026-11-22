@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.starwars",
   "name": "Star Wars",
-  "version": "0.1.5",
+  "version": "0.1.8",
   "by": "Parrot Cart",
   "description": "Emulator for the vector-based arcade game",
   "repo": "plasticbugs/parrot-plugin-starwars",
@@ -25,53 +25,60 @@
   "license": {
     "spdx": "BSD-3-Clause",
     "name": "BSD 3-Clause \"New\" or \"Revised\" License",
-    "url": "https://github.com/plasticbugs/parrot-plugin-starwars/blob/v0.1.5/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-starwars/blob/v0.1.8/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-starwars/tree/v0.1.5",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-starwars/blob/v0.1.5/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-starwars/tree/v0.1.8",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-starwars/blob/v0.1.8/README.md",
   "release": {
-    "tag": "v0.1.5",
-    "url": "https://github.com/plasticbugs/parrot-plugin-starwars/releases/tag/v0.1.5",
-    "published": "2026-11-19"
+    "tag": "v0.1.8",
+    "url": "https://github.com/plasticbugs/parrot-plugin-starwars/releases/tag/v0.1.8",
+    "published": "2026-11-22"
   },
   "download": {
     "name": "STARWARS.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-starwars/releases/download/v0.1.5/STARWARS.CVP",
-    "size": 181290,
-    "sha256": "b9fc27361d7dc6a87c5e344578e8ad9ecf25c1faddd9805244f30dcd811c7526"
+    "url": "https://github.com/plasticbugs/parrot-plugin-starwars/releases/download/v0.1.8/STARWARS.CVP",
+    "size": 184879,
+    "sha256": "83bb8a78558625a9ebdb842aceaf97105457790041b6d8ab5336376695aa9852"
   },
   "image": {
-    "size": 177920,
-    "sha256": "c124470c980a35370dc988ed9f9ea98ac29fd6d0e59fed67c223bb900231445a",
+    "size": 181504,
+    "sha256": "ed066a13cef5f7b4a997b041dacd617ec8a6a751e28813cdd883b313d772a0d7",
     "kind": "sram"
   },
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 2858,
-      "sha256": "5e75b60795f4de860043a07d7933df74f700aca79aeb10b149aa0cae8fa1fa6e",
+      "size": 2863,
+      "sha256": "2803a14c2b4161f412d353bb15e133166db0279de0a339dc09cb54fc5a1d8d96",
       "lines": 135
     },
     "web": {
       "file": "README.md",
-      "size": 3590,
-      "sha256": "637cfa434995aa6b42324abb4ec9cd644413f693a93a76fa54438f9f7e8c7693",
-      "url": "https://github.com/plasticbugs/parrot-plugin-starwars/blob/v0.1.5/README.md"
+      "size": 3691,
+      "sha256": "996427d7f03a3461f146912e72ad14e4cdc806bf0b950950607b289e091523ea",
+      "url": "https://github.com/plasticbugs/parrot-plugin-starwars/blob/v0.1.8/README.md"
     }
   },
   "screenshots": [
     {
       "file": "screenshot-1.png",
-      "size": 1218,
-      "sha256": "d4f504a9bbc7ed935b59b7fe61046874fa750737bda45f7df9080c75a5c70340"
+      "size": 1298,
+      "sha256": "175f09b844a1ca78442f99e94eff4fbdb7be5187b0b1b94a2370e6eb0ae06fd1"
     },
     {
       "file": "screenshot-2.png",
-      "size": 469,
-      "sha256": "a2250f2861b715216f37d91a07154e01ed5dea8d6971bd7f27ae267deb9f0974"
+      "size": 421,
+      "sha256": "e5d586dae9ea0455f9a85c5a4a5b113614019e9b2e4178099ee68319bf90e0c3"
     }
   ],
   "history": [
+    {
+      "tag": "v0.1.8",
+      "url": "https://github.com/plasticbugs/parrot-plugin-starwars/releases/tag/v0.1.8",
+      "published": "2026-11-22",
+      "version": "0.1.8",
+      "notes": "- Keypad * or # adds a coin, and keypad 1 starts the game, the same keys as the other arcade plugins. On a USB pad, minus is the coin and plus the start, as before.\n- The plugin now finds a pad that is already on a powered hub when the game starts, and one you plug in while it runs.\n- The cart now sends the sound chip's whole state with every frame, so a byte the console misreads can't leave a tone stuck on."
+    },
     {
       "tag": "v0.1.5",
       "url": "https://github.com/plasticbugs/parrot-plugin-starwars/releases/tag/v0.1.5",
@@ -88,7 +95,7 @@
     }
   ],
   "added": "2026-11-18",
-  "updated": "2026-11-18",
+  "updated": "2026-11-22",
   "submission": null,
   "credits": "Parts of this plugin are ports of MAME's code, or were checked against it. That code is under the BSD-3-Clause license, and its authors are:; Steve Baines and Frank Palazzolo, for the Star Wars driver and the matrix processor.; Mathis Rosenhauer, for the vector generator, with thanks to Eric Smith,\u2026"
 }

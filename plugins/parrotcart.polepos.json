@@ -1,0 +1,87 @@
+{
+  "schema": 2,
+  "id": "parrotcart.polepos",
+  "name": "Pole Position",
+  "version": "0.1.2",
+  "by": "Parrot Cart",
+  "description": "Emulator for the 1982 racing arcade game",
+  "repo": "plasticbugs/parrot-plugin-polepos",
+  "repo_id": null,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "/POLEPOS",
+  "opens": [],
+  "uses": [
+    "usb-host"
+  ],
+  "tags": [
+    "arcade"
+  ],
+  "works_with": [
+    "gamepad"
+  ],
+  "icon": "667e3c247effbd66",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": "BSD-3-Clause",
+    "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+    "url": "https://github.com/plasticbugs/parrot-plugin-polepos/blob/v0.1.2/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-polepos/tree/v0.1.2",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-polepos/blob/v0.1.2/README.md",
+  "release": {
+    "tag": "v0.1.2",
+    "url": "https://github.com/plasticbugs/parrot-plugin-polepos/releases/tag/v0.1.2",
+    "published": "2026-11-22"
+  },
+  "download": {
+    "name": "POLEPOS.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-polepos/releases/download/v0.1.2/POLEPOS.CVP",
+    "size": 369200,
+    "sha256": "426d900dfbcd256d03956720d6b01d0b3b3732d3560fa28b3c4806bf009828cf"
+  },
+  "image": {
+    "size": 365312,
+    "sha256": "53d72b97c4ad428ae6a3942e5621799ee3b6bfce070a3b61083adf0f9062bd4e",
+    "kind": "xip"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 3376,
+      "sha256": "8b55165f4d16da4b73b4e55cd431efbfccb059e5b088f0824e714797da6b58b0",
+      "lines": 156
+    },
+    "web": {
+      "file": "README.md",
+      "size": 4189,
+      "sha256": "74cacc4b6e9bb0b5a13557294029db7eda4c58922eb7c4cdeb487a2452a9fd61",
+      "url": "https://github.com/plasticbugs/parrot-plugin-polepos/blob/v0.1.2/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1287,
+      "sha256": "b46c14d8975a5a31d165d1ab135153b598d276703982c32e82c1ccfae0035d55"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 444,
+      "sha256": "265ceaaca6ba65fca6564444c16cb65e8e5c1cdb337c4b2c4438e31d1c6a53e3"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.2",
+      "url": "https://github.com/plasticbugs/parrot-plugin-polepos/releases/tag/v0.1.2",
+      "published": "2026-11-22",
+      "version": "0.1.2",
+      "notes": "The first release."
+    }
+  ],
+  "added": "2026-11-22",
+  "updated": "2026-11-22",
+  "submission": null,
+  "credits": "The arcade emulation is a port of MAME 0.288's code, under the BSD-3-Clause license. Its authors are:; Ernesto Corvi, Juergen Buchmueller, Alex Pasadyn, Aaron Giles and Nicola Salmoria, for the Pole Position driver.; Juergen Buchmueller and Ernesto Corvi, for the Z8000 CPU.; Ernesto Corvi, for the\u2026"
+}
