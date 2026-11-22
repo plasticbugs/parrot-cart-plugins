@@ -10,7 +10,7 @@
 /* Hallmark · polish 2026-11-16 (redesign: polish, the user named Hallmark; Terrazzo and the user's display face kept) · new: the authors' parts, the Tools page and its ready-made icons, the code card, the shop button, What is Parrot Cart?, icons by plugin names */
 /* Hallmark · dismissed F1 · the straight quotes are in a plugin's own README, shown as written; the cart prints the same file in its own font, which has no curly quotes */
 /* Hallmark · answered F15 · two column gaps below the hero: 96px between a text column and its picture or list, 32px inside grids and head blocks; the hero keeps 64px */
-/* Hallmark · addition 2026-11-22 (in the project's system, not a new run) · All plugins (plugins/): a banner head, then search and filters in a column beside a grid of plugin cards in the repo card's material (plate, 2px ink rule, offset shadow), twelve a page; on a phone the filters fold behind a Filters button. The home page's list now shows the eight newest, and the menu's Plugins goes to All plugins. Like a plugin's page it is an index, not a landing page, so sloplint's notes on its short banner, its three sections and the cards' words (44c 58 59 77 78) stand as notes */
+/* Hallmark · addition 2026-11-22 (in the project's system, not a new run) · All plugins (plugins/): a banner head, then search and filters in a column beside a grid of plugin cards in the repo card's material (plate, 2px ink rule, offset shadow), twelve a page; on a phone the filters fold behind a Filters button. Under Opens the file types fold into a closed details, File types (N), that opens itself when one is ticked and counts the ticked ones in its summary. The home page's list now shows the eight newest, and the menu's Plugins goes to All plugins. Like a plugin's page it is an index, not a landing page, so sloplint's notes on its short banner, its three sections and the cards' words (44c 58 59 77 78) stand as notes */
 @import url("./tokens.css");
 @import url("./base.css");
 
@@ -362,8 +362,15 @@ html.js .pcard[data-more] { display: none; }
 .facet .is-none .facet__name, .facet .is-none .facet__n { color: var(--color-muted); }
 @media (hover: hover) { .facet__opt:hover .facet__name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.16em; } }
 @media (pointer: coarse) { .facet__opt { min-height: 44px; } }
-.facet--files ul { grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr)); column-gap: var(--space-md); }
-.facet--files li:first-child { grid-column: 1 / -1; }
+.facet__fold { clear: both; }
+.facet__fold > summary { display: flex; align-items: center; gap: var(--space-sm); min-height: 36px; font-size: var(--text-sm); font-weight: 500; list-style: none; cursor: pointer; }
+.facet__fold > summary::-webkit-details-marker { display: none; }
+.facet__fold > summary::after { content: ""; flex: none; width: 8px; height: 8px; margin-left: auto; border-right: var(--rule-bar) solid currentColor; border-bottom: var(--rule-bar) solid currentColor; transform: translateY(-25%) rotate(45deg); }
+.facet__fold[open] > summary::after { transform: translateY(25%) rotate(-135deg); }
+.facet__fold > summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+@media (hover: hover) { .facet__fold > summary:hover .facet__more { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.16em; } }
+@media (pointer: coarse) { .facet__fold > summary { min-height: 44px; } }
+.facet__fold ul { grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr)); column-gap: var(--space-md); }
 .browse__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-md) var(--space-lg); margin-bottom: var(--space-xl); padding-bottom: var(--space-md); border-bottom: var(--rule-bar) solid var(--color-ink); }
 .browse__count { font: var(--display-weight) var(--text-title)/1.2 var(--font-display); letter-spacing: var(--tracking-display); }
 .field--row { display: flex; align-items: center; gap: var(--space-sm); }

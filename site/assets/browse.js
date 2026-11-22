@@ -19,6 +19,7 @@
   const panel = document.getElementById(toggle.getAttribute('aria-controls'));
   const badge = toggle.querySelector('.browse__on');
   const clears = Array.from(root.querySelectorAll('[data-clear]'));
+  const folds = Array.from(form.querySelectorAll('details[data-fold]'));    // Opens' file types
   const words = root.dataset;          // the page's words, from site/copy.toml
   const per = Number(words.perPage) || 12;
   const FACETS = ['type', 'works', 'opens', 'by'];
@@ -128,6 +129,17 @@
       b.closest('label').querySelector('.facet__n').textContent = String(c);
       b.closest('li').classList.toggle('is-none', c === 0 && !b.checked);
     }));
+    // a fold says how many of its boxes are ticked, so a closed one never hides a filter
+    folds.forEach((d) => {
+      const on = d.querySelectorAll('input:checked').length;
+      const mark = d.querySelector('summary .browse__on');
+      mark.hidden = on === 0;
+      mark.textContent = '';
+      if (on) {
+        mark.appendChild(el('span', String(on), { 'aria-hidden': 'true' }));
+        mark.appendChild(el('span', fill(words.ticked, { count: on }), { class: 'visually-hidden' }));
+      }
+    });
     const picked = FACETS.reduce((s, f) => s + state[f].size, 0);
     badge.textContent = String(picked);
     badge.hidden = picked === 0;
@@ -143,6 +155,7 @@
     input.value = state.q;
     sort.value = state.sort;
     FACETS.forEach((f) => boxes[f].forEach((b) => { b.checked = state[f].has(b.value); }));
+    folds.forEach((d) => { if (d.querySelector('input:checked')) d.open = true; });     // a ticked box shows
   };
 
   // a search is one step back: its first letter adds a step, the rest of the typing changes it

@@ -373,18 +373,25 @@ def plugin_card(e, names, more):
             f'</div></li>')
 
 
-def facet(key, title, options, extra=""):
+def facet(key, title, options, folded=(), fold=None):
     """one group of checkboxes: options are [(value, label html, how many plugins have it)]. A
-    group needs two choices to be worth showing, and a choice no plugin has isn't one."""
+    group needs two choices to be worth showing, and a choice no plugin has isn't one. The
+    folded choices go under the others in a <details>, closed, that says fold(how many); the
+    script opens it when one of them is ticked."""
     options = [o for o in options if o[2]]
-    if len(options) < 2:
+    folded = [o for o in folded if o[2]]
+    if len(options) + len(folded) < 2:
         return ""
-    items = "".join(
+    items = lambda opts: "".join(
         f'<li><label class="facet__opt"><input type="checkbox" name="{key}" value="{e_(v)}">'
         f'<span class="facet__name">{label}</span><span class="facet__n">{n}</span></label></li>'
-        for v, label, n in options)
-    return (f'<fieldset class="facet{extra}" data-facet="{key}"><legend>{title}</legend>'
-            f'<ul>{items}</ul></fieldset>')
+        for v, label, n in opts)
+    more = ""
+    if folded:
+        more = (f'<details class="facet__fold" data-fold><summary><span class="facet__more">{fold(len(folded))}</span>'
+                f'<span class="browse__on" hidden></span></summary><ul>{items(folded)}</ul></details>')
+    return (f'<fieldset class="facet" data-facet="{key}"><legend>{title}</legend>'
+            + (f'<ul>{items(options)}</ul>' if options else "") + f'{more}</fieldset>')
 
 
 def count_text(n, first=1, per=PER_PAGE):
@@ -408,9 +415,9 @@ def browse_page(entries, config, index):
         facet("works", T.html("browse.works_with_title"),
               [(v, e_(n), have(lambda p: p["works_with"], v)) for v, n in names["works_with"].items()]),
         facet("opens", T.html("browse.opens_title"),
-              [("app", T.html("browse.on_its_own"), sum(p["standalone"] for p in plugins))]
-              + [(x, f'<code class="code">{e_(x)}</code>', have(lambda p: p["opens"], x)) for x in exts],
-              " facet--files"),
+              [("app", T.html("browse.on_its_own"), sum(p["standalone"] for p in plugins))],
+              [(x, f'<code class="code">{e_(x)}</code>', have(lambda p: p["opens"], x)) for x in exts],
+              lambda n: T.html("browse.file_types", count=n)),
         facet("by", T.html("browse.made_by_title"),
               [("parrotcart", T.html("browse.ours"), have(lambda p: [p["made_by"]], "parrotcart")),
                ("community", T.html("browse.community"), have(lambda p: [p["made_by"]], "community"))]),
@@ -425,6 +432,7 @@ def browse_page(entries, config, index):
         "list": T.attr("browse.list_label", page="{page}", pages="{pages}"),
         "previous": T.attr("browse.previous"),
         "next": T.attr("browse.next"),
+        "ticked": T.attr("browse.files_ticked", count="{count}"),
     }
     data = " ".join(f'data-{k}="{v}"' for k, v in words.items())
     body = f"""<section class="banner banner--tool" aria-labelledby="hero-title"><div class="container">

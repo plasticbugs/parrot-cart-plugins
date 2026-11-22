@@ -186,6 +186,10 @@ opens_title = "Opens"
 made_by_title = "Made by"
 # Under Opens, for the plugins you start from Apps
 on_its_own = "Runs on its own"
+# Under Opens, what opens the list of file types. Takes {count}, how many there are. When some
+# are ticked, it shows how many, and a screen reader hears files_ticked, which takes {count}.
+file_types = "File types ({count})"
+files_ticked = "{count} ticked"
 # Under Made by: our plugins, and everyone else's
 ours = "Parrot Cart"
 community = "Community"

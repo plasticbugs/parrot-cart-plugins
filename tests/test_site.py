@@ -308,6 +308,14 @@ class Browse(unittest.TestCase):
         self.assertEqual(opens[0], "app")
         self.assertEqual(opens[1:], sorted({x for e in self.entries for x in e["opens"]}))
         self.assertIn('<span class="facet__name">Runs on its own</span>', self.page)
+        # the file types fold away under Runs on its own, closed, and say how many there are
+        opens_set = self.page.split('data-facet="opens"')[1].split("</fieldset>")[0]
+        shown, fold = opens_set.split("<details")
+        self.assertIn('value="app"', shown)
+        self.assertEqual(re.findall(r'value="([^"]+)"', fold), opens[1:])
+        self.assertTrue(fold.startswith(' class="facet__fold" data-fold><summary>'))      # no "open"
+        self.assertIn(f'<span class="facet__more">File types ({len(opens) - 1})</span>', fold)
+        self.assertIn('data-ticked="{count} ticked"', self.page)
         self.assertIn('<span class="facet__name">MIDI out to a computer</span><span class="facet__n">1</span>', self.page)
         # the words the script puts on the page keep their placeholders
         self.assertIn('data-count-page="{first} to {last} of {count} plugins"', self.page)
