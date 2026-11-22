@@ -3,9 +3,12 @@ plugins that have no release to download).
 
     python3 tools/build_site.py [--out _site]
 
-Writes OUT/index.html (the catalogue), OUT/plugins/<id>/index.html (a page
-a plugin, with its screenshots and the cart's README text beside it),
-OUT/submit/index.html, OUT/registry.json (the index for installers),
+Writes OUT/index.html (the home page, with the newest plugins),
+OUT/plugins/index.html (All plugins: every plugin, to search, filter and page
+through) and OUT/plugins/index.json (the index it uses, which it also carries),
+OUT/plugins/<id>/index.html (a page a plugin, with its screenshots and the
+cart's README text beside it), OUT/submit/index.html, OUT/registry.json (the
+index for installers),
 OUT/assets/, and OUT/authors/, the old authors' addresses, which send you on
 to the developer portal. The portal is its own site, built into
 OUT/developers/ by tools/build_dev.py from developers/ and the starter kit;
@@ -38,6 +41,9 @@ import tvscreen  # noqa: E402
 ROOT = registry.ROOT
 ASSETS = os.path.join(ROOT, "site", "assets")
 FLASH_SLOTS = 10            # the menu's plugin cache: sdplayer.c NSLOT (keep in step with the firmware)
+HOME_LATEST = 8             # the home page's list: the newest plugins
+PER_PAGE = 12               # All plugins: cards a page (assets/browse.js reads it from the page)
+BROWSE_FORMAT = 1           # plugins/index.json's layout
 CARD_FOLDERS = ["GAMES", "MOVIES"]      # the card's top folder in the Before picture, without the plugin's folder
 NEEDS = {"usb-host": "USB host", "usb-device": "USB device", "psram": "PSRAM"}
 FONTS = ("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Onest:wght@400;500"
@@ -115,7 +121,7 @@ def slab(pre, current, config):
             f'<a class="wordmark" href="{pre}index.html" aria-label="{T.attr("header.home_label")}" '
             f'><img src="{pre}assets/parrot-cart-mark.svg" width="24" height="28" alt="">{T.html("header.wordmark")}</a>'
             f'<nav aria-label="{T.attr("header.nav_label")}"><ul>'
-            + link(f"{pre}index.html#plugins", T.html("header.nav_plugins"), "plugins")
+            + link(f"{pre}plugins/", T.html("header.nav_plugins"), "plugins")
             + link(f"{pre}index.html#install", T.html("header.nav_install"), "install")
             + link(f"{pre}converter/", T.html("header.nav_converter"), "converter")
             + link(f"{pre}developers/", T.html("header.nav_developers"), "developers")
@@ -131,7 +137,7 @@ def footer(pre, entries, config):
 <div class="cols">
 <div><h2>{T.html("footer.title")}</h2><p>{T.html("footer.tagline")}</p><p class="foot__shop">{shop_link(config, "link", T.html("footer.shop"))}</p></div>
 <div><h2>{T.html("footer.plugins_heading")}</h2><ul>{names}</ul></div>
-<div><h2>{T.html("footer.links_heading")}</h2><ul><li><a href="{pre}submit/">{T.html("footer.submit")}</a></li><li><a href="{pre}submit/#rules">{T.html("footer.rules")}</a></li>
+<div><h2>{T.html("footer.links_heading")}</h2><ul><li><a href="{pre}plugins/">{T.html("footer.all_plugins")}</a></li><li><a href="{pre}submit/">{T.html("footer.submit")}</a></li><li><a href="{pre}submit/#rules">{T.html("footer.rules")}</a></li>
 <li><a href="{pre}developers/">{T.html("footer.developers")}</a></li><li><a href="{pre}developers/tools/">{T.html("footer.icon_editor")}</a></li>
 <li><a href="{pre}index.html#install">{T.html("footer.install")}</a></li><li><a href="{pre}converter/">{T.html("footer.converter")}</a></li><li><a href="{pre}registry.json">{T.html("footer.registry_json")}</a></li>{repo}</ul></div>
 </div>
@@ -207,15 +213,21 @@ def thumb(e, pre=""):
     return f'<span class="thumb">{tvscreen.icon_svg(e["icon"])}</span>'
 
 
+def newest(entries):
+    """newest release first, then by name"""
+    return sorted(sorted(entries, key=lambda e: (e["name"].lower(), e["id"])),
+                  key=lambda e: e["release"]["published"], reverse=True)
+
+
 def catalogue_rows(entries, pre=""):
+    """the home page's list, a row a plugin, in the order given"""
     rows = []
     col = {"id": T.attr("home.browse.columns.id"), "opens": T.attr("home.browse.columns.opens"),
            "version": T.attr("home.browse.columns.version"), "size": T.attr("home.browse.columns.size")}
     no_files = T.html("home.browse.no_files")
-    for e in sorted(entries, key=lambda e: e["name"].lower()):
-        text = " ".join([e["name"], e["id"], opens(e), needs(e), e["by"], e["owner"], desc_text(e)]).lower()
+    for e in entries:
         rows.append(
-            f'<tr data-text="{e_(text)}">'
+            f'<tr>'
             f'<td class="first"><div class="plugin">{thumb(e, pre)}'
             f'<div><span class="plugin__title">{tvscreen.icon_svg(e["icon"], "m")}'
             f'<a href="{pre}plugins/{e_(e["id"])}/">{e_(e["name"])}</a></span><small>{e_(desc_text(e))}</small></div></div></td>'
@@ -254,15 +266,12 @@ def home(entries, config):
              T.text("home.hero.card_alt"))}
 </div></section>""", about(config),
             f"""<section class="section" id="plugins" aria-labelledby="plugins-title"><div class="container">
-<div class="headblock"><h2 id="plugins-title">{T.html("home.browse.title")}</h2></div>
-<div class="finder" data-finder="catalogue" data-empty="catalogue-empty" hidden>
-<label for="q">{T.html("home.browse.search_label")}<input id="q" type="search" autocomplete="off" spellcheck="false"></label>
-<p role="status" aria-live="polite"></p></div>
+<div class="headblock"><h2 id="plugins-title">{T.html("home.browse.title")}</h2><p class="lead">{T.html("home.browse.lead")}</p></div>
 <table class="spec" id="catalogue">
 <thead><tr><th scope="col">{T.html("home.browse.columns.plugin")}</th><th scope="col">{T.html("home.browse.columns.id")}</th><th scope="col">{T.html("home.browse.columns.opens")}</th>
 <th scope="col" class="num">{T.html("home.browse.columns.version")}</th><th scope="col" class="num">{T.html("home.browse.columns.size")}</th></tr></thead>
-<tbody>{catalogue_rows(entries)}</tbody></table>
-<p class="empty" id="catalogue-empty" hidden>{T.html("home.browse.no_match")}</p>
+<tbody>{catalogue_rows(newest(entries)[:HOME_LATEST])}</tbody></table>
+<div class="actions more"><a class="btn" href="plugins/">{T.html("home.browse.all_button")}</a></div>
 </div></section>"""]
 
     # what one file changes: a plugin that opens files, in its home folder
@@ -318,8 +327,135 @@ def home(entries, config):
 <div class="actions"><a class="btn" href="submit/">{T.html("home.close.submit_button")}</a>
 <a class="btn btn--secondary" href="registry.json">{T.html("home.close.json_button")}</a></div>
 </div></section>""")
-    return page(T.text("home.page_title"), T.text("home.description"), "\n".join(body), "", "plugins",
+    return page(T.text("home.page_title"), T.text("home.description"), "\n".join(body), "", "home",
                 screens, entries, config)
+
+
+# ---- All plugins ---------------------------------------------------------------------
+
+def made_by(e, config):
+    """who makes it: parrotcart when its repo's owner is the registry's, community otherwise"""
+    return "parrotcart" if e["owner"].lower() == config["registry_repo"].split("/")[0].lower() else "community"
+
+
+def browse_index(entries, config):
+    """plugins/index.json: every plugin on the site (ours with no release too, if the config shows
+    them) with what the All plugins page searches, filters and sorts by, A to Z"""
+    site = registry.pages_url(config)
+    plugins = [{
+        "id": e["id"], "name": e["name"], "by": e["by"], "made_by": made_by(e, config),
+        "description": desc_text(e), "version": e["version"], "published": e["release"]["published"],
+        "size": e["download"]["size"], "icon": e["icon"], "opens": e["opens"], "standalone": is_app(e),
+        "built_in": bool(e.get("built_in")), "tags": e.get("tags", []), "works_with": e.get("works_with", []),
+        "page": f"{site}plugins/{e['id']}/",
+    } for e in sorted(entries, key=lambda e: (e["name"].lower(), e["id"]))]
+    return {"format": BROWSE_FORMAT, "url": f"{site}plugins/index.json", "names": sitecopy.names(config, T),
+            "plugins": plugins}
+
+
+def page_json(obj):
+    """JSON to carry inside a <script>: nothing in it can end the script or start markup"""
+    s = json.dumps(obj, ensure_ascii=True, separators=(",", ":"))
+    return s.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
+
+
+def plugin_card(e, names, more):
+    """a card on All plugins: the plugin's icon, name, author, description, types and version"""
+    tags = "".join(f"<li>{e_(names['tags'][t])}</li>" for t in e.get("tags", []))
+    tags = f'<ul class="tags" aria-label="{T.attr("browse.type_title")}">{tags}</ul>' if tags else "<span></span>"
+    return (f'<li class="pcard" data-id="{e_(e["id"])}"{" data-more" if more else ""}>'
+            f'<div class="pcard__head">{tvscreen.icon_svg(e["icon"], "m")}<div>'
+            f'<h2 class="pcard__name"><a href="{e_(e["id"])}/">{e_(e["name"])}</a></h2>'
+            f'<p class="pcard__by">{T.html("browse.by", by=e_(e["by"]))}</p></div></div>'
+            f'<p class="pcard__desc">{e_(desc_text(e))}</p>'
+            f'<div class="pcard__foot">{tags}'
+            f'<p class="pcard__version">{T.html("browse.version", version=f"""<code class="code">{e_(e["version"])}</code>""")}</p>'
+            f'</div></li>')
+
+
+def facet(key, title, options, extra=""):
+    """one group of checkboxes: options are [(value, label html, how many plugins have it)]. A
+    group needs two choices to be worth showing, and a choice no plugin has isn't one."""
+    options = [o for o in options if o[2]]
+    if len(options) < 2:
+        return ""
+    items = "".join(
+        f'<li><label class="facet__opt"><input type="checkbox" name="{key}" value="{e_(v)}">'
+        f'<span class="facet__name">{label}</span><span class="facet__n">{n}</span></label></li>'
+        for v, label, n in options)
+    return (f'<fieldset class="facet{extra}" data-facet="{key}"><legend>{title}</legend>'
+            f'<ul>{items}</ul></fieldset>')
+
+
+def count_text(n, first=1, per=PER_PAGE):
+    if n == 1:
+        return T.text("browse.count_one")
+    if n <= per:
+        return T.text("browse.count", count=n)
+    return T.text("browse.count_page", first=first, last=min(n, first + per - 1), count=n)
+
+
+def browse_page(entries, config, index):
+    """All plugins: every plugin's card, A to Z. With script, assets/browse.js searches, filters,
+    sorts and pages through them, and keeps it all in the address; without it every card shows."""
+    names = index["names"]
+    plugins = index["plugins"]
+    have = lambda key, v: sum(1 for p in plugins if v in key(p))
+    exts = sorted({x for p in plugins for x in p["opens"]})
+    facets = [
+        facet("type", T.html("browse.type_title"),
+              [(v, e_(n), have(lambda p: p["tags"], v)) for v, n in names["tags"].items()]),
+        facet("works", T.html("browse.works_with_title"),
+              [(v, e_(n), have(lambda p: p["works_with"], v)) for v, n in names["works_with"].items()]),
+        facet("opens", T.html("browse.opens_title"),
+              [("app", T.html("browse.on_its_own"), sum(p["standalone"] for p in plugins))]
+              + [(x, f'<code class="code">{e_(x)}</code>', have(lambda p: p["opens"], x)) for x in exts],
+              " facet--files"),
+        facet("by", T.html("browse.made_by_title"),
+              [("parrotcart", T.html("browse.ours"), have(lambda p: [p["made_by"]], "parrotcart")),
+               ("community", T.html("browse.community"), have(lambda p: [p["made_by"]], "community"))]),
+    ]
+    order = {e["id"]: e for e in entries}
+    cards = "".join(plugin_card(order[p["id"]], names, i >= PER_PAGE) for i, p in enumerate(plugins))
+    words = {               # the words browse.js puts on the page, with their {placeholders} kept
+        "count-one": T.attr("browse.count_one"),
+        "count": T.attr("browse.count", count="{count}"),
+        "count-page": T.attr("browse.count_page", first="{first}", last="{last}", count="{count}"),
+        "page": T.attr("browse.page", page="{page}"),
+        "list": T.attr("browse.list_label", page="{page}", pages="{pages}"),
+        "previous": T.attr("browse.previous"),
+        "next": T.attr("browse.next"),
+    }
+    data = " ".join(f'data-{k}="{v}"' for k, v in words.items())
+    body = f"""<section class="banner banner--tool" aria-labelledby="hero-title"><div class="container">
+<div class="banner__text"><h1 id="hero-title">{T.html("browse.title")}</h1><p class="lead">{T.html("browse.lead")}</p></div>
+</div></section>
+<section class="section browse-sec"><div class="container">
+<div class="browse" data-browse data-per-page="{PER_PAGE}" {data}>
+<form class="browse__tools" id="browse-form" role="search" action="./" method="get">
+<div class="field"><label for="q">{T.html("browse.search_label")}</label><input id="q" name="q" type="search" autocomplete="off" spellcheck="false"></div>
+<button type="button" class="btn btn--secondary browse__toggle" aria-expanded="false" aria-controls="browse-filters">{T.html("browse.filters_button")}<span class="browse__on" hidden></span></button>
+<div class="browse__filters" id="browse-filters">
+{"".join(facets)}
+<div><button type="button" class="tool" data-clear hidden>{T.html("browse.clear")}</button></div>
+</div>
+</form>
+<div class="browse__results" id="browse-results">
+<div class="browse__bar">
+<p class="browse__count" role="status" aria-live="polite" aria-atomic="true">{e_(count_text(len(plugins)))}</p>
+<div class="field field--row"><label for="sort">{T.html("browse.sort_label")}</label><span class="select"><select id="sort" name="sort" form="browse-form">
+<option value="name">{T.html("browse.sort_name")}</option><option value="new">{T.html("browse.sort_new")}</option></select></span></div>
+</div>
+<ul class="pgrid" id="browse-list" tabindex="-1" aria-label="{T.attr("browse.title")}">{cards}</ul>
+<div class="browse__empty" hidden><h2>{T.html("browse.empty_title")}</h2><p>{T.html("browse.empty_text")}</p>
+<div class="actions"><button type="button" class="btn btn--secondary" data-clear>{T.html("browse.clear")}</button></div></div>
+<nav class="pager" aria-label="{T.attr("browse.pages_label")}" hidden><ul></ul></nav>
+</div>
+</div>
+<script type="application/json" id="browse-data">{page_json(index)}</script>
+</div></section>"""
+    return page(T.text("browse.page_title"), T.text("browse.description"), body, "../", "plugins", [], entries,
+                config, scripts=("browse.js",))
 
 
 # ---- a plugin's page ----------------------------------------------------------------
@@ -529,7 +665,7 @@ def submit_page(entries, config):
     # what a plugin needs, in a few lines
     need_rows = "".join(f"<li><b>{t}</b><span>{s}</span></li>" for t, s in
                         T.rows("submit.requirements.rows", ("title", "text"), readme_page="../developers/packaging/#readme",
-                               screenshots_page="../developers/packaging/#screenshots"))
+                               screenshots_page="../developers/packaging/#screenshots", browse_page="../plugins/"))
     primary = f'<a class="btn" href="{e_(form)}">{T.html("submit.hero.issue_button")}</a>'
     body = f"""<section class="banner" aria-labelledby="hero-title"><div class="container">
 <div class="banner__text">
@@ -611,7 +747,7 @@ def site_entries(config, root=ROOT):
     if config.get("show_examples"):
         entries += [e for e in registry.load_entries(root, examples=True).values() if e["id"] not in live]
     for e in entries:
-        bad = registry.check_entry(e)
+        bad = registry.check_entry(e, config=config)
         bad = bad or registry.check_files(registry.files_dir(root, e["id"], bool(e.get("example"))), e)
         if bad:
             raise SystemExit(f"{e.get('id')}: {bad}")
@@ -625,7 +761,7 @@ def build(out, config=None, root=ROOT):
     if os.path.isdir(out):
         shutil.rmtree(out)
     os.makedirs(os.path.join(out, "assets"))
-    for name in ("tokens.css", "base.css", "site.css", "site.js",       # site.css is the portal's too
+    for name in ("tokens.css", "base.css", "site.css", "site.js", "browse.js",      # site.css is the portal's too
                  "parrot-cart-mark.svg", "parrot-cart-icon.svg"):     # the logo, from the cart's own site
         shutil.copy(os.path.join(ASSETS, name), os.path.join(out, "assets", name))
     with open(os.path.join(out, "assets", "icon.svg"), "w") as f:     # the menu's plug, as on the TV
@@ -638,6 +774,9 @@ def build(out, config=None, root=ROOT):
             f.write(text)
 
     write("index.html", home(entries, config))
+    index = browse_index(entries, config)
+    registry.write_json(os.path.join(out, "plugins", "index.json"), index)
+    write("plugins/index.html", browse_page(entries, config, index))
     for e in entries:
         write(f"plugins/{e['id']}/index.html", plugin_page(e, entries, config, root))
         for name in registry.entry_files(e):                    # copies: the site hotlinks nothing
@@ -662,7 +801,7 @@ def main(argv=None):
         entries = build(a.out)
     except sitecopy.CopyError as e:
         raise SystemExit(f"error: {e}") from None
-    print(f"built {a.out}: the catalogue, {len(entries)} plugin pages, the submit page and registry.json "
+    print(f"built {a.out}: the home page, All plugins, {len(entries)} plugin pages, the submit page and registry.json "
           "(the developer portal: tools/build_dev.py --out " + os.path.join(a.out, "developers") + ")")
 
 

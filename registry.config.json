@@ -14,5 +14,7 @@
   "shared_prefixes": [],
   "show_examples": true,
   "shop_url": "https://parrotcart.com/",
-  "template_repo": "plasticbugs/parrot-plugin-template"
+  "template_repo": "plasticbugs/parrot-plugin-template",
+  "tags": ["arcade", "consoles", "computers", "games", "music", "video", "tools", "programming"],
+  "works_with": ["gamepad", "keyboard", "mouse", "midi-in", "midi-out"]
 }

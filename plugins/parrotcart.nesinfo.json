@@ -14,6 +14,9 @@
     ".nes"
   ],
   "uses": [],
+  "tags": [
+    "tools"
+  ],
   "icon": "3c4299819999423c",
   "file_icon": "00dea282a282c67c",
   "license": {

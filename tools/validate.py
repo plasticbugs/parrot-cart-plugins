@@ -150,10 +150,11 @@ def _date(s):
 
 
 def validate(gh, repo, tag=None, description=None, root=registry.ROOT, config=None, today=None,
-             submission=None, rules_ok=True, only_ids=None, entries=None):
+             submission=None, rules_ok=True, only_ids=None, entries=None, tags=None, works_with=None):
     """Check repo's release. Returns a result dict:
     ok, repo, tag, errors, warnings, plugins [{file, id, version, change, entry, errors, warnings}],
-    changed [ids]. only_ids: a scheduled update, for these registered plugins only."""
+    changed [ids]. only_ids: a scheduled update, for these registered plugins only. tags and
+    works_with (from the form) go in each entry; without them a listed plugin keeps its own."""
     config = config or registry.load_config(root)
     limits = config["limits"]
     today = today or datetime.date.today().isoformat()
@@ -165,6 +166,12 @@ def validate(gh, repo, tag=None, description=None, root=registry.ROOT, config=No
         return res
     if not rules_ok:
         err("check all three rules in the form")
+    allowed = registry.vocab(config)
+    for k, v in (("tags", tags), ("works_with", works_with)):
+        if any(x not in allowed[k] for x in v or ()):
+            err(f"{k} can only be " + ", ".join(allowed[k]))
+    if tags and len(set(tags)) > registry.TAGS_MAX:
+        err(f"give {registry.TAGS_MAX} tags at most")
 
     r = gh.repo(repo)
     if r is None:
@@ -358,7 +365,9 @@ def validate(gh, repo, tag=None, description=None, root=registry.ROOT, config=No
         }
         if credits_line:
             entry["credits"] = credits_line
-        problems = registry.check_entry(entry)
+        entry = registry.labelled(entry, tags or (old or {}).get("tags"),
+                                  works_with or (old or {}).get("works_with"))
+        problems = registry.check_entry(entry, config=config)
         if problems:
             pr["errors"] += ["something went wrong on our side while making your listing. " + sentence(p)
                              for p in problems]
@@ -480,6 +489,11 @@ def write_entries(res, root):
                     f.write(data)
 
 
+def words(s):
+    """a comma-separated list, for --tags and --works-with (the entry's check says which words it takes)"""
+    return [w.strip() for w in s.split(",") if w.strip()]
+
+
 def gh_from(fixtures):
     if fixtures:
         return ghapi.GitHub(token="", transport=ghapi.RecordedTransport(fixtures))
@@ -491,6 +505,9 @@ def main(argv=None):
     ap.add_argument("repo", nargs="?", help="owner/repo")
     ap.add_argument("--tag", default="")
     ap.add_argument("--description", default=None)
+    ap.add_argument("--tags", type=words, default=None, help="its type, one or two of registry.config.json's tags, "
+                    "like arcade or tools,music (a listed plugin keeps its own without this)")
+    ap.add_argument("--works-with", type=words, default=None, help="what it works with, like gamepad,keyboard")
     ap.add_argument("--from-issue", action="store_true", help="read the issue form from $ISSUE_BODY")
     ap.add_argument("--issue-json", help="read the issue (GitHub's JSON for it) from this file")
     ap.add_argument("--submission", type=int, default=None, help="the issue's number")
@@ -519,7 +536,10 @@ def main(argv=None):
             a.submission = issue["number"]
     if a.from_issue:
         try:
-            form = issue_form.parse(os.environ.get("ISSUE_BODY", ""), config["limits"]["description_max_chars"])
+            names = sitecopy.names(config)
+            form = issue_form.parse(os.environ.get("ISSUE_BODY", ""), config["limits"]["description_max_chars"],
+                                    {v: k for k, v in names["tags"].items()},
+                                    {v: k for k, v in names["works_with"].items()}, registry.TAGS_MAX)
         except issue_form.FormError as e:
             res = {"ok": False, "repo": "the form", "tag": "", "release_url": None, "errors": [str(e)],
                    "warnings": [], "plugins": [], "changed": []}
@@ -528,14 +548,16 @@ def main(argv=None):
             print(report(res))
             return 1
         repo, tag, desc, rules_ok = form["repo"], form["tag"], form["description"], form["rules_ok"]
+        tags, works = form["tags"], form["works_with"]
     elif a.repo:
         repo, tag, desc = a.repo, a.tag, a.description
+        tags, works = a.tags, a.works_with
     else:
         ap.print_usage()
         return 3
     try:
         res = validate(gh, repo, tag or None, desc, config=config, today=a.today, submission=a.submission,
-                       rules_ok=rules_ok)
+                       rules_ok=rules_ok, tags=tags, works_with=works)
     except ghapi.GitHubError as e:
         res = {"ok": False, "repo": repo, "tag": tag, "release_url": None, "retry": True,
                "errors": [str(e)],

@@ -19,7 +19,8 @@ import unicodedata
 HERE = os.path.dirname(os.path.abspath(__file__))
 FORM = os.path.join(os.path.dirname(HERE), ".github", "ISSUE_TEMPLATE", "submit-plugin.yml")
 
-LABELS = {"repo": "Repository", "tag": "Release tag", "description": "Short description", "rules": "Rules"}
+LABELS = {"repo": "Repository", "tag": "Release tag", "description": "Short description", "type": "Type",
+          "works_with": "Works with", "rules": "Rules"}
 RULES = 3                          # the form's checkboxes, all required
 REPO = re.compile(r"[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})/[A-Za-z0-9._-]{1,100}")
 TAG = re.compile(r"[A-Za-z0-9][A-Za-z0-9._+-]{0,99}")
@@ -56,8 +57,25 @@ def clean_line(s, n):
     return s
 
 
-def parse(body, description_max=160):
-    """the fields of a submission: {"repo", "tag", "description", "rules_ok"}"""
+def choices(answer, names, what):
+    """the values picked in a dropdown or ticked in checkboxes: names is {its label on the form: value}.
+    A label the form doesn't have stops it (the body can be edited by hand)."""
+    by = {k.lower(): v for k, v in names.items()}
+    by.update({v: v for v in names.values()})
+    out = []
+    for word in answer:
+        v = by.get(word.strip().lower())
+        if v is None:
+            raise FormError(f"{what} can only have the choices on the form")
+        if v not in out:
+            out.append(v)
+    return out
+
+
+def parse(body, description_max=160, types=None, works_with=None, types_max=2):
+    """the fields of a submission: {"repo", "tag", "description", "tags", "works_with", "rules_ok"}.
+    types and works_with are {label on the form: value} (registry.config.json's values, site/copy.toml's
+    names); without them those fields are left empty."""
     if not isinstance(body, str) or len(body) > 20000:
         raise FormError("the issue body is missing or too long")
     s = sections(body)
@@ -78,9 +96,19 @@ def parse(body, description_max=160):
     desc = clean_line(desc, description_max)
     if not desc:
         raise FormError("the short description is empty")
+    picked = s.get(LABELS["type"], "").strip()
+    picked = [] if picked == NO_RESPONSE else [w for w in picked.split(",") if w.strip()]
+    tags = choices(picked, types or {}, "Type") if types is not None else []
+    if len(tags) > types_max:
+        raise FormError(f"pick {types_max} types at most")
+    ticked = re.findall(r"^- \[[xX]\] (.+)$", s.get(LABELS["works_with"], ""), re.M)
+    works = choices(ticked, works_with or {}, "Works with") if works_with is not None else []
+    if works_with:                      # in the order the form lists them
+        order = list(works_with.values())
+        works.sort(key=order.index)
     boxes = re.findall(r"^- \[([ xX])\] ", s.get(LABELS["rules"], ""), re.M)
     rules_ok = len(boxes) >= RULES and all(b in "xX" for b in boxes)
-    return {"repo": repo, "tag": tag, "description": desc, "rules_ok": rules_ok}
+    return {"repo": repo, "tag": tag, "description": desc, "tags": tags, "works_with": works, "rules_ok": rules_ok}
 
 
 def main():

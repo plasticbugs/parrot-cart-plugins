@@ -15,6 +15,12 @@
     "usb-host",
     "usb-device"
   ],
+  "tags": [
+    "video"
+  ],
+  "works_with": [
+    "gamepad"
+  ],
   "icon": "00aafec6c6feaa00",
   "file_icon": "0000000000000000",
   "license": {

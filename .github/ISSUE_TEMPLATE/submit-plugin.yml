@@ -44,6 +44,34 @@ body:
       placeholder: Player for .xyz files, with USB pad support
     validations:
       required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      description: Pick one or two. People can filter the list of plugins by type.
+      multiple: true
+      options:
+        - Arcade
+        - Consoles
+        - Computers
+        - Games
+        - Music
+        - Video
+        - Tools
+        - Programming
+    validations:
+      required: true
+  - type: checkboxes
+    id: works_with
+    attributes:
+      label: Works with
+      description: Tick what your plugin can use. Leave them all empty if it only needs the console's controller.
+      options:
+        - label: USB gamepad
+        - label: USB keyboard
+        - label: USB mouse
+        - label: MIDI keyboard
+        - label: MIDI out to a computer
   - type: checkboxes
     id: rules
     attributes:

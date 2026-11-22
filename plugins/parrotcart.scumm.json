@@ -15,6 +15,14 @@
     ".000"
   ],
   "uses": [],
+  "tags": [
+    "games"
+  ],
+  "works_with": [
+    "keyboard",
+    "mouse",
+    "midi-out"
+  ],
   "icon": "3c42a581bda5423c",
   "file_icon": "7e81ad81b981b57e",
   "license": {

@@ -17,6 +17,12 @@
     "usb-host",
     "psram"
   ],
+  "tags": [
+    "consoles"
+  ],
+  "works_with": [
+    "gamepad"
+  ],
   "icon": "00dea282a282c67c",
   "file_icon": "00dea282a282c67c",
   "license": {

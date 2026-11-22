@@ -17,6 +17,12 @@
     "usb-host",
     "standalone"
   ],
+  "tags": [
+    "tools"
+  ],
+  "works_with": [
+    "keyboard"
+  ],
   "icon": "ff81bd81b981b5ff",
   "file_icon": "f88cae82ba82bafe",
   "license": {

@@ -315,6 +315,25 @@ class AgainstTheRegistry(unittest.TestCase):
         self.assertEqual((p["entry"]["added"], p["entry"]["submission"], p["entry"]["description"]),
                          ("2026-10-01", 3, "Old words."))
 
+    def test_tags_and_works_with(self):
+        res = run("nes-good", "fixture-dev/nes-plugin", tags=["consoles"], works_with=["gamepad", "keyboard"])
+        e = res["plugins"][0]["entry"]
+        self.assertEqual((e["tags"], e["works_with"]), (["consoles"], ["gamepad", "keyboard"]))
+        self.assertEqual(list(e)[list(e).index("uses") + 1:][:2], ["tags", "works_with"])
+        self.assertNotIn("tags", run("nes-good", "fixture-dev/nes-plugin")["plugins"][0]["entry"])
+        # a new version keeps the listed plugin's, unless the form gives new ones
+        old = nes_entry(version="0.4.5", tags=["arcade", "music"], works_with=["mouse"])
+        with Root(old) as root:
+            e = run("nes-good", "fixture-dev/nes-plugin", desc=None, root=root)["plugins"][0]["entry"]
+            self.assertEqual((e["tags"], e["works_with"]), (["arcade", "music"], ["mouse"]))
+            e = run("nes-good", "fixture-dev/nes-plugin", root=root, tags=["tools"])["plugins"][0]["entry"]
+            self.assertEqual((e["tags"], e["works_with"]), (["tools"], ["mouse"]))
+        for kw in (dict(tags=["emulators"]), dict(tags=["arcade", "music", "tools"]), dict(works_with=["toaster"])):
+            with self.subTest(kw):
+                res = run("nes-good", "fixture-dev/nes-plugin", **kw)
+                self.assertFalse(res["ok"])
+                self.assertTrue(any(k in res["errors"][0] for k in ("can only be", "at most")), res["errors"])
+
     def test_same_file_again(self):
         with Root(nes_entry()) as root:
             res = run("nes-good", "fixture-dev/nes-plugin", root=root)
@@ -354,6 +373,18 @@ _No response_
 ### Short description
 
 Plays NES games on the console.
+
+### Type
+
+Consoles
+
+### Works with
+
+- [X] USB gamepad
+- [ ] USB keyboard
+- [ ] USB mouse
+- [ ] MIDI keyboard
+- [ ] MIDI out to a computer
 
 ### Rules
 
@@ -398,6 +429,7 @@ class Command(unittest.TestCase):
         with open(os.path.join(out, "plugins", "parrotcart.nes.json")) as f:
             e = json.load(f)
         self.assertEqual((e["description"], e["submission"]), ("Plays NES games on the console.", 7))
+        self.assertEqual((e["tags"], e["works_with"]), (["consoles"], ["gamepad"]))
         with open(os.path.join(out, "result.json")) as f:
             self.assertEqual(json.load(f)["changed"], ["parrotcart.nes"])
         with open(os.path.join(out, "report.md")) as f:
@@ -413,6 +445,23 @@ class Command(unittest.TestCase):
         code, text = cli(["--from-issue", "--out", out], {"ISSUE_BODY": "### Repository\n\nnot a repo\n"})
         self.assertEqual(code, 1)
         self.assertIn("owner/repo", text)
+
+    def test_bad_type_on_the_form(self):
+        out = tmp()
+        body = ISSUE_BODY.replace("\nConsoles\n", "\nConsoles, Arcade, Tools\n")
+        code, text = cli(["--from-issue", "--out", out], {"ISSUE_BODY": body})
+        self.assertEqual(code, 1)
+        self.assertIn("Pick 2 types at most", text)
+
+    def test_tags_by_hand(self):
+        out = tmp()
+        with unittest.mock.patch.object(registry, "load_entries", return_value={}):
+            code, text = cli(["fixture-dev/nes-plugin", "--description", "x", "--tags", "consoles, tools",
+                              "--works-with", "gamepad", "--out", out, "--fixtures", os.path.join(GH_DIR, "nes-good")])
+        self.assertEqual(code, 0, text)
+        with open(os.path.join(out, "plugins", "parrotcart.nes.json")) as f:
+            e = json.load(f)
+        self.assertEqual((e["tags"], e["works_with"]), (["consoles", "tools"], ["gamepad"]))
 
     def test_rate_limit_exit(self):
         code, text = cli(["fixture-dev/nes-plugin", "--description", "x", "--fixtures",

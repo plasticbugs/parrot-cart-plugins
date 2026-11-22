@@ -14,6 +14,12 @@
   "uses": [
     "usb-host"
   ],
+  "tags": [
+    "arcade"
+  ],
+  "works_with": [
+    "gamepad"
+  ],
   "icon": "3e7f004c5ef3cc7f",
   "file_icon": "0000000000000000",
   "license": {

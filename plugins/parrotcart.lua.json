@@ -18,6 +18,12 @@
     "psram",
     "standalone"
   ],
+  "tags": [
+    "programming"
+  ],
+  "works_with": [
+    "keyboard"
+  ],
   "icon": "0676f8e4e4fc7800",
   "file_icon": "f8fceec6c6eefe00",
   "license": {

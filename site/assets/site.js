@@ -1,29 +1,6 @@
-// The registry's two bits of script. Without them every plugin and every
-// screen still shows: the search field and the tabs only appear with script.
-
-// search: filter the catalogue's rows by what they say
-document.querySelectorAll('[data-finder]').forEach((finder) => {
-  const input = finder.querySelector('input');
-  const status = finder.querySelector('[role="status"]');
-  const table = document.getElementById(finder.dataset.finder);
-  const rows = Array.from(table.querySelectorAll('tbody tr'));
-  const empty = document.getElementById(finder.dataset.empty);
-  finder.hidden = false;
-  const say = (n) => { status.textContent = n === 1 ? '1 plugin' : n + ' plugins'; };
-  const run = () => {
-    const words = input.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
-    let n = 0;
-    rows.forEach((tr) => {
-      const hit = words.every((w) => tr.dataset.text.includes(w));
-      tr.hidden = !hit;
-      if (hit) n += 1;
-    });
-    empty.hidden = n > 0;
-    say(n);
-  };
-  input.addEventListener('input', run);
-  say(rows.length);
-});
+// The site's script for every page: the tabs that switch the home page's
+// screens. Without it every screen still shows. (All plugins has its own,
+// browse.js.)
 
 // the switcher: one screen at a time, the tabs move with the arrow keys
 document.querySelectorAll('[data-switch]').forEach((sw) => {

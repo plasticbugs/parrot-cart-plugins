@@ -77,14 +77,14 @@ name = "Plugins"
 value = ".CVP files up to 2 MB less 4K, written in C with the Raspberry Pi Pico SDK, or in Lua."
 
 [home.browse]
-# The plugin list's heading
+# The plugin list's heading. The list shows the newest plugins.
 title = "Browse plugins"
-# The search box's label
-search_label = "Search by name or file type"
+# Under that heading
+lead = "The latest releases."
+# The button under the list, to the page with every plugin (plugins/)
+all_button = "Browse all available plugins"
 # In the Opens column, for a plugin that opens no files
 no_files = "An app"
-# When a search finds nothing
-no_match = "No plugins match. Try a file type like .nes, or clear the search."
 
 [home.browse.columns]
 # The plugin list's column headings (also the labels on a phone)
@@ -163,6 +163,80 @@ text = "We'll check your release and list it here."
 # Its two buttons
 submit_button = "Submit a plugin"
 json_button = "registry.json"
+
+
+# ==== All plugins (plugins/) ==================================================
+
+[browse]
+# The browser tab
+page_title = "All plugins: Parrot Cart plugins"
+# The summary search engines show
+description = "Every plugin for Parrot Cart, the ColecoVision flash cartridge. Search them, or pick a type, a file type or what they work with."
+# The headline and the line under it
+title = "All plugins"
+lead = "Each one is a free .CVP file for the /PLUGINS folder on the cart's SD card."
+# The search box's label
+search_label = "Search"
+# The button that shows the filters on a phone
+filters_button = "Filters"
+# The filters' headings
+type_title = "Type"
+works_with_title = "Works with"
+opens_title = "Opens"
+made_by_title = "Made by"
+# Under Opens, for the plugins you start from Apps
+on_its_own = "Runs on its own"
+# Under Made by: our plugins, and everyone else's
+ours = "Parrot Cart"
+community = "Community"
+# The button that clears the search and every filter
+clear = "Clear all"
+# The sort menu and its two choices
+sort_label = "Sort"
+sort_name = "A to Z"
+sort_new = "Newest"
+# How many plugins match, over the list. Takes {count}, and the last one {first} and {last},
+# the plugins this page shows.
+count_one = "1 plugin"
+count = "{count} plugins"
+count_page = "{first} to {last} of {count} plugins"
+# On each plugin's card. Takes {by}, the plugin's author, and {version}.
+by = "By {by}"
+version = "Version {version}"
+# The page links under the list, and their name for screen readers
+pages_label = "Pages"
+previous = "Previous"
+next = "Next"
+# A page number's name for screen readers. Takes {page}.
+page = "Page {page}"
+# The list's name for screen readers. Takes {page} and {pages}.
+list_label = "Plugins, page {page} of {pages}"
+# When nothing matches the search and the filters
+empty_title = "No plugins match"
+empty_text = "Try another word, or clear the filters to see every plugin."
+
+[browse.types]
+# The names of the types a plugin can have (one or two). registry.config.json
+# lists the types, and each one needs a line here. The submit form's Type list
+# uses these same names.
+arcade = "Arcade"
+consoles = "Consoles"
+computers = "Computers"
+games = "Games"
+music = "Music"
+video = "Video"
+tools = "Tools"
+programming = "Programming"
+
+[browse.works_with]
+# The names of what a plugin can work with. registry.config.json lists them,
+# and each one needs a line here. The submit form's Works with boxes use these
+# same names.
+gamepad = "USB gamepad"
+keyboard = "USB keyboard"
+mouse = "USB mouse"
+midi-in = "MIDI keyboard"
+midi-out = "MIDI out to a computer"
 
 
 # ==== A plugin's page ==========================================================
@@ -368,7 +442,8 @@ text = "We spot it within a day, and it goes through the same steps."
 title = "Requirements"
 
 # The requirements, a bold start and the rest. They can use {readme_page} and
-# {screenshots_page}, the links to those help pages.
+# {screenshots_page}, the links to those help pages, and {browse_page}, the
+# link to the All plugins page.
 [[submit.requirements.rows]]
 title = "The .CVP"
 text = "Its image can be up to 2 MB less 4K."
@@ -384,6 +459,10 @@ text = "You can add up to three, as [256 × 192 PNGs]({screenshots_page})."
 [[submit.requirements.rows]]
 title = "Your repo"
 text = "It has to be public and have a license."
+
+[[submit.requirements.rows]]
+title = "Its type"
+text = "Pick one or two in the form, and tick what your plugin works with. People use them to filter [all the plugins]({browse_page})."
 
 [submit.check]
 # The last band's heading
@@ -435,6 +514,7 @@ shop = "Get a Parrot Cart"
 plugins_heading = "Plugins"
 # The third column's heading and links
 links_heading = "This site"
+all_plugins = "All plugins"
 submit = "Submit a plugin"
 rules = "Requirements"
 developers = "For developers"

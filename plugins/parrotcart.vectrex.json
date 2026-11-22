@@ -17,6 +17,12 @@
   "uses": [
     "usb-host"
   ],
+  "tags": [
+    "consoles"
+  ],
+  "works_with": [
+    "gamepad"
+  ],
   "icon": "7e81a5a599817e24",
   "file_icon": "7c46545448407e00",
   "license": {

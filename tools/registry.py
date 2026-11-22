@@ -18,6 +18,7 @@ import cvp  # noqa: E402
 import png  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CONFIG = os.path.join(ROOT, "registry.config.json")     # this checkout's, whatever ROOT is set to later
 SCHEMA = 2                     # an entry's layout (plugins/<id>.json)
 INDEX_FORMAT = 1               # registry.json's layout
 
@@ -48,7 +49,44 @@ def load_config(root=ROOT):
         c = json.load(f)
     if not REPO_RE.fullmatch(c.get("registry_repo", "")):
         raise ValueError("registry.config.json: registry_repo must be owner/repo")
+    for k in LABELS:
+        v = c.get(k, [])
+        if not (isinstance(v, list) and len(set(v)) == len(v) and all(isinstance(x, str) and SLUG.fullmatch(x) for x in v)):
+            raise ValueError(f"registry.config.json: {k} must be a list of different words like {LABELS[k]}")
     return c
+
+
+# the labels an entry can carry, for the site's All plugins page: what kind of plugin it is (one or
+# two), and what it works with. registry.config.json lists the values; site/copy.toml names them.
+LABELS = {"tags": "arcade", "works_with": "midi-in"}
+SLUG = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*")
+TAGS_MAX = 2
+_vocab = {}
+
+
+def vocab(config=None):
+    """{"tags": [...], "works_with": [...]}: the values entries may use (this checkout's config by default)"""
+    if config is None or not all(k in config for k in LABELS):
+        if CONFIG not in _vocab:
+            with open(CONFIG) as f:
+                _vocab[CONFIG] = json.load(f)
+        config = _vocab[CONFIG]
+    return {k: list(config.get(k, [])) for k in LABELS}
+
+
+def labelled(e, tags=None, works_with=None):
+    """a copy of e with these tags and works_with in place of its own, right after "uses", where the
+    entries keep them (an empty one is left out)"""
+    out = {}
+    for k, v in e.items():
+        if k in LABELS:
+            continue
+        out[k] = v
+        if k == "uses":
+            for key, val in (("tags", tags), ("works_with", works_with)):
+                if val:
+                    out[key] = list(val)
+    return out
 
 
 def pages_url(config):
@@ -122,8 +160,14 @@ def _history_ok(v, e):
     return newest_first and vs[0] == e.get("version") and v[0]["tag"] == (e.get("release") or {}).get("tag")
 
 
-def check_entry(e, filename=None):
-    """an entry's problems against the schema ([] if none)"""
+def _words(v, allowed, least, most):
+    return (isinstance(v, list) and least <= len(v) <= most and all(isinstance(x, str) and x in allowed for x in v)
+            and len(set(v)) == len(v))
+
+
+def check_entry(e, filename=None, config=None):
+    """an entry's problems against the schema ([] if none). The tags and works_with it may use are
+    config's (this checkout's registry.config.json by default)."""
     bad = []
 
     def need(key, ok, what):
@@ -169,6 +213,11 @@ def check_entry(e, filename=None):
     need("screenshots", _shots_ok, "up to three of {file: screenshot-N.png, size, sha256}, in order")
     need("history", lambda v: _history_ok(v, e),
          "[{version, tag, url, published, notes}], newest first, starting with this version")
+    words = vocab(config)
+    if "tags" in e and not _words(e["tags"], words["tags"], 1, TAGS_MAX):
+        bad.append("tags: one or two of " + ", ".join(words["tags"]))
+    if "works_with" in e and not _words(e["works_with"], words["works_with"], 1, len(words["works_with"])):
+        bad.append("works_with: one or more of " + ", ".join(words["works_with"]) + ", each once")
     if "credits" in e and not (isinstance(e["credits"], str) and len(e["credits"]) <= 400 and "\n" not in e["credits"]):
         bad.append("credits: one line, 400 at most")
     if "example" in e and not isinstance(e["example"], bool):
@@ -273,7 +322,7 @@ def index(entries, config, now=None):
     """registry.json: format, when, where, the menu API, and the plugins"""
     now = now or datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     keep = ("id", "name", "version", "by", "description", "repo", "owner", "api", "home", "opens", "uses",
-            "icon", "file_icon", "license", "source_url", "credits_url", "credits", "release", "download",
+            "tags", "works_with", "icon", "file_icon", "license", "source_url", "credits_url", "credits", "release", "download",
             "image", "added", "updated")
     site = pages_url(config)
     plugins = []
@@ -320,7 +369,7 @@ def main(argv=None):
                     continue
                 with open(os.path.join(d, name)) as f:
                     e = json.load(f)
-                problems = check_entry(e, name)
+                problems = check_entry(e, name, config)
                 if ex and e.get("example") is not True:
                     problems.append("example: an entry in examples/ must say example: true")
                 if not ex and e.get("example"):

@@ -56,6 +56,10 @@ CREDITS = {
     "parrotcart.movies": "TinyUSB by Ha Thach",
 }
 BUILT_IN = {"parrotcart.movies"}
+# its type and what it works with, for the All plugins page (registry.config.json's words)
+TAGS = {
+    "parrotcart.movies": (["video"], ["gamepad"]),
+}
 NOTES = {
     "parrotcart.movies": "{name} {version} is built into the cart.",
 }
@@ -130,6 +134,7 @@ def build(today, cvp_dir=None):
             "source_url": source, "credits_url": credits, "release": release,
             "download": dict(old["download"], url=release["url"]), "image": old["image"],
         }
+        e = registry.labelled(e, *TAGS.get(pid, ([], [])))
         if pid in CREDITS:
             e["credits"] = CREDITS[pid]
         d = os.path.join(registry.ROOT, "examples", "readmes")

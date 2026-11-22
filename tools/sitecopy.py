@@ -19,6 +19,8 @@ literal braces.
     T.list("packaging.needs.columns")   an array of strings, each as html
     T.block("submit.check.command")     a code block: escaped, nothing else
     T.raw("packaging.readme.hero.sample") a string, untouched
+    T.table("browse.types")             a table of strings, {key: text as written}
+    names(config)                       the names of registry.config.json's tags and works_with
 
 A missing key, an unknown placeholder or a stray brace stops the build
 with the key's name. Standard library only (tomllib, Python 3.11+).
@@ -170,6 +172,12 @@ class Copy:
             raise CopyError(f"{self.where}: {key} should be a list of text in quotes")
         return [self._fill(f"{key}[{i}]", x, values) for i, x in enumerate(v, 1)]
 
+    def table(self, key):
+        v = self._get(key)
+        if not isinstance(v, dict) or not all(isinstance(x, str) for x in v.values()):
+            raise CopyError(f"{self.where}: {key} should be a [{key}] table of lines like name = \"text\"")
+        return dict(v)
+
     def rows(self, key, fields, **values):
         v = self._get(key)
         if not isinstance(v, list) or not v or not all(isinstance(x, dict) for x in v):
@@ -187,3 +195,22 @@ class Copy:
 
 
 COPY = Copy()
+
+# registry.config.json's lists of words an entry can carry, and the tables here that name them
+NAMES = {"tags": "browse.types", "works_with": "browse.works_with"}
+
+
+def names(config, copy=None):
+    """{"tags": {value: name}, "works_with": {value: name}}, in registry.config.json's order, each
+    value with its name from the copy (as written). A value with no name stops the build."""
+    copy = copy or COPY
+    out = {}
+    for k, key in NAMES.items():
+        table = copy.table(key)
+        out[k] = {}
+        for v in config.get(k, []):
+            if v not in table:
+                raise CopyError(f"{copy.where}: {key}.{v} is missing. registry.config.json lists {v} in {k}, "
+                                f"so it needs a name here")
+            out[k][v] = table[v]
+    return out

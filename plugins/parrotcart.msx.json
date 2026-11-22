@@ -19,6 +19,14 @@
     "usb-host",
     "psram"
   ],
+  "tags": [
+    "computers"
+  ],
+  "works_with": [
+    "gamepad",
+    "keyboard",
+    "mouse"
+  ],
   "icon": "81c3a59981818100",
   "file_icon": "7e425a427e7e5600",
   "license": {

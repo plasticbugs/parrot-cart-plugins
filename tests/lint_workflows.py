@@ -13,7 +13,9 @@ Checks every .github/workflows/*.yml:
   - a timeout on every job
   - checkout without saved credentials in jobs that can't write
   - every script a run step names exists and is executable
-and the issue form against tools/issue_form.py and registry.config.json.
+and the issue form against tools/issue_form.py and registry.config.json (its
+Type and Works with choices are the config's tags and works_with, by their
+names in site/copy.toml).
 If actionlint is on the PATH it runs too.
 """
 import json
@@ -246,6 +248,22 @@ def lint_form():
     rules = ((fields.get("rules") or {}).get("attributes") or {}).get("options") or []
     if len(rules) != issue_form.RULES or not all(r.get("required") for r in rules):
         bad.append(f"{rel}: {len(rules)} rules; issue_form.py expects {issue_form.RULES}, all required")
+    # the Type dropdown and the Works with boxes: registry.config.json's values, by their names in site/copy.toml
+    import sitecopy
+    names = sitecopy.names(config)
+    attrs = lambda key: (fields.get(key) or {}).get("attributes") or {}
+    types = attrs("type").get("options") or []
+    if (fields.get("type") or {}).get("type") != "dropdown" or attrs("type").get("multiple") is not True:
+        bad.append(f"{rel}: the type field must be a dropdown with multiple: true")
+    if types != list(names["tags"].values()):
+        bad.append(f"{rel}: the type options are {types}; registry.config.json's tags are named "
+                   f"{list(names['tags'].values())} in site/copy.toml")
+    boxes = [o.get("label") for o in attrs("works_with").get("options") or []]
+    if (fields.get("works_with") or {}).get("type") != "checkboxes" or boxes != list(names["works_with"].values()):
+        bad.append(f"{rel}: the works_with boxes are {boxes}; registry.config.json's works_with are named "
+                   f"{list(names['works_with'].values())} in site/copy.toml")
+    if any(o.get("required") for o in attrs("works_with").get("options") or []):
+        bad.append(f"{rel}: none of the works_with boxes can be required")
     for wf in ("submission.yml",):
         with open(os.path.join(ROOT, ".github", "workflows", wf)) as f:
             if f"'{config['labels']['submission']}'" not in f.read():

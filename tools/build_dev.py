@@ -448,7 +448,7 @@ def home(ctx):
 </div></section>
 <section class="band band--paper close" aria-labelledby="close-title"><div class="container">
 <div><h2 id="close-title">{T.html("home.close.title")}</h2><p>{T.html("home.close.text")}</p></div>
-<div class="actions"><a class="btn" href="../submit/">{T.html("home.close.submit_button")}</a><a class="btn btn--secondary" href="../index.html#plugins">{T.html("home.close.plugins_button")}</a></div>
+<div class="actions"><a class="btn" href="../submit/">{T.html("home.close.submit_button")}</a><a class="btn btn--secondary" href="../plugins/">{T.html("home.close.plugins_button")}</a></div>
 </div></section>"""
     return page(T.text("home.page_title"), T.text("home.description"), body, "", "home", ctx)
 

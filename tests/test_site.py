@@ -71,7 +71,7 @@ class Site(unittest.TestCase):
         out, pages, idx = self.build()
         examples = registry.load_entries(ROOT, examples=True)
         live = registry.load_entries(ROOT)
-        want = ({"index.html", "submit/index.html"} | AUTHORS | CONVERTER
+        want = ({"index.html", "plugins/index.html", "submit/index.html"} | AUTHORS | CONVERTER
                 | {f"plugins/{i}/index.html" for i in set(examples) | set(live)})
         self.assertEqual(set(pages), want)
         self.assertEqual([e["id"] for e in idx["plugins"]],
@@ -97,7 +97,7 @@ class Site(unittest.TestCase):
     def test_examples_can_be_hidden(self):
         config = dict(registry.load_config(ROOT), show_examples=False)
         _, pages, _ = self.build(config=config)
-        self.assertEqual(set(pages), {"index.html", "submit/index.html"} | AUTHORS | CONVERTER
+        self.assertEqual(set(pages), {"index.html", "plugins/index.html", "submit/index.html"} | AUTHORS | CONVERTER
                          | {f"plugins/{i}/index.html" for i in registry.load_entries(ROOT)})
 
     def test_a_built_in_plugin(self):
@@ -105,8 +105,10 @@ class Site(unittest.TestCase):
         page = pages["plugins/parrotcart.movies/index.html"]
         self.assertIn('<a class="link" href="../../converter/">movie converter</a>', page)
         self.assertNotIn('id="install"', page)
-        self.assertNotIn("[movie converter]", pages["index.html"])
-        self.assertIn("<small>Player for movies made with the movie converter</small>", pages["index.html"])
+        for name in ("index.html", "plugins/index.html"):
+            self.assertNotIn("[movie converter]", pages[name])
+        self.assertIn('<p class="pcard__desc">Player for movies made with the movie converter</p>',
+                      pages["plugins/index.html"])
         for name, text in pages.items():
             if not name.startswith("converter/") and name not in MOVED:
                 self.assertIn('href="' + "../" * name.count("/") + 'converter/"', text, name)
@@ -228,7 +230,7 @@ class Site(unittest.TestCase):
 
     def test_the_site_needs_no_script_and_calls_nobody(self):
         out, pages, _ = self.build()
-        for name in ("site.js",):
+        for name in ("site.js", "browse.js"):
             with open(os.path.join(out, "assets", name)) as f:
                 js = f.read()
             for call in ("fetch(", "XMLHttpRequest", "WebSocket", "sendBeacon", "import(", "http://", "https://"):
@@ -241,6 +243,110 @@ class Site(unittest.TestCase):
         self.assertFalse(re.search(r"#[0-9a-fA-F]{3,8}\b|rgb\(|oklch\(|font-family:(?!\s*var\()", new))
 
 
+def cards(page):
+    """the ids of the cards on All plugins, in the page's order"""
+    return re.findall(r'<li class="pcard" data-id="([^"]+)"', page)
+
+
+def embedded(page):
+    """the index All plugins carries"""
+    return json.loads(re.search(r'<script type="application/json" id="browse-data">(.*?)</script>', page, re.S)[1])
+
+
+class Browse(unittest.TestCase):
+    """All plugins (plugins/), its index, and the home page's list of the newest"""
+
+    def setUp(self):
+        self.out, self.pages, self.idx = Site.build(self)
+        self.page = self.pages["plugins/index.html"]
+        with open(os.path.join(self.out, "plugins", "index.json")) as f:
+            self.index = json.load(f)
+        config = registry.load_config(ROOT)
+        self.entries, _ = build_site.site_entries(config)
+
+    def test_every_plugin_has_a_card(self):
+        ids = sorted((e["id"] for e in self.entries), key=lambda i: next(
+            (e["name"].lower(), e["id"]) for e in self.entries if e["id"] == i))
+        self.assertEqual(cards(self.page), ids)                     # A to Z, all of them, with or without script
+        self.assertEqual([p["id"] for p in self.index["plugins"]], ids)
+        for e in self.entries:
+            self.assertIn(f'<a href="{e["id"]}/">{build_site.e_(e["name"])}</a>', self.page)
+        more = re.findall(r'<li class="pcard" data-id="([^"]+)" data-more>', self.page)
+        self.assertEqual(more, ids[build_site.PER_PAGE:])           # held back until the script pages them
+        self.assertIn('<script src="../assets/browse.js" defer></script>', self.page)
+        self.assertIn(f'data-per-page="{build_site.PER_PAGE}"', self.page)
+        self.assertIn('<a href="../plugins/" aria-current="page">Plugins</a>', self.page)
+
+    def test_the_index(self):
+        self.assertEqual(embedded(self.page), self.index)          # the page carries the published file
+        self.assertEqual(self.index["format"], build_site.BROWSE_FORMAT)
+        self.assertEqual(self.index["url"], "https://plasticbugs.github.io/parrot-cart-plugins/plugins/index.json")
+        config = registry.load_config(ROOT)
+        self.assertEqual(list(self.index["names"]["tags"]), config["tags"])
+        self.assertEqual(self.index["names"]["works_with"]["midi-out"], "MIDI out to a computer")
+        by = {p["id"]: p for p in self.index["plugins"]}
+        lua = by["parrotcart.lua"]
+        self.assertEqual(set(lua), {"id", "name", "by", "made_by", "description", "version", "published", "size",
+                                    "icon", "opens", "standalone", "built_in", "tags", "works_with", "page"})
+        self.assertEqual((lua["tags"], lua["works_with"], lua["opens"], lua["standalone"], lua["made_by"]),
+                         (["programming"], ["keyboard"], [".lua"], True, "parrotcart"))
+        self.assertEqual(lua["page"], "https://plasticbugs.github.io/parrot-cart-plugins/plugins/parrotcart.lua/")
+        self.assertFalse(by["parrotcart.nes"]["standalone"])
+        self.assertTrue(by["parrotcart.movies"]["built_in"])
+        self.assertEqual(by["parrotcart.movies"]["description"], "Player for movies made with the movie converter")
+        for e in self.entries:
+            self.assertEqual(by[e["id"]]["published"], e["release"]["published"])
+
+    def test_the_filters(self):
+        facets = dict(re.findall(r'<fieldset class="facet[^"]*" data-facet="(\w+)"><legend>([^<]+)</legend>', self.page))
+        self.assertEqual(facets, {"type": "Type", "works": "Works with", "opens": "Opens"})      # Made by: all ours
+        boxes = re.findall(r'<input type="checkbox" name="(\w+)" value="([^"]+)">', self.page)
+        types = [v for k, v in boxes if k == "type"]
+        self.assertEqual(types, [t for t in registry.load_config(ROOT)["tags"]
+                                 if any(t in e.get("tags", []) for e in self.entries)])
+        opens = [v for k, v in boxes if k == "opens"]
+        self.assertEqual(opens[0], "app")
+        self.assertEqual(opens[1:], sorted({x for e in self.entries for x in e["opens"]}))
+        self.assertIn('<span class="facet__name">Runs on its own</span>', self.page)
+        self.assertIn('<span class="facet__name">MIDI out to a computer</span><span class="facet__n">1</span>', self.page)
+        # the words the script puts on the page keep their placeholders
+        self.assertIn('data-count-page="{first} to {last} of {count} plugins"', self.page)
+        self.assertIn('data-list="Plugins, page {page} of {pages}"', self.page)
+        n = len(self.entries)
+        self.assertIn(f'aria-live="polite" aria-atomic="true">1 to {build_site.PER_PAGE} of {n} plugins</p>', self.page)
+        self.assertIn('<ul class="tags" aria-label="Type"><li>Consoles</li></ul>', self.page)
+
+    def test_community_plugins_get_made_by(self):
+        root = tmp()
+        listed(root, owner="fixture-dev")
+        e = registry.load_entries(root)["parrotcart.nes"]
+        self.assertEqual(build_site.made_by(e, registry.load_config(root)), "community")
+        self.assertEqual(build_site.made_by(dict(e, owner="PlasticBugs"), registry.load_config(root)), "parrotcart")
+
+    def test_the_home_page_shows_the_newest(self):
+        home = self.pages["index.html"]
+        rows = re.findall(r'<a href="plugins/([^/]+)/">', home.split('id="catalogue"')[1].split("</table>")[0])
+        want = [e["id"] for e in build_site.newest(self.entries)][:build_site.HOME_LATEST]
+        self.assertEqual(rows, want)
+        dates = [next(e for e in self.entries if e["id"] == i)["release"]["published"] for i in rows]
+        self.assertEqual(dates, sorted(dates, reverse=True))
+        self.assertIn('<a class="btn" href="plugins/">Browse all available plugins</a>', home)
+        self.assertIn('<a class="btn" href="#plugins">Browse plugins</a>', home)          # the hero's button
+        self.assertNotIn("data-finder", home)
+        for name, text in self.pages.items():           # the menu's Plugins is All plugins
+            if name not in MOVED and name not in CONVERTER:
+                self.assertIn(f'<a href="{"../" * name.count("/")}plugins/"', text, name)
+
+    def test_an_entry_cant_break_out_of_the_index(self):
+        root = tmp()
+        listed(root, name="</script><b>x", description='</script><script>alert(1)</script>&amp;')
+        out, pages, _ = Site.build(self, root)
+        page = pages["plugins/index.html"]
+        data = page.split('id="browse-data">')[1].split("</script>")[0]
+        self.assertNotIn("<", data)
+        self.assertEqual(embedded(page)["plugins"][0]["description"], '</script><script>alert(1)</script>&amp;')
+
+
 class Copy(unittest.TestCase):
     """site/copy.toml holds every word the pages and the bot use"""
     CODE = ("tools/build_site.py", "tools/validate.py", "tools/ci/pr_text.py")
@@ -250,7 +356,10 @@ class Copy(unittest.TestCase):
         for name in self.CODE:
             with open(os.path.join(ROOT, name)) as f:
                 used |= set(re.findall(r'\bT\.\w+\(\s*"([a-z0-9_.]+)"', f.read()))
-        have = set(sitecopy.COPY.keys())
+        # the tables that name registry.config.json's words are read whole (sitecopy.names)
+        tables = set(sitecopy.NAMES.values())
+        have = {next((t for t in tables if k.startswith(t + ".")), k) for k in sitecopy.COPY.keys()}
+        used |= tables
         self.assertEqual(sorted(used - have), [], "read by the code but missing from site/copy.toml")
         self.assertEqual(sorted(have - used), [], "in site/copy.toml but nothing reads it")
         # a missing key stops the build, and says which

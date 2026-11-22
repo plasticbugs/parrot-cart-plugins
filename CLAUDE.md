@@ -2,7 +2,8 @@
 
 This repository is the Parrot Cart plugin registry and the site built from
 it, at https://plasticbugs.github.io/parrot-cart-plugins/. The site has the
-plugin catalogue with direct `.CVP` downloads, a page for each plugin, the
+home page with the newest plugins, All plugins (`/plugins/`, with search,
+filters and pages) with direct `.CVP` downloads, a page for each plugin, the
 submit page, the movie converter (`/converter/`) and the developer portal
 (`/developers/`). Everything is static, built by Python scripts that use
 only the standard library.
@@ -14,11 +15,11 @@ only the standard library.
 | `plugins/<id>.json`, `plugins/<id>/` | one entry per listed plugin, and its files: the .CVP, screenshots, README.md, the cart's README text |
 | `examples/` | entries for plugins with nothing to download (only Movies, which is built into the cart). `tools/seed_examples.py` writes them |
 | `site/copy.toml` | every word on the site and in our replies on issues and pull requests. The owner edits it by hand |
-| `site/assets/` | `tokens.css`, `base.css`, `site.css`, `site.js` |
+| `site/assets/` | `tokens.css`, `base.css`, `site.css`, `site.js`, `browse.js` (All plugins) |
 | `site/data/menu.json` | the cart menu's font, for drawing its screens (`tools/import_menu_font.py`) |
 | `developers/` | the portal's words (`copy.toml`), its ready-made icons (`icons.toml`) and assets. Its pages come from the starter kit's docs |
 | `converter/` | the movie converter, a built copy of the browser app |
-| `registry.config.json` | limits, labels, the shop link, the template repo, `show_examples` |
+| `registry.config.json` | limits, labels, the shop link, the template repo, `show_examples`, and the allowed `tags` and `works_with` (their names are in `site/copy.toml`, `[browse.types]` and `[browse.works_with]`) |
 | `tools/` | the builders, the validator, the CI scripts (`tools/ci/`) |
 | `tests/` | the unit tests and the workflow lint |
 
@@ -28,7 +29,7 @@ only the standard library.
 python3 -I -m unittest discover -s tests -v       # the tests
 python3 -I tests/lint_workflows.py                # the workflows and the issue form
 python3 -I tools/registry.py check                # every entry against the schema
-python3 -I tools/build_site.py --out _site        # the site and registry.json
+python3 -I tools/build_site.py --out _site        # the site, registry.json and plugins/index.json
 python3 -I tools/build_dev.py --kit ../parrotcart-plugin-template --out _site/developers
 ```
 
@@ -40,7 +41,7 @@ starter kit beside this repository.
 
 ```sh
 export GITHUB_TOKEN=$(gh auth token)
-python3 tools/validate.py OWNER/REPO [--tag vX.Y.Z] [--description "..."] --write
+python3 tools/validate.py OWNER/REPO [--tag vX.Y.Z] [--description "..."] [--tags games,music] [--works-with keyboard,mouse] --write
 ```
 
 - It checks the release the way a submission is checked and writes
@@ -59,6 +60,12 @@ python3 tools/validate.py OWNER/REPO [--tag vX.Y.Z] [--description "..."] --writ
   so they're redrawn for each release.
 - After changing `seed_examples.py`, run `python3 tools/seed_examples.py`.
   A test checks that `examples/` is what it writes.
+- `tags` (one or two types) and `works_with` (USB and MIDI devices) are
+  optional. The form sets them on a submission, an update keeps them, and
+  `--tags` and `--works-with` set them by hand. Only give a `works_with`
+  that the plugin's README says it supports. A new type or device goes in
+  `registry.config.json`, its name in `site/copy.toml` and the issue form
+  (the workflow lint checks they match).
 
 ## Workflows
 

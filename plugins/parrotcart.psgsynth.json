@@ -14,6 +14,12 @@
   "uses": [
     "usb-host"
   ],
+  "tags": [
+    "music"
+  ],
+  "works_with": [
+    "midi-in"
+  ],
   "icon": "003e222222eeee00",
   "file_icon": "0000000000000000",
   "license": {
