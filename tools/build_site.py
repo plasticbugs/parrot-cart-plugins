@@ -57,7 +57,7 @@ def kb(n):
 
 
 def needs(e):
-    return ", ".join(NEEDS[u] for u in e["uses"])
+    return ", ".join(NEEDS[u] for u in e["uses"] if u in NEEDS)     # (standalone isn't something it uses)
 
 
 def opens(e):

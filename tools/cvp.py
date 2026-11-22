@@ -41,16 +41,22 @@ OK, EMAGIC, ESIZE, EID = 0, -1, -2, -3
 ERR_TEXT = {OK: "ok", EMAGIC: "not a plugin", ESIZE: "cut short", EID: "its ID is bad"}
 
 # plugins.h flags; the names are mkcvp.py's --uses words, the labels cvp_needs()'s
+# (standalone has none: the details page doesn't list it, and it says the plugin
+# can start without a file, cvp_standalone())
 FLAGS = (
     (1, "usb-host", "USB host"),
     (2, "usb-device", "USB device"),
     (4, "psram", "PSRAM"),
+    (8, "standalone", None),
 )
+STANDALONE = 8
 
 # plugslot.h
 SLOT_SIZE = 0x00100000
 SECTOR = 4096
-SLOT_ROOM = SLOT_SIZE - SECTOR             # PS_REC: the most an image can be
+SLOT_ROOM = SLOT_SIZE - SECTOR             # PS_REC: the most an image in one slot can be
+SPAN_MAX = 2                               # PS_SPAN_MAX: a plugin over SLOT_ROOM takes two slots side by side
+IMAGE_MAX = SPAN_MAX * SLOT_SIZE - SECTOR  # PS_ROOM(PS_SPAN_MAX): the most an image can be (2 MB less 4K)
 SLOTS = 10                                 # sdplayer.c NSLOT
 SLOT_OFF = 0x00400000                      # sdplayer.c SLOT_OFF
 
@@ -202,22 +208,30 @@ def picobin_walk(w, at, ram_lo=SRAM_BASE, ram_hi=SRAM8_BASE):
     return None
 
 
+def span(size):
+    """plugslot.c ps_span(): the slots an image of this size takes"""
+    return 1 if size <= SLOT_ROOM else 2
+
+
 def chainable(image):
-    """sdplayer.c plug_chainable(), for the image in each of the menu's
-    slots (the menu picks the slot, so it must work in all of them).
+    """sdplayer.c plug_chainable(), for the image in each place the menu
+    could put it (one slot, or two side by side for one over SLOT_ROOM: the
+    menu picks, so it must work in all of them).
     (None, kind) with kind "sram" (a load map into SRAM: the bootrom copies
     it there) or "xip" (runs in place from its slot), or (why not, None)."""
-    slot = image + b"\xff" * (SLOT_ROOM - len(image))      # past the image, as erased
-    w = struct.unpack_from(f"<{SLOT_ROOM // 4}I", slot)
+    need = span(len(image))
+    room = need * SLOT_SIZE - SECTOR                        # ps_room(): its slots less the record
+    slot = image + b"\xff" * (room - len(image))           # past the image, as erased
+    w = struct.unpack_from(f"<{room // 4}I", slot)
     kind = None
-    for k in range(SLOTS):
+    for k in range(SLOTS - need + 1):
         at = XIP_BASE + SLOT_OFF + k * SLOT_SIZE
         r = picobin_walk(w, at)
         if r is None:
             return "It isn't an RP2350 image", None
         ram_end, moves = r
         if ram_end <= SRAM_BASE:
-            if w[1] < XIP_BASE or w[1] >= XIP_BASE + SLOT_ROOM:
+            if w[1] < XIP_BASE or w[1] >= XIP_BASE + room:
                 return "It doesn't load into RAM", None
             kind = "xip"
         elif not moves:
@@ -286,7 +300,12 @@ def uses(flags):
 
 def needs(flags):
     """cvp_needs(): "USB host, PSRAM" """
-    return ", ".join(label for bit, _, label in FLAGS if flags & bit)
+    return ", ".join(label for bit, _, label in FLAGS if flags & bit and label)
+
+
+def standalone(opens, flags):
+    """plugins.c cvp_standalone(): it starts on its own (an app), with no file to open"""
+    return not opens or bool(flags & STANDALONE)
 
 
 def check(data, api_max=API_MENU):
@@ -319,9 +338,12 @@ def check(data, api_max=API_MENU):
                       "\"its header isn't whole sectors\"")
     if not isz:
         errors.append("it has no image, so the cart would refuse it")
-    elif isz > SLOT_ROOM:
-        errors.append(f"the image is {isz} bytes, but a flash slot holds {SLOT_ROOM}. The cart would say "
+    elif isz > IMAGE_MAX:
+        errors.append(f"the image is {isz} bytes, but two flash slots hold {IMAGE_MAX}. The cart would say "
                       "\"it's too big for a slot\"")
+    elif isz > SLOT_ROOM:
+        warnings.append(f"the image is {isz} bytes, over the {SLOT_ROOM} of one flash slot, so it takes two. "
+                        "An older menu says it's too big")
     readme_text, readme_errors = readme(data, p)
     errors += readme_errors
     if readme_text is not None and not readme_text.endswith("\n"):
@@ -335,7 +357,7 @@ def check(data, api_max=API_MENU):
         errors.append("the image doesn't match the SHA-256 in the header, so the cart would refuse to copy it. "
                       "It would say \"the copy doesn't match its SHA-256\"")
     kind = None
-    if isz and isz <= SLOT_ROOM:
+    if isz and isz <= IMAGE_MAX:
         why, kind = chainable(image)
         if why:
             errors.append(f"the menu couldn't start it from a flash slot. It would say \"{why}\"")

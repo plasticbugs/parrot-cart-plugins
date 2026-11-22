@@ -26,7 +26,7 @@ REPO_RE = re.compile(r"[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})/[A-Za-z0-9._-]{1,100}")
 HEX16 = re.compile(r"[0-9a-f]{16}")
 HEX64 = re.compile(r"[0-9a-f]{64}")
 DATE = re.compile(r"\d{4}-\d\d-\d\d")
-USES = ("usb-host", "usb-device", "psram")
+USES = ("usb-host", "usb-device", "psram", "standalone")
 
 # the files an entry keeps beside it, in plugins/<id>/ (copies: a release can disappear)
 CART_README = "cart-readme.txt"            # the .CVP's README section, byte for byte

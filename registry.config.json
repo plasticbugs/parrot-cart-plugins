@@ -2,7 +2,7 @@
   "registry_repo": "plasticbugs/parrot-cart-plugins",
   "api_max": 1,
   "limits": {
-    "asset_max_bytes": 2097152,
+    "asset_max_bytes": 2113536,
     "assets_per_release_max": 8,
     "description_max_chars": 160,
     "readme_max_bytes": 524288

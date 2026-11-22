@@ -8,6 +8,7 @@ import unittest
 
 from helpers import SRAM_IMAGE, fixture, image, make_cvp
 import cvp
+import registry
 import scenarios
 
 class Builds(unittest.TestCase):
@@ -40,6 +41,11 @@ class Builds(unittest.TestCase):
     def test_needs(self):
         self.assertEqual(cvp.needs(5), "USB host, PSRAM")
         self.assertEqual(cvp.needs(0), "")
+        self.assertEqual(cvp.needs(8 | 1), "USB host")            # standalone isn't something it uses
+        self.assertEqual(cvp.uses(8 | 1), ["usb-host", "standalone"])
+        self.assertTrue(cvp.standalone([], 0))
+        self.assertFalse(cvp.standalone([".txt"], 0))
+        self.assertTrue(cvp.standalone([".txt"], 8))
 
 
 class MenuRules(unittest.TestCase):
@@ -131,10 +137,21 @@ class LaterRules(unittest.TestCase):
         self.assertTrue(any("whole 512-byte sectors" in e for e in self.errors(data)))
 
     def test_too_big_for_a_slot(self):
-        big = image(**SRAM_IMAGE, size=cvp.SLOT_ROOM + 4)
-        self.assertTrue(any("flash slot holds" in e for e in self.errors(make_cvp(big))))
         exact = image(**SRAM_IMAGE, size=cvp.SLOT_ROOM)
-        self.assertEqual(self.errors(make_cvp(exact)), [])
+        self.assertEqual(cvp.check(make_cvp(exact))[1:], ([], []))
+        two = image(size=cvp.SLOT_ROOM + 4)                       # over one slot: two side by side
+        info, errors, warnings = cvp.check(make_cvp(two))
+        self.assertEqual(errors, [])
+        self.assertEqual(info["image"]["kind"], "xip")
+        self.assertTrue(any("takes two" in w for w in warnings))
+        self.assertEqual(self.errors(make_cvp(image(size=cvp.IMAGE_MAX))), [])
+        big = image(size=cvp.IMAGE_MAX + 4)
+        self.assertTrue(any("two flash slots hold" in e for e in self.errors(make_cvp(big))))
+        self.assertEqual((cvp.span(cvp.SLOT_ROOM), cvp.span(cvp.SLOT_ROOM + 1)), (1, 2))
+        self.assertEqual(cvp.IMAGE_MAX, 2 * 1024 * 1024 - 4096)
+        # the registry reads a .CVP that big, with its header and the longest README
+        limit = registry.load_config(registry.ROOT)["limits"]["asset_max_bytes"]
+        self.assertGreaterEqual(limit, cvp.HDR_WRITTEN + cvp.IMAGE_MAX + cvp.README_MAX)
 
     def test_no_image(self):
         self.assertTrue(any("no image" in e for e in self.errors(make_cvp(b""))))
@@ -170,6 +187,11 @@ class LaterRules(unittest.TestCase):
         self.assertEqual(errors, [])
         self.assertTrue(any("mean nothing" in w for w in warnings))
         self.assertTrue(any("after the image" in w for w in warnings))
+
+    def test_standalone(self):
+        info, errors, warnings = cvp.check(make_cvp(self.img, opens=[".txt"], flags=0x9))
+        self.assertEqual((errors, warnings), ([], []))
+        self.assertEqual(info["uses"], ["usb-host", "standalone"])
 
 
 class Readme(unittest.TestCase):

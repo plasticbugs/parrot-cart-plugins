@@ -175,6 +175,9 @@ def plugins_page(entries, selected=0):
     return s
 
 
+NEEDS = {"usb-host": "USB host", "usb-device": "USB device", "psram": "PSRAM"}      # plugins.c cvp_needs()
+
+
 def details_page(e):
     """pub_details(): a plugin's details, as the text page shows them"""
     s = Screen(f"The cart's details page for {e['name']}")
@@ -187,7 +190,7 @@ def details_page(e):
     lines += tpair("Folder", e["home"] or "none")
     lines += tpair("File", e["download"]["name"])
     lines += tpair("Size", f"{(e['download']['size'] + 1023) // 1024}K")
-    needs = ", ".join({"usb-host": "USB host", "usb-device": "USB device", "psram": "PSRAM"}[u] for u in e["uses"])
+    needs = ", ".join(NEEDS[u] for u in e["uses"] if u in NEEDS)
     if needs:
         lines += tpair("Uses", needs)
     lines += tpair("In flash", "no: A copies it")
