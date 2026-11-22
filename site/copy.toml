@@ -31,11 +31,11 @@ browse_button = "Browse plugins"
 # The second button under the headline
 submit_button = "Submit a plugin"
 # Under the TV picture beside the headline
-card_caption = "The cart's Plugins page"
+card_caption = "The cart's Plugin Manager"
 # The tag at the right under the TV picture
 card_code = "/PLUGINS"
 # The TV picture's description for screen readers
-card_alt = "A TV showing the cart's Plugins page with these plugins"
+card_alt = "A TV showing the cart's Plugin Manager with these plugins"
 
 [home.about]
 # The section under the headline that says what the cart is: its heading,
@@ -74,7 +74,7 @@ value = "Plugins use the ColecoVision's TMS9918A video chip for the picture and 
 
 [[home.about.specs]]
 name = "Plugins"
-value = ".CVP files up to 1 MB, written in C with the Raspberry Pi Pico SDK."
+value = ".CVP files up to 2 MB less 4K, written in C with the Raspberry Pi Pico SDK, or in Lua."
 
 [home.browse]
 # The plugin list's heading
@@ -103,10 +103,12 @@ lead = "The menu hides a type of file until you add a plugin that opens it."
 tabs_label = "Step by step"
 # The first tab. Its text takes {ext} and {folder}.
 before = "Before"
-before_text = "You have three {ext} files in {folder}, but the menu hides them."
+before_text = "You have three {ext} files in {folder}, but the menu hides them and the folder."
+# The tag under the first tab's picture: the card's top folder
+before_code = "/"
 # The second tab. Its text takes {file}, the .CVP's name.
 copied = "Copied"
-copied_text = "Copy {file} to /PLUGINS, and the plugin shows up on the Plugins page."
+copied_text = "Copy {file} to /PLUGINS, and the plugin shows up in the Plugin Manager."
 # The tag under the second tab's picture
 copied_code = "/PLUGINS"
 # The third tab
@@ -126,20 +128,20 @@ text = "You'll find it on the plugin's page on this site."
 
 [[home.install.steps]]
 title = "Copy it to /PLUGINS"
-text = "That folder is on the cart's microSD card."
+text = "That folder is on the cart's microSD card. A folder inside it, like /PLUGINS/ARCADE, gets a row on Home."
 
 [[home.install.steps]]
-title = "Start it from Plugins"
-text = "Press B for Home, open Plugins, pick the plugin and press A."
+title = "Start it"
+text = "Press B for Home, open Apps, pick the plugin and press A. A plugin that opens files starts when you open one of them."
 
 [home.flash]
 # The dark band. The big number 10 shows first, then this line.
-title = "plugins stay ready on the cart"
+title = "flash slots keep plugins ready to start"
 
 # The dark band's rows: a bold label on the left, a sentence on the right.
 [[home.flash.rows]]
 bold = "The first time you start one"
-text = "The cart copies it into a 1 MB slot. That only happens once for each version."
+text = "The cart copies it into a 1 MB slot, or two for a plugin over 1 MB. That only happens once for each version."
 
 [[home.flash.rows]]
 bold = "A new version"
@@ -147,7 +149,7 @@ text = "It goes into the old version's slot."
 
 [[home.flash.rows]]
 bold = "When every slot is full"
-text = "The next plugin replaces the one you used longest ago."
+text = "The next plugin replaces the one copied longest ago."
 
 [[home.flash.rows]]
 bold = "Removing a plugin"
@@ -296,9 +298,12 @@ copy_text = "That folder is on the cart's microSD card."
 # Step 3, only for a plugin that opens files. The title takes {folder}, the text {types}.
 files_title = "Put your files in {folder}"
 files_text = "Your {types} files go in this folder."
-# The last step. The text takes {name}.
+# The last step. The texts take {name}: one for a plugin that starts on its own,
+# one for a plugin that only opens files, and one for a plugin that does both
 start_title = "Start it"
-start_text = "Press B for Home, open Plugins, pick {name} and press A."
+start_text = "Press B for Home, open Apps, pick {name} and press A."
+start_files_text = "Pick one of your files on the SD card and press A."
+start_both_text = "Press B for Home, open Apps, pick {name} and press A. Or open one of your files on the SD card."
 
 
 # ==== The submit page ==========================================================
@@ -366,7 +371,7 @@ title = "Requirements"
 # {screenshots_page}, the links to those help pages.
 [[submit.requirements.rows]]
 title = "The .CVP"
-text = "It has to be under 1 MB."
+text = "Its image can be up to 2 MB less 4K."
 
 [[submit.requirements.rows]]
 title = "The README"

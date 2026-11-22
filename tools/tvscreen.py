@@ -5,9 +5,11 @@ pixels, the font and icons in site/data/menu.json (from the menu's
 font.asm and icons.h), white text on black, the selected row on a dark
 blue bar, and each icon group in its colour (icons.h icon_colour: folders
 light yellow, ROMs cyan, other systems' files light green, plugins
-magenta). The pages below follow sdplayer.c: pub_plugins(), pub_details()
-(tline/tpair), pub_card() and menu_help(); rows 3-21 hold the list (the
-loader's LIST_ROW and ROWS), row 1 the head and row 23 the help line.
+magenta). The pages below follow sdplayer.c (the menu-groups menu, with
+Home's Apps and groups and the Plugin Manager): pub_plugins(), pub_group(),
+pub_details() (tline/tpair), pub_card() and menu_help(); rows 3-21 hold
+the list (the loader's LIST_ROW and ROWS), row 1 the head and row 23 the
+help line.
 
 Glyphs are drawn once a page (glyph_defs) and placed with <use>, so a
 screen is a few kilobytes. Colours are CSS classes the site's stylesheet
@@ -23,6 +25,7 @@ with open(os.path.join(ROOT, "site", "data", "menu.json")) as _f:
 
 COLS, ROWS = 32, 24
 HEAD_ROW, LIST_ROW, LIST_ROWS, MSG_ROW = 1, 3, 19, 23
+OWN_ICONS = 22                               # sdplayer.c own_slot: a page of plugins' own icons
 BORDER = 12                                  # the backdrop around the picture, as MAME shows it
 NAME_W = 28                                  # browse.h BR_NAME
 
@@ -160,13 +163,36 @@ def icon_svg(hexstr, colour="m", label=None):
 
 # ---- the pages ----------------------------------------------------------------------
 
+def is_app(e):
+    """plugins.c cvp_standalone(): no file to open, or the standalone flag"""
+    return not e["opens"] or "standalone" in e["uses"]
+
+
+class _Own:
+    """own_icon(): a plugin's own icon on a page of plugins, the first OWN_ICONS different ones"""
+    def __init__(self):
+        self.seen = []
+
+    def __call__(self, hexstr, dflt):
+        if hexstr == "00" * 8:
+            return dflt
+        if hexstr not in self.seen:
+            if len(self.seen) == OWN_ICONS:
+                return dflt
+            self.seen.append(hexstr)
+        return hexstr
+
+
 def plugins_page(entries, selected=0):
-    """pub_plugins(): /PLUGINS as the menu lists it, by file name"""
-    s = Screen("The cart's Plugins page")
-    es = sorted(entries, key=lambda e: e["download"]["name"].upper())
-    s.text(HEAD_ROW, 2, "Plugins")
+    """pub_plugins(): the Plugin Manager, /PLUGINS as it is, by file name. An app has
+    its own icon (or the window), a plugin that needs a file the plug. The plugins
+    built into the cart aren't files there"""
+    s = Screen("The cart's Plugin Manager")
+    es = sorted((e for e in entries if not e.get("built_in")), key=lambda e: e["download"]["name"].upper())
+    s.text(HEAD_ROW, 2, "Plugin Manager")
+    own = _Own()
     for r, e in enumerate(es[:LIST_ROWS]):
-        icon = e["icon"] if e["icon"] != "00" * 8 and r < 7 else MENU["icons"]["plugin"]
+        icon = own(e["icon"], MENU["icons"]["app"]) if is_app(e) else MENU["icons"]["plugin"]
         s.icon(LIST_ROW + r, 2, icon, "m")
         s.text(LIST_ROW + r, 4, cvp_row(e["name"], e["version"]))
     if es:
@@ -175,28 +201,68 @@ def plugins_page(entries, selected=0):
     return s
 
 
+def apps_page(entries, title="Apps", selected=0):
+    """pub_group(): Apps on Home (or a folder's group), the plugins that start on
+    their own, each its icon (or the window) and name, by name"""
+    s = Screen(f"The cart's {title} page")
+    es = sorted((e for e in entries if is_app(e) and not e.get("built_in")), key=lambda e: e["name"].upper())
+    s.text(HEAD_ROW, 2, title)
+    own = _Own()
+    for r, e in enumerate(es[:LIST_ROWS]):
+        s.icon(LIST_ROW + r, 2, own(e["icon"], MENU["icons"]["app"]), "m")
+        s.text(LIST_ROW + r, 4, e["name"][:NAME_W])
+    if es:
+        s.bar = LIST_ROW + min(selected, len(es) - 1)
+    s.text(MSG_ROW, 2, "A start  B home")
+    return s
+
+
 NEEDS = {"usb-host": "USB host", "usb-device": "USB device", "psram": "PSRAM"}      # plugins.c cvp_needs()
 
 
 def details_page(e):
-    """pub_details(): a plugin's details, as the text page shows them"""
+    """pub_details(): a plugin's details in the Plugin Manager, as the text page shows
+    them before it's in the cart's flash (a plugin that needs a file: with its folder
+    there and files in it)"""
     s = Screen(f"The cart's details page for {e['name']}")
     s.text(HEAD_ROW, 2, e["name"])
+    app = is_app(e)
     lines = []
     lines += tpair("Version", e["version"])
     lines += tpair("By", e["by"] or "?")
     lines += tpair("ID", e["id"])
-    lines += tpair("Opens", " ".join(e["opens"]) if e["opens"] else "no files: an app")
+    lines += tpair("Opens", " ".join(e["opens"]) + " files" if e["opens"] else "no files")
     lines += tpair("Folder", e["home"] or "none")
     lines += tpair("File", e["download"]["name"])
     lines += tpair("Size", f"{(e['download']['size'] + 1023) // 1024}K")
     needs = ", ".join(NEEDS[u] for u in e["uses"] if u in NEEDS)
     if needs:
         lines += tpair("Uses", needs)
-    lines += tpair("In flash", "no: A copies it")
+    lines += tpair("In flash", "no: A copies it" if app else "not yet")
+    lines.append("")
+    if not app:
+        lines += (["It starts with a file: A opens", f"its folder, {e['home']}."] if e["home"] else
+                  ["It starts with a file: open", "one from the SD card."])
+    if (e.get("readme") or {}).get("cart"):
+        lines.append("* reads its README")
     for r, line in enumerate(lines[:LIST_ROWS]):
         s.text(LIST_ROW + r, 2, line)
-    s.text(MSG_ROW, 2, "A start  # remove  B back")
+    s.text(MSG_ROW, 2, "A start  # remove  B back" if app else
+           "A folder  # remove  B back" if e["home"] else "# remove  B back")
+    return s
+
+
+def card_page(folders, selected=0):
+    """pub_card() at the card's top folder, with only these folders (a folder with nothing
+    the menu would open in it isn't listed)"""
+    s = Screen("The cart's SD card")
+    s.text(HEAD_ROW, 2, "SD card")
+    for r, n in enumerate(folders[:LIST_ROWS]):
+        s.icon(LIST_ROW + r, 2, MENU["icons"]["folder"], "y")
+        s.text(LIST_ROW + r, 4, n[:NAME_W])
+    if folders:
+        s.bar = LIST_ROW + selected
+    s.text(MSG_ROW, 2, "A open  B home")
     return s
 
 
@@ -245,18 +311,18 @@ def readme_page(name, text):
 
 
 def editor_pages(plugin_gid, file_gid):
-    """the icon editor's two previews: the Plugins page with the icon being drawn on its
+    """the icon editor's two previews: Apps on Home with the icon being drawn on its
     selected row, and a folder of its files; the page's script redraws the two glyphs"""
-    a = Screen("The Plugins page with your icon")
-    a.text(HEAD_ROW, 2, "Plugins")
-    a.icon(LIST_ROW, 2, MENU["icons"]["plugin"], "m", plugin_gid)
-    a.text(LIST_ROW, 4, cvp_row("My Plugin", "1.0.0"))
-    a.icon(LIST_ROW + 1, 2, MENU["icons"]["plugin"], "m", plugin_gid)
-    a.text(LIST_ROW + 1, 4, cvp_row("My Plugin (off the bar)", "1.0.0"))
-    a.icon(LIST_ROW + 2, 2, MENU["icons"]["plugin"], "m")
-    a.text(LIST_ROW + 2, 4, cvp_row("Another plugin", "0.2.0"))
+    a = Screen("Apps on the cart with your icon")
+    a.text(HEAD_ROW, 2, "Apps")
+    a.icon(LIST_ROW, 2, MENU["icons"]["app"], "m", plugin_gid)
+    a.text(LIST_ROW, 4, "My Plugin")
+    a.icon(LIST_ROW + 1, 2, MENU["icons"]["app"], "m", plugin_gid)
+    a.text(LIST_ROW + 1, 4, "My Plugin (off the bar)")
+    a.icon(LIST_ROW + 2, 2, MENU["icons"]["app"], "m")
+    a.text(LIST_ROW + 2, 4, "Another plugin")
     a.bar = LIST_ROW
-    a.text(MSG_ROW, 2, "A details  B back")
+    a.text(MSG_ROW, 2, "A start  B home")
     b = Screen("A folder of your plugin's files")
     b.text(HEAD_ROW, 2, "/MYFILES")
     b.icon(LIST_ROW, 2, MENU["icons"]["folder"], "y")

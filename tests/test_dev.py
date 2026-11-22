@@ -8,6 +8,7 @@ import os
 import re
 import shutil
 import unittest
+import zipfile
 
 from helpers import ROOT, shot, tmp
 import build_dev
@@ -19,7 +20,7 @@ import sitecopy
 KIT = os.path.join(ROOT, "tests", "fixtures", "kit")
 REPO = "https://github.com/plasticbugs/parrot-plugin-template"
 DOCS = {"start", "hardware", "sdk", "testing", "rules", "release"}
-MADE = {"examples", "packaging", "tools"}
+MADE = {"claude", "examples", "packaging", "tools"}
 
 
 def kit_copy():
@@ -95,7 +96,7 @@ class Portal(unittest.TestCase):
         self.assertIn(" <code>build/HELLO.CVP</code>", page)
         self.assertIn(f'href="{REPO}/blob/main/docs/getting-started.md"', page)
         self.assertIn("“The rules”", page)
-        self.assertIn('<a class="pager__next" href="../hardware/">', page)
+        self.assertIn('<a class="pager__next" href="../claude/">', page)
         # the same heading twice gets two ids; the SDK's relative paths are its own folder's
         self.assertIn('<h2 id="the-id-2">', pages["developers/rules/index.html"])
         sdk = pages["developers/sdk/index.html"]
@@ -129,6 +130,43 @@ class Portal(unittest.TestCase):
         with self.assertRaises(SystemExit) as cm:
             build_dev.find_kit(os.path.join(tmp(), "nowhere"))
         self.assertIn("--kit", str(cm.exception))
+
+    def test_the_claude_skill(self):
+        out, pages = self.build()
+        page = pages["developers/claude/index.html"]
+        self.assertIn('<h1 id="hero-title">The Claude skill</h1>', page)
+        skill = f"{REPO}/blob/main/.claude/skills/parrot-cart-plugin"
+        # a row for each file the kit's skill has, and none for the rest
+        self.assertIn(f'<a href="{skill}/SKILL.md"><code>SKILL.md</code></a>', page)
+        self.assertIn(f'<a href="{skill}/scripts/check-tools.sh"><code>scripts/check-tools.sh</code></a>', page)
+        self.assertNotIn("porting.md", page)
+        self.assertIn('href="parrot-cart-plugin.zip" download', page)
+        self.assertIn(f'href="{REPO}/tree/main/.claude/skills/parrot-cart-plugin"', page)
+        self.assertIn('<a href="../claude/" aria-current="page">Claude skill</a>', page)
+        # Get started and the home page point to it
+        self.assertIn('href="../claude/"', pages["developers/start/index.html"])
+        self.assertIn('<a href="claude/"><span class="group__name">Claude skill</span>', pages["developers/index.html"])
+        # the zip is the skill's folder, the same bytes each build, scripts still runnable
+        path = os.path.join(out, "developers", "claude", "parrot-cart-plugin.zip")
+        with zipfile.ZipFile(path) as z:
+            self.assertEqual(sorted(z.namelist()), ["parrot-cart-plugin/SKILL.md", "parrot-cart-plugin/references/sdk-api.md",
+                                                    "parrot-cart-plugin/scripts/check-tools.sh"])
+            self.assertEqual(z.getinfo("parrot-cart-plugin/scripts/check-tools.sh").external_attr >> 16, 0o100755)
+            with open(os.path.join(KIT, ".claude", "skills", "parrot-cart-plugin", "SKILL.md"), "rb") as f:
+                self.assertEqual(z.read("parrot-cart-plugin/SKILL.md"), f.read())
+        with open(path, "rb") as f:
+            first = f.read()
+        out2, _ = self.build()
+        with open(os.path.join(out2, "developers", "claude", "parrot-cart-plugin.zip"), "rb") as f:
+            self.assertEqual(f.read(), first)
+        # a kit without the skill has no page, and nothing links to one
+        kit = kit_copy()
+        shutil.rmtree(os.path.join(kit, ".claude"))
+        out, pages = self.build(kit)
+        self.assertNotIn("developers/claude/index.html", pages)
+        self.assertFalse(os.path.exists(os.path.join(out, "developers", "claude")))
+        for name, text in pages.items():
+            self.assertNotIn("claude/", text, name)
 
     def test_the_examples(self):
         _, pages = self.build()

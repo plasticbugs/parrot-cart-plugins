@@ -38,6 +38,7 @@ import tvscreen  # noqa: E402
 ROOT = registry.ROOT
 ASSETS = os.path.join(ROOT, "site", "assets")
 FLASH_SLOTS = 10            # the menu's plugin cache: sdplayer.c NSLOT (keep in step with the firmware)
+CARD_FOLDERS = ["GAMES", "MOVIES"]      # the card's top folder in the Before picture, without the plugin's folder
 NEEDS = {"usb-host": "USB host", "usb-device": "USB device", "psram": "PSRAM"}
 FONTS = ("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Onest:wght@400;500"
          "&family=JetBrains+Mono:wght@500&display=swap")
@@ -58,6 +59,11 @@ def kb(n):
 
 def needs(e):
     return ", ".join(NEEDS[u] for u in e["uses"] if u in NEEDS)     # (standalone isn't something it uses)
+
+
+def is_app(e):
+    """it starts on its own, so the menu lists it in Apps or its group (plugins.c cvp_standalone())"""
+    return not e["opens"] or "standalone" in e["uses"]
 
 
 def opens(e):
@@ -264,14 +270,14 @@ def home(entries, config):
     if pick:
         ext, folder = pick["opens"][0], pick["home"]
         names = ["Sample 1", "Sample 2", "Sample 3"]
-        before = tvscreen.folder_page(folder, [])
+        before = tvscreen.card_page(CARD_FOLDERS)
         listed = tvscreen.plugins_page([pick])
         after = tvscreen.folder_page(folder, names, pick["file_icon"])
         screens += [before, listed, after]
         f = e_(pick["download"]["name"])
         states = [
             ("before", T.html("home.files.before"), T.html("home.files.before_text", ext=e_(ext), folder=e_(folder)),
-             before, folder),
+             before, T.text("home.files.before_code")),
             ("copied", T.html("home.files.copied"), T.html("home.files.copied_text", file=f), listed,
              T.text("home.files.copied_code")),
             ("after", T.html("home.files.after"), T.html("home.files.after_text"),
@@ -494,7 +500,13 @@ def plugin_page(e, entries, config, root=ROOT):
     if e["opens"] and e["home"]:
         steps.append((T.html("plugin.install.files_title", folder=e_(e["home"])),
                       T.html("plugin.install.files_text", types=e_(opens(e)))))
-    steps.append((T.html("plugin.install.start_title"), T.html("plugin.install.start_text", name=e_(e["name"]))))
+    if not e["opens"]:
+        start = T.html("plugin.install.start_text", name=e_(e["name"]))
+    elif is_app(e):
+        start = T.html("plugin.install.start_both_text", name=e_(e["name"]))
+    else:
+        start = T.html("plugin.install.start_files_text", name=e_(e["name"]))
+    steps.append((T.html("plugin.install.start_title"), start))
     install = "" if not live else f"""<section class="section" id="install" aria-labelledby="install-title"><div class="container">
 <div class="headblock"><h2 id="install-title">{T.html("plugin.install.title")}</h2></div>
 <ol class="steps{" steps--4" if len(steps) == 4 else ""}">{li_rows(steps)}</ol>

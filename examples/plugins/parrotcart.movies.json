@@ -58,8 +58,8 @@
   "screenshots": [
     {
       "file": "screenshot-1.png",
-      "size": 1200,
-      "sha256": "cd14bfb517ce1076f4e2cd9c40846359cffc6a7d854c8ea8a66e71659ff5938a"
+      "size": 1277,
+      "sha256": "b39ebd37b7b5609fe46cc77a79b7a3ac9a20d8b8416488dbffce4a0c21ba7c45"
     }
   ],
   "history": [
@@ -72,7 +72,7 @@
     }
   ],
   "added": "2026-11-16",
-  "updated": "2026-11-18",
+  "updated": "2026-11-22",
   "submission": null,
   "example": true,
   "built_in": true

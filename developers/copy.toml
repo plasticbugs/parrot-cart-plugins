@@ -36,6 +36,7 @@ shop = "Get a Parrot Cart"
 # Examples and Tools are there), in the list beside the docs, and under
 # Previous and Next at the bottom of each page
 start = "Get started"
+claude = "Claude skill"
 hardware = "Hardware"
 sdk = "SDK"
 features = "Features"
@@ -88,7 +89,7 @@ description = "Make plugins for Parrot Cart, the flash cartridge for the ColecoV
 # The big headline
 title = "Make plugins for Parrot Cart"
 # The line under it
-lead = "Plugins are C programs that use the ColecoVision's picture, sound and controllers."
+lead = "Plugins are written in C or Lua and use the ColecoVision's picture, sound and controllers."
 # The two buttons under it: the starter kit on GitHub, and the first doc
 kit_button = "Get the starter kit"
 start_button = "Get started"
@@ -102,10 +103,13 @@ card_alt = "A TV showing the starter kit's plugin, with HELLO, PARROT CART, the 
 # The section under the hero: its heading, and the line under it
 title = "The docs"
 lead = "If this is your first plugin, start with [Get started](start/)."
+# After that line when the starter kit has its Claude skill
+claude = "The starter kit also has [a skill for Claude Code](claude/)."
 
 [map]
 # The line under each page's name in that section
 start = "Install the tools and build your first plugin."
+claude = "Claude Code can help you write, port, test and release a plugin."
 hardware = "What's on the cart, and what your plugin can use."
 sdk = "The libraries you build a plugin with."
 features = "How to add game pads, keyboards, mice and MIDI."
@@ -138,7 +142,68 @@ next = "Next"
 # Those two links' name for screen readers
 pager_label = "Previous and next page"
 # The note at the top of the SDK page, over the SDK's README
-sdk_note = "This is the SDK reference from the starter kit. When it mentions `../nes`, `../padtest` or `docs/plugins.md`, those are in the cart's repository. Our plugins and their source code are on [GitHub](https://github.com/plasticbugs)."
+sdk_note = "This is the SDK reference from the starter kit. Paths in it that start with `../` (such as `../nes` or `../sdplayer`) and `docs/plugins.md` are in the cart's repository. Our plugins and their source code are on [GitHub](https://github.com/plasticbugs)."
+# The note at the top of Get started, to the Claude skill page. Takes {claude_page}, the link.
+start_claude = "If you use Claude Code, the starter kit comes with [a skill]({claude_page}) that helps Claude write, test and release your plugin."
+
+
+# ==== The Claude skill page (developers/claude/) ==============================
+
+[claude]
+# The browser tab
+page_title = "Claude skill: Parrot Cart developers"
+# The summary search engines show
+description = "The Parrot Cart starter kit comes with a Claude Code skill for writing, porting, testing and releasing plugins."
+# The big headline
+title = "The Claude skill"
+# The line under it
+lead = "The starter kit comes with a skill for Claude Code. It tells Claude how the SDK works and what the cart needs from a plugin, so Claude can help you write, port, test and release one."
+# The line at the end of the page. Takes {folder}, the link to the skill's folder on GitHub.
+source = "The skill is the folder {folder} in the starter kit."
+# The button at the end of the page. Takes {file}, the zip's name.
+download_button = "Download {file}"
+# The heading over the table of the skill's files
+files_title = "What's in it"
+
+[claude.use]
+title = "Using it"
+text = "Open your plugin's folder in Claude Code and ask for what you want, such as \"make a paddle game\" or \"port this arcade game\". Claude Code finds the skill in the folder and uses it for work on a Parrot Cart plugin."
+more = "Claude builds the plugin, runs it in the simulator, looks at the picture and fixes what it finds. Claude can't try a plugin on a console, so before a release it asks you to. Tagging and pushing a release happen only when you ask."
+
+[claude.have]
+title = "Every new plugin has it"
+text = "`tools/new-plugin.py` copies the kit, skill included, into the new plugin's folder, so the skill is already there in `.claude/skills/parrot-cart-plugin`."
+
+[claude.files_columns]
+# The table's column headings
+file = "File"
+what = "What it has"
+
+# One block a file in the skill's folder, by its path in that folder.
+# A file that isn't in the kit's skill is left out of the table.
+[[claude.files]]
+path = "SKILL.md"
+text = "How a plugin works, choosing between Lua, the screen kernel and the frame kernel, getting set up, the build and check loop with the simulator, the rules the cart depends on, and releasing."
+
+[[claude.files]]
+path = "references/sdk-api.md"
+text = "The SDK's calls by area, with the header each one is in."
+
+[[claude.files]]
+path = "references/porting.md"
+text = "Porting a game: the published plugins as examples, budgets and timing, the picture, sound and how loud, arcade games, memory, testing and licenses."
+
+[[claude.files]]
+path = "scripts/check-tools.sh"
+text = "Checks the build tools and says how to install the ones that are missing."
+
+[[claude.files]]
+path = "scripts/check-release.py"
+text = "Checks a plugin before a release: its ID, the version against the tag, the README's credits and source link, screenshots, licenses, timing, and game files that must not be in the repository."
+
+[claude.elsewhere]
+title = "Using it somewhere else"
+text = "To use the skill in Claude Code outside a copy of the kit, put its folder in `~/.claude/skills/`. The zip has the same folder."
 
 
 # ==== The examples page (developers/examples/) ================================
@@ -215,7 +280,7 @@ columns = ["Part", "", "What it is"]
 [[packaging.needs.rows]]
 part = "The .CVP"
 status = "Required"
-text = "Your plugin, built with the SDK. It has to be under 1 MB."
+text = "Your plugin, built with the SDK. Its image can be up to 2 MB less 4K."
 
 [[packaging.needs.rows]]
 part = "README"
@@ -588,7 +653,7 @@ lead = "You need one for the plugin and one for the files it opens. Each pixel i
 editor_button = "Open the icon editor"
 gallery_button = "Pick a ready-made icon"
 # Under the TV picture
-card_caption = "Each plugin's icon on the Plugins page"
+card_caption = "Plugin icons in the Plugin Manager"
 card_code = "/PLUGINS"
 
 [packaging.icons.spec]
@@ -605,7 +670,7 @@ rule = "8 × 8 pixels. Each pixel is on or off."
 
 [[packaging.icons.spec.rows]]
 name = "The plugin's icon"
-rule = "8 bytes at header offset 264. It shows next to the plugin on the Plugins page and in Open with."
+rule = "8 bytes at header offset 264. It shows next to the plugin in Apps, in its group on Home, in the Plugin Manager and in Open with. A plugin that only opens files shows it in Open with, and the plug everywhere else."
 
 [[packaging.icons.spec.rows]]
 name = "The file icon"
@@ -621,11 +686,11 @@ rule = "The menu sets it. Plugin icons are magenta and file icons are light gree
 
 [[packaging.icons.spec.rows]]
 name = "All zeros"
-rule = "That means no icon, so the menu shows its plug or plain file icon instead."
+rule = "That means no icon. The menu shows its window icon for a plugin that starts on its own, the plug in Open with, and the plain file icon for a file."
 
 [[packaging.icons.spec.rows]]
 name = "Per screen"
-rule = "The menu shows up to seven plugin icons and six different file icons on a page. Any more get the plug and the plain file icon."
+rule = "A page that lists plugins shows up to 22 different plugin icons, and Open with up to 7. A folder shows up to 6 different file icons. Any more get the menu's icons."
 
 [packaging.icons.txt]
 # The section's heading
@@ -739,7 +804,7 @@ keys = "On the keyboard, the arrow keys move around. Space or Enter turns a pixe
 # The preview's name for screen readers
 preview_label = "Your icons on the cart's menu"
 # Under the first preview picture, and its tag
-plugins_caption = "The Plugins page, selected and not selected"
+plugins_caption = "Apps on Home, selected and not selected"
 plugins_code = "magenta"
 # Under the second preview picture, and its tag
 folder_caption = "A folder of the plugin's files"

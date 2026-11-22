@@ -65,11 +65,11 @@ def shots(e):
     """the menu's pages for the plugin, as 256 x 192 PNGs"""
     pages = [tvscreen.details_page(e)]
     if e["id"] in BUILT_IN:
-        pass                            # it isn't on the Plugins page: the menu starts it
+        pass                            # it isn't in the Plugin Manager: the menu starts it
     elif e["opens"] and e["home"]:
         pages.append(tvscreen.folder_page(e["home"], ["Sample 1", "Sample 2", "Sample 3"], e["file_icon"]))
     else:
-        pages.append(tvscreen.plugins_page([e]))
+        pages.append(tvscreen.apps_page([e]))
     pics = [png.write(*p.pixels()) for p in pages]
     return [(registry.SHOTS[i], data) for i, data in enumerate(pics[:len(registry.SHOTS)])]
 
@@ -132,7 +132,6 @@ def build(today, cvp_dir=None):
         }
         if pid in CREDITS:
             e["credits"] = CREDITS[pid]
-        files = dict(shots(e))
         d = os.path.join(registry.ROOT, "examples", "readmes")
         with open(os.path.join(d, pid + ".md"), "rb") as f:
             md = f.read()
@@ -142,10 +141,11 @@ def build(today, cvp_dir=None):
                 text = cvreadme.convert(f.read().decode()).encode("ascii")
         else:
             text = cvreadme.convert(md.decode()).encode("ascii")
-        files[registry.WEB_README] = md
-        files[registry.CART_README] = text
         cart = meta(registry.CART_README, text, lines=text.count(b"\n"))
         e["readme"] = {"cart": cart, "web": meta(registry.WEB_README, md, url=credits)}
+        files = dict(shots(e))          # (after the README: the details page says * reads it)
+        files[registry.WEB_README] = md
+        files[registry.CART_README] = text
         e["screenshots"] = [meta(n, files[n]) for n in registry.SHOTS if n in files]
         notes = NOTES[pid].format(name=e["name"], version=e["version"])
         e["history"] = [dict(release, version=e["version"], notes=notes)]

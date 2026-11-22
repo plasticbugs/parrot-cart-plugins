@@ -15,9 +15,10 @@ the Pages workflow checks it out) and then for a checkout beside this repo.
 PAGES below says which kit file becomes which page.
 
 Writes OUT/index.html, a page a doc (OUT/start/, OUT/hardware/, ...),
-OUT/examples/, OUT/packaging/ (what a release needs: the README, the
-screenshots and the icons), OUT/tools/ (the icon editor and the ready-made
-icons) and OUT/assets/. The pages load the plugins site's assets/site.css
+OUT/claude/ (the kit's Claude skill, and a zip of its folder made from the
+kit's checkout), OUT/examples/, OUT/packaging/ (what a release needs: the
+README, the screenshots and the icons), OUT/tools/ (the icon editor and the
+ready-made icons) and OUT/assets/. The pages load the plugins site's assets/site.css
 from one folder up, so build the plugins site first, into OUT's parent.
 Standard library only; links are relative.
 """
@@ -26,9 +27,11 @@ import html
 import os
 import re
 import shutil
+import io
 import subprocess
 import sys
 import tomllib
+import zipfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_site  # noqa: E402  (the frame's shared parts, and the plugins the menu pictures show)
@@ -50,6 +53,7 @@ KIT_SHOT = "screenshots/screenshot-1.png"       # the kit's own plugin on the TV
 #   kit file                           page         group      its name (developers/copy.toml)
 PAGES = (
     ("docs/getting-started.md",          "start",     "start",   "nav.start"),
+    (None,                               "claude",    "start",   "nav.claude"),
     ("docs/hardware.md",                 "hardware",  "start",   "nav.hardware"),
     ("sdk/firmware/revc/sdk/README.md",  "sdk",       "build",   "nav.sdk"),
     ("docs/features.md",                 "features",  "build",   "nav.features"),
@@ -68,6 +72,9 @@ TOP_NAV = ("start", "hardware", "sdk", "examples", "tools")     # the header's m
 # kit docs the Packaging page covers: a link to one goes to its part there
 COVERED = {"docs/readme-spec.md": "packaging/#readme", "docs/screenshots.md": "packaging/#screenshots",
            "docs/icons.md": "packaging/#icons"}
+SKILL = ".claude/skills/parrot-cart-plugin"     # the kit's Claude skill: the claude/ page, if the kit has it
+SKILL_ZIP = "parrot-cart-plugin.zip"            # its folder as a zip, beside that page
+ZIP_TIME = (2026, 1, 1, 0, 0, 0)                # every file's date in the zip, so a build makes the same bytes
 
 
 # ---- the starter kit --------------------------------------------------------------------
@@ -129,6 +136,8 @@ def present(kit):
     """the pages this kit makes: every page whose file it has; a missing optional doc drops out"""
     out = []
     for f, slug, group, label in PAGES:
+        if slug == "claude" and not kit.has(f"{SKILL}/SKILL.md"):
+            continue
         if f and not kit.has(f):
             if f in OPTIONAL:
                 continue
@@ -142,6 +151,8 @@ def portal_map(kit, pages):
     here = {f: f"{slug}/" for f, slug, _, _ in pages if f}
     here.update(COVERED)
     here["examples/README.md"] = here["examples"] = "examples/"
+    if any(slug == "claude" for _, slug, _, _ in pages):
+        here[SKILL] = "claude/"
     for name in example_names(kit):
         here["src" if name == "src" else f"examples/{name}"] = f"examples/#{name}"
     return here
@@ -390,7 +401,11 @@ def doc_page(ctx, rel, slug, label):
     kit, pre = ctx["kit"], "../"
     title, body, toc = render_doc(kit, rel, ctx["here"], pre)
     title = title or T.text(label)
-    intro = f'<p class="warn doc__note">{T.html("doc.sdk_note")}</p>\n' if slug == "sdk" else ""
+    intro = ""
+    if slug == "sdk":
+        intro = f'<p class="warn doc__note">{T.html("doc.sdk_note")}</p>\n'
+    elif slug == "start" and any(p[1] == "claude" for p in ctx["pages"]):
+        intro = f'<p class="docnote doc__note">{T.html("doc.start_claude", claude_page="../claude/")}</p>\n'
     first = re.search(r"<p>(.*?)</p>", body, re.S)
     desc = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", first.group(1)))).strip() if first else title
     return page(f"{title}: {T.text('header.wordmark')}", desc[:300],
@@ -418,6 +433,7 @@ def home(ctx):
                         f'<span class="group__text">{T.html(f"map.{slug}")}</span></a></li>'
                         for _, slug, group, label in pages if group == g)
         groups.append(f'<div class="group"><h3>{T.html(f"side.{g}")}</h3><ul class="group__pages">{items}</ul></div>')
+    claude = " " + T.html("home.map.claude") if any(p[1] == "claude" for p in pages) else ""
     body = f"""<section class="hero dev-hero" aria-labelledby="hero-title"><div class="container">
 <div class="hero__text">
 <h1 id="hero-title">{build_site.keep_together(T.html("home.hero.title"))}</h1>
@@ -427,7 +443,7 @@ def home(ctx):
 {card}
 </div></section>
 <section class="section" id="docs" aria-labelledby="docs-title"><div class="container">
-<div class="headblock"><h2 id="docs-title">{T.html("home.map.title")}</h2><p class="lead">{T.html("home.map.lead")}</p></div>
+<div class="headblock"><h2 id="docs-title">{T.html("home.map.title")}</h2><p class="lead">{T.html("home.map.lead")}{claude}</p></div>
 <div class="groups">{"".join(groups)}</div>
 </div></section>
 <section class="band band--paper close" aria-labelledby="close-title"><div class="container">
@@ -435,6 +451,74 @@ def home(ctx):
 <div class="actions"><a class="btn" href="../submit/">{T.html("home.close.submit_button")}</a><a class="btn btn--secondary" href="../index.html#plugins">{T.html("home.close.plugins_button")}</a></div>
 </div></section>"""
     return page(T.text("home.page_title"), T.text("home.description"), body, "", "home", ctx)
+
+
+# ---- the Claude skill ---------------------------------------------------------------------
+
+def skill_files(kit):
+    """the skill folder's files in the kit (tracked ones, as Kit.has counts them), by path from it"""
+    base = os.path.join(kit.path, SKILL)
+    out = []
+    for d, dirs, files in os.walk(base):
+        dirs[:] = sorted(x for x in dirs if not x.startswith("."))
+        for f in sorted(files):
+            rel = os.path.relpath(os.path.join(d, f), base).replace(os.sep, "/")
+            if not f.startswith(".") and kit.has(f"{SKILL}/{rel}"):
+                out.append(rel)
+    return out
+
+
+def skill_zip(kit):
+    """the skill's folder as a zip, for Claude apps that take a skill that way: the same bytes
+    from the same files (fixed dates and modes, the files in order)"""
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+        for rel in skill_files(kit):
+            path = os.path.join(kit.path, SKILL, rel)
+            info = zipfile.ZipInfo(f"{os.path.basename(SKILL)}/{rel}", ZIP_TIME)
+            info.compress_type = zipfile.ZIP_DEFLATED
+            info.external_attr = (0o100755 if os.access(path, os.X_OK) else 0o100644) << 16
+            with open(path, "rb") as f:
+                z.writestr(info, f.read())
+    return buf.getvalue()
+
+
+def claude_page(ctx):
+    kit, pre, here = ctx["kit"], "../", ctx["here"]
+    have = set(skill_files(kit))
+    rows = "".join(
+        f'<tr><td><a href="{e_(kit.url(f"{SKILL}/{path}"))}"><code>{e_(path)}</code></a></td><td>{text}</td></tr>'
+        for path, text in T.rows("claude.files", ("path", "text")) if html.unescape(path) in have)
+    table = (f'<table><thead><tr><th>{T.html("claude.files_columns.file")}</th><th>{T.html("claude.files_columns.what")}</th>'
+             f'</tr></thead><tbody>{rows}</tbody></table>')
+    download = (f'<div class="actions"><a class="btn" href="{SKILL_ZIP}" download>'
+                f'{T.html("claude.download_button", file=SKILL_ZIP)}</a></div>')
+    body = f"""<h2>{T.html("claude.use.title")}</h2>
+<p>{T.html("claude.use.text")}</p>
+<p>{T.html("claude.use.more")}</p>
+<h2>{T.html("claude.have.title")}</h2>
+<p>{T.html("claude.have.text")}</p>
+<h2>{T.html("claude.files_title")}</h2>
+{table}
+<h2>{T.html("claude.elsewhere.title")}</h2>
+<p>{T.html("claude.elsewhere.text")}</p>
+{download}"""
+    body = curl_quotes(link_kit(body, kit, here, "", pre))
+    body, toc = anchor_headings(body)
+    folder = f'<a class="link" href="{e_(kit.url(SKILL))}"><code class="code">{e_(SKILL)}</code></a>'
+    html_ = f"""<div class="container docs">
+{side(pre, ctx["pages"], "claude", toc)}
+<article class="doc" aria-labelledby="hero-title">
+<h1 id="hero-title">{T.html("claude.title")}</h1>
+<p class="lead doc__lead">{T.html("claude.lead")}</p>
+<div class="prose doc__body">
+{body}
+</div>
+<p class="doc__source">{T.html("claude.source", folder=folder)}</p>
+{pager(pre, ctx["pages"], "claude")}
+</article>
+</div>"""
+    return page(T.text("claude.page_title"), T.text("claude.description"), html_, pre, "claude", ctx)
 
 
 # ---- the examples ------------------------------------------------------------------------
@@ -825,6 +909,9 @@ def pages_of(kit, config, root=ROOT):
     for rel, slug, _, label in pages:
         if rel:
             out[f"{slug}/index.html"] = doc_page(ctx, rel, slug, label)
+    if any(slug == "claude" for _, slug, _, _ in pages):
+        out["claude/index.html"] = claude_page(ctx)
+        out[f"claude/{SKILL_ZIP}"] = skill_zip(kit)
     out["examples/index.html"] = examples_page(ctx)
     out["packaging/index.html"] = packaging_page(ctx)
     out["tools/index.html"] = tools_page(ctx)
@@ -853,7 +940,7 @@ def build(out, kit=None, config=None, root=ROOT):
     for rel, text in files.items():
         path = os.path.join(out, rel)
         os.makedirs(os.path.dirname(path), exist_ok=True)
-        with open(path, "w") as f:
+        with open(path, "wb" if isinstance(text, bytes) else "w") as f:
             f.write(text)
     return kit, files
 
