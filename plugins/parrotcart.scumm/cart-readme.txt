@@ -96,7 +96,17 @@ NOTES
   does at the start, the
   plugin uses one view.
 - Music and sound play on the
-  console's sound chip.
+  console's sound chip. In
+  Fate of Atlantis and Monkey
+  Island 2 it plays the AdLib
+  music, three notes and a
+  drum at a time.
+- Fate of Atlantis's speech
+  plays on the sound chip when
+  the music plays on a
+  computer over MIDI (below).
+  Without MIDI the game shows
+  the lines as text.
 
 HEAR THE MT-32 MUSIC ON YOUR
 COMPUTER
@@ -131,6 +141,10 @@ MIDI finds either name.
 With nothing plugged into the
 USB-C port, the music plays on
 the ColecoVision's sound chip.
+With MIDI playing, Fate of
+Atlantis's speech plays on the
+ColecoVision, about a fifth of
+a second after its text shows.
 
 CREDITS
 
