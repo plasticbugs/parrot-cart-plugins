@@ -88,7 +88,7 @@
     }
   ],
   "added": "2026-11-22",
-  "updated": "2026-11-23",
+  "updated": "2026-11-22",
   "submission": null,
   "credits": "The arcade emulation is a port of MAME 0.288's code, under the BSD-3-Clause license. Its authors are:; Dan Boris and Mirko Buffoni, for the Cloak & Dagger driver.; Olivier Galibert, for the 6502 CPU.; Brad Oliver, Eric Smith and Juergen Buchmueller, for the POKEY sound chip.; Aaron Giles, for MAME'\u2026"
 }

@@ -88,7 +88,7 @@
     }
   ],
   "added": "2026-11-22",
-  "updated": "2026-11-23",
+  "updated": "2026-11-22",
   "submission": null,
   "credits": "Parts of this plugin are ports of MAME's code, or were checked against it. That code is under the BSD-3-Clause license, and its authors are:; Nicola Salmoria, for the Time Pilot driver and its sound board.; Juergen Buchmueller, for the Z80 CPU, and Andrei I. Holub for its instruction list.; Courier\u2026"
 }

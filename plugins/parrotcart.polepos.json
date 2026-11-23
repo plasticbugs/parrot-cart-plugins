@@ -88,7 +88,7 @@
     }
   ],
   "added": "2026-11-22",
-  "updated": "2026-11-23",
+  "updated": "2026-11-22",
   "submission": null,
   "credits": "The arcade emulation is a port of MAME 0.288's code, under the BSD-3-Clause license. Its authors are:; Ernesto Corvi, Juergen Buchmueller, Alex Pasadyn, Aaron Giles and Nicola Salmoria, for the Pole Position driver.; Juergen Buchmueller and Ernesto Corvi, for the Z8000 CPU.; Ernesto Corvi, for the\u2026"
 }
