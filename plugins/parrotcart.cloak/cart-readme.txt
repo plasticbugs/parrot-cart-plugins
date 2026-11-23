@@ -136,5 +136,5 @@ source is linked next to its
 download.
 
 Cloak & Dagger is a trademark
-of Atari. This plugin contains
-none of the game.
+of its owner. This plugin
+contains none of the game.

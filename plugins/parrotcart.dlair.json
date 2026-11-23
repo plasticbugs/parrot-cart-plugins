@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.dlair",
   "name": "Dragon's Lair",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "by": "Parrot Cart",
   "description": "Emulator for the 1983 laserdisc arcade game",
   "repo": "plasticbugs/parrot-plugin-dlair",
@@ -20,25 +20,25 @@
   "works_with": [
     "gamepad"
   ],
-  "icon": "3c4281999981423c",
+  "icon": "40f8242424247880",
   "file_icon": "0000000000000000",
   "license": {
     "spdx": "GPL-3.0",
     "name": "GNU General Public License v3.0",
-    "url": "https://github.com/plasticbugs/parrot-plugin-dlair/blob/v0.1.6/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-dlair/blob/v0.1.7/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-dlair/tree/v0.1.6",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-dlair/blob/v0.1.6/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-dlair/tree/v0.1.7",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-dlair/blob/v0.1.7/README.md",
   "release": {
-    "tag": "v0.1.6",
-    "url": "https://github.com/plasticbugs/parrot-plugin-dlair/releases/tag/v0.1.6",
-    "published": "2026-11-22"
+    "tag": "v0.1.7",
+    "url": "https://github.com/plasticbugs/parrot-plugin-dlair/releases/tag/v0.1.7",
+    "published": "2026-11-23"
   },
   "download": {
     "name": "DLAIR.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-dlair/releases/download/v0.1.6/DLAIR.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-dlair/releases/download/v0.1.7/DLAIR.CVP",
     "size": 188056,
-    "sha256": "f391700e81160741d47bbdd9a77948c3e213cdf6c27447ce7e2bc7b69368ad66"
+    "sha256": "14fd49178c4616acb8f3d1935c6a29be056f87808c86efcb4d93eda597ca55f0"
   },
   "image": {
     "size": 185088,
@@ -56,22 +56,29 @@
       "file": "README.md",
       "size": 4035,
       "sha256": "3cd09e9b15236f0b5b719a5a2775703976ca7a98688d08cfcfe5e059025ea097",
-      "url": "https://github.com/plasticbugs/parrot-plugin-dlair/blob/v0.1.6/README.md"
+      "url": "https://github.com/plasticbugs/parrot-plugin-dlair/blob/v0.1.7/README.md"
     }
   },
   "screenshots": [
     {
       "file": "screenshot-1.png",
-      "size": 1266,
-      "sha256": "dfa310af11873b92f31e2ebccac901bd2131f8045d9f3cc3b542887306fd9c64"
+      "size": 1271,
+      "sha256": "c4dc7ec427a2baae52079c62f39aa1cef170ff7e8d7b08b09508bf3e2cff6494"
     },
     {
       "file": "screenshot-2.png",
-      "size": 432,
-      "sha256": "68fdab97258a1898c7478f520f3d097b582d2aac5b924fca009dff2037011cfe"
+      "size": 425,
+      "sha256": "11a015d1ad08e7a6586fb947569327a65a1608b4d8cbcdc2868ab33c8dd58429"
     }
   ],
   "history": [
+    {
+      "tag": "v0.1.7",
+      "url": "https://github.com/plasticbugs/parrot-plugin-dlair/releases/tag/v0.1.7",
+      "published": "2026-11-23",
+      "version": "0.1.7",
+      "notes": "A new icon in the cart's menu."
+    },
     {
       "tag": "v0.1.6",
       "url": "https://github.com/plasticbugs/parrot-plugin-dlair/releases/tag/v0.1.6",
@@ -81,7 +88,7 @@
     }
   ],
   "added": "2026-11-22",
-  "updated": "2026-11-22",
+  "updated": "2026-11-23",
   "submission": null,
   "credits": "The arcade board and the laserdisc player are ports of MAME's code, which is under the BSD-3-Clause license. Its authors are:; Aaron Giles, for the Dragon's Lair driver and the laserdisc player.; Ryan Holtz, for the LD-V1000 player.; Juergen Buchmueller and Andrei Holub, for the Z80 CPU. The Z80 an\u2026"
 }
