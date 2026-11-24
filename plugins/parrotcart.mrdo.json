@@ -88,7 +88,7 @@
     }
   ],
   "added": "2026-11-22",
-  "updated": "2026-11-24",
+  "updated": "2026-11-23",
   "submission": null,
   "credits": "The arcade emulation is a port of MAME 0.288's code, under the BSD-3-Clause license. Its authors are:; Nicola Salmoria, for the Mr. Do! driver and the SN76496 sound chip.; Juergen Buchmueller and Andrei I. Holub, for the Z80 CPU.; Aaron Giles, for MAME's scheduler, screen and tilemaps. You can find\u2026"
 }

@@ -95,7 +95,7 @@
     }
   ],
   "added": "2026-11-18",
-  "updated": "2026-11-24",
+  "updated": "2026-11-23",
   "submission": null,
   "credits": "Parts of this plugin are ports of MAME's code, or were checked against it. That code is under the BSD-3-Clause license, and its authors are:; Steve Baines and Frank Palazzolo, for the Star Wars driver and the matrix processor.; Aaron Giles, for the slapstic chip.; Mathis Rosenhauer, for the vector\u2026"
 }

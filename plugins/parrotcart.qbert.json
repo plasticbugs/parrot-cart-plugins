@@ -95,7 +95,7 @@
     }
   ],
   "added": "2026-11-22",
-  "updated": "2026-11-24",
+  "updated": "2026-11-23",
   "submission": null,
   "credits": "The arcade emulation is a port of MAME 0.288's code, under the BSD-3-Clause license. Its authors are:; Fabrice Frances, Nicola Salmoria and Aaron Giles, for the Gottlieb driver.; Aaron Giles, for the Gottlieb sound board, MAME's scheduler and the watchdog.; Carl, for the 8088 CPU.; Olivier Galibert\u2026"
 }

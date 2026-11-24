@@ -104,7 +104,7 @@
     }
   ],
   "added": "2026-11-18",
-  "updated": "2026-11-24",
+  "updated": "2026-11-23",
   "submission": null,
   "credits": "Lua 5.4.8, by Roberto Ierusalimschy, Luiz Henrique de Figueiredo and Waldemar Celes at PUC-Rio, MIT:; Parrot Cart plugin template and SDK, by the Parrot Cart contributors, MIT:; TinyUSB, by Ha Thach and contributors, MIT:; Raspberry Pi Pico SDK, BSD 3-Clause: Source"
 }
