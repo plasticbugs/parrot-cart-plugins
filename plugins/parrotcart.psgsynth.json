@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.psgsynth",
   "name": "PSG Synth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "by": "Parrot Cart",
   "description": "Synth for USB MIDI keyboards",
   "repo": "plasticbugs/parrot-plugin-psgsynth",
@@ -25,24 +25,24 @@
   "license": {
     "spdx": "MIT",
     "name": "MIT License",
-    "url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/blob/v1.0.0/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/blob/v1.0.1/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/tree/v1.0.0",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/blob/v1.0.0/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/tree/v1.0.1",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/blob/v1.0.1/README.md",
   "release": {
-    "tag": "v1.0.0",
-    "url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/releases/tag/v1.0.0",
-    "published": "2026-11-17"
+    "tag": "v1.0.1",
+    "url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/releases/tag/v1.0.1",
+    "published": "2026-11-24"
   },
   "download": {
     "name": "PSGSYNTH.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/releases/download/v1.0.0/PSGSYNTH.CVP",
-    "size": 96583,
-    "sha256": "1fc83b462a9aa4bc3e8f251bf8449e209fceed453978e1146b0019e08b15c135"
+    "url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/releases/download/v1.0.1/PSGSYNTH.CVP",
+    "size": 108359,
+    "sha256": "c0a3ba8576f438fdfcd9b457a35461f92943fbc402551046cd9b2c4a7079a988"
   },
   "image": {
-    "size": 93952,
-    "sha256": "7353ee47b12633794e6d16786812a5e6a270680dca29c3284b0c140571b4c9c7",
+    "size": 105728,
+    "sha256": "74646b05484ed5c5c93a7cff7a0bd7275ff8dcd5054e921eeb33ec12caa743a2",
     "kind": "sram"
   },
   "readme": {
@@ -54,9 +54,9 @@
     },
     "web": {
       "file": "README.md",
-      "size": 2950,
-      "sha256": "aefbf1e5319193c5181d1ec84f1dca4dca22fa803fe529e5af9bbea1b2036249",
-      "url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/blob/v1.0.0/README.md"
+      "size": 2819,
+      "sha256": "bab678bb2eff09a6c7eb138ae33c03e6b7c6228592b0308aac0f455c719f640f",
+      "url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/blob/v1.0.1/README.md"
     }
   },
   "screenshots": [
@@ -78,6 +78,13 @@
   ],
   "history": [
     {
+      "tag": "v1.0.1",
+      "url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/releases/tag/v1.0.1",
+      "published": "2026-11-24",
+      "version": "1.0.1",
+      "notes": "The plugin now sees a USB music keyboard on a powered hub that was already plugged in when it started, or that is plugged in or pulled out while it runs. Some hubs never report these, such as an Anker hub with a Genesys GL3523 chip.\n\nIt now uses the TinyUSB 0.21 in `sdk/`, so you no longer need the pico-sdk's TinyUSB submodule to build it."
+    },
+    {
       "tag": "v1.0.0",
       "url": "https://github.com/plasticbugs/parrot-plugin-psgsynth/releases/tag/v1.0.0",
       "published": "2026-11-17",
@@ -86,7 +93,7 @@
     }
   ],
   "added": "2026-11-18",
-  "updated": "2026-11-18",
+  "updated": "2026-11-24",
   "submission": null,
   "credits": "TinyUSB by Ha Thach, under the MIT license. The source is at https://github.com/hathach/tinyusb; The plugin itself is by Parrot Cart."
 }

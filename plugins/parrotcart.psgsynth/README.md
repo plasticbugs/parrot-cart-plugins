@@ -47,9 +47,6 @@ Ninja, Python 3, sjasmplus and picotool. Releases are built with the Arm
 GNU Toolchain 9-2019-q4 (GCC 9.2.1) and picotool 2.3.1. With those you get
 the same file, byte for byte.
 
-This plugin uses the pico-sdk's own copy of TinyUSB. Run
-`git submodule update --init lib/tinyusb` in your pico-sdk folder first.
-
 ```sh
 cmake -B build -G Ninja -DPICO_SDK_PATH=$HOME/pico-sdk
 ninja -C build
