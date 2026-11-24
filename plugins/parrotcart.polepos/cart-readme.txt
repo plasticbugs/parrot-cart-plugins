@@ -45,7 +45,10 @@ controller:
   button is the brake.
 - Keypad * or # adds a coin.
 - Press RESET on the console
-  to go back to the menu.
+  to go back to the menu, or
+  hold both fire buttons and *
+  for 2 seconds (Select and
+  Start on a USB pad).
 
 On a USB pad, through a
 powered hub:

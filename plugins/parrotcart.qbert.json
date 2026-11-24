@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.qbert",
   "name": "Q*bert",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "by": "Parrot Cart",
   "description": "Emulator for the 1982 pyramid-hopping arcade game",
   "repo": "plasticbugs/parrot-plugin-qbert",
@@ -25,45 +25,45 @@
   "license": {
     "spdx": "BSD-3-Clause",
     "name": "BSD 3-Clause \"New\" or \"Revised\" License",
-    "url": "https://github.com/plasticbugs/parrot-plugin-qbert/blob/v0.1.7/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-qbert/blob/v0.1.8/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-qbert/tree/v0.1.7",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-qbert/blob/v0.1.7/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-qbert/tree/v0.1.8",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-qbert/blob/v0.1.8/README.md",
   "release": {
-    "tag": "v0.1.7",
-    "url": "https://github.com/plasticbugs/parrot-plugin-qbert/releases/tag/v0.1.7",
-    "published": "2026-11-23"
+    "tag": "v0.1.8",
+    "url": "https://github.com/plasticbugs/parrot-plugin-qbert/releases/tag/v0.1.8",
+    "published": "2026-11-24"
   },
   "download": {
     "name": "QBERT.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-qbert/releases/download/v0.1.7/QBERT.CVP",
-    "size": 241011,
-    "sha256": "443355dcf09f92e41e32b886bd6eaa39fdb895ff78e7b77af3d142563a0d97df"
+    "url": "https://github.com/plasticbugs/parrot-plugin-qbert/releases/download/v0.1.8/QBERT.CVP",
+    "size": 241608,
+    "sha256": "5ac921d52532149e2100bad33076dbc48c590a5d9df81e4838f3e5e97e058de6"
   },
   "image": {
-    "size": 237312,
-    "sha256": "050e493444f3b4aacae6bad5298ec76054f4b92bc4ebc68c41eb39ba0769627d",
+    "size": 237824,
+    "sha256": "515112a22e24dcd8deefee36daf7328ea509060a003ea65f4c3b266adbf3e1eb",
     "kind": "sram"
   },
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 3187,
-      "sha256": "1d25ad7fdc1abd3504ece9ffa60cb4698bd7e2c1c85c636a2df3146e6db313d8",
-      "lines": 152
+      "size": 3272,
+      "sha256": "02e17d29964d086f17f5826b9fc0da00b28a9f0da9aa77564139ff7df9f12526",
+      "lines": 155
     },
     "web": {
       "file": "README.md",
-      "size": 4037,
-      "sha256": "72a8334b9f45e1586167f573572b8d9ccea2f582749a2527add9161cc32685e9",
-      "url": "https://github.com/plasticbugs/parrot-plugin-qbert/blob/v0.1.7/README.md"
+      "size": 4117,
+      "sha256": "46f2921ab9f984e30717427a7075ce1366ecdc3878d47fac0fc17e3f80a9417f",
+      "url": "https://github.com/plasticbugs/parrot-plugin-qbert/blob/v0.1.8/README.md"
     }
   },
   "screenshots": [
     {
       "file": "screenshot-1.png",
       "size": 1244,
-      "sha256": "6f21459f6dcc700acc4228b681c92f0f21a7226575841356e9086a5c20a2e11b"
+      "sha256": "8f6cb492be62d259aaf3a7051f84ff64ceeb0c484cc308c6ab2b4199e0bd18dc"
     },
     {
       "file": "screenshot-2.png",
@@ -72,6 +72,13 @@
     }
   ],
   "history": [
+    {
+      "tag": "v0.1.8",
+      "url": "https://github.com/plasticbugs/parrot-plugin-qbert/releases/tag/v0.1.8",
+      "published": "2026-11-24",
+      "version": "0.1.8",
+      "notes": "Hold both fire buttons and * on controller 1 for 2 seconds, or Select and Start on a USB pad, to go back to the menu. RESET still works too."
+    },
     {
       "tag": "v0.1.7",
       "url": "https://github.com/plasticbugs/parrot-plugin-qbert/releases/tag/v0.1.7",
@@ -88,7 +95,7 @@
     }
   ],
   "added": "2026-11-22",
-  "updated": "2026-11-22",
+  "updated": "2026-11-24",
   "submission": null,
   "credits": "The arcade emulation is a port of MAME 0.288's code, under the BSD-3-Clause license. Its authors are:; Fabrice Frances, Nicola Salmoria and Aaron Giles, for the Gottlieb driver.; Aaron Giles, for the Gottlieb sound board, MAME's scheduler and the watchdog.; Carl, for the 8088 CPU.; Olivier Galibert\u2026"
 }

@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.pacman",
   "name": "Pac-Man",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "by": "Parrot Cart",
   "description": "Emulator for the 1980 maze arcade game",
   "repo": "plasticbugs/parrot-plugin-pacman",
@@ -25,45 +25,45 @@
   "license": {
     "spdx": "BSD-3-Clause",
     "name": "BSD 3-Clause \"New\" or \"Revised\" License",
-    "url": "https://github.com/plasticbugs/parrot-plugin-pacman/blob/v0.1.6/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-pacman/blob/v0.1.7/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-pacman/tree/v0.1.6",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-pacman/blob/v0.1.6/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-pacman/tree/v0.1.7",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-pacman/blob/v0.1.7/README.md",
   "release": {
-    "tag": "v0.1.6",
-    "url": "https://github.com/plasticbugs/parrot-plugin-pacman/releases/tag/v0.1.6",
-    "published": "2026-11-23"
+    "tag": "v0.1.7",
+    "url": "https://github.com/plasticbugs/parrot-plugin-pacman/releases/tag/v0.1.7",
+    "published": "2026-11-24"
   },
   "download": {
     "name": "PACMAN.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-pacman/releases/download/v0.1.6/PACMAN.CVP",
-    "size": 249752,
-    "sha256": "a4f9fda57d28cce69150086a1fe4d0412022561c574e0e3df95260e624e643dd"
+    "url": "https://github.com/plasticbugs/parrot-plugin-pacman/releases/download/v0.1.7/PACMAN.CVP",
+    "size": 250349,
+    "sha256": "ad26b08e10ef5559d8a7fc545d0e3d158fdf337b3989cacc1c845afc02e2cf36"
   },
   "image": {
-    "size": 246528,
-    "sha256": "02005d1e5ac11a12125e8aacf8f31562e4fa79a2cf927abffa48bba268b97377",
+    "size": 247040,
+    "sha256": "afaf8ffdbb4afa260021b8bedf568f4cf0c3a96282d5dbe405ea6c4ec540282b",
     "kind": "sram"
   },
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 2712,
-      "sha256": "fc41d5e273a097b024085b4ddeac43561de12249ba12cb895f5d04bea16dff76",
-      "lines": 132
+      "size": 2797,
+      "sha256": "80dc579fd37deb31c1e131011bd6ce550245c348e65ae5c42f59cabf84b1805f",
+      "lines": 135
     },
     "web": {
       "file": "README.md",
-      "size": 3549,
-      "sha256": "e3e121e4fe68962cf66d95e89c88a00b0617045f2051524729ce0e2bde5a3c1c",
-      "url": "https://github.com/plasticbugs/parrot-plugin-pacman/blob/v0.1.6/README.md"
+      "size": 3629,
+      "sha256": "297d89342a4286d712ce5d210ba177a96c9a3fa46e3e7a50053fae7ea96c963b",
+      "url": "https://github.com/plasticbugs/parrot-plugin-pacman/blob/v0.1.7/README.md"
     }
   },
   "screenshots": [
     {
       "file": "screenshot-1.png",
-      "size": 1258,
-      "sha256": "2ef252f31f79a320bf19947d7d211dc0bac8761fdfab540864187c6ebe93946d"
+      "size": 1263,
+      "sha256": "003c8ac82b4c7736fbe70b86fc59042514b76a9a77784aa722aeb4b9d976d16c"
     },
     {
       "file": "screenshot-2.png",
@@ -72,6 +72,13 @@
     }
   ],
   "history": [
+    {
+      "tag": "v0.1.7",
+      "url": "https://github.com/plasticbugs/parrot-plugin-pacman/releases/tag/v0.1.7",
+      "published": "2026-11-24",
+      "version": "0.1.7",
+      "notes": "Hold both fire buttons and * on controller 1 for 2 seconds, or Select and Start on a USB pad, to go back to the menu. RESET still works too."
+    },
     {
       "tag": "v0.1.6",
       "url": "https://github.com/plasticbugs/parrot-plugin-pacman/releases/tag/v0.1.6",
@@ -88,7 +95,7 @@
     }
   ],
   "added": "2026-11-22",
-  "updated": "2026-11-22",
+  "updated": "2026-11-24",
   "submission": null,
   "credits": "The arcade emulation is a port of MAME 0.288's code, under the BSD-3-Clause license. Its authors are:; Nicola Salmoria and Stephane Humbert, for the Pac-Man driver.; Nicola Salmoria and Aaron Giles, for the Namco sound chip.; Aaron Giles, for MAME's scheduler and the watchdog.; Juergen Buchmueller\u2026"
 }

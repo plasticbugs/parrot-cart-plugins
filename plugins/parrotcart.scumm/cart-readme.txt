@@ -53,7 +53,9 @@ controller:
   second to open the save and
   load screen.
 - Press RESET on the console
-  to go back to the menu.
+  to go back to the menu, or
+  hold both fire buttons and *
+  for 2 seconds.
 
 On the save and load screen:
 
@@ -134,9 +136,8 @@ without MIDI.
 For a real MT-32, choose its
 USB MIDI cable under Play on.
 
-Older versions call the cart
-MovieCart MIDI. Parrot Cart
-MIDI finds either name.
+On the computer the cart is
+called Parrot Cart MIDI.
 
 With nothing plugged into the
 USB-C port, the music plays on

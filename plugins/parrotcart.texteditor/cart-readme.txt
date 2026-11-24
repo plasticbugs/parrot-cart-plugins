@@ -98,8 +98,10 @@ save was cut short. Press 1 to
 finish it or 3 to drop it.
 
 RESET goes back to the menu
-straight away. Save first, or
-the changes are lost.
+straight away, and so does
+holding both fire buttons and
+* for 2 seconds. Save first,
+or the changes are lost.
 
 CREDITS
 

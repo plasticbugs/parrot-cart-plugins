@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.timeplt",
   "name": "Time Pilot",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "by": "Parrot Cart",
   "description": "Emulator for the 1982 air combat arcade game",
   "repo": "plasticbugs/parrot-plugin-timeplt",
@@ -25,45 +25,45 @@
   "license": {
     "spdx": "BSD-3-Clause",
     "name": "BSD 3-Clause \"New\" or \"Revised\" License",
-    "url": "https://github.com/plasticbugs/parrot-plugin-timeplt/blob/v0.1.1/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-timeplt/blob/v0.1.2/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-timeplt/tree/v0.1.1",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-timeplt/blob/v0.1.1/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-timeplt/tree/v0.1.2",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-timeplt/blob/v0.1.2/README.md",
   "release": {
-    "tag": "v0.1.1",
-    "url": "https://github.com/plasticbugs/parrot-plugin-timeplt/releases/tag/v0.1.1",
-    "published": "2026-11-23"
+    "tag": "v0.1.2",
+    "url": "https://github.com/plasticbugs/parrot-plugin-timeplt/releases/tag/v0.1.2",
+    "published": "2026-11-24"
   },
   "download": {
     "name": "TIMEPLT.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-timeplt/releases/download/v0.1.1/TIMEPLT.CVP",
-    "size": 236551,
-    "sha256": "d202bb560fd8f4e51997eb0a0f8106dfa44df266cf5b53769c84bf899687a083"
+    "url": "https://github.com/plasticbugs/parrot-plugin-timeplt/releases/download/v0.1.2/TIMEPLT.CVP",
+    "size": 237148,
+    "sha256": "b055484632bf9595f3ad4ceb8d3df492b82a030349664b96b0284e24c9d2cba3"
   },
   "image": {
-    "size": 233472,
-    "sha256": "79146d42ee232b51031bc257e0a660b206652e32c9540dab31b5d5952ef7f1ab",
+    "size": 233984,
+    "sha256": "cb45b47ee21fbaf40fbe6ab0162d6b557829c0e633af0ed24e42b0019ac8943a",
     "kind": "sram"
   },
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 2567,
-      "sha256": "df008cbfae62bd1330dbde3f865033855815b52784dc766875d746a5f7e61edc",
-      "lines": 119
+      "size": 2652,
+      "sha256": "03644c979a2c81b0528b8616ee280ec7c4549e77116f8948470735e41fe21a1f",
+      "lines": 122
     },
     "web": {
       "file": "README.md",
-      "size": 3842,
-      "sha256": "3549384744dbfd4256303af12f883697487c007abb38c412de24bad863cc9c36",
-      "url": "https://github.com/plasticbugs/parrot-plugin-timeplt/blob/v0.1.1/README.md"
+      "size": 3934,
+      "sha256": "836c3279b74b73c464beaa3672fee0ee687a42d8b89af7d6e9f2bb55ad2a2ffa",
+      "url": "https://github.com/plasticbugs/parrot-plugin-timeplt/blob/v0.1.2/README.md"
     }
   },
   "screenshots": [
     {
       "file": "screenshot-1.png",
-      "size": 1278,
-      "sha256": "638714f3f8c2d822629af05cb1c31e9bcad984c13defa8875650bc470ddd9237"
+      "size": 1274,
+      "sha256": "42e9cd2bdafd241893781bdd3ab6ed95f8253f27e79567484026731ac0f39c1e"
     },
     {
       "file": "screenshot-2.png",
@@ -72,6 +72,13 @@
     }
   ],
   "history": [
+    {
+      "tag": "v0.1.2",
+      "url": "https://github.com/plasticbugs/parrot-plugin-timeplt/releases/tag/v0.1.2",
+      "published": "2026-11-24",
+      "version": "0.1.2",
+      "notes": "Hold both fire buttons and * on controller 1 for 2 seconds, or Select and Start on a USB pad, to go back to the menu. RESET still works too."
+    },
     {
       "tag": "v0.1.1",
       "url": "https://github.com/plasticbugs/parrot-plugin-timeplt/releases/tag/v0.1.1",
@@ -88,7 +95,7 @@
     }
   ],
   "added": "2026-11-22",
-  "updated": "2026-11-22",
+  "updated": "2026-11-24",
   "submission": null,
   "credits": "Parts of this plugin are ports of MAME's code, or were checked against it. That code is under the BSD-3-Clause license, and its authors are:; Nicola Salmoria, for the Time Pilot driver and its sound board.; Juergen Buchmueller, for the Z80 CPU, and Andrei I. Holub for its instruction list.; Courier\u2026"
 }

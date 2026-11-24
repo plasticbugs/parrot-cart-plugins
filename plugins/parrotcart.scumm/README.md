@@ -21,7 +21,7 @@ On the ColecoVision controller:
 - Keypad 1 shows the whole screen as one view. Press it again to give the verbs their own view.
 - Hold keypad 7 for a second to save to slot 1, or 9 to load it.
 - Hold keypad # for half a second to open the save and load screen.
-- Press RESET on the console to go back to the menu.
+- Press RESET on the console to go back to the menu, or hold both fire buttons and \* for 2 seconds.
 
 On the save and load screen:
 
@@ -84,7 +84,7 @@ On a Mac with Apple silicon, macOS asks whether to allow the accessory to connec
 
 If you have a real MT-32 or CM-32L, connect it to the computer with a USB MIDI cable. In Parrot Cart MIDI, choose the cable under **Play on**. The program sends the music straight to it, so you don't need ROMs.
 
-On the computer the cart is called "MovieCart MIDI", its old name. Parrot Cart MIDI finds it by that name, or by "Parrot Cart MIDI".
+On the computer the cart is called "Parrot Cart MIDI".
 
 With MIDI playing, Fate of Atlantis's speech plays on the ColecoVision, about a fifth of a second after its text shows.
 

@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.esb",
   "name": "Empire Strikes Back",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "by": "Parrot Cart",
   "description": "Emulator for the vector-based arcade sequel",
   "repo": "plasticbugs/parrot-plugin-esb",
@@ -25,45 +25,45 @@
   "license": {
     "spdx": "BSD-3-Clause",
     "name": "BSD 3-Clause \"New\" or \"Revised\" License",
-    "url": "https://github.com/plasticbugs/parrot-plugin-esb/blob/v0.1.7/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-esb/blob/v0.1.8/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-esb/tree/v0.1.7",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-esb/blob/v0.1.7/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-esb/tree/v0.1.8",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-esb/blob/v0.1.8/README.md",
   "release": {
-    "tag": "v0.1.7",
-    "url": "https://github.com/plasticbugs/parrot-plugin-esb/releases/tag/v0.1.7",
-    "published": "2026-11-22"
+    "tag": "v0.1.8",
+    "url": "https://github.com/plasticbugs/parrot-plugin-esb/releases/tag/v0.1.8",
+    "published": "2026-11-24"
   },
   "download": {
     "name": "ESB.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-esb/releases/download/v0.1.7/ESB.CVP",
-    "size": 202753,
-    "sha256": "7324ae15d29790a0dd52cf78dbcec1d2d9bc94e088aca47f3469466bfc92ef43"
+    "url": "https://github.com/plasticbugs/parrot-plugin-esb/releases/download/v0.1.8/ESB.CVP",
+    "size": 203350,
+    "sha256": "66e56915c638ff40755682e164820a300fe1075782f9eb610ccd85a578150980"
   },
   "image": {
-    "size": 199424,
-    "sha256": "5cb849d48b6951b46194e4a6e9cb9c8df11990c4f6651294d6cbaf6c658519da",
+    "size": 199936,
+    "sha256": "3721ada5ca3c2eb3b6cd979286d7301891c8ffb47b4d2ac5da591351451d005e",
     "kind": "sram"
   },
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 2817,
-      "sha256": "50f6a49d227284a04fa81851393bc702da482b09d1ea7ee7e33deaa23066440a",
-      "lines": 133
+      "size": 2902,
+      "sha256": "92b6f086687ce7f34868a0ff2030f7f27322e1a586bfa62cb86d89ace50bd5f7",
+      "lines": 136
     },
     "web": {
       "file": "README.md",
-      "size": 3626,
-      "sha256": "58fdae23dadade628588ffae8c1d6047a447b456549b678ffe8291deb500a57b",
-      "url": "https://github.com/plasticbugs/parrot-plugin-esb/blob/v0.1.7/README.md"
+      "size": 3706,
+      "sha256": "139596f224091e3f778ab239757cfc21c377fd1b95bdef075e71a1bd0ea78618",
+      "url": "https://github.com/plasticbugs/parrot-plugin-esb/blob/v0.1.8/README.md"
     }
   },
   "screenshots": [
     {
       "file": "screenshot-1.png",
-      "size": 1284,
-      "sha256": "d3a7323b37d816aeaa5a58e49224e2631573fcdaebe31c493f4ede5cdb3bc8df"
+      "size": 1282,
+      "sha256": "d940c9a0c1adc839abfc644f191e90b6bae413d599be8d32eea4bb8c4e9090f3"
     },
     {
       "file": "screenshot-2.png",
@@ -72,6 +72,13 @@
     }
   ],
   "history": [
+    {
+      "tag": "v0.1.8",
+      "url": "https://github.com/plasticbugs/parrot-plugin-esb/releases/tag/v0.1.8",
+      "published": "2026-11-24",
+      "version": "0.1.8",
+      "notes": "Hold both fire buttons and * on controller 1 for 2 seconds, or Select and Start on a USB pad, to go back to the menu. RESET still works too."
+    },
     {
       "tag": "v0.1.7",
       "url": "https://github.com/plasticbugs/parrot-plugin-esb/releases/tag/v0.1.7",
@@ -88,7 +95,7 @@
     }
   ],
   "added": "2026-11-18",
-  "updated": "2026-11-22",
+  "updated": "2026-11-24",
   "submission": null,
   "credits": "Parts of this plugin are ports of MAME's code, or were checked against it. That code is under the BSD-3-Clause license, and its authors are:; Steve Baines and Frank Palazzolo, for the Star Wars driver and the matrix processor.; Aaron Giles, for the slapstic chip.; Mathis Rosenhauer, for the vector\u2026"
 }

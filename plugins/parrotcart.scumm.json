@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.scumm",
   "name": "SCUMM",
-  "version": "0.2.14",
+  "version": "0.2.15",
   "by": "Parrot Cart",
   "description": "Engine for classic point-and-click adventure games",
   "repo": "plasticbugs/parrot-plugin-scumm",
@@ -28,45 +28,45 @@
   "license": {
     "spdx": "GPL-3.0",
     "name": "GNU General Public License v3.0",
-    "url": "https://github.com/plasticbugs/parrot-plugin-scumm/blob/v0.2.14/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-scumm/blob/v0.2.15/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-scumm/tree/v0.2.14",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-scumm/blob/v0.2.14/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-scumm/tree/v0.2.15",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-scumm/blob/v0.2.15/README.md",
   "release": {
-    "tag": "v0.2.14",
-    "url": "https://github.com/plasticbugs/parrot-plugin-scumm/releases/tag/v0.2.14",
-    "published": "2026-11-23"
+    "tag": "v0.2.15",
+    "url": "https://github.com/plasticbugs/parrot-plugin-scumm/releases/tag/v0.2.15",
+    "published": "2026-11-24"
   },
   "download": {
     "name": "SCUMM.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-scumm/releases/download/v0.2.14/SCUMM.CVP",
-    "size": 1006289,
-    "sha256": "5d2d3d7d7b24fa887aaffc25845f4f924f6737944c0901c2959c1558d76f8db0"
+    "url": "https://github.com/plasticbugs/parrot-plugin-scumm/releases/download/v0.2.15/SCUMM.CVP",
+    "size": 1006568,
+    "sha256": "f1332104be7100553e9897c92aafadb2925268f370be937282d4122708d3a48f"
   },
   "image": {
-    "size": 1001984,
-    "sha256": "9ca42f20bcb54201b3401a8a9e984903a7be2a2da607a1d44cdfcf3252ef5864",
+    "size": 1002240,
+    "sha256": "c9ca4ca54f7805597859a43236f167b87f54220a9c62b43cfafc3828f94634ab",
     "kind": "xip"
   },
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 3793,
-      "sha256": "4956692c77057ee14a4405bceb9910f61c5421b274e8c0fdb27c5518e3af52ca",
-      "lines": 177
+      "size": 3816,
+      "sha256": "592316748f7e0cc9f6aaf82673f2ad4126bc72e83009cceead853a7b3cdb0480",
+      "lines": 178
     },
     "web": {
       "file": "README.md",
-      "size": 7130,
-      "sha256": "fb50f7155f7f8e5876eff8a0023b67b4ed98ce471e1711fcca1c09c48766b91a",
-      "url": "https://github.com/plasticbugs/parrot-plugin-scumm/blob/v0.2.14/README.md"
+      "size": 7100,
+      "sha256": "056facb29565684747587a1c1cadebb515ba3f8648cfdf2d5cebcc9716f59400",
+      "url": "https://github.com/plasticbugs/parrot-plugin-scumm/blob/v0.2.15/README.md"
     }
   },
   "screenshots": [
     {
       "file": "screenshot-1.png",
-      "size": 1351,
-      "sha256": "2ff49d10a81d45584e08cf682e23c3accb4fc95107c33db0e7fce956b11340ef"
+      "size": 1352,
+      "sha256": "44c5d8246b81edf7c5569cfe957f94f1b75168a9eff205015c7aafe56b75479e"
     },
     {
       "file": "screenshot-2.png",
@@ -75,6 +75,13 @@
     }
   ],
   "history": [
+    {
+      "tag": "v0.2.15",
+      "url": "https://github.com/plasticbugs/parrot-plugin-scumm/releases/tag/v0.2.15",
+      "published": "2026-11-24",
+      "version": "0.2.15",
+      "notes": "- Hold both fire buttons and * on controller 1 for 2 seconds to go back to the menu. RESET still works too.\n- On the computer, the cart is now called Parrot Cart MIDI."
+    },
     {
       "tag": "v0.2.14",
       "url": "https://github.com/plasticbugs/parrot-plugin-scumm/releases/tag/v0.2.14",
@@ -91,7 +98,7 @@
     }
   ],
   "added": "2026-11-18",
-  "updated": "2026-11-22",
+  "updated": "2026-11-24",
   "submission": null,
   "credits": "frank-quest by Mikhail Matveev, a port of ScummVM to the RP2350, under the GPL-3.0. The source is at https://github.com/rh1tech/frank-quest; The engine is Cabal, a community fork of ScummVM, by the ScummVM and Cabal authors, under the GPL-2.0-or-later. The source is at https://github.com/project-ca\u2026"
 }

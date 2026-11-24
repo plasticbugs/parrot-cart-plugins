@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.mrdo",
   "name": "Mr. Do!",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "by": "Parrot Cart",
   "description": "Emulator for the 1982 digging arcade game",
   "repo": "plasticbugs/parrot-plugin-mrdo",
@@ -25,45 +25,45 @@
   "license": {
     "spdx": "BSD-3-Clause",
     "name": "BSD 3-Clause \"New\" or \"Revised\" License",
-    "url": "https://github.com/plasticbugs/parrot-plugin-mrdo/blob/v0.1.0/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-mrdo/blob/v0.1.1/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-mrdo/tree/v0.1.0",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-mrdo/blob/v0.1.0/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-mrdo/tree/v0.1.1",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-mrdo/blob/v0.1.1/README.md",
   "release": {
-    "tag": "v0.1.0",
-    "url": "https://github.com/plasticbugs/parrot-plugin-mrdo/releases/tag/v0.1.0",
-    "published": "2026-11-22"
+    "tag": "v0.1.1",
+    "url": "https://github.com/plasticbugs/parrot-plugin-mrdo/releases/tag/v0.1.1",
+    "published": "2026-11-24"
   },
   "download": {
     "name": "MRDO.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-mrdo/releases/download/v0.1.0/MRDO.CVP",
-    "size": 240192,
-    "sha256": "b0c4f257daf49783056bdf34c53dd5907ae5374092f81a9280307771b92da817"
+    "url": "https://github.com/plasticbugs/parrot-plugin-mrdo/releases/download/v0.1.1/MRDO.CVP",
+    "size": 240789,
+    "sha256": "85ffcfbed4ba665ead9201ec08d9feabc141c102fc2caa46ffdb147d8ae61cbe"
   },
   "image": {
-    "size": 236800,
-    "sha256": "def2a7fdb3db973a0132ad7921b7ddc5fa8b568230686914ac4542291070d106",
+    "size": 237312,
+    "sha256": "3bafff2e0b605265b508ed036f90437402a1c975184bdffd4a833c868f8a5302",
     "kind": "sram"
   },
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 2880,
-      "sha256": "37dbd729496239bf346f0728356ea23fac4d17a462056170310cee53682e4720",
-      "lines": 138
+      "size": 2965,
+      "sha256": "a06ef1c439f7984de816438fd4b6386a931b1183dfc7772238652ae33e053974",
+      "lines": 141
     },
     "web": {
       "file": "README.md",
-      "size": 3800,
-      "sha256": "87f03dbdd206eee2066e4c14add2a5c897dc2f09450f629ade273998b86c7624",
-      "url": "https://github.com/plasticbugs/parrot-plugin-mrdo/blob/v0.1.0/README.md"
+      "size": 3892,
+      "sha256": "28ebb550f55bc4606e325b8d8ccfc1c79d54d1cdf7518bf5305c9024be9c2f10",
+      "url": "https://github.com/plasticbugs/parrot-plugin-mrdo/blob/v0.1.1/README.md"
     }
   },
   "screenshots": [
     {
       "file": "screenshot-1.png",
-      "size": 1230,
-      "sha256": "bc4885c9f65a5675278ab254a17f3707375a4fe3f840f0a6f3b443014a36519c"
+      "size": 1227,
+      "sha256": "eabc8cb6e9462f22240085d59e069b93842edaad053c833410762053058d1124"
     },
     {
       "file": "screenshot-2.png",
@@ -73,6 +73,13 @@
   ],
   "history": [
     {
+      "tag": "v0.1.1",
+      "url": "https://github.com/plasticbugs/parrot-plugin-mrdo/releases/tag/v0.1.1",
+      "published": "2026-11-24",
+      "version": "0.1.1",
+      "notes": "Hold both fire buttons and * on controller 1 for 2 seconds, or Select and Start on a USB pad, to go back to the menu. RESET still works too."
+    },
+    {
       "tag": "v0.1.0",
       "url": "https://github.com/plasticbugs/parrot-plugin-mrdo/releases/tag/v0.1.0",
       "published": "2026-11-22",
@@ -81,7 +88,7 @@
     }
   ],
   "added": "2026-11-22",
-  "updated": "2026-11-22",
+  "updated": "2026-11-24",
   "submission": null,
   "credits": "The arcade emulation is a port of MAME 0.288's code, under the BSD-3-Clause license. Its authors are:; Nicola Salmoria, for the Mr. Do! driver and the SN76496 sound chip.; Juergen Buchmueller and Andrei I. Holub, for the Z80 CPU.; Aaron Giles, for MAME's scheduler, screen and tilemaps. You can find\u2026"
 }

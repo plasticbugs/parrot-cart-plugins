@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.dkong",
   "name": "Donkey Kong",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "by": "Parrot Cart",
   "description": "Emulator for the 1981 barrel-dodging arcade game",
   "repo": "plasticbugs/parrot-plugin-dkong",
@@ -25,45 +25,45 @@
   "license": {
     "spdx": "BSD-3-Clause",
     "name": "BSD 3-Clause \"New\" or \"Revised\" License",
-    "url": "https://github.com/plasticbugs/parrot-plugin-dkong/blob/v0.1.3/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-dkong/blob/v0.1.4/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-dkong/tree/v0.1.3",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-dkong/blob/v0.1.3/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-dkong/tree/v0.1.4",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-dkong/blob/v0.1.4/README.md",
   "release": {
-    "tag": "v0.1.3",
-    "url": "https://github.com/plasticbugs/parrot-plugin-dkong/releases/tag/v0.1.3",
-    "published": "2026-11-23"
+    "tag": "v0.1.4",
+    "url": "https://github.com/plasticbugs/parrot-plugin-dkong/releases/tag/v0.1.4",
+    "published": "2026-11-24"
   },
   "download": {
     "name": "DKONG.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-dkong/releases/download/v0.1.3/DKONG.CVP",
-    "size": 275733,
-    "sha256": "103505092ccc0332d99aa73a16254994d4b6f76490f0be5cd6960358c5a4fada"
+    "url": "https://github.com/plasticbugs/parrot-plugin-dkong/releases/download/v0.1.4/DKONG.CVP",
+    "size": 276330,
+    "sha256": "a9d453d4b1d4f68b235c82145010a57f69c69cb92b2ea467ee2151b012ed598e"
   },
   "image": {
-    "size": 272384,
-    "sha256": "301f1a90037ba51625f8a5db11a8a25d95cbd888d8ce16bf0386377ebccff932",
+    "size": 272896,
+    "sha256": "d58433652d1ba9b0f91d73f13c6cc769b5ec80133630cd17427ba94251e7b8b8",
     "kind": "sram"
   },
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 2837,
-      "sha256": "08c6893c5b9abc6e5946a09dde46f7ab0bd5eb0775d6a8a7f06d04215f3b7ed5",
-      "lines": 134
+      "size": 2922,
+      "sha256": "0ccea3ab37fde108508a112d9833465b38c943ae5266d39d0e6bace256052be0",
+      "lines": 137
     },
     "web": {
       "file": "README.md",
-      "size": 3677,
-      "sha256": "192651a80c500969520a4f1c930dd5175c71d9099f74402830ec447e0943ee41",
-      "url": "https://github.com/plasticbugs/parrot-plugin-dkong/blob/v0.1.3/README.md"
+      "size": 3757,
+      "sha256": "a56314a12804beb482911f9f4666f963d891f64ee91c513b670f372becec9ec5",
+      "url": "https://github.com/plasticbugs/parrot-plugin-dkong/blob/v0.1.4/README.md"
     }
   },
   "screenshots": [
     {
       "file": "screenshot-1.png",
-      "size": 1250,
-      "sha256": "62de516b03d19c6d3608ff80b0fd239de2aee6c770341cd3f371e871808432f1"
+      "size": 1258,
+      "sha256": "e2d065f5e40865e38c285d0a7d6cd417cc78fb2000a72db9da4659eeaae974a5"
     },
     {
       "file": "screenshot-2.png",
@@ -72,6 +72,13 @@
     }
   ],
   "history": [
+    {
+      "tag": "v0.1.4",
+      "url": "https://github.com/plasticbugs/parrot-plugin-dkong/releases/tag/v0.1.4",
+      "published": "2026-11-24",
+      "version": "0.1.4",
+      "notes": "Hold both fire buttons and * on controller 1 for 2 seconds, or Select and Start on a USB pad, to go back to the menu. RESET still works too."
+    },
     {
       "tag": "v0.1.3",
       "url": "https://github.com/plasticbugs/parrot-plugin-dkong/releases/tag/v0.1.3",
@@ -88,7 +95,7 @@
     }
   ],
   "added": "2026-11-22",
-  "updated": "2026-11-22",
+  "updated": "2026-11-24",
   "submission": null,
   "credits": "The arcade emulation is a port of MAME 0.288's code, under the BSD-3-Clause license. Its authors are:; Couriersud, for the Donkey Kong driver, its sound board and the latches.; K.Wilkins, Couriersud and Derrick Renaud, for the discrete sound circuits.; Curt Coder and Carl, for the 8257 DMA controll\u2026"
 }

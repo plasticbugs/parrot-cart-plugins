@@ -44,7 +44,10 @@ controller:
 - Keypad 2 starts a two-player
   game.
 - Press RESET on the console
-  to go back to the menu.
+  to go back to the menu, or
+  hold both fire buttons and *
+  for 2 seconds (Select and
+  Start on a USB pad).
 
 On a USB pad, through a
 powered hub:
