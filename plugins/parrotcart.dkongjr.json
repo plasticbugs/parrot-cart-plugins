@@ -1,0 +1,88 @@
+{
+  "schema": 2,
+  "id": "parrotcart.dkongjr",
+  "name": "Donkey Kong Jr.",
+  "version": "0.1.2",
+  "by": "Parrot Cart",
+  "description": "Emulator for the 1982 vine-climbing arcade sequel",
+  "repo": "plasticbugs/parrot-plugin-dkongjr",
+  "repo_id": 1469747787,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "/DKONGJR",
+  "opens": [],
+  "uses": [
+    "usb-host",
+    "psram"
+  ],
+  "tags": [
+    "arcade"
+  ],
+  "works_with": [
+    "gamepad"
+  ],
+  "icon": "007e7e0c6c7c3800",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": "BSD-3-Clause",
+    "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+    "url": "https://github.com/plasticbugs/parrot-plugin-dkongjr/blob/v0.1.2/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-dkongjr/tree/v0.1.2",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-dkongjr/blob/v0.1.2/README.md",
+  "release": {
+    "tag": "v0.1.2",
+    "url": "https://github.com/plasticbugs/parrot-plugin-dkongjr/releases/tag/v0.1.2",
+    "published": "2026-11-24"
+  },
+  "download": {
+    "name": "DKONGJR.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-dkongjr/releases/download/v0.1.2/DKONGJR.CVP",
+    "size": 155044,
+    "sha256": "2160510feac028c3a703cc6afa152b04db9338311bd9f5c77b6a7c4da849b274"
+  },
+  "image": {
+    "size": 151040,
+    "sha256": "85e84b0955c568061a60455a8de6e427f825796d7ea7b35bda10eb393ebdeace",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 3492,
+      "sha256": "e6f536879e7f195830f942d5e4a7275bffb43238afb4aa90e34225a4ade7bb3c",
+      "lines": 160
+    },
+    "web": {
+      "file": "README.md",
+      "size": 3412,
+      "sha256": "4aef09131487a3acbae799a9263e75ef9dd0c6cfaad04156801e0c7da39aba37",
+      "url": "https://github.com/plasticbugs/parrot-plugin-dkongjr/blob/v0.1.2/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1321,
+      "sha256": "034754e00d1345a17aefc9eaf443f9bb6e2f4443e6dadb5946cddbc8aeceba8e"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 439,
+      "sha256": "7ebc314ac67a43fea38b4a312a6fab2d17755817771e11e523954b8c1bb0502e"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.2",
+      "url": "https://github.com/plasticbugs/parrot-plugin-dkongjr/releases/tag/v0.1.2",
+      "published": "2026-11-24",
+      "version": "0.1.2",
+      "notes": "Hold both fire buttons and * on controller 1 for 2 seconds, or Select and Start on a USB pad, to go back to the menu. RESET still works too."
+    }
+  ],
+  "added": "2026-11-23",
+  "updated": "2026-11-23",
+  "submission": null,
+  "credits": "The board, its sound circuits, the 8035 and the Z80 follow MAME 0.288: dkong.cpp, dkonga.cpp and dkongv.cpp by Couriersud, the discrete sound modules by K. Wilkins, Couriersud, Derrick Renaud and Frank Palazzolo, mcs48.cpp by Dan Boris, Mirko Buffoni, Aaron Giles and Couriersud, and z80.cpp by Juer\u2026"
+}

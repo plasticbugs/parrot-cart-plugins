@@ -1,0 +1,87 @@
+{
+  "schema": 2,
+  "id": "parrotcart.robotron",
+  "name": "Robotron: 2084",
+  "version": "0.1.2",
+  "by": "Parrot Cart",
+  "description": "Emulator for the 1982 twin-stick arcade shooter",
+  "repo": "plasticbugs/parrot-plugin-robotron",
+  "repo_id": 1469755938,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "/ROBOTRON",
+  "opens": [],
+  "uses": [
+    "usb-host"
+  ],
+  "tags": [
+    "arcade"
+  ],
+  "works_with": [
+    "gamepad"
+  ],
+  "icon": "0e111f0e3f515b5f",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": "BSD-3-Clause",
+    "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+    "url": "https://github.com/plasticbugs/parrot-plugin-robotron/blob/v0.1.2/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-robotron/tree/v0.1.2",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-robotron/blob/v0.1.2/README.md",
+  "release": {
+    "tag": "v0.1.2",
+    "url": "https://github.com/plasticbugs/parrot-plugin-robotron/releases/tag/v0.1.2",
+    "published": "2026-11-24"
+  },
+  "download": {
+    "name": "ROBOTRON.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-robotron/releases/download/v0.1.2/ROBOTRON.CVP",
+    "size": 167265,
+    "sha256": "1e124567f19f546099f3a21ef12f680a7693da7d69c83d72551d5d9e39da86a2"
+  },
+  "image": {
+    "size": 163328,
+    "sha256": "2609a1af69ff18f3354d89dc46155d08f4bf82d5668a7ae5a4c8a9fe64845df5",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 3425,
+      "sha256": "52926e66c2df5c8e26b71be9dd76e13ecb49aa4a0edde886741282ae166a0b8a",
+      "lines": 160
+    },
+    "web": {
+      "file": "README.md",
+      "size": 4699,
+      "sha256": "17d8553fedbf2bed8c341dab9681ab326b7ea09b0f2b239621ac8d117277e19d",
+      "url": "https://github.com/plasticbugs/parrot-plugin-robotron/blob/v0.1.2/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1284,
+      "sha256": "64422727ed2deffa1e57c13b2f3d022ed015916d11ed737addeb70416fc322c1"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 443,
+      "sha256": "6c07fbedd46339fbfb402280a07ea9c5b2c329980f5412e5f92a8120d566f3f5"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.2",
+      "url": "https://github.com/plasticbugs/parrot-plugin-robotron/releases/tag/v0.1.2",
+      "published": "2026-11-24",
+      "version": "0.1.2",
+      "notes": "Hold both fire buttons and * on controller 1 for 2 seconds, or Select and Start on a USB pad, to go back to the menu. RESET still works too."
+    }
+  ],
+  "added": "2026-11-23",
+  "updated": "2026-11-23",
+  "submission": null,
+  "credits": "Parts of this plugin are ports of MAME's code, or were checked against it. That code is under the BSD-3-Clause license, and its authors are:; Aaron Giles, for the Williams driver, its blitter and video, the 6800 CPU family (which plays the sound) and MAME's screen timing.; Nathan Woods, for the 680\u2026"
+}

@@ -1,0 +1,87 @@
+{
+  "schema": 2,
+  "id": "parrotcart.startrek",
+  "name": "Star Trek",
+  "version": "0.1.2",
+  "by": "Parrot Cart",
+  "description": "Emulator for the 1982 vector-based starship arcade game",
+  "repo": "plasticbugs/parrot-plugin-startrek",
+  "repo_id": 1469758002,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "/STARTREK",
+  "opens": [],
+  "uses": [
+    "usb-host"
+  ],
+  "tags": [
+    "arcade"
+  ],
+  "works_with": [
+    "gamepad"
+  ],
+  "icon": "3828380028282800",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": "BSD-3-Clause",
+    "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+    "url": "https://github.com/plasticbugs/parrot-plugin-startrek/blob/v0.1.2/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-startrek/tree/v0.1.2",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-startrek/blob/v0.1.2/README.md",
+  "release": {
+    "tag": "v0.1.2",
+    "url": "https://github.com/plasticbugs/parrot-plugin-startrek/releases/tag/v0.1.2",
+    "published": "2026-11-24"
+  },
+  "download": {
+    "name": "STARTREK.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-startrek/releases/download/v0.1.2/STARTREK.CVP",
+    "size": 253373,
+    "sha256": "a43c102f3574377e07166fdb90eb2c10dbdb173deb09689cc6b196e3c40e5c30"
+  },
+  "image": {
+    "size": 249600,
+    "sha256": "1646acfead4c7ed05f8f2d2bbd47db2022550b7a980d49f1288092fe9c91d13f",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 3261,
+      "sha256": "904fa4ed13d4ca71a8cc5708ffc6b93d2c408baad36e4d280feaac1804b64908",
+      "lines": 148
+    },
+    "web": {
+      "file": "README.md",
+      "size": 4342,
+      "sha256": "f08cefeb65b4bcb4c449bad411a09502295dd7029fdb5d2ddde91a60045b5d8a",
+      "url": "https://github.com/plasticbugs/parrot-plugin-startrek/blob/v0.1.2/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1281,
+      "sha256": "50865d6bb68d2936a21f995fd0deaf4e48bac6a149e02ff2419ad4c9fb118b05"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 412,
+      "sha256": "3dd40a809fa27fcbb4ebba82d4be29fac2ffc512862e2577f2b42de75fc69a6a"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.2",
+      "url": "https://github.com/plasticbugs/parrot-plugin-startrek/releases/tag/v0.1.2",
+      "published": "2026-11-24",
+      "version": "0.1.2",
+      "notes": "Hold both fire buttons and * on controller 1 for 2 seconds, or Select and Start on a USB pad, to go back to the menu. RESET still works too."
+    }
+  ],
+  "added": "2026-11-23",
+  "updated": "2026-11-23",
+  "submission": null,
+  "credits": "Parts of this plugin are ports of MAME's code, or were checked against it. That code is under the BSD-3-Clause license, and its authors are:; Aaron Giles, for the Sega G80 vector driver, its vector generator, its security chip, the Universal Sound Board and the speech board.; Olivier Galibert, for\u2026"
+}

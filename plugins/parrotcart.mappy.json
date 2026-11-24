@@ -1,0 +1,87 @@
+{
+  "schema": 2,
+  "id": "parrotcart.mappy",
+  "name": "Mappy",
+  "version": "0.1.2",
+  "by": "Parrot Cart",
+  "description": "Emulator for the 1983 police mouse arcade game",
+  "repo": "plasticbugs/parrot-plugin-mappy",
+  "repo_id": 1469753745,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "/MAPPY",
+  "opens": [],
+  "uses": [
+    "usb-host"
+  ],
+  "tags": [
+    "arcade"
+  ],
+  "works_with": [
+    "gamepad"
+  ],
+  "icon": "0245a9c629c1423c",
+  "file_icon": "0000000000000000",
+  "license": {
+    "spdx": "BSD-3-Clause",
+    "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+    "url": "https://github.com/plasticbugs/parrot-plugin-mappy/blob/v0.1.2/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-mappy/tree/v0.1.2",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-mappy/blob/v0.1.2/README.md",
+  "release": {
+    "tag": "v0.1.2",
+    "url": "https://github.com/plasticbugs/parrot-plugin-mappy/releases/tag/v0.1.2",
+    "published": "2026-11-24"
+  },
+  "download": {
+    "name": "MAPPY.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-mappy/releases/download/v0.1.2/MAPPY.CVP",
+    "size": 194201,
+    "sha256": "5574202fa21f743371074bb64db78ae1caf1641d8711211af620f32a797aaaa7"
+  },
+  "image": {
+    "size": 189696,
+    "sha256": "292c1407ad8d4e1b5d66ec4c0821bc3bae2eb5f4d9f89a2a495477f63533d438",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 3993,
+      "sha256": "68912277ef176d6d0c65d880140e12093024b33287e5a650548fdd0b9050e0a3",
+      "lines": 187
+    },
+    "web": {
+      "file": "README.md",
+      "size": 4010,
+      "sha256": "7d66a9fee86bc591d61a81452a83e79c9cd72d7180b50c75c159abe4c3144af7",
+      "url": "https://github.com/plasticbugs/parrot-plugin-mappy/blob/v0.1.2/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1230,
+      "sha256": "867edb93b463d18c27e152b394eae1fdae0b12f9775b3d49e7e4b3c4ab2816dd"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 404,
+      "sha256": "1463ace2282dd53e50b95431059c034f54993dbf80ef201f56ab6260c2574b2e"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.2",
+      "url": "https://github.com/plasticbugs/parrot-plugin-mappy/releases/tag/v0.1.2",
+      "published": "2026-11-24",
+      "version": "0.1.2",
+      "notes": "Hold both fire buttons and * on controller 1 for 2 seconds, or Select and Start on a USB pad, to go back to the menu. RESET still works too."
+    }
+  ],
+  "added": "2026-11-23",
+  "updated": "2026-11-23",
+  "submission": null,
+  "credits": "Parts of this plugin are ports of MAME's code, or were checked against it. That code is under the BSD-3-Clause license, and its authors are:; Nicola Salmoria, for the Mappy driver, its video and the Namco I/O chips.; Nicola Salmoria and Aaron Giles, for the Namco sound chip.; Nathan Woods, for the\u2026"
+}
