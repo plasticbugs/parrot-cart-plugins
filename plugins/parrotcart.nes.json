@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.nes",
   "name": "NES",
-  "version": "0.4.8",
+  "version": "0.4.10",
   "by": "Parrot Cart",
   "description": "Emulator for Nintendo's 8-bit console",
   "repo": "plasticbugs/parrot-plugin-nes",
@@ -28,38 +28,38 @@
   "license": {
     "spdx": "LGPL-2.1",
     "name": "GNU Lesser General Public License v2.1",
-    "url": "https://github.com/plasticbugs/parrot-plugin-nes/blob/v0.4.8/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-nes/blob/v0.4.10/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-nes/tree/v0.4.8",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-nes/blob/v0.4.8/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-nes/tree/v0.4.10",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-nes/blob/v0.4.10/README.md",
   "release": {
-    "tag": "v0.4.8",
-    "url": "https://github.com/plasticbugs/parrot-plugin-nes/releases/tag/v0.4.8",
-    "published": "2026-11-19"
+    "tag": "v0.4.10",
+    "url": "https://github.com/plasticbugs/parrot-plugin-nes/releases/tag/v0.4.10",
+    "published": "2026-11-24"
   },
   "download": {
     "name": "NES.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-nes/releases/download/v0.4.8/NES.CVP",
-    "size": 206287,
-    "sha256": "da28c1a467d631397930012ebea8771702f4461a9126e92d76327ea0f3e92649"
+    "url": "https://github.com/plasticbugs/parrot-plugin-nes/releases/download/v0.4.10/NES.CVP",
+    "size": 208932,
+    "sha256": "ca277740084e057e5d75913c8efab081d936a3f8fddd7dbaa0560f9a5ef51473"
   },
   "image": {
-    "size": 203776,
-    "sha256": "e14483cdcf99551331297361104ad58c9740ff09b0dbfee5b077d9a76322d79f",
+    "size": 206336,
+    "sha256": "5031937202d6c2db7c76f3566768576089bfb2ddf79b1c99777cf25ff18c41e7",
     "kind": "sram"
   },
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 1999,
-      "sha256": "06f7c8fef17d9f3cfddb24c4e0dc4a555f1ef2d582547430f84bd8b85e8c46bc",
-      "lines": 99
+      "size": 2084,
+      "sha256": "936cc34fd5e939fa6b345b4fba3bdb88c9e05adadb714c433cf328aa5d53470e",
+      "lines": 102
     },
     "web": {
       "file": "README.md",
-      "size": 2719,
-      "sha256": "6e9675202047efbc96b5571aba044ec4a82c53dc80b8f46f286d09b71c7b5533",
-      "url": "https://github.com/plasticbugs/parrot-plugin-nes/blob/v0.4.8/README.md"
+      "size": 2799,
+      "sha256": "38be6c3afc616db6c3aafdc12d0f923df3534c34bcdb00a67b242060db56322c",
+      "url": "https://github.com/plasticbugs/parrot-plugin-nes/blob/v0.4.10/README.md"
     }
   },
   "screenshots": [
@@ -76,6 +76,13 @@
   ],
   "history": [
     {
+      "tag": "v0.4.10",
+      "url": "https://github.com/plasticbugs/parrot-plugin-nes/releases/tag/v0.4.10",
+      "published": "2026-11-24",
+      "version": "0.4.10",
+      "notes": "Changes since 0.4.8:\n\n- A game pad already on a powered hub when you start is found, and pads plugged in or pulled out while you play are seen.\n- Hold both fire buttons and * on controller 1 for 2 seconds, or Select and Start on a USB pad, to go back to the menu."
+    },
+    {
       "tag": "v0.4.8",
       "url": "https://github.com/plasticbugs/parrot-plugin-nes/releases/tag/v0.4.8",
       "published": "2026-11-19",
@@ -91,7 +98,7 @@
     }
   ],
   "added": "2026-11-18",
-  "updated": "2026-11-18",
+  "updated": "2026-11-24",
   "submission": null,
   "credits": "QuickNES, from NesEmu 0.7.0 by Shay Green (blargg), in the frank-nes fork, under the LGPL-2.1-or-later. The source is at https://github.com/rh1tech/frank-nes; emu2413 by Mitsutaka Okazaki, changed for VRC7 by xodnizel, under its own permissive license.; TinyUSB by Ha Thach, under the MIT license. T\u2026"
 }

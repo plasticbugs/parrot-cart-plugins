@@ -52,7 +52,10 @@ controller:
   I on and off. Keypad 9 does
   the same for II.
 - Press RESET on the console
-  to go back to the menu.
+  to go back to the menu, or
+  hold both fire buttons and *
+  for 2 seconds (Select and
+  Start on a USB pad).
 
 On a USB pad:
 

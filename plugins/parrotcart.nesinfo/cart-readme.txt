@@ -22,10 +22,12 @@ CONTROLS
 There are no controls. Pick a
 .nes file in the menu and read
 the screen. Press RESET on the
-console to go back to the
-menu. The menu comes back on
-the same file, with the mapper
-and CRC on its bottom line.
+console, or hold both fire
+buttons and * for 2 seconds,
+to go back to the menu. The
+menu comes back on the same
+file, with the mapper and CRC
+on its bottom line.
 
 WHAT THE SCREEN SHOWS
 

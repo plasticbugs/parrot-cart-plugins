@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.nesinfo",
   "name": "NES Info",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "by": "Parrot Cart",
   "description": "Viewer for NES ROM headers",
   "repo": "plasticbugs/parrot-plugin-nesinfo",
@@ -22,38 +22,38 @@
   "license": {
     "spdx": "MIT",
     "name": "MIT License",
-    "url": "https://github.com/plasticbugs/parrot-plugin-nesinfo/blob/v1.0.1/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-nesinfo/blob/v1.0.2/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-nesinfo/tree/v1.0.1",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-nesinfo/blob/v1.0.1/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-nesinfo/tree/v1.0.2",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-nesinfo/blob/v1.0.2/README.md",
   "release": {
-    "tag": "v1.0.1",
-    "url": "https://github.com/plasticbugs/parrot-plugin-nesinfo/releases/tag/v1.0.1",
-    "published": "2026-11-17"
+    "tag": "v1.0.2",
+    "url": "https://github.com/plasticbugs/parrot-plugin-nesinfo/releases/tag/v1.0.2",
+    "published": "2026-11-24"
   },
   "download": {
     "name": "NESINFO.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-nesinfo/releases/download/v1.0.1/NESINFO.CVP",
-    "size": 68137,
-    "sha256": "04ca764abdc3c194fd15b260b62969bedbf4b0b42ef68594614ceb53122ac00a"
+    "url": "https://github.com/plasticbugs/parrot-plugin-nesinfo/releases/download/v1.0.2/NESINFO.CVP",
+    "size": 68697,
+    "sha256": "48f9b7d9b7e6d946b7dfcaff606b0bed6bc7875b5a79a3dbab1ad8f0045b83d1"
   },
   "image": {
-    "size": 66304,
-    "sha256": "2ace0cd9b18dd3062b7cefbfb67ab62a394c833d2f0a5cd5396ee30e8990fb35",
+    "size": 66816,
+    "sha256": "06e0d9ad091146c3c2c499285beee29e3da54b77f002f7edc48145de280b0ec4",
     "kind": "sram"
   },
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 1321,
-      "sha256": "238cb3fb2e0e391db7e05a40cd48f359364ea93b519b1a845aab3ba3b28d26c7",
-      "lines": 64
+      "size": 1369,
+      "sha256": "eabc32f83c8ac4408805335bd5ac80aed2d2525e451d3b413919cf730ba20cdb",
+      "lines": 66
     },
     "web": {
       "file": "README.md",
-      "size": 2083,
-      "sha256": "147d404719dbce510529933445453ed702149c4122c501b1102c0689f2ca0924",
-      "url": "https://github.com/plasticbugs/parrot-plugin-nesinfo/blob/v1.0.1/README.md"
+      "size": 2132,
+      "sha256": "62cc00c4e378c596bcd85d4a61371b33a815eabd14a6b14fab101b0ca3abba95",
+      "url": "https://github.com/plasticbugs/parrot-plugin-nesinfo/blob/v1.0.2/README.md"
     }
   },
   "screenshots": [
@@ -70,6 +70,13 @@
   ],
   "history": [
     {
+      "tag": "v1.0.2",
+      "url": "https://github.com/plasticbugs/parrot-plugin-nesinfo/releases/tag/v1.0.2",
+      "published": "2026-11-24",
+      "version": "1.0.2",
+      "notes": "Changes since 1.0.1:\n\n- Hold both fire buttons and * on controller 1 for 2 seconds to go back to the menu."
+    },
+    {
       "tag": "v1.0.1",
       "url": "https://github.com/plasticbugs/parrot-plugin-nesinfo/releases/tag/v1.0.1",
       "published": "2026-11-17",
@@ -78,7 +85,7 @@
     }
   ],
   "added": "2026-11-18",
-  "updated": "2026-11-18",
+  "updated": "2026-11-24",
   "submission": null,
   "credits": "NES Info is by Parrot Cart. It uses no third-party emulator or library."
 }

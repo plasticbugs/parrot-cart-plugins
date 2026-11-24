@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.padtest",
   "name": "Pad Test",
-  "version": "0.1.2",
+  "version": "0.1.6",
   "by": "Parrot Cart",
   "description": "Tester for USB gamepads",
   "repo": "plasticbugs/parrot-plugin-padtest",
@@ -25,38 +25,38 @@
   "license": {
     "spdx": "MIT",
     "name": "MIT License",
-    "url": "https://github.com/plasticbugs/parrot-plugin-padtest/blob/v0.1.2/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-padtest/blob/v0.1.6/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-padtest/tree/v0.1.2",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-padtest/blob/v0.1.2/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-padtest/tree/v0.1.6",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-padtest/blob/v0.1.6/README.md",
   "release": {
-    "tag": "v0.1.2",
-    "url": "https://github.com/plasticbugs/parrot-plugin-padtest/releases/tag/v0.1.2",
-    "published": "2026-11-17"
+    "tag": "v0.1.6",
+    "url": "https://github.com/plasticbugs/parrot-plugin-padtest/releases/tag/v0.1.6",
+    "published": "2026-11-24"
   },
   "download": {
     "name": "PADTEST.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-padtest/releases/download/v0.1.2/PADTEST.CVP",
-    "size": 97935,
-    "sha256": "bbe16d4bcc56c7489999f7ce4f24f672c6b8e67dae12edeec556607f7e5a64b7"
+    "url": "https://github.com/plasticbugs/parrot-plugin-padtest/releases/download/v0.1.6/PADTEST.CVP",
+    "size": 101342,
+    "sha256": "5ad1d7f424c10025fdbb86b30943a72e36e7c689f4101cfcfa6fe7e6e8600f47"
   },
   "image": {
-    "size": 95744,
-    "sha256": "3f1cdc4cc59af7fccb3b425c3481b166342326c86454db06ed0faafc18ab3c2e",
+    "size": 99072,
+    "sha256": "106be36fdbb827cbc73dbe2b22bbdea3b7bb037f2b98a17192b97861ab88c270",
     "kind": "sram"
   },
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 1679,
-      "sha256": "1164de0e99fbf8acc579219d6a9ca8d5e40beb770395d1057b10aa4237988166",
-      "lines": 82
+      "size": 1758,
+      "sha256": "b03301671642ebcd698271739196af8b957b4652eee8c9b4fa4880c04bdfaed5",
+      "lines": 85
     },
     "web": {
       "file": "README.md",
-      "size": 2423,
-      "sha256": "75c755bbc3ad060a87490165336aeba6741c4102ab1cded38595b73f41c0053f",
-      "url": "https://github.com/plasticbugs/parrot-plugin-padtest/blob/v0.1.2/README.md"
+      "size": 2503,
+      "sha256": "1404554fd9532d3452e5272054eb51cf018c5c6f725b3379db8a9ee3d8beb674",
+      "url": "https://github.com/plasticbugs/parrot-plugin-padtest/blob/v0.1.6/README.md"
     }
   },
   "screenshots": [
@@ -73,6 +73,13 @@
   ],
   "history": [
     {
+      "tag": "v0.1.6",
+      "url": "https://github.com/plasticbugs/parrot-plugin-padtest/releases/tag/v0.1.6",
+      "published": "2026-11-24",
+      "version": "0.1.6",
+      "notes": "Changes since 0.1.2:\n\n- A game pad already on a powered hub when you start is found, and pads plugged in or pulled out while you play are seen.\n- The log shows what a hub reports for each port at the start, and each change it finds. Line 1 counts the hub's status answers (EP) and the changes found (CH).\n- Hold both fire buttons and * on controller 1 for 2 seconds, or Select and Start on a USB pad, to go back to the menu."
+    },
+    {
       "tag": "v0.1.2",
       "url": "https://github.com/plasticbugs/parrot-plugin-padtest/releases/tag/v0.1.2",
       "published": "2026-11-17",
@@ -81,7 +88,7 @@
     }
   ],
   "added": "2026-11-18",
-  "updated": "2026-11-18",
+  "updated": "2026-11-24",
   "submission": null,
   "credits": "TinyUSB by Ha Thach, under the MIT license. The source is at https://github.com/hathach/tinyusb; The plugin itself is by Parrot Cart."
 }

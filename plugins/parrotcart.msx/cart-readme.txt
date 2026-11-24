@@ -45,7 +45,10 @@ controller:
 - The other keypad keys are
   the number keys.
 - Press RESET on the console
-  to go back to the menu.
+  to go back to the menu, or
+  hold both fire buttons and *
+  for 2 seconds (Select and
+  Start on a USB pad).
 
 On a USB pad:
 

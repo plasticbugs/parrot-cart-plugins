@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.vectrex",
   "name": "Vectrex",
-  "version": "0.1.3",
+  "version": "0.1.7",
   "by": "Parrot Cart",
   "description": "Emulator for the vector-based home console",
   "repo": "plasticbugs/parrot-plugin-vectrex",
@@ -15,7 +15,8 @@
     ".gam"
   ],
   "uses": [
-    "usb-host"
+    "usb-host",
+    "standalone"
   ],
   "tags": [
     "consoles"
@@ -23,43 +24,43 @@
   "works_with": [
     "gamepad"
   ],
-  "icon": "7e81a5a599817e24",
+  "icon": "40f07c7f7cf04000",
   "file_icon": "7c46545448407e00",
   "license": {
     "spdx": "BSD-3-Clause",
     "name": "BSD 3-Clause \"New\" or \"Revised\" License",
-    "url": "https://github.com/plasticbugs/parrot-plugin-vectrex/blob/v0.1.3/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-vectrex/blob/v0.1.7/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-vectrex/tree/v0.1.3",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-vectrex/blob/v0.1.3/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-vectrex/tree/v0.1.7",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-vectrex/blob/v0.1.7/README.md",
   "release": {
-    "tag": "v0.1.3",
-    "url": "https://github.com/plasticbugs/parrot-plugin-vectrex/releases/tag/v0.1.3",
-    "published": "2026-11-18"
+    "tag": "v0.1.7",
+    "url": "https://github.com/plasticbugs/parrot-plugin-vectrex/releases/tag/v0.1.7",
+    "published": "2026-11-24"
   },
   "download": {
     "name": "VECTREX.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-vectrex/releases/download/v0.1.3/VECTREX.CVP",
-    "size": 174696,
-    "sha256": "db7034d91f9818916f1efd693e6247e917bc2815ee9b2c038fe4178011632f95"
+    "url": "https://github.com/plasticbugs/parrot-plugin-vectrex/releases/download/v0.1.7/VECTREX.CVP",
+    "size": 177341,
+    "sha256": "3e69a7fd0fc1c908471b9489119bd758ef6b7f1ff7172f3f158c60714d5555ae"
   },
   "image": {
-    "size": 171776,
-    "sha256": "e4a053019c0fc76ce7b243214886fd084a2d97ccd4e2839113c1352555ee877d",
+    "size": 174336,
+    "sha256": "51d6f82ab7f077070721d4e1b0228db79791ca2691d7b2b8f3806b94a5f8551a",
     "kind": "sram"
   },
   "readme": {
     "cart": {
       "file": "cart-readme.txt",
-      "size": 2408,
-      "sha256": "9d235407ae71ec17f256ab748d2698bbaa857016547df6b8c0e2f91c90607ba8",
-      "lines": 114
+      "size": 2493,
+      "sha256": "05bd68bde2b5f2608be0399e0c3620658bbdd651ae9c7953c83032e84b37a03a",
+      "lines": 117
     },
     "web": {
       "file": "README.md",
-      "size": 3101,
-      "sha256": "68d557fec500f99efc93b3a49649c77f15d342c428de3e89316641252d064360",
-      "url": "https://github.com/plasticbugs/parrot-plugin-vectrex/blob/v0.1.3/README.md"
+      "size": 3181,
+      "sha256": "bb8dac492685bc1c63cd93b32e82e6fced12d8c8e5dd277b2e0f85183ab09b2f",
+      "url": "https://github.com/plasticbugs/parrot-plugin-vectrex/blob/v0.1.7/README.md"
     }
   },
   "screenshots": [
@@ -76,6 +77,13 @@
   ],
   "history": [
     {
+      "tag": "v0.1.7",
+      "url": "https://github.com/plasticbugs/parrot-plugin-vectrex/releases/tag/v0.1.7",
+      "published": "2026-11-24",
+      "version": "0.1.7",
+      "notes": "Changes since 0.1.3:\n\n- A new icon.\n- A game pad already on a powered hub when you start is found, and pads plugged in or pulled out while you play are seen.\n- It can start from Apps in the menu with no game. Then it plays Mine Storm, the game in the system ROM.\n- Hold both fire buttons and * on controller 1 for 2 seconds, or Select and Start on a USB pad, to go back to the menu."
+    },
+    {
       "tag": "v0.1.3",
       "url": "https://github.com/plasticbugs/parrot-plugin-vectrex/releases/tag/v0.1.3",
       "published": "2026-11-18",
@@ -84,7 +92,7 @@
     }
   ],
   "added": "2026-11-18",
-  "updated": "2026-11-18",
+  "updated": "2026-11-24",
   "submission": null,
   "credits": "The Vectrex's VIA, beam and cartridge follow MAME's Vectrex driver by Mathis Rosenhauer and others. BSD-3-Clause. Source: https://github.com/mamedev/mame; The 6809 was written for the cart's Star Wars plugin and checked against MAME's.; MAME's licence text is in the plugin's source.; TinyUSB by Ha\u2026"
 }
