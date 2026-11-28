@@ -1,0 +1,91 @@
+{
+  "schema": 2,
+  "id": "parrotcart.ngpc",
+  "name": "Neo Geo Pocket Color",
+  "version": "0.1.1",
+  "by": "Parrot Cart",
+  "description": "Emulator for Neo Geo Pocket and Neo Geo Pocket Color",
+  "repo": "plasticbugs/parrot-plugin-ngpc",
+  "repo_id": 1475235986,
+  "owner": "plasticbugs",
+  "api": 1,
+  "home": "/NGPC",
+  "opens": [
+    ".ngc",
+    ".ngp"
+  ],
+  "uses": [
+    "usb-host",
+    "psram"
+  ],
+  "tags": [
+    "consoles"
+  ],
+  "works_with": [
+    "gamepad"
+  ],
+  "icon": "007cc682c67c0000",
+  "file_icon": "007c44447c547c00",
+  "license": {
+    "spdx": "GPL-2.0",
+    "name": "GNU General Public License v2.0",
+    "url": "https://github.com/plasticbugs/parrot-plugin-ngpc/blob/v0.1.1/LICENSE"
+  },
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-ngpc/tree/v0.1.1",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-ngpc/blob/v0.1.1/README.md",
+  "release": {
+    "tag": "v0.1.1",
+    "url": "https://github.com/plasticbugs/parrot-plugin-ngpc/releases/tag/v0.1.1",
+    "published": "2026-11-28"
+  },
+  "download": {
+    "name": "NGPC.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-ngpc/releases/download/v0.1.1/NGPC.CVP",
+    "size": 231302,
+    "sha256": "9d6dde249dd0858cf70e198eb4ef6351aa50c7bed7915f7d8c79993573b16069"
+  },
+  "image": {
+    "size": 227072,
+    "sha256": "5c2971efb316beee7926facaaf779ebcb5246dc942675a4d936aa3e0810dd7d9",
+    "kind": "sram"
+  },
+  "readme": {
+    "cart": {
+      "file": "cart-readme.txt",
+      "size": 3718,
+      "sha256": "c4a27844a6aa8861944ce1fac1a0ee18532f0f36e8e056d2ef5028579bfff9c3",
+      "lines": 165
+    },
+    "web": {
+      "file": "README.md",
+      "size": 3615,
+      "sha256": "bef4643f477a020c2cb948e2406a5eff5b3fbce3c33d4096594231004128c3f5",
+      "url": "https://github.com/plasticbugs/parrot-plugin-ngpc/blob/v0.1.1/README.md"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "screenshot-1.png",
+      "size": 1425,
+      "sha256": "7d952d4f953ec1a1c4357603e729a817b0e876da23f67aa511063d13f3cea1d2"
+    },
+    {
+      "file": "screenshot-2.png",
+      "size": 519,
+      "sha256": "d57d7458741b1c91639103ede04cc8a37ae8aba729f6b995d27dd484286417e2"
+    }
+  ],
+  "history": [
+    {
+      "tag": "v0.1.1",
+      "url": "https://github.com/plasticbugs/parrot-plugin-ngpc/releases/tag/v0.1.1",
+      "published": "2026-11-28",
+      "version": "0.1.1",
+      "notes": "The first release:\n\n- Neo Geo Pocket Color and Neo Geo Pocket games (`.ngc` and `.ngp`) from the card, with NeoPop.\n- The ColecoVision controller or a USB pad on a powered hub.\n- A game's saves go in a `.ngf` file next to the game.\n- When a game is too busy for the cart, fewer pictures are shown so the game keeps its speed. Big Bang Pro Wrestling still runs slower.\n- Sampled sounds don't play yet."
+    }
+  ],
+  "added": "2026-11-27",
+  "updated": "2026-11-27",
+  "submission": null,
+  "credits": "NeoPop 0.71 by neopopuk, GPL-2.0-or-later, as ported to the Raspberry Pi Pico by xrip:; The picture encoder from the Parrot Cart NES plugin, LGPL-2.1:; The colour matching uses the Oklab colour space by Bj\u00f6rn Ottosson:; Parrot Cart plugin template and SDK, by the Parrot Cart contributors, MIT:; Tin\u2026"
+}

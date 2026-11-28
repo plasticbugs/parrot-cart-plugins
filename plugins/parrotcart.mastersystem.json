@@ -2,7 +2,7 @@
   "schema": 2,
   "id": "parrotcart.mastersystem",
   "name": "SMS & Game Gear",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "by": "Parrot Cart",
   "description": "Emulator for Sega Master System and Game Gear",
   "repo": "plasticbugs/parrot-plugin-sms-gamegear",
@@ -30,24 +30,24 @@
   "license": {
     "spdx": "GPL-3.0",
     "name": "GNU General Public License v3.0",
-    "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/blob/v0.2.7/LICENSE"
+    "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/blob/v0.2.8/LICENSE"
   },
-  "source_url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/tree/v0.2.7",
-  "credits_url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/blob/v0.2.7/README.md",
+  "source_url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/tree/v0.2.8",
+  "credits_url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/blob/v0.2.8/README.md",
   "release": {
-    "tag": "v0.2.7",
-    "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/releases/tag/v0.2.7",
-    "published": "2026-11-24"
+    "tag": "v0.2.8",
+    "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/releases/tag/v0.2.8",
+    "published": "2026-11-28"
   },
   "download": {
     "name": "SMS.CVP",
-    "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/releases/download/v0.2.7/SMS.CVP",
+    "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/releases/download/v0.2.8/SMS.CVP",
     "size": 209239,
-    "sha256": "80230d455926a8c8f2e4111af0074ac9446fae700a47e6d81d230a44f808a4ab"
+    "sha256": "c8834a6ca99bf1c434df51d4d4b29a41ae6040700078bec2dff5c9acc1841703"
   },
   "image": {
     "size": 206080,
-    "sha256": "496eb02baffddcd977057667423b31e809805c5afb77ef1f54cb98d2ae9a2130",
+    "sha256": "05facdb2eb11390f2b40e2c0d56e41225574975a5de2dcdefbab2ed0284873e3",
     "kind": "sram"
   },
   "readme": {
@@ -61,14 +61,14 @@
       "file": "README.md",
       "size": 3338,
       "sha256": "1437fde7a0def7c6ea45e17a2afda9ae6b04496f22e04e734d52ca9f9882acb9",
-      "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/blob/v0.2.7/README.md"
+      "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/blob/v0.2.8/README.md"
     }
   },
   "screenshots": [
     {
       "file": "screenshot-1.png",
-      "size": 1286,
-      "sha256": "70600877a82a041ff111c16826d7c5788f29fce408ba55d2c1b7f1ac556ef7d3"
+      "size": 1495,
+      "sha256": "f233cea299873b327e6f87ac86468fb4b4b47af6f72519f2a2aa0a79ac2003c1"
     },
     {
       "file": "screenshot-2.png",
@@ -77,6 +77,13 @@
     }
   ],
   "history": [
+    {
+      "tag": "v0.2.8",
+      "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/releases/tag/v0.2.8",
+      "published": "2026-11-28",
+      "version": "0.2.8",
+      "notes": "Changes since 0.2.7:\n\n- Game Gear games whose file names are longer than 32 characters now run as Game Gear games. Before, they ran as Master System games, with the wrong colours, no Game Gear window and no Start button."
+    },
     {
       "tag": "v0.2.7",
       "url": "https://github.com/plasticbugs/parrot-plugin-sms-gamegear/releases/tag/v0.2.7",
@@ -100,7 +107,7 @@
     }
   ],
   "added": "2026-11-18",
-  "updated": "2026-11-24",
+  "updated": "2026-11-27",
   "submission": null,
   "credits": "SMS Plus by Charles MacDonald, under the GPL-2.0-or-later.; pico-smsplus, the Pico port by Frank Hoedemakers, under the GPL-3.0. The source used here is at https://github.com/PicoPlus-devel/pico-smsplus; SG-1000 support (tms.c) from SMS Plus GX, under the GPL-2.0.; The Z80 core by Juergen Buchmuell\u2026"
 }
